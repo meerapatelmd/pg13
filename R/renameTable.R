@@ -3,21 +3,21 @@
 #' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
 #' @export
 
-renameTable <- 
+renameTable <-
     function(conn,
              schema,
              tableName,
              newTableName,
              ...) {
-        
-        
+
+
             sql_statement <- renderRenameTable(schema = schema,
                                                tableName = tableName,
                                                newTableName = newTableName)
-        
-            pgSend(conn = conn,
+
+            send(conn = conn,
                    sql_statement = sql_statement,
                    ...)
-        
+
     }
 

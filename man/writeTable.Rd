@@ -4,7 +4,7 @@
 \alias{writeTable}
 \title{Write a Table}
 \usage{
-writeTable(conn = conn, tableName, .data, ...)
+writeTable(conn = conn, schema, tableName, .data, ...)
 }
 \arguments{
 \item{...}{Additional arguments passed to DatabaseConnector::dbWriteTable}

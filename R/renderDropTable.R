@@ -3,12 +3,12 @@
 #' @import SqlRender
 #' @export
 
-renderDropTable <- 
+renderDropTable <-
     function(schema,
              tableName) {
-        
+
         SqlRender::render(SqlRender::readSql("inst/sql/dropTable.sql"),
                           schema = schema,
                           tableName = tableName)
-        
+
     }

@@ -7,14 +7,16 @@
 
 writeTable <-
     function(conn = conn,
+             schema,
              tableName,
              .data,
              ...) {
 
-
+            schemaTableName <- constructSchemaTableName(schema = schema,
+                                                        tableName = tableName)
 
             DatabaseConnector::dbWriteTable(conn = conn,
-                                            name = tableName,
+                                            name = schemaTableName,
                                             value = .data %>%
                                                 as.data.frame(),
                                             ...)

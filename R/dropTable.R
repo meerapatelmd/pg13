@@ -3,19 +3,19 @@
 #' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
 #' @export
 
-dropTable <- 
+dropTable <-
     function(conn,
              schema,
              tableName,
              ...) {
-        
-        
-            sql_statement <- renderRenameTable(schema = schema,
+
+
+            sql_statement <- renderDropTable(schema = schema,
                                                tableName = tableName)
-        
-            pgSend(conn = conn,
+
+            send(conn = conn,
                    sql_statement = sql_statement,
                    ...)
-        
+
     }
 
