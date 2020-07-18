@@ -2,9 +2,7 @@
 #' @export
 
 buildQueryString <-
-        function(string,
-                 split,
-                 fields = "*",
+        function(fields = "*",
                  schema,
                  tableName,
                  whereLikeField,
@@ -19,48 +17,71 @@ buildQueryString <-
                               schema = schema,
                               tableName = tableName)
 
-            if (case_insensitive == FALSE) {
-                Args <- strsplit(string, split = split) %>% unlist()
-                sql_statement <- paste0("SELECT ", select, " FROM ", table_name, " WHERE ", column_name, " LIKE '%",
-                                        Args[[1]], "%'")
+                Args <- strsplit(string, split = split) %>%
+                                        unlist()
 
-                Args <- Args[-1]
 
-                while (length(Args) > 0) {
+                if (caseInsensitive) {
 
-                    sql_statement <- paste0(sql_statement, paste0(" AND ", column_name, " LIKE '%",
-                                                                  Args[1], "%'"))
-                    Args <- Args[-1]
-                }
-                if (is.null(limit)) {
-                    sql_statement <- paste0(sql_statement, ";")
+                            Args <- tolower(Args)
+
+                            for (i in 1:length(Args)) {
+
+                                        if (i == 1) {
+                                                    sql_construct <-
+                                                        c(sql_construct,
+                                                          constructWhereLowerLike(field = whereLikeField,
+                                                                                  term = Args[1])
+                                                        ) %>%
+                                                        paste(collapse = " ")
+                                        } else {
+
+
+                                                sql_construct <-
+                                                    concatWhereConstructs(sql_construct,
+                                                                               where_sql_construct_2 = constructWhereLowerLike(field = whereLikeField, term = Args[i]))
+
+
+                                        }
+                            }
+
                 } else {
-                    sql_statement <- paste0(sql_statement, " LIMIT ", limit,
-                                            ";")
+
+
+                    for (i in 1:length(Args)) {
+
+                                if (i == 1) {
+                                            sql_construct <-
+                                                c(sql_construct,
+                                                  constructWhereLike(field = whereLikeField,
+                                                                          term = Args[1])
+                                                ) %>%
+                                                paste(collapse = " ")
+                                } else {
+
+
+                                            sql_construct <-
+                                                concatWhereConstructs(sql_construct,
+                                                                      where_sql_construct_2 = constructWhereLike(field = whereLikeField, term = Args[i]))
+
+
+                                }
+                    }
                 }
-                return(sql_statement)
-            } else {
-                Args <- strsplit(string, split = split) %>% unlist()
-                Args <- tolower(Args)
 
-                sql_statement <- paste0("SELECT ", select, " FROM ", table_name, " WHERE LOWER(", column_name, ") LIKE '%",
-                                        Args[[1]], "%'")
+                if (!is.null(limit_n)) {
 
-                Args <- Args[-1]
+                            sql_construct <-
+                                    c(sql_construct,
+                                      constructLimit(n = limit_n)) %>%
+                                        paste(collapse = " ")
 
-                while (length(Args) > 0) {
 
-                    sql_statement <- paste0(sql_statement, paste0(" AND LOWER(", column_name, ") LIKE '%",
-                                                                  Args[1], "%'"))
-                    Args <- Args[-1]
                 }
-                if (is.null(limit)) {
-                    sql_statement <- paste0(sql_statement, ";")
-                } else {
-                    sql_statement <- paste0(sql_statement, " LIMIT ", limit,
-                                            ";")
-                }
-                return(sql_statement)
-            }
+
+                sql_construct %>%
+                    terminateBuild()
+
+
         }
 

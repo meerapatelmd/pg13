@@ -12,6 +12,7 @@ buildQuery(
   whereInVector = NULL,
   whereNotInField = NULL,
   whereNotInVector = NULL,
+  caseInsensitive = TRUE,
   n = NULL,
   n_type = c("limit", "random")
 )

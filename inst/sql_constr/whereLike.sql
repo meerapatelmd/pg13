@@ -1,2 +1,1 @@
 WHERE @field LIKE '%@term%'
-
