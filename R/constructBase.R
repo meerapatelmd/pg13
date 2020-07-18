@@ -8,8 +8,10 @@ constructBase <-
              schema = "public",
              tableName) {
 
+            base <- system.file(package='pg13')
+            path <- paste0(base, "/sql_constr")
 
-            SqlRender::render(SqlRender::readSql("inst/sql_constr/base.sql"),
+            SqlRender::render(SqlRender::readSql(paste0(path, "/base.sql")),
                               fields = fields,
                               schema = schema,
                               tableName = tableName)
