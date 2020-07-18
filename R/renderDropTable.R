@@ -7,7 +7,10 @@ renderDropTable <-
     function(schema,
              tableName) {
 
-        SqlRender::render(SqlRender::readSql("inst/sql/dropTable.sql"),
+        base <- system.file(package='pg13')
+        path <- paste0(base, "/sql")
+
+        SqlRender::render(SqlRender::readSql(paste0(path, "/dropTable.sql")),
                           schema = schema,
                           tableName = tableName)
 

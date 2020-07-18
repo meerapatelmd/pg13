@@ -3,14 +3,17 @@
 #' @import SqlRender
 #' @export
 
-renderRenameTable <- 
+renderRenameTable <-
     function(schema,
              tableName,
              newTableName) {
-        
-        SqlRender::render(SqlRender::readSql("inst/sql/renameTable.sql"),
+
+        base <- system.file(package='pg13')
+        path <- paste0(base, "/sql")
+
+        SqlRender::render(SqlRender::readSql(paste0(path,"/renameTable.sql")),
                           schema = schema,
                           tableName = tableName,
                           newTableName = newTableName)
-        
+
     }
