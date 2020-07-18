@@ -16,7 +16,10 @@ constructWhereNotIn <-
 
         }
 
-        SqlRender::render(SqlRender::readSql("inst/sql_constr/whereNotIn.sql"),
+        base <- system.file(package='pg13')
+        path <- paste0(base, "/sql_constr")
+
+        SqlRender::render(SqlRender::readSql(paste0(path, "/whereNotIn.sql")),
                           field = field,
                           vector = vector)
     }

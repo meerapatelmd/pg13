@@ -7,7 +7,9 @@
 
 constructIn <-
     function(vector) {
+        base <- system.file(package='pg13')
+        path <- paste0(base, "/sql_constr")
 
-        SqlRender::render(SqlRender::readSql("inst/sql_constr/in.sql"),
+        SqlRender::render(SqlRender::readSql(paste0(path, "/in.sql")),
                           vector = vector)
     }

@@ -6,8 +6,10 @@
 constructRandom <-
     function(n) {
 
+        base <- system.file(package='pg13')
+        path <- paste0(base, "/sql_constr")
 
-        SqlRender::render(SqlRender::readSql("inst/sql_constr/orderByRandom.sql"),
+        SqlRender::render(SqlRender::readSql(paste0(path, "/orderByRandom.sql")),
                           n = n)
 
     }

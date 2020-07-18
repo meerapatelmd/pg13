@@ -16,7 +16,10 @@ constructWhereLowerIn <-
 
         }
 
-        SqlRender::render(SqlRender::readSql("inst/sql_constr/whereLowerIn.sql"),
+        base <- system.file(package='pg13')
+        path <- paste0(base, "/sql_constr")
+
+        SqlRender::render(SqlRender::readSql(paste0(path, "sql_constr/whereLowerIn.sql")),
                           field = field,
                           vector = vector)
     }
