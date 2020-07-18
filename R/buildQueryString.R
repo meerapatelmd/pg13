@@ -1,26 +1,33 @@
 #' Write a SQL statement that loops over a word in a string
 #' @export
 
-write_sql_query_string_as_vector <-
+buildQueryString <-
         function(string,
                  split,
-                 select = "*",
-                 table_name,
-                 column_name,
-                 case_insensitive = TRUE,
-                 limit = NULL) {
+                 fields = "*",
+                 schema,
+                 tableName,
+                 whereLikeField,
+                 string,
+                 split,
+                 caseInsensitive = TRUE,
+                 limit_n = NULL) {
 
-            select <- prepare_vector(select)
-            
+
+                sql_construct <-
+                constructBase(fields = fields,
+                              schema = schema,
+                              tableName = tableName)
+
             if (case_insensitive == FALSE) {
                 Args <- strsplit(string, split = split) %>% unlist()
                 sql_statement <- paste0("SELECT ", select, " FROM ", table_name, " WHERE ", column_name, " LIKE '%",
                                         Args[[1]], "%'")
-                
+
                 Args <- Args[-1]
-                
+
                 while (length(Args) > 0) {
-                    
+
                     sql_statement <- paste0(sql_statement, paste0(" AND ", column_name, " LIKE '%",
                                                                   Args[1], "%'"))
                     Args <- Args[-1]
@@ -35,14 +42,14 @@ write_sql_query_string_as_vector <-
             } else {
                 Args <- strsplit(string, split = split) %>% unlist()
                 Args <- tolower(Args)
-                
+
                 sql_statement <- paste0("SELECT ", select, " FROM ", table_name, " WHERE LOWER(", column_name, ") LIKE '%",
                                         Args[[1]], "%'")
-                
+
                 Args <- Args[-1]
-                
+
                 while (length(Args) > 0) {
-                    
+
                     sql_statement <- paste0(sql_statement, paste0(" AND LOWER(", column_name, ") LIKE '%",
                                                                   Args[1], "%'"))
                     Args <- Args[-1]

@@ -12,6 +12,7 @@ buildQuery <-
              whereInVector = NULL,
              whereNotInField = NULL,
              whereNotInVector = NULL,
+             caseInsensitive = TRUE,
              n = NULL,
              n_type = c("limit", "random")) {
 
@@ -51,73 +52,160 @@ buildQuery <-
 
 
 
-                    # If WhereIn arguments are not null include it in build
-                    if (length(whereIns) == 2) {
+                    if (caseInsensitive) {
+
+
+                        # If WhereIn arguments are not null include it in build
+                        if (length(whereIns) == 2) {
 
                             sql_construct <-
-                                    paste(sql_construct,
-                                          constructWhereIn(field = whereIns$field,
-                                                            vector = whereIns$vector),
-                                          collapse = " ")
+                                paste(sql_construct,
+                                      constructWhereLowerIn(field = whereIns$field,
+                                                       vector = tolower(whereIns$vector)),
+                                      collapse = " ")
 
                             # If WhereNotIn arguments are supplied on top of the WhereIn, add them to the query by modifying the constructWhereNotIn output by replacing the second "WHERE" with "AND"
                             if (length(whereNotIns) == 2) {
 
 
-                                            sql_construct <-
-                                                paste(sql_construct,
-                                                      "AND",
-                                                      constructWhereNotIn(field = whereNotIns$field,
-                                                                       vector = whereNotIns$vector) %>%
-                                                          stringr::str_remove_all("WHERE") %>%
-                                                          trimws(),
-                                                      collapse = " ")
+                                sql_construct <-
+                                    paste(sql_construct,
+                                          "AND",
+                                          constructWhereLowerNotIn(field = whereNotIns$field,
+                                                              vector = tolower(whereNotIns$vector)) %>%
+                                              stringr::str_remove_all("WHERE") %>%
+                                              trimws(),
+                                          collapse = " ")
 
 
                             }
 
+                        } else {
+
+                            # Building a query if only whereNotIn arguments were supplied
+                            if (length(whereNotIns) == 2) {
+
+
+                                sql_construct <-
+                                    paste(sql_construct,
+                                          constructWhereLowerNotIn(field = whereNotIns$field,
+                                                              vector = tolower(whereNotIns$vector)),
+                                          collapse = " ")
+
+
+                            }
+
+
+
+                        }
+
+                        # If n arguments are not null include it in build, as either a limit or random sample of size n
+                        if (!is.null(n)) {
+
+                            if (n_type == "limit") {
+
+                                sql_construct <-
+                                    paste(sql_construct,
+                                          constructLimit(n = n),
+                                          collapse = " ")
+
+                            } else if (n_type == "random") {
+
+                                sql_construct <-
+                                    paste(sql_construct,
+                                          constructRandom(n = n),
+                                          collapse = " ")
+
+                            } else {
+
+                                warning('"n_type" not recognized and "n" removed from build')
+
+
+                            }
+
+                        }
+
+
+
+
+
+
+
+
+
                     } else {
 
-                                # Building a query if only whereNotIn arguments were supplied
-                                if (length(whereNotIns) == 2) {
 
 
-                                    sql_construct <-
-                                        paste(sql_construct,
-                                              constructWhereNotIn(field = whereNotIns$field,
-                                                                  vector = whereNotIns$vector),
-                                              collapse = " ")
+                                    # If WhereIn arguments are not null include it in build
+                                    if (length(whereIns) == 2) {
+
+                                            sql_construct <-
+                                                    paste(sql_construct,
+                                                          constructWhereIn(field = whereIns$field,
+                                                                            vector = whereIns$vector),
+                                                          collapse = " ")
+
+                                            # If WhereNotIn arguments are supplied on top of the WhereIn, add them to the query by modifying the constructWhereNotIn output by replacing the second "WHERE" with "AND"
+                                            if (length(whereNotIns) == 2) {
 
 
-                                }
+                                                            sql_construct <-
+                                                                paste(sql_construct,
+                                                                      "AND",
+                                                                      constructWhereNotIn(field = whereNotIns$field,
+                                                                                       vector = whereNotIns$vector) %>%
+                                                                          stringr::str_remove_all("WHERE") %>%
+                                                                          trimws(),
+                                                                      collapse = " ")
+
+
+                                            }
+
+                                    } else {
+
+                                                # Building a query if only whereNotIn arguments were supplied
+                                                if (length(whereNotIns) == 2) {
+
+
+                                                    sql_construct <-
+                                                        paste(sql_construct,
+                                                              constructWhereNotIn(field = whereNotIns$field,
+                                                                                  vector = whereNotIns$vector),
+                                                              collapse = " ")
+
+
+                                                }
 
 
 
-                    }
+                                    }
 
-                    # If n arguments are not null include it in build, as either a limit or random sample of size n
-                    if (!is.null(n)) {
+                                    # If n arguments are not null include it in build, as either a limit or random sample of size n
+                                    if (!is.null(n)) {
 
-                                if (n_type == "limit") {
+                                                if (n_type == "limit") {
 
-                                    sql_construct <-
-                                                paste(sql_construct,
-                                                      constructLimit(n = n),
-                                                      collapse = " ")
+                                                    sql_construct <-
+                                                                paste(sql_construct,
+                                                                      constructLimit(n = n),
+                                                                      collapse = " ")
 
-                                } else if (n_type == "random") {
+                                                } else if (n_type == "random") {
 
-                                    sql_construct <-
-                                        paste(sql_construct,
-                                              constructRandom(n = n),
-                                              collapse = " ")
+                                                    sql_construct <-
+                                                        paste(sql_construct,
+                                                              constructRandom(n = n),
+                                                              collapse = " ")
 
-                                } else {
+                                                } else {
 
-                                    warning('"n_type" not recognized and "n" removed from build')
+                                                    warning('"n_type" not recognized and "n" removed from build')
 
 
-                                }
+                                                }
+
+                                    }
 
                     }
 
