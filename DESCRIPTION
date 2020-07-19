@@ -2,7 +2,8 @@ Package: pg13
 Type: Package
 Title: 'pg13' Package
 Version: 0.1.0
-Author: Meera Y. Patel, M.D. <patelmeeray@gmail.com>
+Author: Authors@R: person("Meera", "Patel, M.D.", email = "patelmeeray@gmail.com",
+  role = c("aut", "cre"))
 Maintainer:  Meera Patel, M.D. <patelmeeray@gmail.com>
 Description: Render, Read, and Build SQL statements in the PostgreSQL dialect using R. 
     This package was developed to generate basic SQL statements in R. 
