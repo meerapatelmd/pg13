@@ -5,7 +5,7 @@ Authors@R:
     person(given = "Meera",
            family = "Patel",
            role = c("aut", "cre"),
-           email = "patelmeeray@gmail.com"
+           email = "patelmeeray@gmail.com")
 Description: Render, Read, and Build SQL statements in the PostgreSQL dialect using R.
 License: `use_mit_license()`
 Encoding: UTF-8
