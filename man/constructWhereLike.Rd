@@ -2,7 +2,7 @@
 % Please edit documentation in R/constructWhereLike.R
 \name{constructWhereLike}
 \alias{constructWhereLike}
-\title{Render "WHERE x LIKE '%y%'"}
+\title{Render "WHERE x LIKE y"}
 \usage{
 constructWhereLike(field, term)
 }
