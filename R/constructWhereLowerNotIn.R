@@ -1,4 +1,4 @@
-#' Render "WHERE LOWER(x) NOT IN y"
+#' Render "WHERE lowercase x NOT IN y"
 #' @description This is a non-terminal render, meaning that the SQL component will not be terminated with a semicolon in order to construct complex SQL queries.
 #' @import SqlRender
 #' @param field Single field to be filtered for
