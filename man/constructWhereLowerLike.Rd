@@ -2,7 +2,7 @@
 % Please edit documentation in R/constructWhereLowerLike.R
 \name{constructWhereLowerLike}
 \alias{constructWhereLowerLike}
-\title{Render "WHERE lowercase x LIKE y"}
+\title{Render WHERE lowercase x LIKE y}
 \usage{
 constructWhereLowerLike(field, term)
 }
@@ -12,5 +12,5 @@ constructWhereLowerLike(field, term)
 \item{term}{Character string that the field parameter is searched for.}
 }
 \description{
-This is a non-terminal render, meaning that the SQL component will not be terminated with a semicolon in order to construct complex SQL queries.
+Render WHERE lowercase x LIKE y
 }
