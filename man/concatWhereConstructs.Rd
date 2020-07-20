@@ -2,10 +2,10 @@
 % Please edit documentation in R/concatWhereConstructs.R
 \name{concatWhereConstructs}
 \alias{concatWhereConstructs}
-\title{Concatenate multuiple WHERE constructs}
+\title{Concatenate 2 WHERE constructs}
 \usage{
 concatWhereConstructs(sql_construct, where_sql_construct_2)
 }
 \description{
-When 2 WHERE constructs are included in the SQL Statement, they are concatenated with an "AND"
+When 2 WHERE constructs are included in the SQL Statement, they are concatenated and the 2nd "WHERE" is replaced with an "AND".
 }

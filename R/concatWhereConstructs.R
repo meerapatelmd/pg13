@@ -1,5 +1,5 @@
-#' Concatenate multuiple WHERE constructs
-#' @description When 2 WHERE constructs are included in the SQL Statement, they are concatenated with an "AND"
+#' Concatenate 2 WHERE constructs
+#' @description When 2 WHERE constructs are included in the SQL Statement, they are concatenated and the 2nd "WHERE" is replaced with an "AND".
 #' @import stringr
 #' @export
 

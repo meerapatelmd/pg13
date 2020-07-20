@@ -2,14 +2,14 @@
 % Please edit documentation in R/constructWhereLike.R
 \name{constructWhereLike}
 \alias{constructWhereLike}
-\title{Render "WHERE x IN y" Component}
+\title{Render "WHERE x LIKE '%y%'"}
 \usage{
 constructWhereLike(field, term)
 }
 \arguments{
 \item{field}{Single field to be filtered for}
 
-\item{vector}{vector of values that the SQL query is filtering for}
+\item{term}{Character string that the field parameter is searched for.}
 }
 \description{
 This is a non-terminal render, meaning that the SQL component will not be terminated with a semicolon in order to construct complex SQL queries.

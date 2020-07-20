@@ -2,7 +2,7 @@
 % Please edit documentation in R/constructWhereLowerIn.R
 \name{constructWhereLowerIn}
 \alias{constructWhereLowerIn}
-\title{Render "WHERE x IN y" Component}
+\title{Render "WHERE LOWER(x) IN y" Component}
 \usage{
 constructWhereLowerIn(field, vector)
 }

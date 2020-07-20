@@ -2,7 +2,7 @@
 % Please edit documentation in R/constructWhereNotIn.R
 \name{constructWhereNotIn}
 \alias{constructWhereNotIn}
-\title{Render "WHERE x NOT IN y" Component}
+\title{Render "WHERE x NOT IN y"}
 \usage{
 constructWhereNotIn(field, vector)
 }

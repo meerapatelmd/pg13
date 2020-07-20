@@ -2,10 +2,13 @@
 % Please edit documentation in R/constructRandom.R
 \name{constructRandom}
 \alias{constructRandom}
-\title{Construct ORDER BY RANDOM() Part of SQL Query}
+\title{Construct ORDER BY RANDOM()}
 \usage{
 constructRandom(n)
 }
+\arguments{
+\item{n}{Row number desired in the output}
+}
 \description{
-Construct ORDER BY RANDOM() Part of SQL Query
+Construct ORDER BY RANDOM()
 }

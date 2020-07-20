@@ -2,7 +2,7 @@
 % Please edit documentation in R/constructWhereIn.R
 \name{constructWhereIn}
 \alias{constructWhereIn}
-\title{Render "WHERE x IN y" Component}
+\title{Render x in "WHERE x IN (y)"}
 \usage{
 constructWhereIn(field, vector)
 }

@@ -1,8 +1,11 @@
-#' Write a SQL statement that loops over a word in a string
+#' Writes a SQL Query Loop
+#' @description This function writes a SQL Query that loops over the words in a string.
+#' @return a SQL Query as a character string.
 #' @export
 
 buildQueryString <-
         function(fields = "*",
+                 distinct = FALSE,
                  schema,
                  tableName,
                  whereLikeField,
@@ -14,6 +17,7 @@ buildQueryString <-
 
                 sql_construct <-
                 constructBase(fields = fields,
+                              distinct = distinct,
                               schema = schema,
                               tableName = tableName)
 

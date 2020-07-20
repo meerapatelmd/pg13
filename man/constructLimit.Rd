@@ -2,7 +2,7 @@
 % Please edit documentation in R/constructLimit.R
 \name{constructLimit}
 \alias{constructLimit}
-\title{Render y in WHERE x IN y Component}
+\title{Construct LIMIT}
 \usage{
 constructLimit(n)
 }

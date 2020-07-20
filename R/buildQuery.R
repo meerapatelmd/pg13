@@ -1,11 +1,13 @@
-#' Build a Query based on Constructs
-#' @description A SQL query is built from construction of parts from the construct primitive functions in this package.
+#' Build a SQL Query
+#' @description A SQL query is built using the given arguments. Currently, only 1 whereIn and whereNot in parameters can be set.
+#' @return SQL statement as a character string.
 #' @import purrr
 #' @import stringr
 #' @export
 
 buildQuery <-
     function(fields = "*",
+             distinct = FALSE,
              schema,
              tableName,
              whereInField = NULL,
@@ -47,9 +49,9 @@ buildQuery <-
                     # Start
                     #####
                     sql_construct  <- constructBase(fields = fields,
-                                              schema = schema,
-                                              tableName = tableName)
-
+                                                    distinct = distinct,
+                                                    schema = schema,
+                                                    tableName = tableName)
 
 
                     if (caseInsensitive) {

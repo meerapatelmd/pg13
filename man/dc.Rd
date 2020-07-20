@@ -7,7 +7,11 @@
 dc(conn, ..., remove = TRUE)
 }
 \arguments{
+\item{conn}{Connection object}
+
 \item{...}{Additional arguments passed to DatabaseConnector::dbDisconnect}
+
+\item{remove}{If TRUE, the Connection object argument is removed from the Global Environment.}
 }
 \description{
 This function also removes the connection object from the global environment if remove is set to true

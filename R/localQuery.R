@@ -7,14 +7,14 @@ localQuery <-
               dbname = "athena",
               port = 5432) {
 
-        conn <- localConnect(dbname = dbname,
-                             port = port)
+            conn <- localConnect(dbname = dbname,
+                                 port = port)
 
-        data <- query(conn = conn,
-                      sql_statement = sql_statement)
+            data <- query(conn = conn,
+                          sql_statement = sql_statement)
 
-        dc(conn = conn,
-           remove = FALSE)
+            dc(conn = conn,
+               remove = FALSE)
 
-        return(data)
+            return(data)
     }

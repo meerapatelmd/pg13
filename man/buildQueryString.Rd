@@ -2,10 +2,11 @@
 % Please edit documentation in R/buildQueryString.R
 \name{buildQueryString}
 \alias{buildQueryString}
-\title{Write a SQL statement that loops over a word in a string}
+\title{Writes a SQL Query Loop}
 \usage{
 buildQueryString(
   fields = "*",
+  distinct = FALSE,
   schema,
   tableName,
   whereLikeField,
@@ -15,6 +16,9 @@ buildQueryString(
   limit_n = NULL
 )
 }
+\value{
+a SQL Query as a character string.
+}
 \description{
-Write a SQL statement that loops over a word in a string
+This function writes a SQL Query that loops over the words in a string.
 }

@@ -4,7 +4,10 @@
 \alias{constructBase}
 \title{Construct a base SQL query}
 \usage{
-constructBase(fields = "*", schema = "public", tableName)
+constructBase(fields = "*", distinct = FALSE, schema = "public", tableName)
+}
+\arguments{
+\item{distinct}{if TRUE, the DISTINCT fields will be selected for.}
 }
 \description{
 Construct the SELECT {fields} FROM {schema}.{table} base query. The SQL Statement is not terminated for the addition of other parameters generated using "construct" functions.

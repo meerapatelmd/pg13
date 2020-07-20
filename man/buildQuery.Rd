@@ -2,10 +2,11 @@
 % Please edit documentation in R/buildQuery.R
 \name{buildQuery}
 \alias{buildQuery}
-\title{Build a Query based on Constructs}
+\title{Build a SQL Query}
 \usage{
 buildQuery(
   fields = "*",
+  distinct = FALSE,
   schema,
   tableName,
   whereInField = NULL,
@@ -17,6 +18,9 @@ buildQuery(
   n_type = c("limit", "random")
 )
 }
+\value{
+SQL statement as a character string.
+}
 \description{
-A SQL query is built from construction of parts from the construct primitive functions in this package.
+A SQL query is built using the given arguments. Currently, only 1 whereIn and whereNot in parameters can be set.
 }

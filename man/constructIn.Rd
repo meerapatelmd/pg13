@@ -2,7 +2,7 @@
 % Please edit documentation in R/constructIn.R
 \name{constructIn}
 \alias{constructIn}
-\title{Render y in WHERE x IN y Component}
+\title{Render y in "WHERE x IN (y)"}
 \usage{
 constructIn(vector)
 }

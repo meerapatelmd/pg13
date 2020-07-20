@@ -2,7 +2,7 @@
 % Please edit documentation in R/constructWhereLowerNotIn.R
 \name{constructWhereLowerNotIn}
 \alias{constructWhereLowerNotIn}
-\title{Render "WHERE x NOT IN y" Component}
+\title{Render "WHERE LOWER(x) NOT IN y"}
 \usage{
 constructWhereLowerNotIn(field, vector)
 }

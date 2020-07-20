@@ -1,4 +1,5 @@
-#' Construct ORDER BY RANDOM() Part of SQL Query
+#' Construct ORDER BY RANDOM()
+#' @param n Row number desired in the output
 #' @import SqlRender
 #' @export
 
