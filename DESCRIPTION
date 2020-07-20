@@ -10,3 +10,12 @@ LazyData: true
 URL: https://patelm9.github.io/pg13/
 BugReports: https://github.com/patelm9/pg13/issues
 RoxygenNote: 7.1.1
+Imports: 
+        DatabaseConnector,
+        SqlRender,
+        purrr,
+        stringr,
+        readr,
+        secretary
+Remotes:
+        patelm9/secretary
