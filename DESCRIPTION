@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: 
     person(given = "Meera", family = "Patel", role = c("aut", "cre"), email = "patelmeeray@gmail.com")
 Description: Render, Read, and Build SQL statements in the PostgreSQL dialect using R.
-License: `use_mit_license()`
+License: Apache License 2.0
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
