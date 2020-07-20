@@ -2,7 +2,7 @@
 % Please edit documentation in R/constructWhereLowerLike.R
 \name{constructWhereLowerLike}
 \alias{constructWhereLowerLike}
-\title{Render "WHERE LOWER(x) LIKE '%y%'"}
+\title{Render "WHERE LOWER(x) LIKE 'y'"}
 \usage{
 constructWhereLowerLike(field, term)
 }
