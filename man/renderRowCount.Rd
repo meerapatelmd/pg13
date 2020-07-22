@@ -7,6 +7,8 @@
 renderRowCount(fields = "*", distinct = FALSE, schema = NULL, tableName)
 }
 \arguments{
+\item{fields}{Fields selected for. Defaults to "*".}
+
 \item{distinct}{If TRUE, the distinct row count will be returned.}
 
 \item{schema}{If NULL, defaults to "public"}

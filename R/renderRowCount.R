@@ -1,6 +1,6 @@
 #' Render SQL for a Table Row Count
 #' @import SqlRender
-#' @param fields
+#' @param fields Fields selected for. Defaults to "*".
 #' @param distinct If TRUE, the distinct row count will be returned.
 #' @param schema If NULL, defaults to "public"
 #' @export
