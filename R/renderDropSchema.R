@@ -9,7 +9,7 @@ renderDropSchema <-
         base <- system.file(package='pg13')
         path <- paste0(base, "/sql")
 
-        SqlRender::render(SqlRender::readSql(paste0(path, "dropSchema.sql")),
+        SqlRender::render(SqlRender::readSql(paste0(path, "/dropSchema.sql")),
                           schema = schema)
 
     }
