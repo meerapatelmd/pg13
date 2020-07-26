@@ -1,4 +1,4 @@
-#' Build a SQL Query
+#' Build a JOIN SQL Query
 #' @description A SQL query is built using the given arguments. Currently, only 1 whereIn and whereNot in parameters can be set.
 #' @return SQL statement as a character string.
 #' @import purrr
@@ -11,10 +11,10 @@ buildJoinQuery <-
              schema,
              tableName,
              column,
-             joinSchema,
-             joinTableName,
-             joinColumn,
-             joinType,
+             joinOnSchema,
+             joinOnTableName,
+             joinOnColumn,
+             joinType = "LEFT",
              whereInField = NULL,
              whereInVector = NULL,
              whereNotInField = NULL,
@@ -59,6 +59,16 @@ buildJoinQuery <-
                                                     tableName = tableName)
 
                     # Add join
+                    sql_construct <-
+                            c(sql_construct,
+                              constructJoin(schema = schema,
+                                            tableName = tableName,
+                                            column = column,
+                                            joinType = joinType,
+                                            joinOnSchema = joinOnSchema,
+                                            joinOnTableName = joinOnTableName,
+                                            joinOnColumn = joinOnColumn)) %>%
+                            paste(collapse = " ")
 
 
 

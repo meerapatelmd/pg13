@@ -2,7 +2,7 @@
 % Please edit documentation in R/buildJoinQuery.R
 \name{buildJoinQuery}
 \alias{buildJoinQuery}
-\title{Build a SQL Query}
+\title{Build a JOIN SQL Query}
 \usage{
 buildJoinQuery(
   fields = "*",
@@ -10,10 +10,10 @@ buildJoinQuery(
   schema,
   tableName,
   column,
-  joinSchema,
-  joinTableName,
-  joinColumn,
-  joinType,
+  joinOnSchema,
+  joinOnTableName,
+  joinOnColumn,
+  joinType = "LEFT",
   whereInField = NULL,
   whereInVector = NULL,
   whereNotInField = NULL,
