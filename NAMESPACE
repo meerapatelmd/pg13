@@ -3,6 +3,7 @@
 export(appendTable)
 export(buildJoinQuery)
 export(buildQuery)
+export(buildQueryLike)
 export(buildQueryString)
 export(concatWhereConstructs)
 export(constructBase)
