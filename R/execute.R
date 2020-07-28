@@ -6,7 +6,7 @@
 execute <-
         function(conn,
                  sql_statement,
-                 profile = TRUE,
+                 profile = FALSE,
                  progressBar = TRUE,
                  reportOverallTime = TRUE,
                  ...) {
