@@ -2,12 +2,10 @@
 #' @export
 
 
-getTable <-
+readTable <-
         function(conn,
                  schema,
                  tableName) {
-
-                .Deprecated(new = "readTable")
 
                 query(conn = conn,
                       buildQuery(schema = schema,

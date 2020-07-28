@@ -6,22 +6,22 @@
 #' @export
 
 
-refresh_table <-
+refreshTable <-
             function(conn,
                      schema,
                      tableName,
                      .data) {
 
-                tableNameHist <- toupper(paste0(tableName, "_", stringr::str_replace_all(rubix::dated(), "[-]", "_")))
+                tableNameHist <- appendDate(name = toupper(tableName))
 
 
-                today_tables <-
+                todayTables <-
                     grep(tableNameHist,
                          lsTables(conn = conn,
                                   schema = schema),
                          value = TRUE)
 
-                n <- length(today_tables)
+                n <- length(todayTables)
 
 
                 # If this table has not been written yet today
@@ -31,7 +31,7 @@ refresh_table <-
                     # If more than 1 table has been written today, the new table name would be the length of the list of today's table + 1
                 } else {
                     secretary::typewrite_bold("Off-Loaded Tables Today:")
-                    today_tables %>%
+                    todayTables %>%
                         purrr::map(function(x) secretary::typewrite(x, tabs = 1))
 
                     tableNameHist <- paste0(tableNameHist, "_", (1+n))
@@ -55,6 +55,5 @@ refresh_table <-
                                     as.data.frame())
 
                 secretary::typewrite_bold("New", tableName, "written.")
-
 
             }
