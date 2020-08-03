@@ -5,7 +5,6 @@
 
 renameDB <-
     function(conn,
-             schema,
              db,
              newDB,
              ...) {

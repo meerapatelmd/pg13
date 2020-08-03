@@ -4,7 +4,7 @@
 \alias{renameDB}
 \title{Rename a table in a Postgres schema}
 \usage{
-renameDB(conn, schema, db, newDB, ...)
+renameDB(conn, db, newDB, ...)
 }
 \arguments{
 \item{...}{Additional arguments passed to the DatabaseConnector::dbSendStatement function}
