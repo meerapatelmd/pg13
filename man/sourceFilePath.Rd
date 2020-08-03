@@ -14,5 +14,5 @@ sourceFilePath(instSubdir, FileName, package)
 \item{package}{Package name}
 }
 \description{
-Get SourceFile Path
+This function provides the path for files installed within a given package's library.
 }
