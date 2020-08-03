@@ -10,6 +10,7 @@ query <-
              sql_statement,
              ...) {
 
+
         DatabaseConnector::dbGetQuery(conn,
                                       statement = sql_statement,
                                       ...)
