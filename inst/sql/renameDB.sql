@@ -1,0 +1,1 @@
+ALTER DATABASE @db RENAME TO @newDB;
