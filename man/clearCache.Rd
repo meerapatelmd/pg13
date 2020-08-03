@@ -4,16 +4,16 @@
 \alias{clearCache}
 \title{Clear a Cache}
 \usage{
-clearCache(db, schema)
+clearCache(db)
 }
 \arguments{
 \item{db}{name of database}
 
-\item{schema}{name of schema}
-
 \item{.data}{dataframe to cache}
 
 \item{sqlQuery}{sql statement of length 1 that will be the sole key for cache retrieval.}
+
+\item{schema}{name of schema}
 }
 \description{
 This function will clear a cache subdirectory of the cache root directory, the path of which will be {db/schema}.

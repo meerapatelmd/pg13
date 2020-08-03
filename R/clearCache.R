@@ -8,10 +8,9 @@
 #' @export
 
 clearCache <-
-        function(db,
-                 schema) {
+        function(db) {
 
-                R.cache::clearCache(path = getCachePath(paste0(db, "/", schema)))
+                R.cache::clearCache(path = getCachePath(db))
 
 
         }

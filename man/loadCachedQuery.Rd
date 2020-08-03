@@ -4,7 +4,7 @@
 \alias{loadCachedQuery}
 \title{Load a Cached Query Resultset}
 \usage{
-loadCachedQuery(sqlQuery, db, schema)
+loadCachedQuery(sqlQuery, db)
 }
 \arguments{
 \item{sqlQuery}{sql statement of length 1 that will be the sole key for cache retrieval.}

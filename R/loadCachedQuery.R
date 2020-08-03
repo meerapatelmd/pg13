@@ -8,9 +8,8 @@
 
 loadCachedQuery <-
         function(sqlQuery,
-                 db,
-                 schema) {
+                 db) {
 
                 R.cache::loadCache(key = list(sqlQuery),
-                                   dirs = paste0(db, "/", schema))
+                                   dirs = db)
         }

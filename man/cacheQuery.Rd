@@ -4,7 +4,7 @@
 \alias{cacheQuery}
 \title{Cache a Query Resultset}
 \usage{
-cacheQuery(.data, sqlQuery, db, schema)
+cacheQuery(.data, sqlQuery, db)
 }
 \arguments{
 \item{.data}{dataframe to cache}

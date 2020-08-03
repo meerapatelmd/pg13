@@ -10,10 +10,9 @@
 cacheQuery <-
         function(.data,
                  sqlQuery,
-                 db,
-                 schema) {
+                 db) {
 
                 R.cache::saveCache(object = .data,
                                    key = list(sqlQuery),
-                                   dirs = paste0(db, "/", schema))
+                                   dirs = db)
         }
