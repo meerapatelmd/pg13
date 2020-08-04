@@ -1,6 +1,6 @@
 #' Execute SQL
 #' @description This function differs from the send() and query() functions in that it provides additional features such as a progress bar and time estimations.
-#' @importFrom DatabaseConnector executeSql
+#' @import DatabaseConnector
 #' @export
 
 execute <-
