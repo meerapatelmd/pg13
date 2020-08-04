@@ -12,6 +12,7 @@ RoxygenNote: 7.1.1
 Imports: 
         DatabaseConnector,
         SqlRender,
+        R.cache,
         purrr,
         stringr,
         readr,
