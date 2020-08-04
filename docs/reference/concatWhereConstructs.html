@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pg13</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.0</span>
       </span>
     </div>
 
@@ -86,6 +86,9 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -112,8 +115,16 @@
     <p>When 2 WHERE constructs are included in the SQL Statement, they are concatenated and the 2nd "WHERE" is replaced with an "AND".</p>
     </div>
 
-    <pre class="usage"><span class='fu'>concatWhereConstructs</span>(<span class='no'>sql_construct</span>, <span class='no'>where_sql_construct_2</span>)</pre>
+    <pre class="usage"><span class='fu'>concatWhereConstructs</span>(<span class='no'>sql_construct</span>, <span class='no'>where_sql_construct_2</span>, <span class='no'>...</span>, <span class='kw'>AND</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>AND</th>
+      <td><p>If TRUE, the WHERE constructs are concatenated with "AND". If FALSE, the concatenation is performed with an "OR".</p></td>
+    </tr>
+    </table>
 
 
   </div>

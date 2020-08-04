@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Writes a SQL Query Loop — buildQueryString • pg13</title>
+<title>Get SourceFile Path — sourceFilePath • pg13</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Writes a SQL Query Loop — buildQueryString" />
-<meta property="og:description" content="This function writes a SQL Query that loops over the words in a string." />
+<meta property="og:title" content="Get SourceFile Path — sourceFilePath" />
+<meta property="og:description" content="This function provides the path for files installed within a given package's library." />
 
 
 
@@ -106,31 +106,34 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Writes a SQL Query Loop</h1>
+    <h1>Get SourceFile Path</h1>
     
-    <div class="hidden name"><code>buildQueryString.Rd</code></div>
+    <div class="hidden name"><code>sourceFilePath.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function writes a SQL Query that loops over the words in a string.</p>
+    <p>This function provides the path for files installed within a given package's library.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>buildQueryString</span>(
-  <span class='kw'>fields</span> <span class='kw'>=</span> <span class='st'>"*"</span>,
-  <span class='kw'>distinct</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>schema</span>,
-  <span class='no'>tableName</span>,
-  <span class='no'>whereLikeField</span>,
-  <span class='no'>string</span>,
-  <span class='no'>split</span>,
-  <span class='kw'>caseInsensitive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>limit_n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>sourceFilePath</span>(<span class='no'>instSubdir</span>, <span class='no'>FileName</span>, <span class='no'>package</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>instSubdir</th>
+      <td><p>Name of subdirectory in the inst/ folder</p></td>
+    </tr>
+    <tr>
+      <th>FileName</th>
+      <td><p>Name of file in subdirectory</p></td>
+    </tr>
+    <tr>
+      <th>package</th>
+      <td><p>Package name</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>a SQL Query as a character string.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

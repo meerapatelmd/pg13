@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Writes a SQL Query Loop — buildQueryString • pg13</title>
+<title>Cache a Query Resultset — cacheQuery • pg13</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Writes a SQL Query Loop — buildQueryString" />
-<meta property="og:description" content="This function writes a SQL Query that loops over the words in a string." />
+<meta property="og:title" content="Cache a Query Resultset — cacheQuery" />
+<meta property="og:description" content="This function will cache the resultset from a SQL query to a subdirectory of the cache root directory, the path of which will be db/schema." />
 
 
 
@@ -106,31 +106,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Writes a SQL Query Loop</h1>
+    <h1>Cache a Query Resultset</h1>
     
-    <div class="hidden name"><code>buildQueryString.Rd</code></div>
+    <div class="hidden name"><code>cacheQuery.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function writes a SQL Query that loops over the words in a string.</p>
+    <p>This function will cache the resultset from a SQL query to a subdirectory of the cache root directory, the path of which will be db/schema.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>buildQueryString</span>(
-  <span class='kw'>fields</span> <span class='kw'>=</span> <span class='st'>"*"</span>,
-  <span class='kw'>distinct</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>schema</span>,
-  <span class='no'>tableName</span>,
-  <span class='no'>whereLikeField</span>,
-  <span class='no'>string</span>,
-  <span class='no'>split</span>,
-  <span class='kw'>caseInsensitive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>limit_n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>cacheQuery</span>(<span class='no'>.data</span>, <span class='no'>sqlQuery</span>, <span class='no'>db</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.data</th>
+      <td><p>dataframe to cache</p></td>
+    </tr>
+    <tr>
+      <th>sqlQuery</th>
+      <td><p>sql statement of length 1 that will be the sole key for cache retrieval.</p></td>
+    </tr>
+    <tr>
+      <th>db</th>
+      <td><p>name of database</p></td>
+    </tr>
+    <tr>
+      <th>schema</th>
+      <td><p>name of schema</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>a SQL Query as a character string.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
