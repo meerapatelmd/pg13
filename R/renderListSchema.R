@@ -10,7 +10,6 @@ renderLsSchema <-
         base <- system.file(package='pg13')
         path <- paste0(base, "/sql")
 
-        SqlRender::render(SqlRender::readSql(paste0(path, "/lsSchema.sql")),
-                          schema = schema)
+        SqlRender::render(SqlRender::readSql(paste0(path, "/lsSchema.sql")))
 
     }

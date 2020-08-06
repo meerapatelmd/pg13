@@ -4,7 +4,7 @@
 \alias{lsSchema}
 \title{List Schema}
 \usage{
-lsSchema(conn, schema)
+lsSchema(conn)
 }
 \description{
 List all schema in the connection.

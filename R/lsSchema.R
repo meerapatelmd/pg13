@@ -4,8 +4,7 @@
 #' @export
 
 lsSchema <-
-        function(conn,
-                 schema) {
+        function(conn) {
 
                 query(conn = conn,
                      renderLsSchema())
