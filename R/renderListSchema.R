@@ -1,16 +1,16 @@
-#' Render SQL to Create a Schema
+#' Render SQL to List All Schema
 #' @description
-#' Renders a SQL statement as a string that creates a schema.
+#' Renders a SQL statement that will list all schema in a database.
 #' @import SqlRender
 #' @export
 
-renderCreateSchema <-
+renderLsSchema <-
     function(schema) {
 
         base <- system.file(package='pg13')
         path <- paste0(base, "/sql")
 
-        SqlRender::render(SqlRender::readSql(paste0(path, "/createSchema.sql")),
+        SqlRender::render(SqlRender::readSql(paste0(path, "/lsSchema.sql")),
                           schema = schema)
 
     }

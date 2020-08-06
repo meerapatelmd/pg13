@@ -2,10 +2,10 @@
 % Please edit documentation in R/renderCreateSchema.R
 \name{renderCreateSchema}
 \alias{renderCreateSchema}
-\title{Render SQL to Drop a Schema}
+\title{Render SQL to Create a Schema}
 \usage{
 renderCreateSchema(schema)
 }
 \description{
-Drop a schema if it exists
+Renders a SQL statement as a string that creates a schema.
 }
