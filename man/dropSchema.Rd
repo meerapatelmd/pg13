@@ -2,13 +2,13 @@
 % Please edit documentation in R/dropSchema.R
 \name{dropSchema}
 \alias{dropSchema}
-\title{Drop a table in a Postgres schema}
+\title{Drop a Postgres schema}
 \usage{
-dropSchema(conn, schema, cascade = FALSE, tableName, ...)
+dropSchema(conn, schema, cascade = FALSE, ...)
 }
 \arguments{
 \item{...}{Additional arguments passed to the DatabaseConnector::dbSendStatement function}
 }
 \description{
-Drop a table if it exists.
+Drop a schema if it exists.
 }
