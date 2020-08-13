@@ -30,6 +30,7 @@ queryList <-
 
             }
 
+            output <- list()
             for (i in 1:length(sqlList)) {
 
                     sql <- sqlList[[i]]
@@ -43,9 +44,12 @@ queryList <-
                             Sys.sleep(.2)
                     }
 
+                    output[[i]] <-
                     query(conn = conn,
                           sql_statement = sql,
                           ...)
 
             }
+
+            output
     }
