@@ -49,6 +49,8 @@ queryList <-
                           sql_statement = sql,
                           ...)
 
+                    names(output)[i] <- sql
+
             }
 
             output

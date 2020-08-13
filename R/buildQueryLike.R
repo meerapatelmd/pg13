@@ -36,6 +36,8 @@ buildQueryLike <-
 
                 }
                 sql_construct %>%
+                        stringr::str_replace_all(pattern = "[\n]{2,}",
+                                                 replacement = "\n") %>%
                     terminateBuild()
 
 

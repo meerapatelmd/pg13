@@ -84,7 +84,9 @@ buildQueryString <-
                 }
 
                 sql_construct %>%
-                    terminateBuild()
+                        stringr::str_replace_all(pattern = "[\n]{2,}",
+                                                 replacement = "\n") %>%
+                        terminateBuild()
 
 
         }
