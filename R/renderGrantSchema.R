@@ -20,6 +20,9 @@ renderGrantSchema <-
                         stop("group or user is required")
                 }
 
+                base <- system.file(package='pg13')
+                path <- paste0(base, "/sql")
+
                 if (!is.null(group)) {
                         SqlRender::render(SqlRender::readSql(paste0(path, "/grantGroup.sql")),
                                           schema = schema,
