@@ -1,6 +1,25 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: R
+
 cache: packages
+
 latex: false
+
 warnings_are_errors: false
+
+apt_packages:
+  - libssh-dev
+
+r_packages:
+  - covr
+  - drat
+  - devtools
+
+r_github_packages:
+  - OHDSI/DatabaseConnectorJars
+  - OHDSI/SqlRender
+
+before_script:
+  - export PKG_NAME=$(Rscript -e 'cat(paste0(devtools::as.package(".")$package))')
+  - export PKG_TARBALL=$(Rscript -e 'pkg <- devtools::as.package("."); cat(paste0(pkg$package,"_",pkg$version,".tar.gz"))')
