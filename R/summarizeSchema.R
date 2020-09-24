@@ -12,8 +12,11 @@
 #'  \code{\link[purrr]{map}}
 #'  \code{\link[tibble]{as_tibble}}
 #'  \code{\link[dplyr]{bind}},\code{\link[dplyr]{mutate}}
+#'
 #' @rdname summarizeSchema
+#'
 #' @export
+#'
 #' @importFrom purrr map
 #' @importFrom tibble as_tibble_col
 #' @importFrom dplyr bind_rows mutate
