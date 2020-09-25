@@ -6,19 +6,35 @@
 
 renderDropSchema <-
     function(schema,
-             cascade = FALSE) {
+             cascade = FALSE,
+             if_exists = TRUE) {
 
         base <- system.file(package='pg13')
         path <- paste0(base, "/sql")
 
         if (cascade) {
 
-        SqlRender::render(SqlRender::readSql(paste0(path, "/dropSchemaCascade.sql")),
-                          schema = schema)
+            SqlRender::render("
+                              DROP SCHEMA @schema CASCADE
+                              ;",
+                              schema = schema)
+
+        }
+
+        if (if_exists) {
+
+                SqlRender::render("
+                                  DROP SCHEMA IF EXISTS @schema
+                                  ;",
+                                  schema = schema)
 
         } else {
-            SqlRender::render(SqlRender::readSql(paste0(path, "/dropSchema.sql")),
-                              schema = schema)
+
+                SqlRender::render("
+                                  DROP SCHEMA @schema
+                                  ;",
+                                  schema = schema)
         }
 
     }
+

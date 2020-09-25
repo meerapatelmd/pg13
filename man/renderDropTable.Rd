@@ -4,7 +4,7 @@
 \alias{renderDropTable}
 \title{Render SQL to Drop a Table}
 \usage{
-renderDropTable(schema, tableName)
+renderDropTable(schema, tableName, if_exists = TRUE)
 }
 \description{
 Drop a table if it exists

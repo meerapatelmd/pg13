@@ -18,10 +18,14 @@ appendTable <-
             schemaTableName <- constructSchemaTableName(schema = schema,
                                                         tableName = tableName)
 
-            DatabaseConnector::dbAppendTable(conn = conn,
-                                            name = schemaTableName,
-                                            value = .data %>%
-                                                as.data.frame(),
-                                            ...)
+
+            if (nrow(.data)) {
+
+                    DatabaseConnector::dbAppendTable(conn = conn,
+                                                    name = schemaTableName,
+                                                    value = .data %>%
+                                                        as.data.frame(),
+                                                    ...)
+            }
 
     }

@@ -4,7 +4,7 @@
 \alias{dropSchema}
 \title{Drop a Postgres schema}
 \usage{
-dropSchema(conn, schema, cascade = FALSE, ...)
+dropSchema(conn, schema, cascade = FALSE, if_exists = TRUE, ...)
 }
 \arguments{
 \item{...}{Additional arguments passed to the DatabaseConnector::dbSendStatement function}

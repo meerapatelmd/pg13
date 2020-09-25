@@ -5,11 +5,15 @@
 #' @export
 
 renderLsSchema <-
-    function(schema) {
+    function() {
 
         base <- system.file(package='pg13')
         path <- paste0(base, "/sql")
 
-        SqlRender::render(SqlRender::readSql(paste0(path, "/lsSchema.sql")))
+        SqlRender::render("
+                          SELECT nspname
+                          FROM pg_catalog.pg_namespace
+                          ;
+                          ")
 
     }

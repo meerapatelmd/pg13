@@ -20,14 +20,24 @@ renderRowCount <-
 
         if (distinct) {
 
-                SqlRender::render(SqlRender::readSql(paste0(path, "/distinctRowCount.sql")),
-                                  fields = fields,
-                                  schema = schema,
-                                  tableName = tableName)
+                SqlRender::render(
+                                    "
+                                    SELECT DISTINCT COUNT(@fields)
+                                    FROM @schema.@tableName
+                                    ;
+                                    ",
+                    schema = schema,
+                    fields = fields,
+                    tableName = tableName)
 
         } else {
 
-                SqlRender::render(SqlRender::readSql(paste0(path, "/rowCount.sql")),
+                SqlRender::render(
+                                "
+                                SELECT COUNT(@fields)
+                                FROM @schema.@tableName
+                                ;
+                                ",
                                   schema = schema,
                                   fields = fields,
                                   tableName = tableName)
