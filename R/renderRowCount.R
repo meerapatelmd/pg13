@@ -8,12 +8,8 @@
 renderRowCount <-
     function(fields = "*",
              distinct = FALSE,
-             schema = NULL,
+             schema,
              tableName) {
-
-        if (is.null(schema)) {
-            schema <- "public"
-        }
 
         base <- system.file(package='pg13')
         path <- paste0(base, "/sql")

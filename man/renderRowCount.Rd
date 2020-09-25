@@ -4,7 +4,7 @@
 \alias{renderRowCount}
 \title{Render SQL for a Table Row Count}
 \usage{
-renderRowCount(fields = "*", distinct = FALSE, schema = NULL, tableName)
+renderRowCount(fields = "*", distinct = FALSE, schema, tableName)
 }
 \arguments{
 \item{fields}{Fields selected for. Defaults to "*".}
