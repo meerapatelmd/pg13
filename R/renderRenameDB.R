@@ -11,7 +11,7 @@ renderRenameDB <-
         base <- system.file(package='pg13')
         path <- paste0(base, "/sql")
 
-        SqlRender::render(SqlRender::readSql(paste0(path,"/renameDB.sql")),
+        SqlRender::render("ALTER DATABASE @db RENAME TO @newDB;",
                           schema = schema,
                           db = db,
                           newDB = newDB)

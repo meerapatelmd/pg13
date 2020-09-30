@@ -5,13 +5,28 @@
 
 renderDropTable <-
     function(schema,
-             tableName) {
+             tableName,
+             if_exists = TRUE) {
 
         base <- system.file(package='pg13')
         path <- paste0(base, "/sql")
 
-        SqlRender::render(SqlRender::readSql(paste0(path, "/dropTable.sql")),
-                          schema = schema,
-                          tableName = tableName)
+
+        if (if_exists) {
+
+            SqlRender::render("
+                              DROP TABLE IF EXISTS @schema.@tableName;
+                              ",
+                              schema = schema,
+                              tableName = tableName)
+
+        } else {
+
+            SqlRender::render("
+                          DROP TABLE @schema.@tableName;
+                          ",
+                              schema = schema,
+                              tableName = tableName)
+        }
 
     }

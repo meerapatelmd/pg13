@@ -7,11 +7,13 @@ dropTable <-
     function(conn,
              schema,
              tableName,
+             if_exists = TRUE,
              ...) {
 
 
             sql_statement <- renderDropTable(schema = schema,
-                                               tableName = tableName)
+                                               tableName = tableName,
+                                             if_exists = if_exists)
 
             send(conn = conn,
                    sql_statement = sql_statement,

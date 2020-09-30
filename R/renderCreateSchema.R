@@ -10,7 +10,9 @@ renderCreateSchema <-
         base <- system.file(package='pg13')
         path <- paste0(base, "/sql")
 
-        SqlRender::render(SqlRender::readSql(paste0(path, "/createSchema.sql")),
+        SqlRender::render("
+                          CREATE SCHEMA @schema;
+                          ",
                           schema = schema)
 
     }

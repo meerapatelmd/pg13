@@ -4,7 +4,7 @@
 \alias{dropTable}
 \title{Drop a table in a Postgres schema}
 \usage{
-dropTable(conn, schema, tableName, ...)
+dropTable(conn, schema, tableName, if_exists = TRUE, ...)
 }
 \arguments{
 \item{...}{Additional arguments passed to the DatabaseConnector::dbSendStatement function}

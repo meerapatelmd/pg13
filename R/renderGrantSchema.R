@@ -24,13 +24,19 @@ renderGrantSchema <-
                 path <- paste0(base, "/sql")
 
                 if (!is.null(group)) {
-                        SqlRender::render(SqlRender::readSql(paste0(path, "/grantGroup.sql")),
+
+                        SqlRender::render("
+                                          GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA @schema to group @gp
+                                          ",
                                           schema = schema,
                                           gp = group)
+
                 } else {
-                        SqlRender::render(SqlRender::readSql(paste0(path, "/grantUser.sql")),
+
+                        SqlRender::render("GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA @schema to @user;",
                                           schema = schema,
                                           user = user)
+
                 }
 
         }

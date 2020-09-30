@@ -4,7 +4,7 @@
 \alias{renderDropSchema}
 \title{Render SQL to Drop a Schema}
 \usage{
-renderDropSchema(schema, cascade = FALSE)
+renderDropSchema(schema, cascade = FALSE, if_exists = TRUE)
 }
 \arguments{
 \item{cascade}{If TRUE, a DROP SCHEMA CASCADE is performed.}

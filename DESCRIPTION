@@ -1,6 +1,6 @@
 Package: pg13
 Title: pg13 Package
-Version: 0.1.0.0
+Version: 1.0.0
 Authors@R: 
     person(given = "Meera", family = "Patel, MD", role = c("aut", "cre"), email = "patelmeeray@gmail.com")
 Description: Render, Read, and Build SQL statements in the PostgreSQL dialect using R.
@@ -19,4 +19,4 @@ Imports:
     secretary,
     magrittr
 Remotes:
-        patelm9/secretary
+        meerapatelmd/secretary
