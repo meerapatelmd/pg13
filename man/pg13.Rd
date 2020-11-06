@@ -5,5 +5,5 @@
 \alias{pg13}
 \title{pg13}
 \description{
-Wrappers to \code{\link[DatabaseConnector]} and \code{\link[SqlRender]}
+Wrappers to DatabaseConnector and SqlRender Packages
 }

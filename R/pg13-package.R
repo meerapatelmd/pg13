@@ -1,6 +1,6 @@
 #' pg13
 #'
-#' Wrappers to \code{\link[DatabaseConnector]} and \code{\link[SqlRender]}
+#' Wrappers to DatabaseConnector and SqlRender Packages
 #'
 #' @docType package
 #' @name pg13
