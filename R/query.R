@@ -8,11 +8,15 @@
 query <-
     function(conn,
              sql_statement,
+             render_sql = TRUE,
              ...) {
 
+            if (render_sql) {
+                    typewrite_sql(sql_statement = sql_statement)
+            }
 
-        DatabaseConnector::dbGetQuery(conn,
-                                      statement = sql_statement,
-                                      ...)
+            DatabaseConnector::dbGetQuery(conn,
+                                              statement = sql_statement,
+                                              ...)
 
     }
