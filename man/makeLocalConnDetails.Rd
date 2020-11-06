@@ -22,7 +22,7 @@ DETAILS
 }
 \section{Local Connection Details}{
 
-This function returns a connectionDetails class object for functions that make the database connection within its caller environment, such as those belonging to the OHDSI Feature Extraction package. A connection can be made by passing the connectionDetails class object to the \code{\link{[DatabaseConnector]{connect}}. This process can be simplified into a single function call with \code{\link{localConnect}}, which performs both operations but will not return a connectionDetails object if it is desired as a return value.
+This function returns a connectionDetails class object for functions that make the database connection within its caller environment, such as those belonging to the OHDSI Feature Extraction package. A connection can be made by passing the connectionDetails class object to the \code{\link[DatabaseConnector]{connect}}. This process can be simplified into a single function call with \code{\link{localConnect}}, which performs both operations but will not return a connectionDetails object if it is desired as a return value.
 }
 
 \section{Local Connection}{
