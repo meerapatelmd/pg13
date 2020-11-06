@@ -14,7 +14,7 @@
 #' @param port          The port on the server to connect to, Default: 5432
 #'
 #' @name local_db
-#' @family local
+#' @family local functions
 #' @export
 NULL
 
@@ -30,7 +30,7 @@ NULL
 #' @seealso
 #'  \code{\link[DatabaseConnector]{createConnectionDetails}}
 #' @rdname makeLocalConnDetails
-#' @family local
+#' @family local functions
 #' @export
 #' @importFrom DatabaseConnector createConnectionDetails
 
@@ -58,7 +58,7 @@ makeLocalConnDetails <-
 #' @seealso
 #'  \code{\link[DatabaseConnector]{connect}}
 #' @rdname localConnect
-#' @family local
+#' @family local functions
 #' @export
 #' @importFrom DatabaseConnector connect
 

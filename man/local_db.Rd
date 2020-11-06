@@ -22,8 +22,8 @@ This function combines the process of creating a connectionDetails object and ma
 }
 
 \seealso{
-Other local: 
+Other local functions: 
 \code{\link{localConnect}()},
 \code{\link{makeLocalConnDetails}()}
 }
-\concept{local}
+\concept{local functions}
