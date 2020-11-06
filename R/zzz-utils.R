@@ -6,6 +6,14 @@ safely.print <-
                 "dummy"
         }
 
+#' Print an Object with \code\link{[purrr]{safely}} Wrapper and a superimposed \code\link{[purrr]{quietly}} wrapper
+#' @noRd
+
+quietly.safely.print <-
+        function() {
+                "dummy"
+        }
+
 
 #' @title
 #' Is the Connection Open?
