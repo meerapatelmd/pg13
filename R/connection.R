@@ -13,12 +13,83 @@
 #' @export
 NULL
 
+#' @title
+#' Is the Connection Closed?
+#'
+#' @description
+#' This function checks if a connection object is closed.
+#'
+#' @param conn Postgres connection object
+#'
+#' @return
+#' TRUE if the connection is closed and FALSE invisibly if it is open.
+#'
+#' @rdname isClosed
+#' @export
 
-
-
-brake_bad_conn <-
+isClosed <-
         function(conn) {
-                if (!is_conn_open(conn)) {
-                        stop("`conn` is not open")
+
+                .Deprecated(new = "is_conn_open")
+
+                results <- tryCatch(print(conn),
+                                    error = function(e) NULL)
+
+                if (is.null(results)) {
+                        TRUE
+                } else {
+                        invisible(FALSE)
                 }
+        }
+
+
+#' @title
+#' Remove a Closed Connection Object
+#'
+#' @description
+#' (Deprecated) This function removes a connection object from the Global Environment if it is closed.
+#'
+#' @param conn Postgres connection object
+#'
+#' @rdname rmIfClosed
+#' @export
+
+rmIfClosed <-
+        function(conn) {
+
+                .Deprecated(new = "rm_if_closed")
+
+                results <- isClosed(conn = conn)
+
+                if (results == TRUE) {
+
+                        rm(list = deparse(substitute(conn)), envir = globalenv())
+
+                }
+
+        }
+
+
+#' @title
+#' Remove a Closed Connection Object
+#'
+#' @description
+#' If a connection is not open, it is removed from the parent environment from which this function is called.
+#'
+#' @param conn Postgres connection object
+#'
+#' @rdname rm_if_closed
+#' @export
+
+
+rm_if_closed <-
+        function(conn) {
+
+                if (!is_conn_open(conn = conn)) {
+
+                        rm(list = deparse(substitute(conn)), envir = parent.frame())
+
+                }
+
+
         }
