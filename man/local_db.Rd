@@ -21,4 +21,8 @@ This function returns a connectionDetails class object for functions that make t
 This function combines the process of creating a connectionDetails object and making the connection in a single function call. If a connectionDetails object is required, see \code{\link{makeLocalConnDetails}}.
 }
 
+\seealso{
+Other local_db: 
+\code{\link{makeLocalConnDetails}()}
+}
 \concept{local_db}

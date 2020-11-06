@@ -39,4 +39,8 @@ if(interactive()){
 }
 \seealso{
 \code{\link[DatabaseConnector]{createConnectionDetails}}
+
+Other local_db: 
+\code{\link{local_db}}
 }
+\concept{local_db}
