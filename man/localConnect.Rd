@@ -6,6 +6,11 @@
 \usage{
 localConnect(dbname = "athena", port = 5432)
 }
+\arguments{
+\item{dbname}{Name of a local Postgres database, Default: 'athena'}
+
+\item{port}{The port on the server to connect to, Default: 5432}
+}
 \value{
 A connection class object to the database.
 }
@@ -20,7 +25,8 @@ This function combines the process of creating a connectionDetails object and ma
 \seealso{
 \code{\link[DatabaseConnector]{connect}}
 
-Other local_db: 
+Other local: 
+\code{\link{local_db}},
 \code{\link{makeLocalConnDetails}()}
 }
-\concept{local_db}
+\concept{local}

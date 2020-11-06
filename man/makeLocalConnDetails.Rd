@@ -25,7 +25,8 @@ This function returns a connectionDetails class object for functions that make t
 \seealso{
 \code{\link[DatabaseConnector]{createConnectionDetails}}
 
-Other local_db: 
-\code{\link{localConnect}()}
+Other local: 
+\code{\link{localConnect}()},
+\code{\link{local_db}}
 }
-\concept{local_db}
+\concept{local}
