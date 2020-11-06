@@ -26,7 +26,7 @@ This function combines the process of creating a connectionDetails object and ma
 \code{\link[DatabaseConnector]{connect}}
 
 Other local functions: 
-\code{\link{local_db}},
+\code{\link{local}()},
 \code{\link{makeLocalConnDetails}()}
 }
 \concept{local functions}

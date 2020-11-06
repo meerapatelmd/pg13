@@ -27,6 +27,6 @@ This function returns a connectionDetails class object for functions that make t
 
 Other local functions: 
 \code{\link{localConnect}()},
-\code{\link{local_db}}
+\code{\link{local}()}
 }
 \concept{local functions}

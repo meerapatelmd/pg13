@@ -13,8 +13,10 @@
 #' @param dbname        Name of a local Postgres database, Default: 'athena'
 #' @param port          The port on the server to connect to, Default: 5432
 #'
-#' @name local_db
+#' @name local
+#'
 #' @family local functions
+#'
 #' @export
 NULL
 
@@ -22,9 +24,9 @@ NULL
 #' @title
 #' Make a local Postgres Connection Details object
 #'
-#' @inherit local_db description
-#' @inheritSection local_db Local ConnectionDetails
-#' @inheritParams local_db
+#' @inherit local description
+#' @inheritSection local Local ConnectionDetails
+#' @inheritParams local
 #' @return
 #' A connectionDetails class object that lists all the details needed to connect to a database.
 #' @seealso
@@ -50,9 +52,9 @@ makeLocalConnDetails <-
 #' @title
 #' Connect to a Local Postgres Database
 #'
-#' @inherit local_db description
-#' @inheritSection local_db Local Connection
-#' @inheritParams local_db
+#' @inherit local description
+#' @inheritSection local Local Connection
+#' @inheritParams local
 #' @return
 #' A connection class object to the database.
 #' @seealso
