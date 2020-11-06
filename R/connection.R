@@ -12,3 +12,13 @@
 #'
 #' @export
 NULL
+
+
+
+
+brake_bad_conn <-
+        function(conn) {
+                if (!is_conn_open(conn)) {
+                        stop("`conn` is not open")
+                }
+        }
