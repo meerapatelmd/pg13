@@ -7,7 +7,7 @@
 #' @seealso
 #'  \code{\link[DatabaseConnector]{createConnectionDetails}},
 #'  \code{\link[DatabaseConnector]{connect}},
-#'   \code{\link{local_db}}
+#'   \code{\link{local}}
 #'
 #'
 #' @export
