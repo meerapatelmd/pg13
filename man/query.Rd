@@ -4,14 +4,14 @@
 \alias{query}
 \title{Send Query to any Postgres connection}
 \usage{
-query(conn, sql_statement, ...)
+query(conn, sql_statement, render_sql = TRUE, ...)
 }
 \arguments{
 \item{conn}{Connection object}
 
 \item{sql_statement}{SQL Query}
 
-\item{...}{Additional arguments to pass onto the DatabaseConnector::dbGetQuery function}
+\item{...}{Additional arguments to pass onto \code{\link[DatabaseConnector]{dbGetQuery}}}
 }
 \description{
 Send Query to any Postgres connection

@@ -1,7 +1,7 @@
 #' Send Query to any Postgres connection
 #' @param conn Connection object
 #' @param sql_statement SQL Query
-#' @param ... Additional arguments to pass onto the DatabaseConnector::dbGetQuery function
+#' @param ... Additional arguments to pass onto \code{\link[DatabaseConnector]{dbGetQuery}}
 #' @import DatabaseConnector
 #' @export
 
