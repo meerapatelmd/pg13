@@ -1,8 +1,10 @@
 .onLoad <-
         function(lib,pkg) {
-                safely.print <<- purrr::quietly(print)
+
+                safely.print <<- purrr::safely(print)
+
                 is_conn_open <<-
-                        function(conn, verbose = TRUE) {
+                        function(conn) {
 
                                 output <- safely.print(conn)
 
