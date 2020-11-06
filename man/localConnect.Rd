@@ -2,17 +2,30 @@
 % Please edit documentation in R/local_db.R
 \name{localConnect}
 \alias{localConnect}
-\title{Connect to Local PostGres Server}
+\title{Connect to a Local Postgres Database}
 \usage{
 localConnect(dbname = "athena", port = 5432)
 }
 \arguments{
-\item{dbname}{database name with the corresponding 'localhost/{dbname}' server}
+\item{dbname}{Name of a local Postgres database, Default: 'athena'}
 
-\item{port}{defults to "5432"}
-
-\item{schema}{defaults to NULL}
+\item{port}{The port on the server to connect to, Default: 5432}
+}
+\value{
+A connection class object to the database.
 }
 \description{
-Connect to Local PostGres Server
+Connect and disconnect to a local Postgres database that does not require credentialing. These functions automatically set the dbms and server arguments to "postgresql" and "localhost/{dbname}", leaving the database name (\code{dbname}) and port (\code{port}) as the only connection details that are modifiable by the user. Note that these functions cannot be used to connect to a local instance that requires a username and password.
 }
+\section{Local Connection}{
+
+This function combines the process of creating a connectionDetails object and making the connection in a single function call. If a connectionDetails object is required, see \code{\link{makeLocalConnDetails}}.
+}
+
+\seealso{
+\code{\link[DatabaseConnector]{connect}}
+
+Other local_db: 
+\code{\link{makeLocalConnDetails}()}
+}
+\concept{local_db}
