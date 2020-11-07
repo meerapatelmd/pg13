@@ -25,6 +25,23 @@ sQuo <-
                 paste0("'", vector, "'")
         }
 
+
+#' @title
+#' Affix the System Date to a String
+#'
+#' @description
+#' Date is affixed at the end of a string in "YYYY_mm_dd" Format
+#'
+#' @importFrom stringr str_replace_all
+#'
+#' @export
+
+affix_date <-
+        function(string) {
+                paste0(name, "_", stringr::str_replace_all(as.character(Sys.Date()), "[-]{1}", "_"))
+        }
+
+
 #' Typewrite SQL
 #' @importFrom secretary typewrite greenTxt
 #' @importFrom stringr str_replace_all
