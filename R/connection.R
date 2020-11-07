@@ -9,7 +9,7 @@
 #'  \code{\link[DatabaseConnector]{connect}},
 #'   \code{\link{local}}
 #'
-#' @name connection
+#' @rdname connection
 #' @export
 NULL
 
