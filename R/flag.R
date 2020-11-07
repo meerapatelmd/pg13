@@ -7,7 +7,7 @@
 #' @param predicate             Evaluating function.
 #' @param warn_message          Message to receive with the `predicate` evaluates to true.
 #' @param arguments             (option) character vector of arguments for the new function. If missing, the new function will not have any arguments. Arguments in the `predicate` should also be considered. For example, if the predicate is "is.logical(x)", the `arguments` value should be "x".
-#' @param ...                   Additional arguments passed to \link{\code[base]{warning}}
+#' @param ...                   Additional arguments passed to the base warning function
 #'
 #' @return
 #' Assigned function

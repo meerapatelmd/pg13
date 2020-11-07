@@ -13,7 +13,7 @@ flag_ff(predicate, warn_message, arguments, ...)
 
 \item{arguments}{(option) character vector of arguments for the new function. If missing, the new function will not have any arguments. Arguments in the \code{predicate} should also be considered. For example, if the predicate is "is.logical(x)", the \code{arguments} value should be "x".}
 
-\item{...}{Additional arguments passed to \link{\code[base]{warning}}}
+\item{...}{Additional arguments passed to the base warning function}
 }
 \value{
 Assigned function
