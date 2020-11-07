@@ -19,4 +19,30 @@
 
                         }
 
+
+                quiety.connDB <<- purrr::quietly(connDB)
+
+                connect <<-
+                        function(user,
+                                 password,
+                                 port,
+                                 server,
+                                 verbose = TRUE) {
+
+                                conn <- quiety.connDB(user = user,
+                                                      password = password,
+                                                      port = port,
+                                                      server = server)
+
+                                if (verbose) {
+
+                                        secretary::typewrite(conn$output)
+
+                                }
+
+                                conn$result
+
+                        }
+
+
         }

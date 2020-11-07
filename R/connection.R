@@ -13,6 +13,82 @@
 #' @export
 NULL
 
+#' @title
+#' Connect to a Postgres Database
+#' @description
+#' @param user PARAM_DESCRIPTION
+#' @param password PARAM_DESCRIPTION
+#' @param port PARAM_DESCRIPTION
+#' @param server PARAM_DESCRIPTION
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @seealso
+#'  \code{\link[DatabaseConnector]{createConnectionDetails}},\code{\link[DatabaseConnector]{connect}}
+#' @rdname connDB
+#' @export
+#' @importFrom DatabaseConnector createConnectionDetails connect
+
+
+connDB <-
+        function(user,
+                 password,
+                 port,
+                 server) {
+
+                conn_details <- DatabaseConnector::createConnectionDetails(dbms = "postgresql",
+                                                                           user = user,
+                                                                           password = password,
+                                                                           port = port,
+                                                                           server = server)
+
+                DatabaseConnector::connect(conn_details)
+        }
+
+
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname connect
+#' @export
+
+connect <-
+        function() {
+                "dummy"
+        }
+
+
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname quietly.connDB
+#' @export
+
+quietly.connDB <-
+        function() {
+                "dummy"
+        }
 
 #' @title
 #' Disconnect a Connection
