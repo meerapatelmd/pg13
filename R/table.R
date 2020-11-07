@@ -133,3 +133,274 @@ write <-
                                                 ...)
 
         }
+
+#' Drop a table in a Postgres schema
+#' @description Drop a table if it exists.
+#' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
+#' @export
+
+dropTable <-
+    function(conn,
+             schema,
+             tableName,
+             if_exists = TRUE,
+             ...) {
+
+
+            sql_statement <- renderDropTable(schema = schema,
+                                               tableName = tableName,
+                                             if_exists = if_exists)
+
+            send(conn = conn,
+                   sql_statement = sql_statement,
+                   ...)
+
+    }
+
+
+#' Get Full Table
+#' @export
+
+
+getTable <-
+        function(conn,
+                 schema,
+                 tableName) {
+
+                .Deprecated(new = "readTable")
+
+                query(conn = conn,
+                      buildQuery(schema = schema,
+                           tableName = tableName))
+        }
+
+
+
+
+
+#' Get Full Table
+#' @export
+
+
+readTable <-
+        function(conn,
+                 schema,
+                 tableName) {
+
+                query(conn = conn,
+                      buildQuery(schema = schema,
+                           tableName = tableName))
+        }
+
+
+
+
+
+#' Refresh Table with New Data
+#' @description A refresh is when a table needs to be overwritten and the table that is being overwritten is off-loaded to another table with today's date and the index of iterations for that day.
+#' @import stringr
+#' @import secretary
+#' @import purrr
+#' @export
+
+
+refreshTable <-
+            function(conn,
+                     schema,
+                     tableName,
+                     .data) {
+
+                tableNameHist <- appendDate(name = toupper(tableName))
+
+
+                todayTables <-
+                    grep(tableNameHist,
+                         lsTables(conn = conn,
+                                  schema = schema),
+                         value = TRUE)
+
+                n <- length(todayTables)
+
+
+                # If this table has not been written yet today
+                if (n == 0) {
+                    secretary::typewrite_bold("No Off-Loaded Tables Today")
+                    secretary::typewrite_bold("Next Table Name:", tableNameHist)
+                    # If more than 1 table has been written today, the new table name would be the length of the list of today's table + 1
+                } else {
+                    secretary::typewrite_bold("Off-Loaded Tables Today:")
+                    todayTables %>%
+                        purrr::map(function(x) secretary::typewrite(x, tabs = 1))
+
+                    tableNameHist <- paste0(tableNameHist, "_", (1+n))
+                    secretary::typewrite_bold("Next Table Name:", tableNameHist)
+
+                }
+
+                secretary::press_enter()
+
+                renameTable(conn = conn,
+                            schema = schema,
+                            tableName = tableName,
+                            newTableName = tableNameHist)
+
+                secretary::typewrite_bold(tableName, "renamed to", tableNameHist)
+
+                writeTable(conn = conn,
+                           tableName = tableName,
+                           schema = schema,
+                           .data = .data %>%
+                                    as.data.frame())
+
+                secretary::typewrite_bold("New", tableName, "written.")
+
+            }
+
+
+
+
+
+#' Rename a table in a Postgres schema
+#' @description This function will rename a table in a schema, but not move it out of a schema.
+#' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
+#' @export
+
+renameTable <-
+    function(conn,
+             schema,
+             tableName,
+             newTableName,
+             ...) {
+
+
+            sql_statement <- renderRenameTable(schema = schema,
+                                               tableName = tableName,
+                                               newTableName = newTableName)
+
+            send(conn = conn,
+                   sql_statement = sql_statement,
+                   ...)
+
+    }
+
+
+
+
+
+
+#' @title
+#' Search a Table for a Value
+#'
+#' @description
+#' If the Field to query is unknown, this function can be used to search and query all Fields or a subset of Fields for a given value. The `value` is converted to character and the Field is cast to varchar in the query and as a result, the query times may be long which may require providing a subset of Fields as an argument rather than searching the entire Table in many cases.
+#'
+#'
+#'
+#' @export
+
+
+searchTable <-
+        function(conn,
+                 schema,
+                 tableName,
+                 values,
+                 case_insensitive = TRUE,
+                 ...) {
+
+                # Prepare Value argument
+                values <- as.character(values)
+
+                if (case_insensitive) {
+                        values <- tolower(values)
+                }
+
+                values <- sQuo(values)
+
+                if (missing(...)) {
+                        Fields <- lsFields(conn = conn,
+                                           schema = schema,
+                                           tableName = tableName)
+                } else {
+                        Fields <- unlist(as.list(...))
+                }
+
+                        output <- list()
+
+                        if (case_insensitive) {
+
+                                for (i in 1:length(Fields)) {
+
+                                        Field <- Fields[i]
+
+                                        sql_statement <-
+                                        SqlRender::render(
+                                                "
+                                                SELECT *
+                                                FROM @schema.@tableName t
+                                                WHERE LOWER(t.@Field::varchar) IN (@values)
+                                                ;
+                                                ",
+                                                schema = schema,
+                                                tableName = tableName,
+                                                Field = Field,
+                                                values = values
+                                        )
+
+
+                                        print(sql_statement)
+
+
+                                        x <-
+                                                query(conn = conn,
+                                                      sql_statement = sql_statement)
+                                        if (!is.null(x)) {
+                                                output[[i]] <- x
+                                                names(output)[i] <- Field
+                                        }
+
+                                }
+
+                        } else {
+
+                                for (i in 1:length(Fields)) {
+
+                                Field <- Fields[i]
+
+                                sql_statement <-
+                                        SqlRender::render(
+                                                "
+                                                SELECT *
+                                                FROM @schema.@tableName t
+                                                WHERE t.@Field::varchar IN (@values)
+                                                ;
+                                                ",
+                                                schema = schema,
+                                                tableName = tableName,
+                                                Field = Field,
+                                                values = values
+                                        )
+
+                                x <-
+                                        query(conn = conn,
+                                              sql_statement = sql_statement)
+                                if (!is.null(x)) {
+                                        output[[i]] <- x
+                                        names(output)[i] <- Field
+                                }
+
+
+                                }
+                        }
+
+
+
+                output
+        }
+
+
+
+
+
+
+
+
