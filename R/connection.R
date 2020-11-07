@@ -9,9 +9,46 @@
 #'  \code{\link[DatabaseConnector]{connect}},
 #'   \code{\link{local}}
 #'
-#'
+#' @name connection
 #' @export
 NULL
+
+
+#' @title
+#' Disconnect a Connection
+#'
+#' @description
+#' Disconnect a Postgres Connection object with the option of removing the object from the parent environment.
+#'
+#' @param conn          Connection object
+#' @param ...           Additional arguments passed to \code{\link[DatabaseConnector]{dbDisconnect}}.
+#' @param remove        If TRUE, the Connection object argument is removed from the Parent Environment.
+#'
+#' @rdname dc
+#'
+#' @importFrom DatabaseConnector dbDisconnect
+#'
+#' @export
+
+dc <-
+        function(conn,
+                 ...,
+                 remove = FALSE) {
+
+                DatabaseConnector::dbDisconnect(conn = conn,
+                                                ...)
+
+                if (remove) {
+
+                        rm(list = deparse(substitute(conn)), envir = parent.frame())
+
+                }
+        }
+
+
+
+
+
 
 #' @title
 #' Is the Connection Closed?
