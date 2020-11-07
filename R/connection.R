@@ -82,7 +82,6 @@ connect <-
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @rdname quietly.connDB
 #' @export
 
 quietly.connDB <-

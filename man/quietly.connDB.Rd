@@ -4,7 +4,7 @@
 \alias{quietly.connDB}
 \title{FUNCTION_TITLE}
 \usage{
-quietly.connDB()
+quietly.connDB(...)
 }
 \value{
 OUTPUT_DESCRIPTION

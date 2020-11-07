@@ -20,7 +20,7 @@
                         }
 
 
-                quiety.connDB <<- purrr::quietly(connDB)
+                quietly.connDB <<- purrr::quietly(connDB)
 
                 connect <<-
                         function(user,
@@ -29,7 +29,7 @@
                                  server,
                                  verbose = TRUE) {
 
-                                conn <- quiety.connDB(user = user,
+                                conn <- quietly.connDB(user = user,
                                                       password = password,
                                                       port = port,
                                                       server = server)
