@@ -8,7 +8,7 @@
 #' @export
 
 
-appendTable <-
+appendTable2 <-
     function(conn = conn,
              schema,
              tableName,
@@ -43,7 +43,7 @@ appendTable <-
 #' @param data dataframe to append
 #' @param ... Additional arguments passed to DatabaseConnector::dbAppendTable
 #'
-#' @rdname append
+#' @rdname appendTable
 #' @family table functions
 #'
 #' @importFrom DatabaseConnector dbAppendTable
@@ -51,7 +51,7 @@ appendTable <-
 #' @export
 
 
-append <-
+appendTable <-
         function(conn = conn,
                  schema,
                  tableName,
@@ -81,7 +81,7 @@ append <-
 #' @export
 
 
-writeTable <-
+writeTable2 <-
         function(conn = conn,
                  schema,
                  tableName,
@@ -111,10 +111,12 @@ writeTable <-
 #'
 #' @importFrom DatabaseConnector dbWriteTable
 #'
+#' @rdname writeTable
+#'
 #' @export
 
 
-write <-
+writeTable <-
         function(conn,
                  schema,
                  tableName,
