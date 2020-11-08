@@ -14,7 +14,6 @@ NULL
 
 #' @title
 #' Connect to a Postgres Database
-#' @description
 #' @param user PARAM_DESCRIPTION
 #' @param password PARAM_DESCRIPTION
 #' @param port PARAM_DESCRIPTION
@@ -70,14 +69,8 @@ connect <-
         }
 
 
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' @title
+#' Connection FF
 #' @rdname connect_ff
 #' @export
 
