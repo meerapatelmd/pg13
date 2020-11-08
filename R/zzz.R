@@ -45,4 +45,23 @@
                         }
 
 
+                connect_ff <<-
+                        function(user,
+                                 password,
+                                 port,
+                                 server) {
+
+                                function(verbose) {
+
+                                        connect(
+                                                user = user,
+                                                password = password,
+                                                port = port,
+                                                server = server
+                                        )
+                                }
+
+                        }
+
+
         }

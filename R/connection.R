@@ -9,8 +9,7 @@
 #'  \code{\link[DatabaseConnector]{connect}},
 #'   \code{\link{local}}
 #'
-#' @rdname connection
-#' @export
+#' @name connection
 NULL
 
 #' @title
@@ -66,6 +65,23 @@ connDB <-
 #' @export
 
 connect <-
+        function() {
+                "dummy"
+        }
+
+
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname connect_ff
+#' @export
+
+connect_ff <-
         function() {
                 "dummy"
         }
