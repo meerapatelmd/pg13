@@ -10,6 +10,9 @@ concatWhereConstructs <-
              ...,
              AND = TRUE) {
 
+
+            .Deprecated()
+
             if (missing(...)) {
 
                             if (AND) {

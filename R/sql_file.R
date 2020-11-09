@@ -5,17 +5,15 @@
 #' @importFrom readr write_lines
 #' @export
 
-saveSQL <-
+write_sql_file <-
         function(sql_statement,
                  file,
                  append = TRUE,
                  ...) {
 
-                .Deprecated("write_sql_file")
-
                 readr::write_lines(x = sql_statement,
                                    path = file,
                                    append = append,
                                    ...
-                                   )
+                )
         }

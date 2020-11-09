@@ -343,5 +343,50 @@ constructWhereNotIn <-
 
 
 
+#' Export a sql statement to a file
+#' @param sql_statement sql statement R object
+#' @param file File to write to.
+#' @param ... Additional arguments passed to the readr::write_lines function
+#' @importFrom readr write_lines
+#' @export
+
+saveSQL <-
+        function(sql_statement,
+                 file,
+                 append = TRUE,
+                 ...) {
+
+                .Deprecated("write_sql_file")
+
+                readr::write_lines(x = sql_statement,
+                                   path = file,
+                                   append = append,
+                                   ...
+                )
+        }
+
+#' Drop a Postgres schema
+#' @description Drop a schema if it exists.
+#' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
+#' @export
+
+dropSchema <-
+        function(conn,
+                 schema,
+                 cascade = FALSE,
+                 if_exists = TRUE,
+                 ...) {
 
 
+                .Deprecated("dropCascade")
+
+
+                sql_statement <- renderDropSchema(schema = schema,
+                                                  cascade = cascade,
+                                                  if_exists = if_exists)
+
+                send(conn = conn,
+                     sql_statement = sql_statement,
+                     ...)
+
+        }

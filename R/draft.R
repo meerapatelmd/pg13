@@ -120,11 +120,28 @@ draftTablePath <-
         function(schema,
                  tableName) {
 
+            .Deprecated("table.path")
+
             SqlRender::render("@schema.@tableName",
                               schema = schema,
                               tableName = tableName)
 
         }
+
+
+#' Construct schemaTableName
+#' @description construct schemaTableName from the schema and tableName
+#' @export
+
+table.path <-
+    function(schema,
+             tableName) {
+
+        SqlRender::render("@schema.@tableName",
+                          schema = schema,
+                          tableName = tableName)
+
+    }
 
 
 
@@ -147,7 +164,7 @@ draftWhereIn <-
 
         }
 
-        SqlRender::render("WHERE @field IN (@vector)",
+        SqlRender::render("@field IN (@vector)",
                           field = field,
                           vector = vector)
     }
@@ -165,7 +182,7 @@ draftWhereLike <-
     function(field,
              term) {
 
-        SqlRender::render("WHERE @field LIKE '%@term%'",
+        SqlRender::render("@field LIKE '%@term%'",
                           field = field,
                           term = term)
     }
@@ -191,7 +208,7 @@ draftWhereLowerIn <-
 
         }
 
-        SqlRender::render("WHERE LOWER(@field) IN (@vector)",
+        SqlRender::render("LOWER(@field) IN (@vector)",
                           field = field,
                           vector = vector)
     }
@@ -208,7 +225,7 @@ draftWhereLowerLike <-
     function(field,
              term) {
 
-        SqlRender::render("WHERE LOWER(@field) LIKE '%@term%'",
+        SqlRender::render("LOWER(@field) LIKE '%@term%'",
                           field = field,
                           term = tolower(term))
 
@@ -236,7 +253,7 @@ draftWhereLowerNotIn <-
 
         }
 
-        SqlRender::render("WHERE LOWER(@field) NOT IN (@vector)",
+        SqlRender::render("LOWER(@field) NOT IN (@vector)",
                           field = field,
                           vector = vector)
     }
@@ -260,13 +277,31 @@ draftWhereNotIn <-
 
         }
 
-        SqlRender::render("WHERE @field NOT IN (@vector)",
+        SqlRender::render("@field NOT IN (@vector)",
                           field = field,
                           vector = vector)
     }
 
 
+#' @title
+#' Paste All Drafted Where Statements
+#'
+#' @rdname pasteWheres
+#'
+#' @importFrom rlang list2
+#' @export
 
+pasteWheres <-
+    function(...) {
+
+        Args <- rlang::list2(...)
+
+        paste0("WHERE ",
+                unlist(Args) %>%
+                    paste(collapse = " AND ")
+        )
+
+    }
 
 
 
