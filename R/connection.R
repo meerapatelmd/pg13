@@ -117,10 +117,15 @@ quietly.connDB <-
 dc <-
         function(conn,
                  ...,
+                 verbose = TRUE,
                  remove = FALSE) {
 
                 DatabaseConnector::dbDisconnect(conn = conn,
                                                 ...)
+
+                if (verbose) {
+                        secretary::typewrite("Postgres connection closed")
+                }
 
                 if (remove) {
 
