@@ -4,7 +4,7 @@
 \alias{dc}
 \title{Disconnect a Connection}
 \usage{
-dc(conn, ..., remove = FALSE)
+dc(conn, ..., verbose = TRUE, remove = FALSE)
 }
 \arguments{
 \item{conn}{Connection object}

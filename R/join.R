@@ -25,173 +25,159 @@
 #' }
 #' @seealso
 #'  \code{\link[SqlRender]{render}}
-#' @rdname join2
+#' @name join2
 #' @importFrom SqlRender render
+NULL
+#' .Join <-
+#'         function(conn,
+#'                  data,
+#'                  column,
+#'                  writeSchema,
+#'                  rSchema,
+#'                  rTable,
+#'                  rColumn,
+#'                  ...,
+#'                  join_type = "LEFT",
+#'                  case_insensitive = TRUE,
+#'                  render_sql = TRUE,
+#'                  verbose = TRUE) {
+#'
+#'
+#'                 ArgA <- rlang::list2({{ column }} := rColumn)
+#'                 ArgB <- rlang::list2(...)
+#'                 Args <- c(ArgA,
+#'                           ArgB)
+#'
+#'
+#'                 draftJoinOn <-
+#'                         function(...,
+#'                                  case_insensitive) {
+#'
+#'                                 Args <- rlang::list2(...)
+#'
+#'                                 lhs <- names(Args)
+#'                                 rhs <- unname(Args)
+#'
+#'
+#'                                 output <- list()
+#'                                 for (i in seq_along(lhs)) {
+#'
+#'                                         if (case_insensitive) {
+#'
+#'                                                 output[[i]] <-
+#'                                                         SqlRender::render(
+#'                                                                 "
+#'                                 LOWER(@lh::varchar) = LOWER(@rh::varchar)
+#'                                 ",
+#'                                                                 lh = lhs[[i]],
+#'                                                                 rh = rhs[[i]]
+#'                                                         )
+#'
+#'                                         } else {
+#'
+#'                                                 output[[i]] <-
+#'                                                         SqlRender::render(
+#'                                                                 "
+#'                                                 @lh::varchar = @rh::varchar
+#'                                                 ",
+#'                                                                 lh = lhs[[i]],
+#'                                                                 rh = rhs[[i]]
+#'                                                         )
+#'
+#'
+#'                                         }
+#'
+#'
+#'                                         } else {
+#'
+#'
+#'                                                 if (case_insensitive) {
+#'
+#'                                                         output[[i]] <-
+#'                                                                 SqlRender::render(
+#'                                                                         "
+#'                                 LOWER(@lh) = LOWER(@rh)
+#'                                 ",
+#'                                                                         lh = lhs[[i]],
+#'                                                                         rh = rhs[[i]]
+#'                                                                 )
+#'
+#'                                                 } else {
+#'
+#'                                                         output[[i]] <-
+#'                                                                 SqlRender::render(
+#'                                                                         "
+#'                                                 @lh = @rh
+#'                                                 ",
+#'                                                                         lh = lhs[[i]],
+#'                                                                         rh = rhs[[i]]
+#'                                                                 )
+#'
+#'
+#'                                                 }
+#'
+#'
+#'
+#'
+#'
+#'                                         }
+#'                                 }
+#'
+#'                                 output %>%
+#'                                         unlist() %>%
+#'                                         trimws(which = "both") %>%
+#'                                         paste(collapse = " AND ")
+#'
+#'
+#'                         }
+#'
+#'
+#'
+#'
+#'                 tableName <-
+#'                         writeVTable(
+#'                                 writeSchema = writeSchema,
+#'                                 data = data,
+#'                                 verbose = verbose
+#'                         )
+#'
+#'
+#'                 join_clause <-
+#'                         draftJoinOn(
+#'                                 ...,
+#'                                 cast_to_varchar = cast_to_varchar,
+#'                                 case_insensitive = case_insensitive
+#'                         )
+#'
+#'
+#'
+#'                 sql_statement <-
+#'                         SqlRender::render(
+#'                                 "
+#'                               SELECT *
+#'                               FROM @writeSchema.@tableName t
+#'                               @join_type JOIN @omopSchema.@omopTable omop
+#'                               ON @join_clause
+#'                               ;
+#'                               ",
+#'                                 omopSchema = omopSchema,
+#'                                 omopTable = omopTable,
+#'                                 join_type = join_type,
+#'                                 writeSchema = writeSchema,
+#'                                 tableName = tableName,
+#'                                 join_clause = join_clause)
+#'
+#'
+#'                 resultset <-
+#'                         qOMOP(sql_statement = sql_statement,
+#'                               verbose = verbose,
+#'                               render_sql = render_sql,
+#'                               skip_cache = TRUE
+#'                         )
+#'
+#'
+#'                 resultset
 
-.Join <-
-        function(conn,
-                 data,
-                 column,
-                 writeSchema,
-                 rSchema,
-                 rTable,
-                 rColumn,
-                 ...,
-                 join_type = "LEFT",
-                 case_insensitive = TRUE,
-                 render_sql = TRUE,
-                 verbose = TRUE) {
-
-
-                ArgA <- rlang::list2({{ column }} := rColumn)
-                ArgB <- rlang::list2(...)
-                Args <- c(ArgA,
-                          ArgB)
-
-
-                draftJoinOn <-
-                        function(...,
-                                 case_insensitive) {
-
-                                Args <- rlang::list2(...)
-
-                                lhs <- names(Args)
-                                rhs <- unname(Args)
-
-
-                                output <- list()
-                                for (i in seq_along(lhs)) {
-
-                                        if (case_insensitive) {
-
-                                                output[[i]] <-
-                                                        SqlRender::render(
-                                                                "
-                                LOWER(@lh::varchar) = LOWER(@rh::varchar)
-                                ",
-                                                                lh = lhs[[i]],
-                                                                rh = rhs[[i]]
-                                                        )
-
-                                        } else {
-
-                                                output[[i]] <-
-                                                        SqlRender::render(
-                                                                "
-                                                @lh::varchar = @rh::varchar
-                                                ",
-                                                                lh = lhs[[i]],
-                                                                rh = rhs[[i]]
-                                                        )
-
-
-                                        }
-
-
-                                        } else {
-
-
-                                                if (case_insensitive) {
-
-                                                        output[[i]] <-
-                                                                SqlRender::render(
-                                                                        "
-                                LOWER(@lh) = LOWER(@rh)
-                                ",
-                                                                        lh = lhs[[i]],
-                                                                        rh = rhs[[i]]
-                                                                )
-
-                                                } else {
-
-                                                        output[[i]] <-
-                                                                SqlRender::render(
-                                                                        "
-                                                @lh = @rh
-                                                ",
-                                                                        lh = lhs[[i]],
-                                                                        rh = rhs[[i]]
-                                                                )
-
-
-                                                }
-
-
-
-
-
-                                        }
-                                }
-
-                                output %>%
-                                        unlist() %>%
-                                        trimws(which = "both") %>%
-                                        paste(collapse = " AND ")
-
-
-                        }
-
-
-
-
-                tableName <-
-                        writeVTable(
-                                writeSchema = writeSchema,
-                                data = data,
-                                verbose = verbose
-                        )
-
-
-                join_clause <-
-                        draftJoinOn(
-                                ...,
-                                cast_to_varchar = cast_to_varchar,
-                                case_insensitive = case_insensitive
-                        )
-
-
-
-                sql_statement <-
-                        SqlRender::render(
-                                "
-                              SELECT *
-                              FROM @writeSchema.@tableName t
-                              @join_type JOIN @omopSchema.@omopTable omop
-                              ON @join_clause
-                              ;
-                              ",
-                                omopSchema = omopSchema,
-                                omopTable = omopTable,
-                                join_type = join_type,
-                                writeSchema = writeSchema,
-                                tableName = tableName,
-                                join_clause = join_clause)
-
-
-                resultset <-
-                        qOMOP(sql_statement = sql_statement,
-                              verbose = verbose,
-                              render_sql = render_sql,
-                              skip_cache = TRUE
-                        )
-
-
-                dropWriteTable(
-                        writeSchema = writeSchema,
-                        tableName = tableName,
-                        verbose = verbose
-                )
-
-                resultset
-
-        }
-
-
-
-test_function <-
-        function() {
-                print("This is a test")
-        }
 
 
 #' @title
