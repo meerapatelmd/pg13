@@ -51,7 +51,7 @@
                                  port,
                                  server) {
 
-                                function(verbose) {
+                                function(verbose = TRUE) {
 
                                         connect(
                                                 user = user,
