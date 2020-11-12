@@ -8,7 +8,14 @@
 send <-
     function(conn,
              sql_statement,
+             render_sql = TRUE,
              ...) {
+
+        if (render_sql) {
+
+            typewrite_sql(sql_statement = sql_statement)
+
+        }
 
         DatabaseConnector::dbSendStatement(conn = conn,
                                            statement = sql_statement,
@@ -16,7 +23,38 @@ send <-
 
     }
 
+#' Send Function Factor
+#' @export
 
+send_ff <-
+    function(
+        user,
+        password,
+        port,
+        server) {
+
+        function(verbose = TRUE) {
+
+            conn <- connect(user = user,
+                            password = password,
+                            port = port,
+                            server = server,
+                            verbose = verbose)
+
+            on.exit(expr = dc(conn = conn,
+                              verbose = verbose)
+            )
+
+
+            send(conn = conn,
+                 sql_statement = sql_statement,
+                 render_sql = render_sql)
+
+
+        }
+
+
+    }
 
 
 
