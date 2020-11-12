@@ -9,6 +9,3 @@ join2_ff(writeSchema, omopSchema, omopTable, join_type)
 \description{
 Customize the join2 function
 }
-\details{
-
-}

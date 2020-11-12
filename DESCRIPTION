@@ -19,6 +19,12 @@ Imports:
     stringr,
     readr,
     secretary,
-    magrittr
+    magrittr,
+    centipede,
+    dplyr,
+    progress,
+    rlang,
+    tibble,
+    tidyr
 Remotes:
         meerapatelmd/secretary
