@@ -33,7 +33,7 @@ send_ff <-
         port,
         server) {
 
-        function(verbose = TRUE) {
+        function(sql_statement, verbose = TRUE) {
 
             conn <- connect(user = user,
                             password = password,
@@ -42,8 +42,7 @@ send_ff <-
                             verbose = verbose)
 
             on.exit(expr = dc(conn = conn,
-                              verbose = verbose)
-            )
+                              verbose = verbose))
 
 
             send(conn = conn,
