@@ -134,7 +134,45 @@ dc <-
                 }
         }
 
+#' @title
+#' Write a function that already points to the connection object
+#' @description FUNCTION_DESCRIPTION
+#' @param conn PARAM_DESCRIPTION
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @seealso
+#'  \code{\link[DatabaseConnector]{character(0)}}
+#'  \code{\link[secretary]{typewrite}}
+#' @rdname dc_ff
+#' @export
+#' @importFrom DatabaseConnector dbDisconnect
+#' @importFrom secretary typewrite
 
+dc_ff <-
+        function(conn) {
+
+                function(verbose = TRUE,
+                         remove = FALSE) {
+
+                        DatabaseConnector::dbDisconnect(conn = conn)
+
+                        if (verbose) {
+                                secretary::typewrite("Postgres connection closed")
+                        }
+
+                        if (remove) {
+
+                                rm(list = deparse(substitute(conn)), envir = parent.frame())
+
+                        }
+                }
+        }
 
 
 
