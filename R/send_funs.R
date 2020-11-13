@@ -33,7 +33,9 @@ send_ff <-
         port,
         server) {
 
-        function(sql_statement, verbose = TRUE) {
+        function(sql_statement,
+                 verbose = TRUE,
+                 render_sql = TRUE) {
 
             conn <- connect(user = user,
                             password = password,
