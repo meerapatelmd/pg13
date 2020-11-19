@@ -22,20 +22,38 @@ appendTable <-
                  schema,
                  tableName,
                  data,
+                 verbose = TRUE,
+                 render_sql = TRUE,
                  ...) {
 
                 brake_closed_conn(conn = conn)
                 flag_no_rows(data = data)
 
+                schemaTableName <- sprintf("%s.%s", schema, tableName)
 
-                schemaTableName <- constructSchemaTableName(schema = schema,
-                                                            tableName = tableName)
 
+                if (render_sql) {
+
+                    typewrite_sql(sql_statement = "N/A")
+
+                }
+
+                if (verbose) {
+
+                    typewrite_activity("Appending...")
+
+                }
 
                 DatabaseConnector::dbAppendTable(conn = conn,
                                                  name = schemaTableName,
                                                  value = as.data.frame(data),
                                                  ...)
+
+                if (verbose) {
+
+                    typewrite_activity("Appending...complete")
+
+                }
 
         }
 
@@ -73,13 +91,31 @@ writeTable <-
                               if_exists = TRUE)
                 }
 
-                schemaTableName <- constructSchemaTableName(schema = schema,
-                                                            tableName = tableName)
+                schemaTableName <- sprintf("%s.%s", schema, tableName)
+
+
+                if (render_sql) {
+
+                    typewrite_sql(sql_statement = "N/A")
+
+                }
+
+                if (verbose) {
+
+                    typewrite_activity("Writing...")
+
+                }
 
                 DatabaseConnector::dbWriteTable(conn = conn,
                                                 name = schemaTableName,
                                                 value = as.data.frame(data),
                                                 ...)
+
+                if (verbose) {
+
+                    typewrite_activity("Writing...complete")
+
+                }
 
         }
 
@@ -108,11 +144,31 @@ dropTable <-
 
             }
 
+            if (render_sql) {
+
+                typewrite_sql(sql_statement = sql_statement)
+
+            }
+
+            if (verbose) {
+
+                typewrite_activity("Dropping...")
+
+            }
+
+
             send(conn = conn,
                  sql_statement = sql_statement,
                  verbose = verbose,
                  render_sql = render_sql,
                  ...)
+
+
+            if (verbose) {
+
+                typewrite_activity("Dropping...complete")
+
+            }
 
     }
 
@@ -128,10 +184,32 @@ readTable <-
                  verbose = TRUE,
                  render_sql = TRUE) {
 
-                query(conn = conn,
-                      sql_statement = sprintf("SELECT * FROM %s.%s", schema, tableName),
-                      verbose = verbose,
-                      render_sql = render_sql)
+
+            sql_statement <- sprintf("SELECT * FROM %s.%s;", schema, tableName)
+
+            if (render_sql) {
+
+                typewrite_sql(sql_statement = sql_statement)
+            }
+
+
+
+            if (verbose) {
+
+                typewrite_activity("Reading...")
+
+            }
+
+            query(conn = conn,
+                  sql_statement = sql_statement,
+                  verbose = verbose,
+                  render_sql = render_sql)
+
+            if (verbose) {
+
+                typewrite_activity("Reading...complete")
+
+            }
 
         }
 
