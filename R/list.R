@@ -5,13 +5,35 @@
 
 lsFields <-
     function(conn,
+             schema,
              tableName,
-             schema = NULL) {
+             verbose = TRUE,
+             render_sql = TRUE) {
 
-            DatabaseConnector::dbListFields(conn = conn,
+            if (render_sql) {
+
+                typewrite_sql("N/A")
+
+            }
+
+
+            if (verbose) {
+
+                typewrite_activity("Listing Fields...")
+
+            }
+
+            resultset <- DatabaseConnector::dbListFields(conn = conn,
                                             name = tableName,
                                             schema = schema)
 
+            if (verbose) {
+
+                typewrite_activity("Listing Fields...complete")
+
+            }
+
+            resultset
 
     }
 

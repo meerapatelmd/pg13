@@ -12,6 +12,9 @@ query <-
              render_sql = TRUE,
              ...) {
 
+            brake_closed_conn(conn = conn)
+            on.exit(flag_no_rows(data = resultset))
+
             if (render_sql) {
 
                     typewrite_sql(sql_statement = sql_statement)
@@ -31,7 +34,7 @@ query <-
 
             if (verbose) {
 
-                    secretary::typewrite("Querying...complete")
+                    typewrite_activity("Querying...complete")
 
             }
 

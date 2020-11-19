@@ -18,7 +18,7 @@
 
 
 appendTable <-
-        function(conn = conn,
+        function(conn,
                  schema,
                  tableName,
                  data,
@@ -133,6 +133,7 @@ dropTable <-
              render_sql = TRUE,
              ...) {
 
+            brake_closed_conn(conn = conn)
 
             if (if_exists) {
 
@@ -159,8 +160,8 @@ dropTable <-
 
             send(conn = conn,
                  sql_statement = sql_statement,
-                 verbose = verbose,
-                 render_sql = render_sql,
+                 verbose = FALSE,
+                 render_sql = FALSE,
                  ...)
 
 
@@ -200,10 +201,11 @@ readTable <-
 
             }
 
+            resultset <-
             query(conn = conn,
                   sql_statement = sql_statement,
-                  verbose = verbose,
-                  render_sql = render_sql)
+                  verbose = FALSE,
+                  render_sql = FALSE)
 
             if (verbose) {
 
@@ -211,7 +213,10 @@ readTable <-
 
             }
 
+            resultset
+
         }
+
 
 
 
@@ -221,7 +226,7 @@ readTable <-
 #' @description
 #' If the Field to query is unknown, this function can be used to search and query all Fields or a subset of Fields for a given value. The `value` is converted to character and the Field is cast to varchar in the query and as a result, the query times may be long which may require providing a subset of Fields as an argument rather than searching the entire Table in many cases.
 #'
-#'
+#' @importFrom rlang list2
 #'
 #' @export
 
@@ -230,104 +235,109 @@ searchTable <-
         function(conn,
                  schema,
                  tableName,
+                 ...,
                  values,
                  case_insensitive = TRUE,
-                 ...) {
+                 verbose = TRUE,
+                 render_sql = TRUE) {
 
-                # Prepare Value argument
+                brake_closed_conn(conn = conn)
+
+                # Format Values for SQL
                 values <- as.character(values)
 
                 if (case_insensitive) {
                         values <- tolower(values)
                 }
-
                 values <- sQuo(values)
 
+
+
+                # Get Fields vector to loop over for each SQL query
                 if (missing(...)) {
+
                         Fields <- lsFields(conn = conn,
                                            schema = schema,
-                                           tableName = tableName)
+                                           tableName = tableName,
+                                           verbose = verbose,
+                                           render_sql = FALSE)
+
                 } else {
-                        Fields <- unlist(as.list(...))
+
+                        Fields <- unlist(rlang::list2(...))
+
                 }
 
-                        output <- list()
 
-                        if (case_insensitive) {
+                sql_statements <- list()
+                for (Field in Fields) {
 
-                                for (i in 1:length(Fields)) {
+                    i <- 1+length(sql_statements)
 
-                                        Field <- Fields[i]
-
-                                        sql_statement <-
-                                        SqlRender::render(
-                                                "
-                                                SELECT *
-                                                FROM @schema.@tableName t
-                                                WHERE LOWER(t.@Field::varchar) IN (@values)
-                                                ;
-                                                ",
-                                                schema = schema,
-                                                tableName = tableName,
-                                                Field = Field,
-                                                values = values
-                                        )
+                    if (case_insensitive) {
 
 
-                                        print(sql_statement)
+                                sql_statements[[i]] <-
+                                SqlRender::render(
+                                                    "
+                                                    SELECT *
+                                                    FROM @schema.@tableName t
+                                                    WHERE LOWER(t.@Field::varchar) IN (@values)
+                                                    ;
+                                                    ",
+                                    schema = schema,
+                                    tableName = tableName,
+                                    Field = Field,
+                                    values = values
+                                )
 
+                    } else {
 
-                                        x <-
-                                                query(conn = conn,
-                                                      sql_statement = sql_statement)
-                                        if (!is.null(x)) {
-                                                output[[i]] <- x
-                                                names(output)[i] <- Field
-                                        }
-
-                                }
-
-                        } else {
-
-                                for (i in 1:length(Fields)) {
-
-                                Field <- Fields[i]
-
-                                sql_statement <-
-                                        SqlRender::render(
+                        sql_statements[[i]] <-
+                            SqlRender::render(
                                                 "
                                                 SELECT *
                                                 FROM @schema.@tableName t
                                                 WHERE t.@Field::varchar IN (@values)
                                                 ;
                                                 ",
-                                                schema = schema,
-                                                tableName = tableName,
-                                                Field = Field,
-                                                values = values
-                                        )
-
-                                x <-
-                                        query(conn = conn,
-                                              sql_statement = sql_statement)
-                                if (!is.null(x)) {
-                                        output[[i]] <- x
-                                        names(output)[i] <- Field
-                                }
-
-
-                                }
-                        }
+                                schema = schema,
+                                tableName = tableName,
+                                Field = Field,
+                                values = values
+                            )
 
 
 
-                output
+                    }
+
+                }
+
+
+                resultsets <- list()
+                for (i in seq_along(sql_statements)) {
+
+                        resultsets[[i]] <-
+                            suppressWarnings(
+                            query(conn = conn,
+                                  sql_statement = sql_statements[[i]],
+                                  verbose = verbose,
+                                  render_sql = render_sql))
+
+                }
+
+                names(resultsets) <- Fields
+
+                metrics <-
+                    resultsets %>%
+                    purrr::map(~ tibble::as_tibble_col(x = nrow(.), column_name = "Rows")) %>%
+                    dplyr::bind_rows(.id = "Field")
+
+
+                list(ROWS = metrics,
+                     RESULTSETS = resultsets %>%
+                                        purrr::keep(~ nrow(.) > 0))
+
         }
-
-
-
-
-
-
 
 

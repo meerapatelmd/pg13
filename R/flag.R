@@ -76,3 +76,4 @@ flag_no_rows <-
                 warn_message = "data has 0 rows",
                 arguments = "data"
         )
+
