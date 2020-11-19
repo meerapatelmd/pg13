@@ -4,7 +4,7 @@
 \alias{lsFields}
 \title{List Fields}
 \usage{
-lsFields(conn, tableName, schema = NULL)
+lsFields(conn, schema, tableName, verbose = TRUE, render_sql = TRUE)
 }
 \description{
 List Fields

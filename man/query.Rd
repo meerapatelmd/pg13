@@ -4,7 +4,7 @@
 \alias{query}
 \title{Send Query to any Postgres connection}
 \usage{
-query(conn, sql_statement, render_sql = TRUE, ...)
+query(conn, sql_statement, verbose = TRUE, render_sql = TRUE, ...)
 }
 \arguments{
 \item{conn}{Connection object}

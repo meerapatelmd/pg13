@@ -4,7 +4,7 @@
 \alias{send}
 \title{Send a SQL Statement to Postgres}
 \usage{
-send(conn, sql_statement, render_sql = TRUE, ...)
+send(conn, sql_statement, verbose = TRUE, render_sql = TRUE, ...)
 }
 \arguments{
 \item{conn}{Connection object}

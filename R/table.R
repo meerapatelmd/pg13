@@ -4,10 +4,8 @@
 #' @description
 #' Like the writeTable function, this function is a wrapper around a DatabaseConnector function rather than one where a SQL statement is rendered using the SqlRender package. This function performs the additional step of converting all inputs to the data.frame class, especially in cases where the input is a tibble.
 #'
-#' @param tableName Name of table to write to.
-#' @param schema schema where `tableName` is located.
-#' @param data dataframe to append
-#' @param ... Additional arguments passed to DatabaseConnector::dbAppendTable
+#' @inheritParams base_args
+#' @param           ...     Additional arguments passed to `DatabaseConnector::dbAppendTable()`
 #'
 #' @rdname appendTable
 #' @family table functions
@@ -62,8 +60,10 @@ appendTable <-
 #' Write a Table
 #'
 #' @description
-#' Unlike the dropTable and renameTable functions, this function is a wrapper around the DatabaseConnector::dbWriteTable function rather than one where a SQL statement is rendered using the SqlRender package. This function that converts all inputs to the data.frame class, especially in cases where the input is a tibble, in which case an error would be thrown when writing.
-#' @param ... Additional arguments passed to DatabaseConnector::dbWriteTable
+#' Unlike the dropTable and renameTable functions, this function is a wrapper around the `DatabaseConnector::dbWriteTable()` function rather than one where a SQL statement is rendered using the SqlRender package. This function that converts all inputs to a dataframe, especially in cases where the input is a tibble, in which case an error would be thrown when writing.
+#'
+#' @inheritParams base_args
+#' @param       ...     Additional arguments passed to `DatabaseConnector::dbWriteTable()`
 #'
 #' @importFrom DatabaseConnector dbWriteTable
 #'
@@ -119,9 +119,14 @@ writeTable <-
 
         }
 
-#' Drop a table in a Postgres schema
-#' @description Drop a table if it exists.
-#' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
+#' @title
+#' Drop a Table
+#'
+#' @inheritParams base_args
+#' @param           if_exists   If TRUE, the table will be dropped only if it exists.
+#' @param           ...         Additional arguments passed to `DatabaseConnector::dbSendStatement()`
+#'
+#' @rdname dropTable
 #' @export
 
 dropTable <-
@@ -174,7 +179,14 @@ dropTable <-
     }
 
 
-#' Get Full Table
+#' @title
+#' Read an Entire Table
+#'
+#' @description
+#' Shortcut for a `SELECT *` SQL statement.
+#'
+#' @inheritParams base_args
+#'
 #' @export
 
 
@@ -224,9 +236,18 @@ readTable <-
 #' Search a Table for a Value
 #'
 #' @description
-#' If the Field to query is unknown, this function can be used to search and query all Fields or a subset of Fields for a given value. The `value` is converted to character and the Field is cast to varchar in the query and as a result, the query times may be long which may require providing a subset of Fields as an argument rather than searching the entire Table in many cases.
+#' Loop a query for a set of one or more values in a table across all the existing fields or optionally, a subset of the fields. Both the values and the table fields are ensured compatibility by 1. Converting each value in the `values` argument to the character class and 2. Casting each table field as varchar in the query.
+#'
+#' @inheritParams base_args
+#' @param case_insensitive  If TRUE, both sides of the query are converted to lowercase.
+#' @param values            Vector of length 1 or greater to search for.
+#' @param ...               (Optional) Character strings of 1 or more fields in the table to search in.
 #'
 #' @importFrom rlang list2
+#'
+#' @rdname searchTable
+#' @family table functions
+#' @example inst/example/table.R
 #'
 #' @export
 

@@ -4,18 +4,36 @@
 \alias{appendTable}
 \title{Append a Table}
 \usage{
-appendTable(conn = conn, schema, tableName, data, ...)
+appendTable(
+  conn,
+  schema,
+  tableName,
+  data,
+  verbose = TRUE,
+  render_sql = TRUE,
+  ...
+)
 }
 \arguments{
-\item{schema}{schema where \code{tableName} is located.}
+\item{conn}{A connection object returned by \code{connect()}.}
 
-\item{tableName}{Name of table to write to.}
+\item{schema}{The target schema for the operation.}
 
-\item{data}{dataframe to append}
+\item{tableName}{The target table in the \code{schema} for an operation or for writing functions, the name of the table that will be created.}
 
-\item{...}{Additional arguments passed to DatabaseConnector::dbAppendTable}
+\item{data}{A dataframe or tibble.}
+
+\item{verbose}{If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.}
+
+\item{render_sql}{If TRUE, the SQL statement for the operation is returned in the console.}
+
+\item{...}{Additional arguments passed to \code{DatabaseConnector::dbAppendTable()}}
 }
 \description{
 Like the writeTable function, this function is a wrapper around a DatabaseConnector function rather than one where a SQL statement is rendered using the SqlRender package. This function performs the additional step of converting all inputs to the data.frame class, especially in cases where the input is a tibble.
+}
+\seealso{
+Other table functions: 
+\code{\link{searchTable}()}
 }
 \concept{table functions}

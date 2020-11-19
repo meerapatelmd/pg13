@@ -2,10 +2,21 @@
 % Please edit documentation in R/table.R
 \name{readTable}
 \alias{readTable}
-\title{Get Full Table}
+\title{Read an Entire Table}
 \usage{
-readTable(conn, schema, tableName)
+readTable(conn, schema, tableName, verbose = TRUE, render_sql = TRUE)
+}
+\arguments{
+\item{conn}{A connection object returned by \code{connect()}.}
+
+\item{schema}{The target schema for the operation.}
+
+\item{tableName}{The target table in the \code{schema} for an operation or for writing functions, the name of the table that will be created.}
+
+\item{verbose}{If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.}
+
+\item{render_sql}{If TRUE, the SQL statement for the operation is returned in the console.}
 }
 \description{
-Get Full Table
+Shortcut for a \verb{SELECT *} SQL statement.
 }
