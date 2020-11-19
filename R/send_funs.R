@@ -8,6 +8,7 @@
 send <-
     function(conn,
              sql_statement,
+             verbose = TRUE,
              render_sql = TRUE,
              ...) {
 
@@ -17,9 +18,21 @@ send <-
 
         }
 
+        if (verbose) {
+
+            secretary::typewrite("Sending...")
+
+        }
+
         DatabaseConnector::dbSendStatement(conn = conn,
                                            statement = sql_statement,
                                            ...)
+
+        if (verbose) {
+
+            secretary::typewrite("Sending...complete")
+
+        }
 
     }
 
@@ -49,6 +62,7 @@ send_ff <-
 
             send(conn = conn,
                  sql_statement = sql_statement,
+                 verbose = verbose,
                  render_sql = render_sql)
 
 

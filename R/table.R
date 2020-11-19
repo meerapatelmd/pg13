@@ -1,37 +1,3 @@
-#' Append to am Existing Table
-#' @import DatabaseConnector
-#' @description Like the writeTable function, this function is a wrapper around a DatabaseConnector function rather than one where a SQL statement is rendered using the SqlRender package. This function performs the additional step of converting all inputs to the data.frame class, especially in cases where the input is a tibble.
-#' @param tableName Name of table to write to.
-#' @param schema schema where `tableName` is located.
-#' @param .data dataframe to append
-#' @param ... Additional arguments passed to DatabaseConnector::dbAppendTable
-#' @export
-
-
-appendTable2 <-
-    function(conn = conn,
-             schema,
-             tableName,
-             .data,
-             ...) {
-
-            .Deprecated(new = "append")
-
-            schemaTableName <- constructSchemaTableName(schema = schema,
-                                                        tableName = tableName)
-
-
-            if (nrow(.data)) {
-
-                    DatabaseConnector::dbAppendTable(conn = conn,
-                                                    name = schemaTableName,
-                                                    value = .data %>%
-                                                        as.data.frame(),
-                                                    ...)
-            }
-
-    }
-
 #' @title
 #' Append a Table
 #'
@@ -74,34 +40,6 @@ appendTable <-
         }
 
 
-#' Write a Table
-#' @import DatabaseConnector
-#' @description Unlike the dropTable and renameTable functions, this function is a wrapper around the DatabaseConnector::dbWriteTable function rather than one where a SQL statement is rendered using the SqlRender package. This function that converts all inputs to the data.frame class, especially in cases where the input is a tibble, in which case an error would be thrown when writing.
-#' @param ... Additional arguments passed to DatabaseConnector::dbWriteTable
-#' @export
-
-
-writeTable2 <-
-        function(conn = conn,
-                 schema,
-                 tableName,
-                 .data,
-                 ...) {
-
-                .Deprecated(new = "write")
-
-                schemaTableName <- constructSchemaTableName(schema = schema,
-                                                            tableName = tableName)
-
-                DatabaseConnector::dbWriteTable(conn = conn,
-                                                name = schemaTableName,
-                                                value = .data %>%
-                                                        as.data.frame(),
-                                                ...)
-
-        }
-
-
 #' @title
 #' Write a Table
 #'
@@ -121,10 +59,19 @@ writeTable <-
                  schema,
                  tableName,
                  data,
+                 drop_existing = FALSE,
                  ...) {
 
                 brake_closed_conn(conn = conn)
                 flag_no_rows(data = data)
+
+                if (drop_existing) {
+
+                    dropTable(conn = conn,
+                              schema = schema,
+                              tableName = tableName,
+                              if_exists = TRUE)
+                }
 
                 schemaTableName <- constructSchemaTableName(schema = schema,
                                                             tableName = tableName)
@@ -146,38 +93,28 @@ dropTable <-
              schema,
              tableName,
              if_exists = TRUE,
+             verbose = TRUE,
+             render_sql = TRUE,
              ...) {
 
 
-            sql_statement <- renderDropTable(schema = schema,
-                                               tableName = tableName,
-                                             if_exists = if_exists)
+            if (if_exists) {
+
+                sql_statement <- sprintf("DROP TABLE IF EXISTS %s.%s;", schema, tableName)
+
+            } else {
+
+                sql_statement <- sprintf("DROP TABLE %s.%s;", schema, tableName)
+
+            }
 
             send(conn = conn,
-                   sql_statement = sql_statement,
-                   ...)
+                 sql_statement = sql_statement,
+                 verbose = verbose,
+                 render_sql = render_sql,
+                 ...)
 
     }
-
-
-#' Get Full Table
-#' @export
-
-
-getTable <-
-        function(conn,
-                 schema,
-                 tableName) {
-
-                .Deprecated(new = "readTable")
-
-                query(conn = conn,
-                      buildQuery(schema = schema,
-                           tableName = tableName))
-        }
-
-
-
 
 
 #' Get Full Table
@@ -187,11 +124,15 @@ getTable <-
 readTable <-
         function(conn,
                  schema,
-                 tableName) {
+                 tableName,
+                 verbose = TRUE,
+                 render_sql = TRUE) {
 
                 query(conn = conn,
-                      buildQuery(schema = schema,
-                           tableName = tableName))
+                      sql_statement = sprintf("SELECT * FROM %s.%s", schema, tableName),
+                      verbose = verbose,
+                      render_sql = render_sql)
+
         }
 
 

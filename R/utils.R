@@ -55,3 +55,14 @@ typewrite_sql <-
                 sql_statement <- trimws(sql_statement)
                 secretary::typewrite(secretary::greenTxt("SQL:"), sql_statement)
         }
+
+#' Typewrite Activity
+#' @importFrom secretary typewrite greenTxt
+#' @importFrom stringr str_replace_all
+#' @noRd
+
+typewrite_activity <-
+        function (activity)
+        {
+                secretary::typewrite(secretary::yellowTxt(activity))
+        }

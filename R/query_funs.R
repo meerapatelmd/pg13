@@ -8,16 +8,34 @@
 query <-
     function(conn,
              sql_statement,
+             verbose = TRUE,
              render_sql = TRUE,
              ...) {
 
             if (render_sql) {
+
                     typewrite_sql(sql_statement = sql_statement)
+
             }
 
-            DatabaseConnector::dbGetQuery(conn,
+            if (verbose) {
+
+                    typewrite_activity("Querying...")
+
+            }
+
+            resultset <- DatabaseConnector::dbGetQuery(conn,
                                               statement = sql_statement,
                                               ...)
+
+
+            if (verbose) {
+
+                    secretary::typewrite("Querying...complete")
+
+            }
+
+            resultset
 
     }
 
