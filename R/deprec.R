@@ -536,3 +536,97 @@ getTable <-
               buildQuery(schema = schema,
                          tableName = tableName))
     }
+
+
+#' Refresh Table with New Data
+#' @description A refresh is when a table needs to be overwritten and the table that is being overwritten is off-loaded to another table with today's date and the index of iterations for that day.
+#' @import stringr
+#' @import secretary
+#' @import purrr
+#' @export
+
+
+refreshTable <-
+    function(conn,
+             schema,
+             tableName,
+             .data) {
+
+        .Deprecated()
+
+        tableNameHist <- appendDate(name = toupper(tableName))
+
+
+        todayTables <-
+            grep(tableNameHist,
+                 lsTables(conn = conn,
+                          schema = schema),
+                 value = TRUE)
+
+        n <- length(todayTables)
+
+
+        # If this table has not been written yet today
+        if (n == 0) {
+            secretary::typewrite_bold("No Off-Loaded Tables Today")
+            secretary::typewrite_bold("Next Table Name:", tableNameHist)
+            # If more than 1 table has been written today, the new table name would be the length of the list of today's table + 1
+        } else {
+            secretary::typewrite_bold("Off-Loaded Tables Today:")
+            todayTables %>%
+                purrr::map(function(x) secretary::typewrite(x, tabs = 1))
+
+            tableNameHist <- paste0(tableNameHist, "_", (1+n))
+            secretary::typewrite_bold("Next Table Name:", tableNameHist)
+
+        }
+
+        secretary::press_enter()
+
+        renameTable(conn = conn,
+                    schema = schema,
+                    tableName = tableName,
+                    newTableName = tableNameHist)
+
+        secretary::typewrite_bold(tableName, "renamed to", tableNameHist)
+
+        writeTable(conn = conn,
+                   tableName = tableName,
+                   schema = schema,
+                   .data = .data %>%
+                       as.data.frame())
+
+        secretary::typewrite_bold("New", tableName, "written.")
+
+    }
+
+
+
+
+
+#' Rename a table in a Postgres schema
+#' @description This function will rename a table in a schema, but not move it out of a schema.
+#' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
+#' @export
+
+renameTable <-
+    function(conn,
+             schema,
+             tableName,
+             newTableName,
+             ...) {
+
+
+        sql_statement <- renderRenameTable(schema = schema,
+                                           tableName = tableName,
+                                           newTableName = newTableName)
+
+        send(conn = conn,
+             sql_statement = sql_statement,
+             ...)
+
+    }
+
+
+
+
