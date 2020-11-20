@@ -8,6 +8,10 @@
 
 \item{data}{A dataframe or tibble.}
 
+\item{sql_statement}{A SQL Statement.}
+
+\item{sql_statements}{A list or vector of SQL Statements of length 1 or greater.}
+
 \item{schema}{The target schema for the operation.}
 
 \item{tableName}{The target table in the \code{schema} for an operation or for writing functions, the name of the table that will be created.}
