@@ -78,6 +78,8 @@ writeTable <-
                  tableName,
                  data,
                  drop_existing = FALSE,
+                 verbose = TRUE,
+                 render_sql = TRUE,
                  ...) {
 
                 brake_closed_conn(conn = conn)

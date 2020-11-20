@@ -1,6 +1,6 @@
 Package: pg13
 Title: pg13 Package
-Version: 0.1.0
+Version: 0.2.0
 URL: https://meerapatelmd.github.io/pg13/, https://github.com/meerapatelmd/pg13/
 BugReports: https://github.com/meerapatelmd/pg13/issues/
 Authors@R: 

@@ -4,7 +4,16 @@
 \alias{writeTable}
 \title{Write a Table}
 \usage{
-writeTable(conn, schema, tableName, data, drop_existing = FALSE, ...)
+writeTable(
+  conn,
+  schema,
+  tableName,
+  data,
+  drop_existing = FALSE,
+  verbose = TRUE,
+  render_sql = TRUE,
+  ...
+)
 }
 \arguments{
 \item{conn}{A connection object returned by \code{connect()}.}
@@ -14,6 +23,10 @@ writeTable(conn, schema, tableName, data, drop_existing = FALSE, ...)
 \item{tableName}{The target table in the \code{schema} for an operation or for writing functions, the name of the table that will be created.}
 
 \item{data}{A dataframe or tibble.}
+
+\item{verbose}{If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.}
+
+\item{render_sql}{If TRUE, the SQL statement for the operation is returned in the console.}
 
 \item{...}{Additional arguments passed to \code{DatabaseConnector::dbWriteTable()}}
 }
