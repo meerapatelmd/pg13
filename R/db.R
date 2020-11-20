@@ -1,14 +1,18 @@
-#' Create a new Database
-#' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
+#' @title
+#' Create a New Database
+#'
+#' @inheritParams base_args
+#' @param dbname Database name.
+#' @param ... Additional arguments passed to `DatabaseConnector::dbSendStatement()`.
 #' @export
 
 createDB <-
     function(conn,
-             newDB,
+             dbname,
              ...) {
 
 
-            sql_statement <- renderCreateDB(newDB = newDB)
+            sql_statement <- sprintf("CREATE DATABASE %s;", dbname)
 
             send(conn = conn,
                    sql_statement = sql_statement,
