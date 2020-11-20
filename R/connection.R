@@ -43,9 +43,6 @@ connDB <-
 #' @param verbose If TRUE, returns console messages when a connection has been secured.
 #' @inherit DatabaseConnector::connect return
 #'
-#' @seealso
-#'  \code{\link[DatabaseConnector]{createConnectionDetails}, \code{\link[DatabaseConnector]{connect}}
-#'
 #' @rdname connect
 #'
 #' @export

@@ -24,6 +24,3 @@ direct commands to the database engine.
 \description{
 Connect to a Postgres Database
 }
-\seealso{
-\code{\link[DatabaseConnector]{createConnectionDetails}, \code{\link[DatabaseConnector]{connect}}
-}
