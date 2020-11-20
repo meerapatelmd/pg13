@@ -1,6 +1,13 @@
+#' @title
 #' List Fields
-#' @import DatabaseConnector
+#'
+#' @description
+#' Fields for the given table are returned in lowercase.
+#'
+#' @importFrom DatabaseConnector dbListFields
 #' @export
+#'
+#' @rdname lsFields
 
 
 lsFields <-
@@ -24,8 +31,8 @@ lsFields <-
             }
 
             resultset <- DatabaseConnector::dbListFields(conn = conn,
-                                            name = tableName,
-                                            schema = schema)
+                                                        name = tableName,
+                                                        schema = schema)
 
             if (verbose) {
 
@@ -33,7 +40,105 @@ lsFields <-
 
             }
 
-            resultset
+            tolower(resultset)
+
+    }
+
+
+#' @title
+#' Does a field exist?
+#'
+#' @description
+#' Logical that checks if a field exists in a table. The `field` argument is formatted into lowercase prior to being checked.
+#'
+#'
+#' @inheritParams base_args
+#' @param field Character string to check for in the given table.
+#'
+#' @rdname field_exists
+#' @export
+
+
+field_exists <-
+    function(conn,
+             schema,
+             tableName,
+             field) {
+
+        Fields <- lsFields(conn = conn,
+                             schema = schema,
+                             tableName = tableName,
+                             verbose = FALSE,
+                             render_sql = FALSE)
+
+        if (tolower(field) %in% Fields) {
+
+            TRUE
+
+        } else {
+
+            FALSE
+        }
+    }
+
+
+#' @title
+#' List Schemas
+#'
+#' @description
+#' List all the schemas in a database in lowercase.
+#'
+#' @export
+
+lsSchema <-
+        function(conn,
+                 verbose = TRUE,
+                 render_sql = TRUE) {
+
+                query(conn = conn,
+                      sql_statement = "SELECT nspname FROM pg_catalog.pg_namespace;",
+                      verbose = verbose,
+                      render_sql = render_sql) %>%
+                unlist() %>%
+                unname() %>%
+                tolower()
+
+        }
+
+#' @title
+#' Does a schema exist?
+#'
+#' @description
+#' Logical that checks if a schema exists in the database. The `schema` argument is in formatted in all lowercase prior to checking against what is present in the database.
+#'
+#'
+#' @inheritParams base_args
+#'
+#' @rdname schema_exists
+#' @export
+
+
+schema_exists <-
+    function(conn,
+             schema) {
+
+
+                    schemas <-
+                        lsSchema(conn = conn,
+                                 verbose = FALSE,
+                                 render_sql = FALSE)
+
+
+
+                if (tolower(schema) %in% schemas) {
+
+                    TRUE
+
+                } else {
+
+                    FALSE
+                }
+
 
     }
 
@@ -41,42 +146,80 @@ lsFields <-
 
 
 
-#' List Schema
-#' @description
-#' List all schema in the connection.
-#' @importFrom magrittr %>%
-#' @export
-
-lsSchema <-
-        function(conn) {
-
-                query(conn = conn,
-                     renderLsSchema()) %>%
-                        unlist() %>%
-                        unname()
-
-        }
-
-
-
-
-
+#' @title
 #' List Tables
-#' @import DatabaseConnector
+#'
+#' @inheritParams base_args
+#'
+#' @importFrom DatabaseConnector dbListTables
+#'
+#' @rdname lsTables
+#'
 #' @export
 
 
 lsTables <-
     function(conn,
-             schema = NULL) {
+             schema,
+             verbose = TRUE,
+             render_sql = TRUE) {
 
-            DatabaseConnector::dbListTables(conn = conn,
-                                        schema = schema)
+
+            if (render_sql) {
+
+                typewrite_sql("N/A")
+
+            }
+
+
+            if (verbose) {
+
+                typewrite_activity("Listing Tables...")
+
+            }
+
+
+            resultset <- DatabaseConnector::dbListTables(conn = conn,
+                                                        schema = schema)
+
+            if (verbose) {
+
+                typewrite_activity("Listing Tables...completed")
+
+            }
+
+            toupper(resultset)
 
 
     }
 
 
+#' @title
+#' Does a table exist?
+#'
+#' @inheritParams base_args
+#'
+#' @rdname table_exists
+#'
+#' @export
+
+table_exists <-
+    function(conn,
+             schema,
+             tableName) {
 
 
+        Tables <- lsTables(conn = conn,
+                           schema = schema,
+                           verbose = FALSE,
+                           render_sql = FALSE)
 
+        if (toupper(tableName) %in% Tables) {
+
+            TRUE
+
+        } else {
+
+            FALSE
+        }
+    }
