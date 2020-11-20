@@ -57,9 +57,11 @@ query <-
 #'
 #' @importFrom DatabaseConnector executeSql
 #'
+#' @rdname execute_n
+#'
 #' @export
 
-queries <-
+execute_n <-
     function(conn,
              sql_statements,
              render_sql = TRUE,
