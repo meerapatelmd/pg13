@@ -69,6 +69,12 @@ queries <-
              errorReportFile = file.path(getwd(), "errorReportSql.txt"),
              runAsBatch = FALSE) {
 
+            if (is.list(sql_statements)) {
+
+                    sql_statements <- unlist(sql_statements)
+
+            }
+
             sql_statement <- paste(sql_statements, collapse = ";\n\n\n")
 
             if (render_sql) {

@@ -2,13 +2,17 @@
 % Please edit documentation in R/db.R
 \name{createDB}
 \alias{createDB}
-\title{Create a new Database}
+\title{Create a New Database}
 \usage{
-createDB(conn, newDB, ...)
+createDB(conn, dbname, ...)
 }
 \arguments{
-\item{...}{Additional arguments passed to the DatabaseConnector::dbSendStatement function}
+\item{conn}{A connection object returned by \code{connect()}.}
+
+\item{dbname}{Database name.}
+
+\item{...}{Additional arguments passed to \code{DatabaseConnector::dbSendStatement()}.}
 }
 \description{
-Create a new Database
+Create a New Database
 }
