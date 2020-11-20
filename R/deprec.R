@@ -715,3 +715,33 @@ terminateBuild <-
 
     }
 
+
+
+
+
+
+#' Execute SQL
+#' @description This function differs from the send() and query() functions in that it provides additional features such as a progress bar and time estimations.
+#' @export
+
+execute <-
+        function(conn,
+                 sql_statement,
+                 profile = FALSE,
+                 progressBar = TRUE,
+                 reportOverallTime = TRUE,
+                 ...) {
+
+                .Deprecated(new = "queries")
+                DatabaseConnector::executeSql(connection = conn,
+                                              sql = sql_statement,
+                                              profile = profile,
+                                              progressBar = progressBar,
+                                              reportOverallTime = reportOverallTime,
+                                              ...)
+        }
+
+
+
+
+
