@@ -77,12 +77,12 @@ execute_n <-
 
             }
 
-            sql_statement <- paste(sql_statements, collapse = ";\n\n\n")
+            sql_statement <- paste(sql_statements, collapse = ";\n")
 
             if (render_sql) {
 
                     typewrite_sql(sql_statement = sql_statement)
-                    cat("\n\n\n")
+                    cat("\n\n")
 
             }
 
@@ -94,6 +94,7 @@ execute_n <-
                                           reportOverallTime = reportOverallTime,
                                           errorReportFile = errorReportFile,
                                           runAsBatch = runAsBatch)
+            cat("\n\n")
     }
 
 
