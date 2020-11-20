@@ -6,31 +6,7 @@
 \usage{
 connDB(user, password, port, server)
 }
-\arguments{
-\item{user}{PARAM_DESCRIPTION}
-
-\item{password}{PARAM_DESCRIPTION}
-
-\item{port}{PARAM_DESCRIPTION}
-
-\item{server}{PARAM_DESCRIPTION}
-}
-\value{
-OUTPUT_DESCRIPTION
-}
 \description{
 Connect to a Postgres Database
 }
-\details{
-DETAILS
-}
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}
-\seealso{
-\code{\link[DatabaseConnector]{createConnectionDetails}},\code{\link[DatabaseConnector]{connect}}
-}
+\keyword{internal}

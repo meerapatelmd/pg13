@@ -2,23 +2,28 @@
 % Please edit documentation in R/connection.R
 \name{connect}
 \alias{connect}
-\title{FUNCTION_TITLE}
+\title{Connect to a Postgres Database}
 \usage{
 connect(user, password, port, server, verbose = TRUE)
 }
+\arguments{
+\item{user}{The user name used to access the server.}
+
+\item{password}{The password for that user.}
+
+\item{port}{(optional) The port on the server to connect to.}
+
+\item{server}{The name of the server.}
+
+\item{verbose}{If TRUE, returns console messages when a connection has been secured.}
+}
 \value{
-OUTPUT_DESCRIPTION
+An object that extends \code{DBIConnection} in a database-specific manner. This object is used to
+direct commands to the database engine.
 }
 \description{
-FUNCTION_DESCRIPTION
+Connect to a Postgres Database
 }
-\details{
-DETAILS
-}
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+\seealso{
+\code{\link[DatabaseConnector]{createConnectionDetails}, \code{\link[DatabaseConnector]{connect}}
 }

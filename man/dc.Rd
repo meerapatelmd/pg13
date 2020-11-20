@@ -7,11 +7,13 @@
 dc(conn, ..., verbose = TRUE, remove = FALSE)
 }
 \arguments{
-\item{conn}{Connection object}
+\item{conn}{A connection object returned by \code{connect()}.}
 
 \item{...}{Additional arguments passed to \code{\link[DatabaseConnector]{dbDisconnect}}.}
 
-\item{remove}{If TRUE, the Connection object argument is removed from the Parent Environment.}
+\item{verbose}{If TRUE, returns a console message when the connection has been closed.}
+
+\item{remove}{If TRUE, the Connection object argument is removed from the parent environment.}
 }
 \description{
 Disconnect a Postgres Connection object with the option of removing the object from the parent environment.

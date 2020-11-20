@@ -2,10 +2,19 @@
 % Please edit documentation in R/connection.R
 \name{connect_ff}
 \alias{connect_ff}
-\title{Connection FF}
+\title{Connection Function Factory}
 \usage{
 connect_ff(user, password, port, server)
 }
+\arguments{
+\item{user}{The user name used to access the server.}
+
+\item{password}{The password for that user.}
+
+\item{port}{(optional) The port on the server to connect to.}
+
+\item{server}{The name of the server.}
+}
 \description{
-Connection FF
+Customize a connection function.
 }

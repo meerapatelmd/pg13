@@ -2,23 +2,11 @@
 % Please edit documentation in R/connection.R
 \name{quietly.connDB}
 \alias{quietly.connDB}
-\title{FUNCTION_TITLE}
+\title{Connect without Console Messages}
 \usage{
 quietly.connDB(...)
 }
-\value{
-OUTPUT_DESCRIPTION
-}
 \description{
-FUNCTION_DESCRIPTION
+Connect without Console Messages
 }
-\details{
-DETAILS
-}
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}
+\keyword{internal}

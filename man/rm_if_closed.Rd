@@ -7,7 +7,7 @@
 rm_if_closed(conn)
 }
 \arguments{
-\item{conn}{Postgres connection object}
+\item{conn}{A connection object returned by \code{connect()}.}
 }
 \description{
 If a connection is not open, it is removed from the parent environment from which this function is called.
