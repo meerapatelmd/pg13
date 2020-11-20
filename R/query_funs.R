@@ -46,62 +46,46 @@ query <-
 
 
 
-#' Query a List of SQL Statements
+#' @title
+#' Query with more than 1 SQL Statements
+#'
 #' @description
-#' Iteratively query over a list of SQL Statements such as the object returned by \code{\link{parseSQL}}.
-#' @import progress
-#' @param conn Connection object
-#' @param sqlList list object of queries
-#' @param ... Additional arguments to pass onto the DatabaseConnector::dbGetQuery function
+#' Query multiple SQL Statements in a single function call.
+#'
+#' @inheritParams DatabaseConnector::executeSql
+#' @inheritParams base_args
+#'
+#' @importFrom DatabaseConnector executeSql
+#'
 #' @export
 
-queryList <-
+queries <-
     function(conn,
-             sqlList,
-             verbose = TRUE,
+             sql_statements,
+             render_sql = TRUE,
+             profile = FALSE,
              progressBar = TRUE,
-             ...) {
+             reportOverallTime = TRUE,
+             errorReportFile = file.path(getwd(), "errorReportSql.txt"),
+             runAsBatch = FALSE) {
 
-            if (!is.list(sqlList)) {
+            sql_statement <- paste(sql_statements, collapse = ";\n\n\n")
 
-                    stop("'sqlList' must be a list")
+            if (render_sql) {
 
-            }
-
-            if (progressBar) {
-
-                    pb <- progress::progress_bar$new(total = length(sqlList),
-                                                     format = "[:bar] :elapsedfull :current/:total (:percent)",
-                                                     clear = FALSE)
-                    pb$tick(0)
-                    Sys.sleep(.2)
+                    typewrite_sql(sql_statement = sql_statement)
+                    cat("\n\n\n")
 
             }
 
-            output <- list()
-            for (i in 1:length(sqlList)) {
 
-                    sql <- sqlList[[i]]
-
-                    if (verbose) {
-                            secretary::typewrite(sql)
-                    }
-
-                    if (progressBar) {
-                            pb$tick()
-                            Sys.sleep(.2)
-                    }
-
-                    output[[i]] <-
-                    query(conn = conn,
-                          sql_statement = sql,
-                          ...)
-
-                    names(output)[i] <- sql
-
-            }
-
-            output
+            DatabaseConnector::executeSql(connection = conn,
+                                          sql = sql_statement,
+                                          profile = profile,
+                                          progressBar = progressBar,
+                                          reportOverallTime = reportOverallTime,
+                                          errorReportFile = errorReportFile,
+                                          runAsBatch = runAsBatch)
     }
 
 
