@@ -4,8 +4,23 @@
 \alias{lsTables}
 \title{List Tables}
 \usage{
-lsTables(conn, schema = NULL)
+lsTables(conn, schema, verbose = TRUE, render_sql = TRUE)
+}
+\arguments{
+\item{conn}{A connection object returned by \code{connect()}.}
+
+\item{schema}{The target schema for the operation.}
+
+\item{verbose}{If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.}
+
+\item{render_sql}{If TRUE, the SQL statement for the operation is returned in the console.}
 }
 \description{
 List Tables
 }
+\seealso{
+Other list functions: 
+\code{\link{lsFields}()},
+\code{\link{lsSchema}()}
+}
+\concept{list functions}

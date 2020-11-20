@@ -7,5 +7,11 @@
 lsFields(conn, schema, tableName, verbose = TRUE, render_sql = TRUE)
 }
 \description{
-List Fields
+Fields for the given table are returned in lowercase.
 }
+\seealso{
+Other list functions: 
+\code{\link{lsSchema}()},
+\code{\link{lsTables}()}
+}
+\concept{list functions}

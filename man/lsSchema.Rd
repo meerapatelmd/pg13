@@ -2,10 +2,16 @@
 % Please edit documentation in R/list.R
 \name{lsSchema}
 \alias{lsSchema}
-\title{List Schema}
+\title{List Schemas}
 \usage{
-lsSchema(conn)
+lsSchema(conn, verbose = TRUE, render_sql = TRUE)
 }
 \description{
-List all schema in the connection.
+List all the schemas in a database in lowercase.
 }
+\seealso{
+Other list functions: 
+\code{\link{lsFields}()},
+\code{\link{lsTables}()}
+}
+\concept{list functions}

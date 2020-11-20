@@ -8,6 +8,7 @@
 #' @export
 #'
 #' @rdname lsFields
+#' @family list functions
 
 
 lsFields <-
@@ -57,7 +58,7 @@ lsFields <-
 #'
 #' @rdname field_exists
 #' @export
-
+#' @family logical functions
 
 field_exists <-
     function(conn,
@@ -89,6 +90,7 @@ field_exists <-
 #' List all the schemas in a database in lowercase.
 #'
 #' @export
+#' @family list functions
 
 lsSchema <-
         function(conn,
@@ -116,6 +118,7 @@ lsSchema <-
 #'
 #' @rdname schema_exists
 #' @export
+#' @family logical functions
 
 
 schema_exists <-
@@ -156,7 +159,7 @@ schema_exists <-
 #' @rdname lsTables
 #'
 #' @export
-
+#' @family list functions
 
 lsTables <-
     function(conn,
@@ -202,6 +205,7 @@ lsTables <-
 #' @rdname table_exists
 #'
 #' @export
+#' @family logical functions
 
 table_exists <-
     function(conn,
