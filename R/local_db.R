@@ -14,10 +14,7 @@
 #' @param port          The port on the server to connect to, Default: 5432
 #'
 #' @name local
-#'
 #' @family local functions
-#'
-#' @export
 NULL
 
 
