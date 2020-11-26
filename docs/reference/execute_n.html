@@ -128,6 +128,7 @@
     <pre class="usage"><span class='fu'>execute_n</span><span class='op'>(</span>
   <span class='va'>conn</span>,
   <span class='va'>sql_statements</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
   render_sql <span class='op'>=</span> <span class='cn'>TRUE</span>,
   profile <span class='op'>=</span> <span class='cn'>FALSE</span>,
   progressBar <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -146,6 +147,10 @@
     <tr>
       <th>sql_statements</th>
       <td><p>A list or vector of SQL Statements of length 1 or greater.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.</p></td>
     </tr>
     <tr>
       <th>render_sql</th>

@@ -4,12 +4,21 @@
 \alias{query}
 \title{Send Query to any Postgres connection}
 \usage{
-query(conn, sql_statement, verbose = TRUE, render_sql = TRUE, ...)
+query(
+  conn,
+  sql_statement,
+  verbose = TRUE,
+  render_sql = TRUE,
+  warn_no_rows = FALSE,
+  ...
+)
 }
 \arguments{
 \item{conn}{Connection object}
 
 \item{sql_statement}{SQL Query}
+
+\item{warn_no_rows}{If TRUE, a warning is given that query has returned 0 rows.}
 
 \item{...}{Additional arguments to pass onto \code{\link[DatabaseConnector]{dbGetQuery}}}
 }

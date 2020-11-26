@@ -1,6 +1,7 @@
 #' Send Query to any Postgres connection
 #' @param conn Connection object
 #' @param sql_statement SQL Query
+#' @param warn_no_rows If TRUE, a warning is given that query has returned 0 rows.
 #' @param ... Additional arguments to pass onto \code{\link[DatabaseConnector]{dbGetQuery}}
 #' @import DatabaseConnector
 #' @export
@@ -10,10 +11,16 @@ query <-
              sql_statement,
              verbose = TRUE,
              render_sql = TRUE,
+             warn_no_rows = FALSE,
              ...) {
 
             brake_closed_conn(conn = conn)
-            on.exit(flag_no_rows(data = resultset))
+
+            if (warn_no_rows) {
+
+                on.exit(flag_no_rows(data = resultset), add = TRUE, after = TRUE)
+
+            }
 
             if (render_sql) {
 
@@ -64,6 +71,7 @@ query <-
 execute_n <-
     function(conn,
              sql_statements,
+             verbose = TRUE,
              render_sql = TRUE,
              profile = FALSE,
              progressBar = TRUE,
@@ -83,6 +91,12 @@ execute_n <-
 
                     typewrite_sql(sql_statement = sql_statement)
                     cat("\n\n")
+
+            }
+
+            if (verbose) {
+
+                    typewrite_activity("Executing...")
 
             }
 

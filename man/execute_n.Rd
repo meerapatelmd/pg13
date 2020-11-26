@@ -7,6 +7,7 @@
 execute_n(
   conn,
   sql_statements,
+  verbose = TRUE,
   render_sql = TRUE,
   profile = FALSE,
   progressBar = TRUE,
@@ -19,6 +20,8 @@ execute_n(
 \item{conn}{A connection object returned by \code{connect()}.}
 
 \item{sql_statements}{A list or vector of SQL Statements of length 1 or greater.}
+
+\item{verbose}{If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.}
 
 \item{render_sql}{If TRUE, the SQL statement for the operation is returned in the console.}
 
