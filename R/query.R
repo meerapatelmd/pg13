@@ -100,7 +100,6 @@ execute_n <-
 
             }
 
-
             DatabaseConnector::executeSql(connection = conn,
                                           sql = sql_statement,
                                           profile = profile,
