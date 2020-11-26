@@ -56,6 +56,8 @@ execute_creds_ff <-
         }
 
 
+#' @title
+#' Execute Function Factory using Connection Expression
 #' @rdname execute_fun_ff
 #' @export
 
