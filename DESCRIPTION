@@ -11,20 +11,7 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Imports: 
-    DatabaseConnector,
-    SqlRender,
-    R.cache,
-    purrr,
-    stringr,
-    readr,
-    secretary,
-    magrittr,
-    centipede,
-    dplyr,
-    progress,
-    rlang,
-    tibble,
-    tidyr
+Imports:     DatabaseConnector,    R.cache,    SqlRender,    dplyr,    magrittr,    progress,    purrr,    readr,    rlang,    secretary,    stringr,    tibble,    tidyr,    centipede
 Remotes:
-        meerapatelmd/secretary
+    meerapatelmd/secretary,
+    meerapatelmd/centipede
