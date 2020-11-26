@@ -51,14 +51,32 @@
                                  port,
                                  server) {
 
-                                function(verbose = TRUE) {
+                                function(verbose = TRUE,
+                                         dc_on_exit = TRUE,
+                                         add = TRUE,
+                                         after = FALSE) {
 
                                         connect(
                                                 user = user,
                                                 password = password,
                                                 port = port,
-                                                server = server
+                                                server = server,
+                                                verbose = verbose
                                         )
+
+
+                                        if (dc_on_exit) {
+
+                                                do.call(
+                                                        on.exit,
+                                                        list(substitute(dc(conn = conn,
+                                                                           verbose = verbose)),
+                                                             add = add,
+                                                             after = after),
+                                                        envir = parent.frame()
+                                                )
+
+                                        }
                                 }
 
                         }
