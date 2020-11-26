@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List Schema — lsSchema • pg13</title>
+<title>List Schemas — lsSchema • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="List Schema — lsSchema" />
-<meta property="og:description" content="List all schema in the connection." />
+<meta property="og:title" content="List Schemas — lsSchema" />
+<meta property="og:description" content="List all the schemas in a database in lowercase." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pg13</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -116,18 +116,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List Schema</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/lsSchema.R'><code>R/lsSchema.R</code></a></small>
+    <h1>List Schemas</h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/list.R'><code>R/list.R</code></a></small>
     <div class="hidden name"><code>lsSchema.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>List all schema in the connection.</p>
+    <p>List all the schemas in a database in lowercase.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>lsSchema</span><span class='op'>(</span><span class='va'>conn</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>lsSchema</span><span class='op'>(</span><span class='va'>conn</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, render_sql <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other list functions: 
+<code><a href='lsFields.html'>lsFields</a>()</code>,
+<code><a href='lsTables.html'>lsTables</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

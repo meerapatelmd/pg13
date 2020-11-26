@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Append to am Existing Table — appendTable • pg13</title>
+<title>Append a Table — appendTable • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Append to am Existing Table — appendTable" />
+<meta property="og:title" content="Append a Table — appendTable" />
 <meta property="og:description" content="Like the writeTable function, this function is a wrapper around a DatabaseConnector function rather than one where a SQL statement is rendered using the SqlRender package. This function performs the additional step of converting all inputs to the data.frame class, especially in cases where the input is a tibble." />
 <meta property="og:image" content="/logo.png" />
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pg13</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -116,8 +116,8 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Append to am Existing Table</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/appendTable.R'><code>R/appendTable.R</code></a></small>
+    <h1>Append a Table</h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/table.R'><code>R/table.R</code></a></small>
     <div class="hidden name"><code>appendTable.Rd</code></div>
     </div>
 
@@ -125,29 +125,53 @@
     <p>Like the writeTable function, this function is a wrapper around a DatabaseConnector function rather than one where a SQL statement is rendered using the SqlRender package. This function performs the additional step of converting all inputs to the data.frame class, especially in cases where the input is a tibble.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>appendTable</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>, <span class='va'>schema</span>, <span class='va'>tableName</span>, <span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>appendTable</span><span class='op'>(</span>
+  <span class='va'>conn</span>,
+  <span class='va'>schema</span>,
+  <span class='va'>tableName</span>,
+  <span class='va'>data</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  render_sql <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>conn</th>
+      <td><p>A connection object returned by <code><a href='connect.html'>connect()</a></code>.</p></td>
+    </tr>
+    <tr>
       <th>schema</th>
-      <td><p>schema where <code>tableName</code> is located.</p></td>
+      <td><p>The target schema for the operation.</p></td>
     </tr>
     <tr>
       <th>tableName</th>
-      <td><p>Name of table to write to.</p></td>
+      <td><p>The target table in the <code>schema</code> for an operation or for writing functions, the name of the table that will be created.</p></td>
     </tr>
     <tr>
-      <th>.data</th>
-      <td><p>dataframe to append</p></td>
+      <th>data</th>
+      <td><p>A dataframe or tibble.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.</p></td>
+    </tr>
+    <tr>
+      <th>render_sql</th>
+      <td><p>If TRUE, the SQL statement for the operation is returned in the console.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments passed to DatabaseConnector::dbAppendTable</p></td>
+      <td><p>Additional arguments passed to <code>DatabaseConnector::dbAppendTable()</code></p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other table functions: 
+<code><a href='searchTable.html'>searchTable</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

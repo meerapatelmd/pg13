@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Connect to Local PostGres Server — localConnect • pg13</title>
+<title>Connect to a Local Postgres Database — localConnect • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Connect to Local PostGres Server — localConnect" />
-<meta property="og:description" content="Connect to Local PostGres Server" />
+<meta property="og:title" content="Connect to a Local Postgres Database — localConnect" />
+<meta property="og:description" content="Connect and disconnect to a local Postgres database that does not require credentialing. These functions automatically set the dbms and server arguments to &quot;postgresql&quot; and &quot;localhost/dbname&quot;, leaving the database name (dbname) and port (port) as the only connection details that are modifiable by the user. Note that these functions cannot be used to connect to a local instance that requires a username and password." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pg13</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -116,13 +116,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Connect to Local PostGres Server</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/localConnect.R'><code>R/localConnect.R</code></a></small>
+    <h1>Connect to a Local Postgres Database</h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/local_db.R'><code>R/local_db.R</code></a></small>
     <div class="hidden name"><code>localConnect.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Connect to Local PostGres Server</p>
+    <p>Connect and disconnect to a local Postgres database that does not require credentialing. These functions automatically set the dbms and server arguments to "postgresql" and "localhost/dbname", leaving the database name (<code>dbname</code>) and port (<code>port</code>) as the only connection details that are modifiable by the user. Note that these functions cannot be used to connect to a local instance that requires a username and password.</p>
     </div>
 
     <pre class="usage"><span class='fu'>localConnect</span><span class='op'>(</span>dbname <span class='op'>=</span> <span class='st'>"athena"</span>, port <span class='op'>=</span> <span class='fl'>5432</span><span class='op'>)</span></pre>
@@ -132,18 +132,28 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dbname</th>
-      <td><p>database name with the corresponding 'localhost/dbname' server</p></td>
+      <td><p>Name of a local Postgres database, Default: 'athena'</p></td>
     </tr>
     <tr>
       <th>port</th>
-      <td><p>defults to "5432"</p></td>
-    </tr>
-    <tr>
-      <th>schema</th>
-      <td><p>defaults to NULL</p></td>
+      <td><p>The port on the server to connect to, Default: 5432</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A connection class object to the database.</p>
+    <h2 class="hasAnchor" id="local-connection"><a class="anchor" href="#local-connection"></a>Local Connection</h2>
+
+    
+
+<p>This function combines the process of creating a connectionDetails object and making the connection in a single function call. If a connectionDetails object is required, see <code><a href='makeLocalConnDetails.html'>makeLocalConnDetails</a></code>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://ohdsi.github.io/DatabaseConnector/reference/connect.html'>connect</a></code></p>
+<p>Other local functions: 
+<code><a href='local.html'>local</a>()</code>,
+<code><a href='makeLocalConnDetails.html'>makeLocalConnDetails</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

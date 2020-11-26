@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a new Database — createDB • pg13</title>
+<title>Create a New Database — createDB • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Create a new Database — createDB" />
-<meta property="og:description" content="Create a new Database" />
+<meta property="og:title" content="Create a New Database — createDB" />
+<meta property="og:description" content="Create a New Database" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pg13</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -116,23 +116,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a new Database</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/createDB.R'><code>R/createDB.R</code></a></small>
+    <h1>Create a New Database</h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/db.R'><code>R/db.R</code></a></small>
     <div class="hidden name"><code>createDB.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a new Database</p>
+    <p>Create a New Database</p>
     </div>
 
-    <pre class="usage"><span class='fu'>createDB</span><span class='op'>(</span><span class='va'>conn</span>, <span class='va'>newDB</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>createDB</span><span class='op'>(</span><span class='va'>conn</span>, <span class='va'>dbname</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>conn</th>
+      <td><p>A connection object returned by <code><a href='connect.html'>connect()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>dbname</th>
+      <td><p>Database name.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td><p>Additional arguments passed to the DatabaseConnector::dbSendStatement function</p></td>
+      <td><p>Additional arguments passed to <code>DatabaseConnector::dbSendStatement()</code>.</p></td>
     </tr>
     </table>
 

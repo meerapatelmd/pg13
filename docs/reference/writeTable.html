@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="Write a Table — writeTable" />
-<meta property="og:description" content="Unlike the dropTable and renameTable functions, this function is a wrapper around the DatabaseConnector::dbWriteTable function rather than one where a SQL statement is rendered using the SqlRender package. This function that converts all inputs to the data.frame class, especially in cases where the input is a tibble, in which case an error would be thrown when writing." />
+<meta property="og:description" content="Unlike the dropTable and renameTable functions, this function is a wrapper around the DatabaseConnector::dbWriteTable() function rather than one where a SQL statement is rendered using the SqlRender package. This function that converts all inputs to a dataframe, especially in cases where the input is a tibble, in which case an error would be thrown when writing." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pg13</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -117,22 +117,55 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Write a Table</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/writeTable.R'><code>R/writeTable.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/table.R'><code>R/table.R</code></a></small>
     <div class="hidden name"><code>writeTable.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Unlike the dropTable and renameTable functions, this function is a wrapper around the DatabaseConnector::dbWriteTable function rather than one where a SQL statement is rendered using the SqlRender package. This function that converts all inputs to the data.frame class, especially in cases where the input is a tibble, in which case an error would be thrown when writing.</p>
+    <p>Unlike the dropTable and renameTable functions, this function is a wrapper around the <code>DatabaseConnector::dbWriteTable()</code> function rather than one where a SQL statement is rendered using the SqlRender package. This function that converts all inputs to a dataframe, especially in cases where the input is a tibble, in which case an error would be thrown when writing.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>writeTable</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>, <span class='va'>schema</span>, <span class='va'>tableName</span>, <span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>writeTable</span><span class='op'>(</span>
+  <span class='va'>conn</span>,
+  <span class='va'>schema</span>,
+  <span class='va'>tableName</span>,
+  <span class='va'>data</span>,
+  drop_existing <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  render_sql <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>conn</th>
+      <td><p>A connection object returned by <code><a href='connect.html'>connect()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>schema</th>
+      <td><p>The target schema for the operation.</p></td>
+    </tr>
+    <tr>
+      <th>tableName</th>
+      <td><p>The target table in the <code>schema</code> for an operation or for writing functions, the name of the table that will be created.</p></td>
+    </tr>
+    <tr>
+      <th>data</th>
+      <td><p>A dataframe or tibble.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.</p></td>
+    </tr>
+    <tr>
+      <th>render_sql</th>
+      <td><p>If TRUE, the SQL statement for the operation is returned in the console.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td><p>Additional arguments passed to DatabaseConnector::dbWriteTable</p></td>
+      <td><p>Additional arguments passed to <code>DatabaseConnector::dbWriteTable()</code></p></td>
     </tr>
     </table>
 

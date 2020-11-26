@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get Full Table — readTable • pg13</title>
+<title>Read an Entire Table — readTable • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Get Full Table — readTable" />
-<meta property="og:description" content="Get Full Table" />
+<meta property="og:title" content="Read an Entire Table — readTable" />
+<meta property="og:description" content="Shortcut for a SELECT * SQL statement." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pg13</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -116,17 +116,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get Full Table</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/readTable.R'><code>R/readTable.R</code></a></small>
+    <h1>Read an Entire Table</h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/table.R'><code>R/table.R</code></a></small>
     <div class="hidden name"><code>readTable.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get Full Table</p>
+    <p>Shortcut for a <code>SELECT *</code> SQL statement.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>readTable</span><span class='op'>(</span><span class='va'>conn</span>, <span class='va'>schema</span>, <span class='va'>tableName</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>readTable</span><span class='op'>(</span><span class='va'>conn</span>, <span class='va'>schema</span>, <span class='va'>tableName</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, render_sql <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>conn</th>
+      <td><p>A connection object returned by <code><a href='connect.html'>connect()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>schema</th>
+      <td><p>The target schema for the operation.</p></td>
+    </tr>
+    <tr>
+      <th>tableName</th>
+      <td><p>The target table in the <code>schema</code> for an operation or for writing functions, the name of the table that will be created.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.</p></td>
+    </tr>
+    <tr>
+      <th>render_sql</th>
+      <td><p>If TRUE, the SQL statement for the operation is returned in the console.</p></td>
+    </tr>
+    </table>
 
 
   </div>

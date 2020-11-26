@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="Make a local Postgres Connection Details object — makeLocalConnDetails" />
-<meta property="og:description" content="This function makes a Connection Details object required to use other R packages that execute functions on a Postgres instance, such as the OHDSI Feature Extraction package. Most of the internal packages have collapsed the two-step process of 1) making a Connection Details object and then 2) connecting to it using the localConnect function, for example, because in outside cases Database Management System needs to be derived from the Connection Details object to translate SQL to certain dialects." />
+<meta property="og:description" content="Connect and disconnect to a local Postgres database that does not require credentialing. These functions automatically set the dbms and server arguments to &quot;postgresql&quot; and &quot;localhost/dbname&quot;, leaving the database name (dbname) and port (port) as the only connection details that are modifiable by the user. Note that these functions cannot be used to connect to a local instance that requires a username and password." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pg13</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -117,17 +117,43 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Make a local Postgres Connection Details object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/makeLocalConnDetails.R'><code>R/makeLocalConnDetails.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/local_db.R'><code>R/local_db.R</code></a></small>
     <div class="hidden name"><code>makeLocalConnDetails.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function makes a Connection Details object required to use other R packages that execute functions on a Postgres instance, such as the OHDSI Feature Extraction package. Most of the internal packages have collapsed the two-step process of 1) making a Connection Details object and then 2) connecting to it using the localConnect function, for example, because in outside cases Database Management System needs to be derived from the Connection Details object to translate SQL to certain dialects.</p>
+    <p>Connect and disconnect to a local Postgres database that does not require credentialing. These functions automatically set the dbms and server arguments to "postgresql" and "localhost/dbname", leaving the database name (<code>dbname</code>) and port (<code>port</code>) as the only connection details that are modifiable by the user. Note that these functions cannot be used to connect to a local instance that requires a username and password.</p>
     </div>
 
     <pre class="usage"><span class='fu'>makeLocalConnDetails</span><span class='op'>(</span>dbname <span class='op'>=</span> <span class='st'>"athena"</span>, port <span class='op'>=</span> <span class='fl'>5432</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>dbname</th>
+      <td><p>Name of a local Postgres database, Default: 'athena'</p></td>
+    </tr>
+    <tr>
+      <th>port</th>
+      <td><p>The port on the server to connect to, Default: 5432</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A connectionDetails class object that lists all the details needed to connect to a database.</p>
+    <h2 class="hasAnchor" id="local-connectiondetails"><a class="anchor" href="#local-connectiondetails"></a>Local ConnectionDetails</h2>
+
+    
+
+<p>This function returns a connectionDetails class object for functions that make the database connection within its caller environment, such as those belonging to the OHDSI Feature Extraction package. A connection can be made by passing the connectionDetails class object to the <code><a href='https://ohdsi.github.io/DatabaseConnector/reference/connect.html'>connect</a></code>. This process can be simplified into a single function call with <code><a href='localConnect.html'>localConnect</a></code>, which performs both operations but will not return a connectionDetails object if it is desired as a return value.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://ohdsi.github.io/DatabaseConnector/reference/createConnectionDetails.html'>createConnectionDetails</a></code></p>
+<p>Other local functions: 
+<code><a href='localConnect.html'>localConnect</a>()</code>,
+<code><a href='local.html'>local</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

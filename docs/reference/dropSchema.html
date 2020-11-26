@@ -47,7 +47,8 @@
 
 
 <meta property="og:title" content="Drop a Postgres schema — dropSchema" />
-<meta property="og:description" content="Drop a schema if it exists." />
+<meta property="og:description" content="Drop a schema if it exists.
+Drop a schema if it exists." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pg13</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -117,15 +118,18 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Drop a Postgres schema</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/dropSchema.R'><code>R/dropSchema.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/deprec.R'><code>R/deprec.R</code></a>, <a href='https://github.com/meerapatelmd/pg13/blob/master/R/schema_funs.R'><code>R/schema_funs.R</code></a></small>
     <div class="hidden name"><code>dropSchema.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Drop a schema if it exists.</p>
+<p>Drop a schema if it exists.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dropSchema</span><span class='op'>(</span><span class='va'>conn</span>, <span class='va'>schema</span>, cascade <span class='op'>=</span> <span class='cn'>FALSE</span>, if_exists <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>dropSchema</span><span class='op'>(</span><span class='va'>conn</span>, <span class='va'>schema</span>, cascade <span class='op'>=</span> <span class='cn'>FALSE</span>, if_exists <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='fu'>dropSchema</span><span class='op'>(</span><span class='va'>conn</span>, <span class='va'>schema</span>, cascade <span class='op'>=</span> <span class='cn'>FALSE</span>, if_exists <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

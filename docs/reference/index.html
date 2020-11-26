@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pg13</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -141,6 +141,12 @@
       <tr>
         
         <td>
+          <p><code><a href="affix_date.html">affix_date()</a></code> </p>
+        </td>
+        <td><p>Affix the System Date to a String</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="appendDate.html">appendDate()</a></code> </p>
         </td>
         <td><p>Append Current Date to a String</p></td>
@@ -149,13 +155,31 @@
         <td>
           <p><code><a href="appendTable.html">appendTable()</a></code> </p>
         </td>
+        <td><p>Append a Table</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="appendTable2.html">appendTable2()</a></code> </p>
+        </td>
         <td><p>Append to am Existing Table</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="buildJoinQuery.html">buildJoinQuery()</a></code> </p>
+          <p><code><a href="base_args.html">base_args</a></code> </p>
         </td>
-        <td><p>Build a JOIN SQL Query</p></td>
+        <td><p>Base Arguments</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="brake_closed_conn.html">brake_closed_conn()</a></code> </p>
+        </td>
+        <td><p>Brake if the Connection is Closed</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="brake_ff.html">brake_ff()</a></code> </p>
+        </td>
+        <td><p>Create a Brake Function</p></td>
       </tr><tr>
         
         <td>
@@ -165,15 +189,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="buildQueryLike.html">buildQueryLike()</a></code> </p>
+          <p><code><a href="cache.html">cache()</a></code> </p>
         </td>
-        <td><p>Writes a Like SQL Query</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="buildQueryString.html">buildQueryString()</a></code> </p>
-        </td>
-        <td><p>Writes a SQL Query Loop</p></td>
+        <td><p>Cache a Resultset</p></td>
       </tr><tr>
         
         <td>
@@ -198,6 +216,24 @@
           <p><code><a href="concatWhereConstructs.html">concatWhereConstructs()</a></code> </p>
         </td>
         <td><p>Concatenate 2 WHERE constructs</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="connect.html">connect()</a></code> </p>
+        </td>
+        <td><p>Connect to a Postgres Database</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="connect_ff.html">connect_ff()</a></code> </p>
+        </td>
+        <td><p>Connection Function Factory</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="connection.html">connection</a></code> </p>
+        </td>
+        <td><p>Postgres Connection</p></td>
       </tr><tr>
         
         <td>
@@ -275,7 +311,7 @@
         <td>
           <p><code><a href="createDB.html">createDB()</a></code> </p>
         </td>
-        <td><p>Create a new Database</p></td>
+        <td><p>Create a New Database</p></td>
       </tr><tr>
         
         <td>
@@ -287,11 +323,95 @@
         <td>
           <p><code><a href="dc.html">dc()</a></code> </p>
         </td>
-        <td><p>Disconnect a Postgres connection</p></td>
+        <td><p>Disconnect a Connection</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="dropSchema.html">dropSchema()</a></code> </p>
+          <p><code><a href="draftBase.html">draftBase()</a></code> </p>
+        </td>
+        <td><p>Construct a base SQL query</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="draftIn.html">draftIn()</a></code> </p>
+        </td>
+        <td><p>Render y in "WHERE x IN (y)"</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="draftJoin.html">draftJoin()</a></code> </p>
+        </td>
+        <td><p>Construct a join part of a SQL Statement</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="draftLimit.html">draftLimit()</a></code> </p>
+        </td>
+        <td><p>Construct LIMIT</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="draftRandom.html">draftRandom()</a></code> </p>
+        </td>
+        <td><p>Construct ORDER BY RANDOM()</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="draftTablePath.html">draftTablePath()</a></code> </p>
+        </td>
+        <td><p>Construct schemaTableName</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="draftWhereIn.html">draftWhereIn()</a></code> </p>
+        </td>
+        <td><p>Render x in "WHERE x IN y"</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="draftWhereLike.html">draftWhereLike()</a></code> </p>
+        </td>
+        <td><p>Render "WHERE x LIKE y"</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="draftWhereLowerIn.html">draftWhereLowerIn()</a></code> </p>
+        </td>
+        <td><p>Render "WHERE lowercase x IN y" Component</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="draftWhereLowerLike.html">draftWhereLowerLike()</a></code> </p>
+        </td>
+        <td><p>Render WHERE lowercase x LIKE y</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="draftWhereLowerNotIn.html">draftWhereLowerNotIn()</a></code> </p>
+        </td>
+        <td><p>Render "WHERE lowercase x NOT IN y"</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="draftWhereNotIn.html">draftWhereNotIn()</a></code> </p>
+        </td>
+        <td><p>Render "WHERE x NOT IN y"</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dropCascade.html">dropCascade()</a></code> <code><a href="dropCascade.html">dropCascade()</a></code> </p>
+        </td>
+        <td><p>Drop a Postgres schema</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dropIfExists.html">dropIfExists()</a></code> </p>
+        </td>
+        <td><p>Drop a Postgres schema</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dropSchema.html">dropSchema()</a></code> <code><a href="dropSchema.html">dropSchema()</a></code> </p>
         </td>
         <td><p>Drop a Postgres schema</p></td>
       </tr><tr>
@@ -299,13 +419,25 @@
         <td>
           <p><code><a href="dropTable.html">dropTable()</a></code> </p>
         </td>
-        <td><p>Drop a table in a Postgres schema</p></td>
+        <td><p>Drop a Table</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="execute.html">execute()</a></code> </p>
         </td>
         <td><p>Execute SQL</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="execute_n.html">execute_n()</a></code> </p>
+        </td>
+        <td><p>Query with more than 1 SQL Statements</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="field_exists.html">field_exists()</a></code> </p>
+        </td>
+        <td><p>Does a field exist?</p></td>
       </tr><tr>
         
         <td>
@@ -321,6 +453,18 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="flag_ff.html">flag_ff()</a></code> </p>
+        </td>
+        <td><p>Create a Flag Function</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="flag_no_rows.html">flag_no_rows()</a></code> </p>
+        </td>
+        <td><p>Flag if Data Has 0 Rows</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="getTable.html">getTable()</a></code> </p>
         </td>
         <td><p>Get Full Table</p></td>
@@ -333,9 +477,27 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="ij2.html">ij2()</a></code> </p>
+        </td>
+        <td><p>Second Generation Inner Join</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="isClosed.html">isClosed()</a></code> </p>
         </td>
         <td><p>Is the Connection Closed?</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="is_conn_open.html">is_conn_open()</a></code> </p>
+        </td>
+        <td><p>Is the Connection Open?</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="join2_ff.html">join2_ff()</a></code> </p>
+        </td>
+        <td><p>Second Generation Join Function Factory</p></td>
       </tr><tr>
         
         <td>
@@ -351,6 +513,18 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="lj2.html">lj2()</a></code> </p>
+        </td>
+        <td><p>Second Generation Left Join</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="loadCache.html">loadCache()</a></code> </p>
+        </td>
+        <td><p>Load a Cached Resultset from a SQL Query</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="loadCachedJoin.html">loadCachedJoin()</a></code> </p>
         </td>
         <td><p>Load a Cached Join Resultset</p></td>
@@ -363,9 +537,15 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="local.html">local</a></code> </p>
+        </td>
+        <td><p>Local Postgres Database Function Family</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="localConnect.html">localConnect()</a></code> </p>
         </td>
-        <td><p>Connect to Local PostGres Server</p></td>
+        <td><p>Connect to a Local Postgres Database</p></td>
       </tr><tr>
         
         <td>
@@ -401,7 +581,7 @@
         <td>
           <p><code><a href="lsSchema.html">lsSchema()</a></code> </p>
         </td>
-        <td><p>List Schema</p></td>
+        <td><p>List Schemas</p></td>
       </tr><tr>
         
         <td>
@@ -423,21 +603,34 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="pasteWheres.html">pasteWheres()</a></code> </p>
+        </td>
+        <td><p>Paste All Drafted Where Statements</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="pg13.html">pg13</a></code> </p>
+        </td>
+        <td><p>pg13
+Wrappers to DatabaseConnector and SqlRender Packages</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="q_ff.html">q_ff()</a></code> </p>
+        </td>
+        <td><p>Query Function Factory</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="query.html">query()</a></code> </p>
         </td>
         <td><p>Send Query to any Postgres connection</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="queryList.html">queryList()</a></code> </p>
-        </td>
-        <td><p>Query a List of SQL Statements</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="readTable.html">readTable()</a></code> </p>
         </td>
-        <td><p>Get Full Table</p></td>
+        <td><p>Read an Entire Table</p></td>
       </tr><tr>
         
         <td>
@@ -531,9 +724,27 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="saveSQL.html">saveSQL()</a></code> </p>
+          <p><code><a href="rm_if_closed.html">rm_if_closed()</a></code> </p>
+        </td>
+        <td><p>Remove a Closed Connection Object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="saveSQL.html">saveSQL()</a></code> <code><a href="saveSQL.html">saveSQL()</a></code> </p>
         </td>
         <td><p>Export a sql statement to a file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="schema_exists.html">schema_exists()</a></code> </p>
+        </td>
+        <td><p>Does a schema exist?</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="searchTable.html">searchTable()</a></code> </p>
+        </td>
+        <td><p>Search a Table for a Value</p></td>
       </tr><tr>
         
         <td>
@@ -549,9 +760,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="sourceFilePath.html">sourceFilePath()</a></code> </p>
+          <p><code><a href="send_ff.html">send_ff()</a></code> </p>
         </td>
-        <td><p>Get SourceFile Path</p></td>
+        <td><p>Send Function Factor</p></td>
       </tr><tr>
         
         <td>
@@ -567,15 +778,33 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="terminateBuild.html">terminateBuild()</a></code> </p>
+          <p><code><a href="table.path.html">table.path()</a></code> </p>
         </td>
-        <td><p>Terminate a SQL Statement with a semicolon</p></td>
+        <td><p>Construct schemaTableName</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="table_exists.html">table_exists()</a></code> </p>
+        </td>
+        <td><p>Does a table exist?</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="writeTable.html">writeTable()</a></code> </p>
         </td>
         <td><p>Write a Table</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="writeTable2.html">writeTable2()</a></code> </p>
+        </td>
+        <td><p>Write a Table</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="write_sql_file.html">write_sql_file()</a></code> </p>
+        </td>
+        <td><p>Export a sql statement to a file</p></td>
       </tr>
     </tbody>
     </table>
