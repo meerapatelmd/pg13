@@ -6,6 +6,7 @@
 \usage{
 dropTable(
   conn,
+  conn_fun,
   schema,
   tableName,
   if_exists = TRUE,

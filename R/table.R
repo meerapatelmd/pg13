@@ -17,12 +17,21 @@
 
 appendTable <-
         function(conn,
+                 conn_fun,
                  schema,
                  tableName,
                  data,
                  verbose = TRUE,
                  render_sql = TRUE,
                  ...) {
+
+                if (!missing(conn_fun)) {
+                    conn <- eval(rlang::parse_expr(conn_fun))
+                    on.exit(dc(conn = conn,
+                               verbose = verbose),
+                            add = TRUE,
+                            after = TRUE)
+                }
 
                 brake_closed_conn(conn = conn)
                 flag_no_rows(data = data)
@@ -74,6 +83,7 @@ appendTable <-
 
 writeTable <-
         function(conn,
+                 conn_fun,
                  schema,
                  tableName,
                  data,
@@ -81,6 +91,14 @@ writeTable <-
                  verbose = TRUE,
                  render_sql = TRUE,
                  ...) {
+
+                if (!missing(conn_fun)) {
+                    conn <- eval(rlang::parse_expr(conn_fun))
+                    on.exit(dc(conn = conn,
+                               verbose = verbose),
+                            add = TRUE,
+                            after = TRUE)
+                }
 
                 brake_closed_conn(conn = conn)
                 flag_no_rows(data = data)
@@ -133,12 +151,21 @@ writeTable <-
 
 dropTable <-
     function(conn,
+             conn_fun,
              schema,
              tableName,
              if_exists = TRUE,
              verbose = TRUE,
              render_sql = TRUE,
              ...) {
+
+            if (!missing(conn_fun)) {
+                    conn <- eval(rlang::parse_expr(conn_fun))
+                    on.exit(dc(conn = conn,
+                               verbose = verbose),
+                            add = TRUE,
+                            after = TRUE)
+            }
 
             brake_closed_conn(conn = conn)
 
@@ -180,6 +207,51 @@ dropTable <-
 
     }
 
+#' @title
+#' Write a Table that is Dropped On Exit
+#'
+#' @description
+#' A Staging Table is one that is dropped on exit in the parent frame from which the function is being called.
+#'
+#' @export
+#' @rdname writeStagingTable
+
+writeStagingTable <-
+    function(conn,
+             conn_fun,
+             schema,
+             tableName,
+             data,
+             drop_existing = FALSE,
+             verbose = TRUE,
+             render_sql = TRUE,
+             ...) {
+
+            writeTable(conn = conn,
+                       conn_fun = conn_fun,
+                       schema = schema,
+                       tableName = tableName,
+                       data = data,
+                       drop_existing = drop_existing,
+                       verbose = verbose,
+                       render_sql = render_sql,
+                       ... = ...)
+
+
+            do.call(on.exit,
+                    substitute(dropTable(conn = conn,
+                                         conn_fun = conn_fun,
+                                         schema = schema,
+                                         tableName = tableName,
+                                         if_exists = TRUE,
+                                         verbose = verbose,
+                                         render_sql = render_sql)),
+                    add = TRUE,
+                    after = FALSE)
+
+
+
+    }
 
 #' @title
 #' Read an Entire Table

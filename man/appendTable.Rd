@@ -6,6 +6,7 @@
 \usage{
 appendTable(
   conn,
+  conn_fun,
   schema,
   tableName,
   data,
