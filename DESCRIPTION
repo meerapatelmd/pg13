@@ -4,7 +4,11 @@ Version: 0.3.0
 URL: https://meerapatelmd.github.io/pg13/, https://github.com/meerapatelmd/pg13/
 BugReports: https://github.com/meerapatelmd/pg13/issues/
 Authors@R: 
-    person(given = "Meera", family = "Patel, MD", role = c("aut", "cre"), email = "patelmeeray@gmail.com")
+    person(given = "Meera",
+           family = "Patel, MD",
+           role = c("aut", "cre"),
+           email = "patelmeeray@gmail.com",
+           comment = c(ORCID = "0000-0002-3401-3948"))
 Description: Render, Read, and Build SQL statements in the PostgreSQL dialect using R.
 License: Apache License 2.0
 Encoding: UTF-8
