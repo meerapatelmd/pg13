@@ -1,6 +1,6 @@
 Package: pg13
 Title: pg13 Package
-Version: 0.2.0
+Version: 0.3.0
 URL: https://meerapatelmd.github.io/pg13/, https://github.com/meerapatelmd/pg13/
 BugReports: https://github.com/meerapatelmd/pg13/issues/
 Authors@R: 
@@ -11,7 +11,21 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Imports:     DatabaseConnector,    R.cache,    SqlRender,    dplyr,    magrittr,    progress,    purrr,    readr,    rlang,    secretary,    stringr,    tibble,    tidyr,    centipede
+Imports: 
+    DatabaseConnector,
+    R.cache,
+    SqlRender,
+    dplyr,
+    magrittr,
+    progress,
+    purrr,
+    readr,
+    rlang,
+    secretary,
+    stringr,
+    tibble,
+    tidyr,
+    centipede
 Remotes:
     meerapatelmd/secretary,
     meerapatelmd/centipede
