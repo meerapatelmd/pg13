@@ -1,4 +1,4 @@
-# pg13 R Package     
+# pg13 R Package <img src="man/figures/logo.png" align="right" alt="" width="120" />  
 
 Functionalized rendering, reading, and building SQL statements in the
 PostgreSQL dialect using R. Other functions from the DatabaseConnector package are 
