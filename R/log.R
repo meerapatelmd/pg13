@@ -37,7 +37,7 @@ create_log <-
                                 );",
                                 schema = schema,
                                 log_table = log_table,
-                                datetime_field = datetime
+                                datetime_field = datetime_field
                         )
 
                 send(conn = conn,
