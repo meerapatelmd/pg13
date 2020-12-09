@@ -90,7 +90,7 @@ log_start_ff <-
                         output <-
                         tibble::tibble(activity = activity,
                                        status = "start") %>%
-                                dplyr::mutate({{ as.symbol(datetime_field) }} := Sys.time()) %>%
+                                dplyr::mutate({{ datetime_field }} := Sys.time()) %>%
                                 dplyr::select(dplyr::all_of(datetime_field),
                                              activity,
                                              status)
