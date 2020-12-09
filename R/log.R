@@ -1,3 +1,26 @@
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @param datetime_field PARAM_DESCRIPTION
+#' @param conn PARAM_DESCRIPTION
+#' @param schema PARAM_DESCRIPTION
+#' @param log_table PARAM_DESCRIPTION
+#' @param verbose PARAM_DESCRIPTION, Default: TRUE
+#' @param render_sql PARAM_DESCRIPTION, Default: TRUE
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @seealso
+#'  \code{\link[SqlRender]{render}}
+#'  \code{\link[pg13]{send}}
+#' @rdname create_log
+#' @export
+#' @importFrom SqlRender render
+#' @importFrom pg13 send
 create_log <-
         function(datetime_field,
                  conn,
@@ -25,6 +48,27 @@ create_log <-
 
         }
 
+
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @param datetime_field PARAM_DESCRIPTION
+#' @param schema PARAM_DESCRIPTION
+#' @param log_table PARAM_DESCRIPTION
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @seealso
+#'  \code{\link[tibble]{tibble}}
+#'  \code{\link[dplyr]{mutate}},\code{\link[dplyr]{select}},\code{\link[dplyr]{reexports}}
+#' @rdname log_start_ff
+#' @export
+#' @importFrom tibble tibble
+#' @importFrom dplyr mutate select all_of
 log_start_ff <-
         function(datetime_field,
                  schema,
@@ -62,6 +106,27 @@ log_start_ff <-
         }
 
 
+
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @param datetime_field PARAM_DESCRIPTION
+#' @param schema PARAM_DESCRIPTION
+#' @param log_table PARAM_DESCRIPTION
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @seealso
+#'  \code{\link[tibble]{tibble}}
+#'  \code{\link[dplyr]{mutate}},\code{\link[dplyr]{select}},\code{\link[dplyr]{reexports}}
+#' @rdname log_stop_ff
+#' @export
+#' @importFrom tibble tibble
+#' @importFrom dplyr mutate select all_of
 log_stop_ff <-
         function(datetime_field,
                  schema,
@@ -84,6 +149,64 @@ log_stop_ff <-
                         output <-
                                 tibble::tibble(activity = activity,
                                                status = "stop") %>%
+                                dplyr::mutate({{ as.symbol(datetime_field) }} := Sys.time()) %>%
+                                dplyr::select(dplyr::all_of(datetime_field),
+                                              activity,
+                                              status)
+
+                        appendTable(conn = conn,
+                                    schema = schema,
+                                    tableName = log_table,
+                                    data = output)
+
+                }
+
+        }
+
+
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @param datetime_field PARAM_DESCRIPTION
+#' @param schema PARAM_DESCRIPTION
+#' @param log_table PARAM_DESCRIPTION
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @seealso
+#'  \code{\link[tibble]{tibble}}
+#'  \code{\link[dplyr]{mutate}},\code{\link[dplyr]{select}},\code{\link[dplyr]{reexports}}
+#' @rdname log_error_ff
+#' @export
+#' @importFrom tibble tibble
+#' @importFrom dplyr mutate select all_of
+
+log_error_ff <-
+        function(datetime_field,
+                 schema,
+                 log_table) {
+
+
+                function(activity,
+                         conn,
+                         verbose = TRUE,
+                         render_sql = TRUE) {
+
+                        create_log(datetime_field = datetime_field,
+                                   conn = conn,
+                                   schema = schema,
+                                   log_table = log_table,
+                                   verbose = verbose,
+                                   render_sql = render_sql)
+
+
+                        output <-
+                                tibble::tibble(activity = activity,
+                                               status = "error") %>%
                                 dplyr::mutate({{ as.symbol(datetime_field) }} := Sys.time()) %>%
                                 dplyr::select(dplyr::all_of(datetime_field),
                                               activity,
