@@ -44,5 +44,4 @@ if(interactive()){
 }
 \seealso{
 \code{\link[SqlRender]{render}}
-\code{\link[pg13]{send}}
 }

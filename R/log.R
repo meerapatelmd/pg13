@@ -16,11 +16,10 @@
 #' }
 #' @seealso
 #'  \code{\link[SqlRender]{render}}
-#'  \code{\link[pg13]{send}}
 #' @rdname create_log
 #' @export
 #' @importFrom SqlRender render
-#' @importFrom pg13 send
+
 create_log <-
         function(datetime_field,
                  conn,
@@ -41,7 +40,7 @@ create_log <-
                                 datetime_field = datetime
                         )
 
-                pg13::send(conn = conn,
+                send(conn = conn,
                            sql_statement = sql_statement,
                            verbose = verbose,
                            render_sql = render_sql)
