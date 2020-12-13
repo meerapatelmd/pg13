@@ -136,11 +136,43 @@ draftCreateTableFromDF <-
                         }
 
                 ddl <- makeDDL(data = data)
+                fields <- names(ddl)
 
-                draftCreateTable(schema = schema,
-                                 tableName = tableName,
-                                 if_not_exists = if_not_exists,
-                                 ddl)
+                ddl <- mapply(paste, fields, ddl, collapse = " ")
+                ddl <- paste(ddl, collapse = ",\n")
+
+                if (if_not_exists) {
+
+                        sql_statement <-
+                                SqlRender::render(
+                                        "
+                                        CREATE TABLE IF NOT EXISTS @schema.@tableName (
+                                                @ddl
+                                        );
+                                        ",
+                                        schema = schema,
+                                        tableName = tableName,
+                                        ddl = ddl
+                                )
+
+                } else {
+
+                        sql_statement <-
+                                SqlRender::render(
+                                        "
+                                        CREATE TABLE @schema.@tableName (
+                                                @ddl
+                                        );
+                                        ",
+                                        schema = schema,
+                                        tableName = tableName,
+                                        ddl = ddl
+                                )
+
+
+                }
+
+                sql_statement
 
         }
 
