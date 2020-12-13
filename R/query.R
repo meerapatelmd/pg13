@@ -18,7 +18,9 @@ query <-
 
             if (warn_no_rows) {
 
-                on.exit(flag_no_rows(data = resultset), add = TRUE, after = TRUE)
+                on.exit(flag_no_rows(data = resultset),
+                        add = TRUE,
+                        after = TRUE)
 
             }
 

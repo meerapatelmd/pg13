@@ -8,9 +8,7 @@ renderCopy <-
              csvFilePath) {
 
 
-        SqlRender::render("
-                          COPY @schema.@tableName FROM '@csvFilePath' WITH DELIMITER E'\\t' CSV HEADER QUOTE E'\\b';
-                          ",
+        SqlRender::render("COPY @schema.@tableName FROM '@csvFilePath' WITH DELIMITER E'\\t' CSV HEADER QUOTE E'\\b';",
                           schema = schema,
                           tableName = tableName,
                           csvFilePath = csvFilePath)
