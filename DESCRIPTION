@@ -1,6 +1,6 @@
 Package: pg13
 Title: pg13 Package
-Version: 0.3.1
+Version: 0.3.2
 Authors@R: 
     person(given = "Meera",
            family = "Patel, MD",
@@ -17,9 +17,10 @@ License: Apache License 2.0
 URL: https://meerapatelmd.github.io/pg13/,
     https://github.com/meerapatelmd/pg13/
 BugReports: https://github.com/meerapatelmd/pg13/issues/
+Depends:  
+    DatabaseConnector 
 Imports: 
     centipede,
-    DatabaseConnector,
     dplyr,
     magrittr,
     progress,
