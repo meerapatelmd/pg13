@@ -57,15 +57,6 @@ draftCreateTable <-
                 sql_statement
         }
 
-
-
-
-
-
-
-
-
-
 #' @title
 #' Create a Table
 #' @param ... Named vector of field names and their corresponding data definition.
@@ -107,7 +98,13 @@ createTable <-
 
         }
 
-
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @seealso
+#'  \code{\link[forcats]{fct_collapse}}
+#' @rdname draftCreateTableFromDF
+#' @export
+#' @importFrom forcats fct_collapse
 
 draftCreateTableFromDF <-
         function(schema,
@@ -148,7 +145,14 @@ draftCreateTableFromDF <-
 
         }
 
-
+#' @title
+#' Create a Table with a Dataframe
+#'
+#' @description
+#' Derive DDL using the data classes of each field in a dataframe. The map between the R data classes and the Postgresql data types can be found at \code{\link{renderCreateTableFromDF}}. The dataframe can then be appended to the table using \code{\link{appendTable}}. This method is favorable to a direct call to \code{\link{writeTable}} because in some cases, future appends to the table may not adhere to the data definitions created at the time of writing. For example, \code{\link{writeTable}} defaults to `VARCHAR(255)` for all character classes whereas future appends may contain text greater than 255 characters, resulting in error. This function rolls all character classes to `TEXT` data types instead.
+#'
+#' @rdname createTableFromDF
+#' @export
 
 createTableFromDF <-
         function(conn,
