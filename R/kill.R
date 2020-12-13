@@ -1,8 +1,13 @@
+#' @title
+#' Kill All Connections
+#'
+#' @rdname kill
+#' @seealso
+#'  \code{\link[SqlRender]{render}}
+#' @importFrom SqlRender render
 
-#' @export
 
-
-killAll <-
+kill <-
         function(conn,
                  verbose = TRUE,
                  render_sql = TRUE) {
@@ -12,9 +17,9 @@ killAll <-
                              SqlRender::render(
                                         "SELECT pg_terminate_backend(pg_stat_activity.pid)
                                         FROM pg_stat_activity
-                                        WHERE pg_stat_activity.datname = '@dbname' -- ← change this to your DB
+                                        WHERE pg_stat_activity.datname = '@dbname'
                                         AND pid <> pg_backend_pid();",
-                                        dbname = getDBName(conn = conn)
+                                        dbname = getConnDB(conn = conn)
                                         ),
                      verbose = verbose,
                      render_sql = render_sql
