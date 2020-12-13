@@ -68,7 +68,6 @@ draftCreateTable <-
 #' @export
 #' @importFrom rlang list2
 #' @importFrom SqlRender render
-#' @importFrom pg13 send
 
 createTable <-
         function(conn,
