@@ -2,12 +2,12 @@
 % Please edit documentation in R/createTable.R
 \name{draftCreateTableFromDF}
 \alias{draftCreateTableFromDF}
-\title{FUNCTION_TITLE}
+\title{Draft the SQL to Create Table}
 \usage{
 draftCreateTableFromDF(schema, tableName, data, if_not_exists = TRUE)
 }
 \description{
-FUNCTION_DESCRIPTION
+Draft a SQL that creates a table using DDL derived from a dataframe. Drafting is stopped if the given tablename or fields in the dataframe are a SQL reserve word.
 }
 \seealso{
 \code{\link[forcats]{fct_collapse}}

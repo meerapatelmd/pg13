@@ -4,6 +4,9 @@
 * Added `log_*` functions (https://github.com/meerapatelmd/pg13/issues/13)  
 * Added `migrate` function (https://github.com/meerapatelmd/pg13/issues/18) 
 * Added `kill` and `getConnDB` functions  
+* Added reserve word checks (https://github.com/meerapatelmd/pg13/issues/22)  
+
+
 
 
 

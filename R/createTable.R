@@ -1,5 +1,8 @@
 #' @title
 #' Draft SQL to Create a Table
+#'
+#' @description
+#' Draft a SQL that creates a table using DDL derived from a dataframe. Drafting is stopped if the given tablename or fields in the dataframe are a SQL reserve word.
 #' @param ... Named vector of field names and their corresponding data definition.
 #' @seealso
 #'  \code{\link[rlang]{list2}}
@@ -17,8 +20,13 @@ draftCreateTable <-
 
 
                 ddl <- rlang::list2(...)
-
                 fields <- names(ddl)
+
+                if (any(isReserved(tableName, fields))) {
+
+                        stop("Cannot use reserved sql words.")
+
+                }
 
                 ddl <- mapply(paste, fields, ddl, collapse = " ")
                 ddl <- paste(ddl, collapse = ",\n")
@@ -97,8 +105,12 @@ createTable <-
 
         }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title
+#' Draft the SQL to Create Table
+#'
+#' @description
+#' Draft a SQL that creates a table using DDL derived from a dataframe. Drafting is stopped if the given tablename or fields in the dataframe are a SQL reserve word.
+#'
 #' @seealso
 #'  \code{\link[forcats]{fct_collapse}}
 #' @rdname draftCreateTableFromDF
@@ -137,6 +149,12 @@ draftCreateTableFromDF <-
 
                 ddl <- makeDDL(data = data)
                 fields <- names(ddl)
+
+                if (any(isReserved(tableName, fields))) {
+
+                        stop("Cannot use reserved sql words.")
+
+                }
 
                 ddl <- mapply(paste, fields, ddl, collapse = " ")
                 ddl <- paste(ddl, collapse = ",\n")

@@ -21,9 +21,7 @@ createTable(
 \item{...}{Named vector of field names and their corresponding data definition.}
 }
 \description{
-Draft SQL to Create a Table
-
-Create a Table
+Draft a SQL that creates a table using DDL derived from a dataframe. Drafting is stopped if the given tablename or fields in the dataframe are a SQL reserve word.
 }
 \seealso{
 \code{\link[rlang]{list2}}
