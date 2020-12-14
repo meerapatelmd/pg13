@@ -10,5 +10,5 @@ constructBase(fields = "*", distinct = FALSE, schema = "public", tableName)
 \item{distinct}{if TRUE, the DISTINCT fields will be selected for.}
 }
 \description{
-(Deprecated)  Construct the SELECT {fields} FROM {schema}.{table} base query. The SQL Statement is not terminated for the addition of other parameters generated using "construct" functions.
+Construct the SELECT {fields} FROM {schema}.{table} base query. The SQL Statement is not terminated for the addition of other parameters generated using "construct" functions.
 }

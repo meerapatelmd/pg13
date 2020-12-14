@@ -10,7 +10,7 @@ appendDate <-
         }
 
 #' Construct a base SQL query
-#' @description (Deprecated)  Construct the SELECT {fields} FROM {schema}.{table} base query. The SQL Statement is not terminated for the addition of other parameters generated using "construct" functions.
+#' @description Construct the SELECT {fields} FROM {schema}.{table} base query. The SQL Statement is not terminated for the addition of other parameters generated using "construct" functions.
 #' @param distinct if TRUE, the DISTINCT fields will be selected for.
 #' @import SqlRender
 #' @export
@@ -20,7 +20,6 @@ constructBase <-
                  distinct = FALSE,
                  schema = "public",
                  tableName) {
-                .Deprecated()
 
                 base <- system.file(package='pg13')
                 path <- paste0(base, "/sql_constr")
@@ -70,7 +69,7 @@ constructIn <-
 
 
 #' Construct a join part of a SQL Statement
-#' @description (Deprecated)  Construct {join type} JOIN {schema.table.column2} ON {schema.table.column2} = {schema.table.column1} part of the sql statement
+#' @description Construct {join type} JOIN {schema.table.column2} ON {schema.table.column2} = {schema.table.column1} part of the sql statement
 #' @import SqlRender
 #' @export
 
@@ -82,7 +81,7 @@ constructJoin <-
                  joinOnSchema,
                  joinOnTableName,
                  joinOnColumn) {
-                .Deprecated()
+
 
                 base <- system.file(package='pg13')
                 path <- paste0(base, "/sql_constr")
@@ -708,8 +707,6 @@ sourceFilePath <-
 
 terminateBuild <-
     function(sql_statement) {
-
-        .Deprecated()
 
         paste0(sql_statement, ";")
 
