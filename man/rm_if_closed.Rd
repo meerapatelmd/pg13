@@ -6,6 +6,9 @@
 \usage{
 rm_if_closed(conn)
 }
+\arguments{
+\item{conn}{Connection object}
+}
 \description{
 If a connection is not open, it is removed from the parent environment from which this function is called.
 }

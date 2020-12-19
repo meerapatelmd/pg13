@@ -47,5 +47,5 @@
 #' @param FileName Name of file in subdirectory
 #' @param package Package name
 #'
-#' @name arguments
+#' @name base_args
 NULL

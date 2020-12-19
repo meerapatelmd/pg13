@@ -7,6 +7,12 @@
 field_exists(conn, schema, tableName, field)
 }
 \arguments{
+\item{conn}{Connection object}
+
+\item{schema}{The target schema for the operation.}
+
+\item{tableName}{The target table in the \code{schema} for an operation or for writing functions, the name of the table that will be created.}
+
 \item{field}{Character string to check for in the given table.}
 }
 \description{
