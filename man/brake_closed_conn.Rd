@@ -18,13 +18,6 @@ Stop an operation if the supplied Connection Class object is closed.
 \details{
 This function is derived from the \code{\link{brake_ff}}.
 }
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
-}
 \seealso{
 \code{\link{brake_ff}}
 }
