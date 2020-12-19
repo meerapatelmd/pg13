@@ -6,13 +6,6 @@
 \usage{
 table_exists(conn, schema, tableName)
 }
-\arguments{
-\item{conn}{A connection object returned by \code{connect()}.}
-
-\item{schema}{The target schema for the operation.}
-
-\item{tableName}{The target table in the \code{schema} for an operation or for writing functions, the name of the table that will be created.}
-}
 \description{
 Does a table exist?
 }

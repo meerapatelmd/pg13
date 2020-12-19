@@ -17,14 +17,6 @@ execute_n(
 )
 }
 \arguments{
-\item{conn}{A connection object returned by \code{connect()}.}
-
-\item{sql_statements}{A list or vector of SQL Statements of length 1 or greater.}
-
-\item{verbose}{If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.}
-
-\item{render_sql}{If TRUE, the SQL statement for the operation is returned in the console.}
-
 \item{profile}{When true, each separate statement is written to file prior to sending to
 the server, and the time taken to execute a statement is displayed.}
 

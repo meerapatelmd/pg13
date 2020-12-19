@@ -7,8 +7,6 @@
 dc(conn, ..., verbose = TRUE, remove = FALSE)
 }
 \arguments{
-\item{conn}{A connection object returned by \code{connect()}.}
-
 \item{...}{Additional arguments passed to \code{\link[DatabaseConnector]{dbDisconnect}}.}
 
 \item{verbose}{If TRUE, returns a console message when the connection has been closed.}

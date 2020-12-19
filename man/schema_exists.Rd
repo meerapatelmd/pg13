@@ -6,11 +6,6 @@
 \usage{
 schema_exists(conn, schema)
 }
-\arguments{
-\item{conn}{A connection object returned by \code{connect()}.}
-
-\item{schema}{The target schema for the operation.}
-}
 \description{
 Logical that checks if a schema exists in the database. The \code{schema} argument is in formatted in all lowercase prior to checking against what is present in the database.
 }
