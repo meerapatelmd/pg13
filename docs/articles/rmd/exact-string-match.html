@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Search a Table for a Value • pg13</title>
+<title>Exact String Match • pg13</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
-<script src="../../pkgdown.js"></script><meta property="og:title" content="Search a Table for a Value">
+<script src="../../pkgdown.js"></script><meta property="og:title" content="Exact String Match">
 <meta property="og:description" content="pg13">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -61,7 +61,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../../articles/rmd/search-table.html">Search a Table for a Value</a>
+      <a href="../../articles/rmd/exact-string-match.html">Exact String Match</a>
     </li>
     <li>
       <a href="../../articles/search-table.html">Search a Table for a Value</a>
@@ -92,19 +92,16 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Search a Table for a Value</h1>
+      <h1 data-toc-skip>Exact String Match</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/meerapatelmd/pg13/blob/master/vignettes/rmd/search-table.Rmd"><code>vignettes/rmd/search-table.Rmd</code></a></small>
-      <div class="hidden name"><code>search-table.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/meerapatelmd/pg13/blob/master/vignettes/rmd/exact-string-match.Rmd"><code>vignettes/rmd/exact-string-match.Rmd</code></a></small>
+      <div class="hidden name"><code>exact-string-match.Rmd</code></div>
 
     </div>
 
     
     
-<div id="search-for-an-exact-string-match" class="section level1">
-<h1 class="hasAnchor">
-<a href="#search-for-an-exact-string-match" class="anchor"></a>Search for an Exact String Match</h1>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://meerapatelmd.github.io/pg13/">pg13</a></span><span class="op">)</span>
 <span class="va">conn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/localConnect.html">localConnect</a></span><span class="op">(</span>dbname <span class="op">=</span> <span class="st">"athena"</span>,
@@ -116,38 +113,38 @@
             tableName <span class="op">=</span> <span class="st">"concept"</span>,
             values <span class="op">=</span> <span class="st">"Aspirin"</span>,
             case_insensitive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; [2020-12-18 19:35:23]    Listing Fields...</span>
-<span class="co">#&gt; [2020-12-18 19:35:23]    Listing Fields...complete</span>
-<span class="co">#&gt; [2020-12-18 19:35:23]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.concept_id::varchar) IN ('aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:35:23]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:35:28]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:35:28]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.concept_name::varchar) IN ('aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:35:28]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:35:35]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:35:35]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.domain_id::varchar) IN ('aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:35:35]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:35:38]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:35:38]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.vocabulary_id::varchar) IN ('aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:35:38]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:35:42]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:35:42]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.concept_class_id::varchar) IN ('aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:35:42]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:35:47]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:35:47]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.standard_concept::varchar) IN ('aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:35:47]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:35:49]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:35:49]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.concept_code::varchar) IN ('aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:35:49]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:35:54]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:35:54]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.valid_start_date::varchar) IN ('aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:35:54]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:36:00]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:36:00]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.valid_end_date::varchar) IN ('aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:00]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:36:06]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:36:06]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.invalid_reason::varchar) IN ('aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:06]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:36:08]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:03]    Listing Fields...</span>
+<span class="co">#&gt; [2020-12-18 19:46:03]    Listing Fields...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:03]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.concept_id::varchar) IN ('aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:03]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:08]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:08]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.concept_name::varchar) IN ('aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:08]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:15]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:15]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.domain_id::varchar) IN ('aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:15]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:18]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:18]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.vocabulary_id::varchar) IN ('aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:18]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:22]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:22]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.concept_class_id::varchar) IN ('aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:22]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:27]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:27]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.standard_concept::varchar) IN ('aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:27]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:29]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:29]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.concept_code::varchar) IN ('aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:29]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:34]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:34]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.valid_start_date::varchar) IN ('aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:34]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:40]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:40]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.valid_end_date::varchar) IN ('aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:40]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:46]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:46]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE LOWER(t.invalid_reason::varchar) IN ('aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:46]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:48]    Querying...complete</span>
 <span class="co">#&gt; $ROWS</span>
 <span class="co">#&gt; # A tibble: 10 x 2</span>
 <span class="co">#&gt;    Field             Rows</span>
@@ -336,38 +333,38 @@
             tableName <span class="op">=</span> <span class="st">"concept"</span>,
             values <span class="op">=</span> <span class="st">"Aspirin"</span>,
             case_insensitive <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">#&gt; [2020-12-18 19:36:08]    Listing Fields...</span>
-<span class="co">#&gt; [2020-12-18 19:36:08]    Listing Fields...complete</span>
-<span class="co">#&gt; [2020-12-18 19:36:09]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_id::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:09]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:36:09]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:36:09]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_name::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:09]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:36:10]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:36:10]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.domain_id::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:10]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:36:10]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:36:10]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.vocabulary_id::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:10]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:36:10]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:36:10]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_class_id::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:10]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:36:10]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:36:10]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.standard_concept::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:10]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:36:12]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:36:12]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_code::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:12]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:36:12]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:36:12]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.valid_start_date::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:12]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:36:16]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:36:16]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.valid_end_date::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:16]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:36:20]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-18 19:36:20]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.invalid_reason::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:20]    Querying...</span>
-<span class="co">#&gt; [2020-12-18 19:36:22]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:48]    Listing Fields...</span>
+<span class="co">#&gt; [2020-12-18 19:46:48]    Listing Fields...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:48]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_id::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:48]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:48]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:48]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_name::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:48]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:50]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:50]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.domain_id::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:50]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:50]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:50]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.vocabulary_id::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:50]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:50]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:50]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_class_id::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:50]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:50]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:50]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.standard_concept::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:50]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:52]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:52]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_code::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:52]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:52]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:52]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.valid_start_date::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:52]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:46:56]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:46:56]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.valid_end_date::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:46:56]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:47:00]    Querying...complete</span>
+<span class="co">#&gt; [2020-12-18 19:47:00]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.invalid_reason::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:47:00]    Querying...</span>
+<span class="co">#&gt; [2020-12-18 19:47:02]    Querying...complete</span>
 <span class="co">#&gt; $ROWS</span>
 <span class="co">#&gt; # A tibble: 10 x 2</span>
 <span class="co">#&gt;    Field             Rows</span>
@@ -524,16 +521,16 @@
             values <span class="op">=</span> <span class="st">"Aspirin"</span>,
             case_insensitive <span class="op">=</span> <span class="cn">FALSE</span>,
             verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">#&gt; [2020-12-18 19:36:22]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_id::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:22]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_name::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:23]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.domain_id::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:23]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.vocabulary_id::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:23]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_class_id::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:23]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.standard_concept::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:25]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_code::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:25]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.valid_start_date::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:29]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.valid_end_date::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:33]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.invalid_reason::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:47:02]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_id::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:47:02]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_name::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:47:03]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.domain_id::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:47:03]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.vocabulary_id::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:47:03]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_class_id::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:47:03]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.standard_concept::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:47:05]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_code::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:47:05]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.valid_start_date::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:47:09]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.valid_end_date::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:47:13]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.invalid_reason::varchar IN ('Aspirin') ;</span>
 <span class="co">#&gt; $ROWS</span>
 <span class="co">#&gt; # A tibble: 10 x 2</span>
 <span class="co">#&gt;    Field             Rows</span>
@@ -693,8 +690,8 @@
             render_sql <span class="op">=</span> <span class="cn">TRUE</span>,
             <span class="st">"concept_id"</span>,
             <span class="st">"concept_name"</span><span class="op">)</span>
-<span class="co">#&gt; [2020-12-18 19:36:35]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_id::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:35]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_name::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:47:15]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_id::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:47:15]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_name::varchar IN ('Aspirin') ;</span>
 <span class="co">#&gt; $ROWS</span>
 <span class="co">#&gt; # A tibble: 2 x 2</span>
 <span class="co">#&gt;   Field         Rows</span>
@@ -845,8 +842,8 @@
             case_insensitive <span class="op">=</span> <span class="cn">FALSE</span>,
             verbose <span class="op">=</span> <span class="cn">FALSE</span>,
             render_sql <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; [2020-12-18 19:36:37]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_id::varchar IN ('Aspirin') ;</span>
-<span class="co">#&gt; [2020-12-18 19:36:37]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_name::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:47:17]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_id::varchar IN ('Aspirin') ;</span>
+<span class="co">#&gt; [2020-12-18 19:47:17]    SQL: SELECT * FROM omop_vocabulary.concept t WHERE t.concept_name::varchar IN ('Aspirin') ;</span>
 <span class="co">#&gt; $ROWS</span>
 <span class="co">#&gt; # A tibble: 2 x 2</span>
 <span class="co">#&gt;   Field         Rows</span>
@@ -991,15 +988,12 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/dc.html">dc</a></span><span class="op">(</span>conn <span class="op">=</span> <span class="va">conn</span>,
    remove <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; [2020-12-18 19:36:38]    Postgres connection closed</span></code></pre></div>
-</div>
+<span class="co">#&gt; [2020-12-18 19:47:18]    Postgres connection closed</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
+      </div>
 
 </div>
 
