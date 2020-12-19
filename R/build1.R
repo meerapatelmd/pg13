@@ -274,7 +274,6 @@ build_join_query <-
                         }
 
 
-                    }
 
                     null_field_args <- c("where_is_null_field",
                                     "where_is_null_join_on_field",
@@ -293,6 +292,8 @@ build_join_query <-
                     } else {
 
                         return(paste(c(where_clauses), collapse = " AND \n"))
+                    }
+
                     }
 
                     ######
