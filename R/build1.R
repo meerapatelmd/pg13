@@ -9,19 +9,151 @@ build_join_query <-
     function(fields = "*",
              distinct = FALSE,
              schema,
-             tableName,
+             table,
              column,
-             joinOnSchema,
-             joinOnTableName,
-             joinOnColumn,
-             joinType = "LEFT",
-             whereInField = NULL,
-             whereInVector = NULL,
-             whereNotInField = NULL,
-             whereNotInVector = NULL,
-             caseInsensitive = TRUE,
-             n = NULL,
+             join_on_schema,
+             join_on_table,
+             join_on_column,
+             kind = "LEFT",
+             where_in_field,
+             where_in_vector,
+             where_in_join_on_field,
+             where_in_join_on_vector,
+             where_not_in_field,
+             where_not_in_vector,
+             where_not_in_join_on_field,
+             where_not_in_join_on_vector,
+             case_insensitive,
+             n,
              n_type = c("limit", "random")) {
+
+                    # +++
+                    # Base Query
+                    # +++
+
+                    if (distinct) {
+
+                        sql_statement <-
+                        SqlRender::render(
+                            "SELECT DISTINCT @fields
+                            FROM @schema.@table a
+                            @kind JOIN @join_on_schema.@join_on_table b
+                            ON a.@column = b.@join_on_column",
+                                fields = fields,
+                                schema = schema,
+                                table = table,
+                                kind = kind,
+                                join_on_schema = join_on_schema,
+                                join_on_table = join_on_table,
+                                column = column,
+                                join_on_column = join_on_column
+                        )
+
+                    } else {
+
+                            sql_statement <-
+                                SqlRender::render(
+                                    "SELECT DISTINCT @fields
+                                                FROM @schema.@table a
+                                                @kind JOIN @join_on_schema.@join_on_table b
+                                                ON a.@column = b.@join_on_column",
+                                    fields = fields,
+                                    schema = schema,
+                                    table = table,
+                                    kind = kind,
+                                    join_on_schema = join_on_schema,
+                                    join_on_table = join_on_table,
+                                    column = column,
+                                    join_on_column = join_on_column
+                                )
+
+                    }
+
+                    # +++
+                    # Optional Where Filter
+                    # +++
+
+                    where <- list()
+                    if (!missing(where_in_field) && missing(where_in_vector)|
+                        missing(where_in_field) && !missing(where_in_vector)) {
+
+                            cli::cli_alert_warning("both `where_in_field` & `where_in_vector` required. Ignoring filter...", wrap = TRUE)
+                    } else if (!missing(where_in_field) && !missing(where_in_vector)) {
+
+                            if (is.character(where_in_vector)) {
+
+                                where_in_vector <- s_quo(vector = where_in_vector)
+
+                            }
+
+                            where_ins <- list(field = where_in_field,
+                                              vector = where_in_vector)
+
+                            where[[length(where)+1]] <- where_ins
+                            names(where)[length(where)] <- "where_ins"
+
+
+                    }
+
+                    if (!missing(where_in_join_on_field) && missing(where_in_join_on_vector)|
+                        missing(where_in_join_on_field) && !missing(where_in_join_on_vector)) {
+
+                        cli::cli_alert_warning("both `where_in_join_on_field` & `where_in_join_on_vector` required. Ignoring filter...", wrap = TRUE)
+                    } else if (!missing(where_in_join_on_field) && !missing(where_in_join_on_vector)) {
+
+                        if (is.character(where_ins_join_on)) {
+
+                            where_ins_join_on <- s_quo(vector = where_ins_join_on)
+
+                        }
+
+                        where_ins_join_on <- list(field = where_in_join_on_field,
+                                          vector = where_in_join_on_vector)
+
+
+                        where[[length(where)+1]] <- where_ins_join_on
+                        names(where)[length(where)] <- "where_ins_join_on"
+
+                    }
+
+                if (!missing(where_not_in_field) && missing(where_not_in_vector)|
+                    missing(where_not_in_field) && !missing(where_not_in_vector)) {
+
+                    cli::cli_alert_warning("both `where_not_in_field` & `where_not_in_vector` required. Ignoring filter...", wrap = TRUE)
+                } else if (!missing(where_not_in_field) && !missing(where_not_in_vector)) {
+
+                    where_not_ins <- list(field = where_not_in_field,
+                                      vector = where_not_in_vector)
+
+                    where[[length(where)+1]] <- where_not_ins
+                    names(where)[length(where)] <- "where_not_ins"
+
+                }
+
+
+            if (!missing(where_not_in_join_on_field) && missing(where_not_in_join_on_vector)|
+                missing(where_not_in_join_on_field) && !missing(where_not_in_join_on_vector)) {
+
+                cli::cli_alert_warning("both `where_not_in_join_on_field` & `where_not_in_join_on_vector` required. Ignoring filter...", wrap = TRUE)
+            } else if (!missing(where_not_in_join_on_field) && !missing(where_not_in_join_on_vector)) {
+
+                where_not_ins_join_on <- list(field = where_not_in_join_on_field,
+                                      vector = where_not_in_join_on_vector)
+
+
+                where[[length(where)+1]] <- where_not_ins_join_on
+                names(where)[length(where)] <- "where_not_ins_join_on"
+
+            }
+
+
+                    if (length(where) > 0) {
+
+                        sql_statement <- sprintf("%s
+                                                 WHERE
+                                                 ", sql_statement)
+                    }
+
 
                     ######
                     # QA to make sure all whereIn and n  arguments have been supplied in pairs
@@ -34,7 +166,7 @@ build_join_query <-
                                         purrr::keep(~!is.null(.))
 
 
-                    list(whereIns, whereNotIns) %>%
+                    list(where_ins, where_not_ins) %>%
                         purrr::map2(list("whereIn", "whereNotIn"),
                                    function(x,y) if (!(length(x) %in% c(0,2))) {stop('both "', y, '" arguments must be supplied')})
 
@@ -56,23 +188,23 @@ build_join_query <-
                     sql_construct  <- construct_base(fields = fields,
                                                     distinct = distinct,
                                                     schema = schema,
-                                                    tableName = tableName)
+                                                    table = table)
 
                     # Add join
                     sql_construct <-
                             c(sql_construct,
-                              constructJoin(schema = schema,
-                                            tableName = tableName,
+                              construct_join(schema = schema,
+                                            table = table,
                                             column = column,
-                                            joinType = joinType,
-                                            joinOnSchema = joinOnSchema,
-                                            joinOnTableName = joinOnTableName,
-                                            joinOnColumn = joinOnColumn)) %>%
+                                            joinType = kind,
+                                            join_on_schema = join_on_schema,
+                                            join_on_table = join_on_table,
+                                            join_on_column = join_on_column)) %>%
                             paste(collapse = " ")
 
 
 
-                    if (caseInsensitive) {
+                    if (case_insensitive) {
 
 
                         # If WhereIn arguments are not null include it in build
@@ -254,12 +386,12 @@ build_query <-
     function(fields = "*",
              distinct = FALSE,
              schema,
-             tableName,
-             whereInField = NULL,
-             whereInVector = NULL,
-             whereNotInField = NULL,
-             whereNotInVector = NULL,
-             caseInsensitive = TRUE,
+             table,
+             where_in_field = NULL,
+             where_in_vector = NULL,
+             where_not_in_field = NULL,
+             where_not_in_vector = NULL,
+             case_insensitive = TRUE,
              n = NULL,
              n_type = c("limit", "random")) {
 
@@ -296,10 +428,10 @@ build_query <-
                     sql_construct  <- construct_base(fields = fields,
                                                     distinct = distinct,
                                                     schema = schema,
-                                                    tableName = tableName)
+                                                    table = table)
 
 
-                    if (caseInsensitive) {
+                    if (case_insensitive) {
 
 
                         # If WhereIn arguments are not null include it in build
@@ -478,10 +610,10 @@ build_query_like <-
         function(fields = "*",
                  distinct = FALSE,
                  schema,
-                 tableName,
+                 table,
                  whereLikeField,
                  whereLikeValue,
-                 caseInsensitive = TRUE,
+                 case_insensitive = TRUE,
                  limit_n = NULL) {
 
 
@@ -489,9 +621,9 @@ build_query_like <-
                 constructBase(fields = fields,
                               distinct = distinct,
                               schema = schema,
-                              tableName = tableName)
+                              table = table)
 
-                if (caseInsensitive) {
+                if (case_insensitive) {
                         sql_construct <-
                                 c(sql_construct,
                                   constructWhereLowerLike(field = whereLikeField,
@@ -529,11 +661,11 @@ build_query_string <-
         function(fields = "*",
                  distinct = FALSE,
                  schema,
-                 tableName,
+                 table,
                  whereLikeField,
                  string,
                  split,
-                 caseInsensitive = TRUE,
+                 case_insensitive = TRUE,
                  limit_n = NULL) {
 
 
@@ -541,13 +673,13 @@ build_query_string <-
                 constructBase(fields = fields,
                               distinct = distinct,
                               schema = schema,
-                              tableName = tableName)
+                              table = table)
 
                 args <- strsplit(string, split = split) %>%
                                         unlist()
 
 
-                if (caseInsensitive) {
+                if (case_insensitive) {
 
                             args <- tolower(args)
 
