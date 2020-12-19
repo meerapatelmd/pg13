@@ -158,6 +158,18 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>conn</th>
+      <td><p>Connection object</p></td>
+    </tr>
+    <tr>
+      <th>schema</th>
+      <td><p>The target schema for the operation.</p></td>
+    </tr>
+    <tr>
+      <th>tableName</th>
+      <td><p>The target table in the <code>schema</code> for an operation or for writing functions, the name of the table that will be created.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>(Optional) Character strings of 1 or more fields in the table to search in.</p></td>
     </tr>
@@ -168,6 +180,14 @@
     <tr>
       <th>case_insensitive</th>
       <td><p>If TRUE, both sides of the query are converted to lowercase.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.</p></td>
+    </tr>
+    <tr>
+      <th>render_sql</th>
+      <td><p>If TRUE, the SQL statement for the operation is returned in the console.</p></td>
     </tr>
     </table>
 
@@ -185,8 +205,8 @@
             tableName <span class='op'>=</span> <span class='st'>"concept"</span>,
             values <span class='op'>=</span> <span class='st'>"Aspirin"</span>,
             case_insensitive <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2020-12-18 23:23:27]	<span style='color: #BBBB00;'>Listing Fields...</span><span>
-#&gt; [2020-12-18 23:23:27]	</span><span style='color: #BBBB00;'>Listing Fields...complete</span><span></div><div class='output co'>#&gt; $ROWS
+</div><div class='output co'>#&gt; [2020-12-18 23:25:30]	<span style='color: #BBBB00;'>Listing Fields...</span><span>
+#&gt; [2020-12-18 23:25:30]	</span><span style='color: #BBBB00;'>Listing Fields...complete</span><span></div><div class='output co'>#&gt; $ROWS
 #&gt; </span><span style='color: #555555;'># A tibble: 0 x 0</span><span>
 #&gt; 
 #&gt; $RESULTSETS
@@ -198,8 +218,8 @@
             tableName <span class='op'>=</span> <span class='st'>"concept"</span>,
             values <span class='op'>=</span> <span class='st'>"Aspirin"</span>,
             case_insensitive <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2020-12-18 23:23:27]	</span><span style='color: #BBBB00;'>Listing Fields...</span><span>
-#&gt; [2020-12-18 23:23:27]	</span><span style='color: #BBBB00;'>Listing Fields...complete</span><span></div><div class='output co'>#&gt; $ROWS
+</div><div class='output co'>#&gt; [2020-12-18 23:25:30]	</span><span style='color: #BBBB00;'>Listing Fields...</span><span>
+#&gt; [2020-12-18 23:25:30]	</span><span style='color: #BBBB00;'>Listing Fields...complete</span><span></div><div class='output co'>#&gt; $ROWS
 #&gt; </span><span style='color: #555555;'># A tibble: 0 x 0</span><span>
 #&gt; 
 #&gt; $RESULTSETS
@@ -227,7 +247,7 @@
             render_sql <span class='op'>=</span> <span class='cn'>TRUE</span>,
             <span class='st'>"concept_id"</span>,
             <span class='st'>"concept_name"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2020-12-18 23:23:27]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT * FROM public.concept t WHERE t.concept_id::varchar IN ('Aspirin') ;</div><div class='output co'>#&gt; <span class='error'>Error in rJava::.jnew("org.ohdsi.databaseConnector.BatchedQuery", connection@jConnection,     query): org.postgresql.util.PSQLException: ERROR: relation "public.concept" does not exist</span>
+</div><div class='output co'>#&gt; [2020-12-18 23:25:30]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT * FROM public.concept t WHERE t.concept_id::varchar IN ('Aspirin') ;</div><div class='output co'>#&gt; <span class='error'>Error in rJava::.jnew("org.ohdsi.databaseConnector.BatchedQuery", connection@jConnection,     query): org.postgresql.util.PSQLException: ERROR: relation "public.concept" does not exist</span>
 #&gt; <span class='error'>  Position: 112</span></div><div class='input'>
 
 <span class='fu'>searchTable</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
@@ -238,10 +258,10 @@
             case_insensitive <span class='op'>=</span> <span class='cn'>FALSE</span>,
             verbose <span class='op'>=</span> <span class='cn'>FALSE</span>,
             render_sql <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2020-12-18 23:23:27]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT * FROM public.concept t WHERE t.concept_id::varchar IN ('Aspirin') ;</div><div class='output co'>#&gt; <span class='error'>Error in rJava::.jnew("org.ohdsi.databaseConnector.BatchedQuery", connection@jConnection,     query): org.postgresql.util.PSQLException: ERROR: current transaction is aborted, commands ignored until end of transaction block</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2020-12-18 23:25:30]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT * FROM public.concept t WHERE t.concept_id::varchar IN ('Aspirin') ;</div><div class='output co'>#&gt; <span class='error'>Error in rJava::.jnew("org.ohdsi.databaseConnector.BatchedQuery", connection@jConnection,     query): org.postgresql.util.PSQLException: ERROR: current transaction is aborted, commands ignored until end of transaction block</span></div><div class='input'>
 <span class='fu'><a href='dc.html'>dc</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
    remove <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2020-12-18 23:23:27]	Postgres connection closed</div></span></pre>
+</div><div class='output co'>#&gt; [2020-12-18 23:25:30]	Postgres connection closed</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
