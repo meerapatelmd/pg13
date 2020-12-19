@@ -36,18 +36,5 @@ write_staging_table <-
                            ... = ...)
 
 
-                do.call(what = on.exit,
-                        args = list(substitute(dropTable(conn = conn,
-                                                         conn_fun = conn_fun,
-                                                         schema = schema,
-                                                         tableName = table_name,
-                                                         if_exists = TRUE,
-                                                         verbose = verbose,
-                                                         render_sql = render_sql)),
-                                    add = TRUE,
-                                    after = FALSE),
-                        envir = parent.frame())
-
-
 
         }
