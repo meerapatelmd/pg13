@@ -12,6 +12,9 @@ List all the schemas in a database in lowercase.
 \seealso{
 Other list functions: 
 \code{\link{lsFields}()},
-\code{\link{lsTables}()}
+\code{\link{lsTables}()},
+\code{\link{ls_fields}()},
+\code{\link{ls_schema}()},
+\code{\link{ls_tables}()}
 }
 \concept{list functions}

@@ -22,6 +22,7 @@ An expiration period is incorporated by first determining the cache path and its
 }
 \seealso{
 Other cache functions: 
-\code{\link{cache}()}
+\code{\link{cache}()},
+\code{\link{load_cache}()}
 }
 \concept{cache functions}

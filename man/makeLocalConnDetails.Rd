@@ -16,8 +16,13 @@ A connectionDetails class object that lists all the details needed to connect to
 }
 \description{
 Connect and disconnect to a local Postgres database that does not require credentialing. These functions automatically set the dbms and server arguments to "postgresql" and "localhost/{dbname}", leaving the database name (\code{dbname}) and port (\code{port}) as the only connection details that are modifiable by the user. Note that these functions cannot be used to connect to a local instance that requires a username and password.
+
+Connect and disconnect to a local Postgres database that does not require credentialing. These functions automatically set the dbms and server arguments to "postgresql" and "localhost/{dbname}", leaving the database name (\code{dbname}) and port (\code{port}) as the only connection details that are modifiable by the user. Note that these functions cannot be used to connect to a local instance that requires a username and password.
 }
 \section{Local ConnectionDetails}{
+
+This function returns a connectionDetails class object for functions that make the database connection within its caller environment, such as those belonging to the OHDSI Feature Extraction package. A connection can be made by passing the connectionDetails class object to the \code{\link[DatabaseConnector]{connect}}. This process can be simplified into a single function call with \code{\link{localConnect}}, which performs both operations but will not return a connectionDetails object if it is desired as a return value.
+
 
 This function returns a connectionDetails class object for functions that make the database connection within its caller environment, such as those belonging to the OHDSI Feature Extraction package. A connection can be made by passing the connectionDetails class object to the \code{\link[DatabaseConnector]{connect}}. This process can be simplified into a single function call with \code{\link{localConnect}}, which performs both operations but will not return a connectionDetails object if it is desired as a return value.
 }
@@ -27,6 +32,8 @@ This function returns a connectionDetails class object for functions that make t
 
 Other local functions: 
 \code{\link{localConnect}()},
-\code{\link{local}()}
+\code{\link{local_connect}()},
+\code{\link{local}()},
+\code{\link{make_local_conn_details}()}
 }
 \concept{local functions}

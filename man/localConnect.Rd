@@ -16,8 +16,13 @@ A connection class object to the database.
 }
 \description{
 Connect and disconnect to a local Postgres database that does not require credentialing. These functions automatically set the dbms and server arguments to "postgresql" and "localhost/{dbname}", leaving the database name (\code{dbname}) and port (\code{port}) as the only connection details that are modifiable by the user. Note that these functions cannot be used to connect to a local instance that requires a username and password.
+
+Connect and disconnect to a local Postgres database that does not require credentialing. These functions automatically set the dbms and server arguments to "postgresql" and "localhost/{dbname}", leaving the database name (\code{dbname}) and port (\code{port}) as the only connection details that are modifiable by the user. Note that these functions cannot be used to connect to a local instance that requires a username and password.
 }
 \section{Local Connection}{
+
+This function combines the process of creating a connectionDetails object and making the connection in a single function call. If a connectionDetails object is required, see \code{\link{makeLocalConnDetails}}.
+
 
 This function combines the process of creating a connectionDetails object and making the connection in a single function call. If a connectionDetails object is required, see \code{\link{makeLocalConnDetails}}.
 }
@@ -26,7 +31,9 @@ This function combines the process of creating a connectionDetails object and ma
 \code{\link[DatabaseConnector]{connect}}
 
 Other local functions: 
+\code{\link{local_connect}()},
 \code{\link{local}()},
-\code{\link{makeLocalConnDetails}()}
+\code{\link{makeLocalConnDetails}()},
+\code{\link{make_local_conn_details}()}
 }
 \concept{local functions}

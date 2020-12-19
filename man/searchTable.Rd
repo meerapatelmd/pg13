@@ -85,6 +85,8 @@ dc(conn = conn,
 }
 \seealso{
 Other table functions: 
-\code{\link{appendTable}()}
+\code{\link{appendTable}()},
+\code{\link{append_table}()},
+\code{\link{search_table}()}
 }
 \concept{table functions}
