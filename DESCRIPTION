@@ -1,6 +1,6 @@
 Package: pg13
 Title: pg13 Package
-Version: 0.3.2
+Version: 1.0.0
 Authors@R: 
     person(given = "Meera",
            family = "Patel, MD",
