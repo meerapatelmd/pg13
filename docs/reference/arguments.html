@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Base Arguments — base_args • pg13</title>
+<title>Arguments — arguments • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Base Arguments — base_args" />
-<meta property="og:description" content="Base Arguments" />
+<meta property="og:title" content="Arguments — arguments" />
+<meta property="og:description" content="Arguments" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -134,23 +134,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Base Arguments</h1>
+    <h1>Arguments</h1>
     <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/args-package.R'><code>R/args-package.R</code></a></small>
-    <div class="hidden name"><code>base_args.Rd</code></div>
+    <div class="hidden name"><code>arguments.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Base Arguments</p>
+    <p>Arguments</p>
     </div>
 
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>conn</th>
-      <td><p>A connection object returned by <code><a href='connect.html'>connect()</a></code>.</p></td>
-    </tr>
     <tr>
       <th>data</th>
       <td><p>A dataframe or tibble.</p></td>
@@ -178,6 +174,146 @@
     <tr>
       <th>render_sql</th>
       <td><p>If TRUE, the SQL statement for the operation is returned in the console.</p></td>
+    </tr>
+    <tr>
+      <th>predicate</th>
+      <td><p>Evaluating function.</p></td>
+    </tr>
+    <tr>
+      <th>stop_message</th>
+      <td><p>Message to receive with the <code>predicate</code> evaluates to true.</p></td>
+    </tr>
+    <tr>
+      <th>arguments</th>
+      <td><p>(option) character vector of arguments for the new function. If missing, the new function will not have any arguments. Arguments in the <code>predicate</code> should also be considered. For example, if the predicate is "is.logical(x)", the <code>arguments</code> value should be "x".</p></td>
+    </tr>
+    <tr>
+      <th>.data</th>
+      <td><p>A dataframe or tibble.</p></td>
+    </tr>
+    <tr>
+      <th>db</th>
+      <td><p>name of database</p></td>
+    </tr>
+    <tr>
+      <th>sqlQuery</th>
+      <td><p>sql statement of length 1 that will be the sole key for cache retrieval.</p></td>
+    </tr>
+    <tr>
+      <th>object</th>
+      <td><p>R object to cache.</p></td>
+    </tr>
+    <tr>
+      <th>remove</th>
+      <td><p>If TRUE, the Connection object argument is removed from the parent environment.</p></td>
+    </tr>
+    <tr>
+      <th>vector</th>
+      <td><p>vector of values that the SQL query is filtering for</p></td>
+    </tr>
+    <tr>
+      <th>field</th>
+      <td><p>Single field to be filtered for</p></td>
+    </tr>
+    <tr>
+      <th>term</th>
+      <td><p>Character string that the field parameter is searched for.</p></td>
+    </tr>
+    <tr>
+      <th>warn_message</th>
+      <td><p>Message to receive with the <code>predicate</code> evaluates to true.</p></td>
+    </tr>
+    <tr>
+      <th>dbname</th>
+      <td><p>Name of a local Postgres database, Default: 'athena'</p></td>
+    </tr>
+    <tr>
+      <th>port</th>
+      <td><p>The port on the server to connect to, Default: 5432</p></td>
+    </tr>
+    <tr>
+      <th>datetime_field</th>
+      <td><p>PARAM_DESCRIPTION</p></td>
+    </tr>
+    <tr>
+      <th>log_table</th>
+      <td><p>PARAM_DESCRIPTION</p></td>
+    </tr>
+    <tr>
+      <th>conn</th>
+      <td><p>Connection object</p></td>
+    </tr>
+    <tr>
+      <th>file</th>
+      <td><p>path to sql file</p></td>
+    </tr>
+    <tr>
+      <th>warn_no_rows</th>
+      <td><p>If TRUE, a warning is given that query has returned 0 rows.</p></td>
+    </tr>
+    <tr>
+      <th>cascade</th>
+      <td><p>If TRUE, a DROP SCHEMA CASCADE is performed.</p></td>
+    </tr>
+    <tr>
+      <th>group</th>
+      <td><p>group name, Default: NULL</p></td>
+    </tr>
+    <tr>
+      <th>user</th>
+      <td><p>user name, Default: NULL</p></td>
+    </tr>
+    <tr>
+      <th>fields</th>
+      <td><p>Fields selected for. Defaults to "*".</p></td>
+    </tr>
+    <tr>
+      <th>distinct</th>
+      <td><p>If TRUE, the distinct row count will be returned.</p></td>
+    </tr>
+    <tr>
+      <th>resultTableName</th>
+      <td><p>Table that the final output will be written to.</p></td>
+    </tr>
+    <tr>
+      <th>sqlList</th>
+      <td><p>list object of queries</p></td>
+    </tr>
+    <tr>
+      <th>progressBar</th>
+      <td><p>If TRUE, a progress bar is returned in the console.</p></td>
+    </tr>
+    <tr>
+      <th>skipErrors</th>
+      <td><p>If TRUE, if a SQL execution returns an error, the statement is printed back in red in the console and the iteration will proceed to the next sql statement in line.</p></td>
+    </tr>
+    <tr>
+      <th>errorFile</th>
+      <td><p>(optional) path to the error file where any errors are written to if not null.</p></td>
+    </tr>
+    <tr>
+      <th>if_exists</th>
+      <td><p>If TRUE, the table will be dropped only if it exists.</p></td>
+    </tr>
+    <tr>
+      <th>case_insensitive</th>
+      <td><p>If TRUE, both sides of the query are converted to lowercase.</p></td>
+    </tr>
+    <tr>
+      <th>values</th>
+      <td><p>Vector of length 1 or greater to search for.</p></td>
+    </tr>
+    <tr>
+      <th>instSubdir</th>
+      <td><p>Name of subdirectory in the inst/ folder</p></td>
+    </tr>
+    <tr>
+      <th>FileName</th>
+      <td><p>Name of file in subdirectory</p></td>
+    </tr>
+    <tr>
+      <th>package</th>
+      <td><p>Package name</p></td>
     </tr>
     </table>
 
