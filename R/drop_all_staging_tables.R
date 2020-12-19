@@ -51,7 +51,7 @@ drop_all_staging_tables <-
 
                         if (difftime(Sys.time(), datetimes[1], "hours") > time_diff_hours) {
 
-                                drop_table(conn = conn,
+                                dropTable(conn = conn,
                                            conn_fun = conn_fun,
                                            schema = schema,
                                            tableName = staging_tables[1],

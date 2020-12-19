@@ -25,7 +25,7 @@ write_staging_table <-
                         on.exit(return(table_name))
 
 
-                writeTable(conn = conn,
+                write_table(conn = conn,
                            conn_fun = conn_fun,
                            schema = schema,
                            tableName = table_name,
@@ -40,7 +40,7 @@ write_staging_table <-
                         args = list(substitute(dropTable(conn = conn,
                                                          conn_fun = conn_fun,
                                                          schema = schema,
-                                                         tableName = tableName,
+                                                         tableName = table_name,
                                                          if_exists = TRUE,
                                                          verbose = verbose,
                                                          render_sql = render_sql)),
