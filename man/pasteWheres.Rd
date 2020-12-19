@@ -9,4 +9,3 @@ pasteWheres(...)
 \description{
 Paste All Drafted Where Statements
 }
-\keyword{internal}

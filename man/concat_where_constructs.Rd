@@ -12,4 +12,3 @@ concat_where_constructs(sql_construct, where_sql_construct_2, ..., AND = TRUE)
 \description{
 When 2 WHERE constructs are included in the SQL Statement, they are concatenated and the 2nd "WHERE" is replaced with an "AND".
 }
-\keyword{internal}

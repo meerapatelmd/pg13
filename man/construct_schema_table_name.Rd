@@ -9,4 +9,3 @@ construct_schema_table_name(schema, tableName)
 \description{
 (Deprecated)  construct schemaTableName from the schema and tableName
 }
-\keyword{internal}

@@ -13,4 +13,3 @@ Terminate a SQL Statement with a semicolon
 
 Terminate a SQL Statement with a semicolon
 }
-\keyword{internal}

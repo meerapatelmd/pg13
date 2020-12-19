@@ -32,4 +32,3 @@ sendList(
 \description{
 Iteratively send a list of SQL Statements such as the object returned by \code{\link{parseSQL}}.
 }
-\keyword{internal}

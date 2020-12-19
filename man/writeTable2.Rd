@@ -12,4 +12,3 @@ writeTable2(conn = conn, schema, tableName, .data, ...)
 \description{
 Unlike the dropTable and renameTable functions, this function is a wrapper around the DatabaseConnector::dbWriteTable function rather than one where a SQL statement is rendered using the SqlRender package. This function that converts all inputs to the data.frame class, especially in cases where the input is a tibble, in which case an error would be thrown when writing.
 }
-\keyword{internal}

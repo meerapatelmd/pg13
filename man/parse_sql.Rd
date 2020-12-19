@@ -12,4 +12,3 @@ List of sql statements
 \description{
 This function is helpful in splitting a SQL file into digestible smaller statements based on the semicolon for troubleshooting or to skip of the statements that do not work within the full input SQL.
 }
-\keyword{internal}

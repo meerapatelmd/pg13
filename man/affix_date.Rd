@@ -13,4 +13,3 @@ Date is affixed at the end of a string in "YYYY_mm_dd" Format
 
 Date is affixed at the end of a string in "YYYY_mm_dd" Format
 }
-\keyword{internal}

@@ -14,4 +14,3 @@ draftWhereLike(field, term)
 \description{
 This is a non-terminal render, meaning that the SQL component will not be terminated with a semicolon in order to construct complex SQL queries.
 }
-\keyword{internal}

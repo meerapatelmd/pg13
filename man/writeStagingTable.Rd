@@ -19,4 +19,3 @@ writeStagingTable(
 \description{
 A Staging Table is one that is dropped on exit in the parent frame from which the function is being called.
 }
-\keyword{internal}

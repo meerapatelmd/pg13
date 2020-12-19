@@ -24,4 +24,3 @@ Summarize a Schema
 \code{\link[tibble]{as_tibble}}
 \code{\link[dplyr]{bind}},\code{\link[dplyr]{mutate}}
 }
-\keyword{internal}

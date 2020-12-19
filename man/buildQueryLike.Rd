@@ -21,4 +21,3 @@ a SQL Query as a character string.
 \description{
 Writes a Like SQL Query
 }
-\keyword{internal}

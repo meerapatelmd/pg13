@@ -18,4 +18,3 @@ append_table2(conn = conn, schema, tableName, .data, ...)
 \description{
 Like the writeTable function, this function is a wrapper around a DatabaseConnector function rather than one where a SQL statement is rendered using the SqlRender package. This function performs the additional step of converting all inputs to the data.frame class, especially in cases where the input is a tibble.
 }
-\keyword{internal}

@@ -14,4 +14,3 @@ construct_where_lower_like(field, term)
 \description{
 Render WHERE lowercase x LIKE y
 }
-\keyword{internal}

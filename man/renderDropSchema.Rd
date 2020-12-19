@@ -12,4 +12,3 @@ renderDropSchema(schema, cascade = FALSE, if_exists = TRUE)
 \description{
 Drop a schema if it exists
 }
-\keyword{internal}

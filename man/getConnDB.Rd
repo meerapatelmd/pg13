@@ -9,4 +9,3 @@ getConnDB(conn)
 \description{
 Get the name of the database that the connection object is connected to.
 }
-\keyword{internal}

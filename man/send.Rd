@@ -36,4 +36,3 @@ Send a SQL Statement to Postgres
 
 Send a SQL Statement to Postgres
 }
-\keyword{internal}

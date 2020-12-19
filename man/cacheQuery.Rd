@@ -18,4 +18,3 @@ cacheQuery(.data, sqlQuery, db)
 \description{
 This function will cache the resultset from a SQL query to a subdirectory of the cache root directory, the path of which will be {db/schema}.
 }
-\keyword{internal}

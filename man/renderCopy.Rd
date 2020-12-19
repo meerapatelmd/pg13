@@ -9,4 +9,3 @@ renderCopy(schema, tableName, csvFilePath)
 \description{
 Render SQL to copy a file to a table
 }
-\keyword{internal}

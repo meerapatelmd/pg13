@@ -26,4 +26,3 @@ Other cache functions:
 \code{\link{load_cache}()}
 }
 \concept{cache functions}
-\keyword{internal}

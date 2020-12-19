@@ -20,4 +20,3 @@ Disconnect a Postgres Connection object with the option of removing the object f
 
 Disconnect a Postgres Connection object with the option of removing the object from the parent environment.
 }
-\keyword{internal}

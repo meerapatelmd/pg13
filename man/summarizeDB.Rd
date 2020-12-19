@@ -38,4 +38,3 @@ if(interactive()){
 \code{\link[tidyr]{pivot_wider}}
 \code{\link[secretary]{typewrite_bold}}
 }
-\keyword{internal}

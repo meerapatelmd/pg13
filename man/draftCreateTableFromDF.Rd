@@ -12,4 +12,3 @@ Draft a SQL that creates a table using DDL derived from a dataframe. Drafting is
 \seealso{
 \code{\link[forcats]{fct_collapse}}
 }
-\keyword{internal}

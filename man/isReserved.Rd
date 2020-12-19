@@ -9,4 +9,3 @@ isReserved(...)
 \description{
 Is a string a reserve word?
 }
-\keyword{internal}

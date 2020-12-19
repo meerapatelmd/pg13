@@ -14,4 +14,3 @@ createDB(conn, dbname, ...)
 \description{
 Create a New Database
 }
-\keyword{internal}

@@ -22,4 +22,3 @@ a SQL Query as a character string.
 \description{
 This function writes a SQL Query that loops over the words in a string.
 }
-\keyword{internal}

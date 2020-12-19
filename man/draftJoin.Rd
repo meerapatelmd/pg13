@@ -17,4 +17,3 @@ draftJoin(
 \description{
 Construct {join type} JOIN {schema.table.column2} ON {schema.table.column2} = {schema.table.column1} part of the sql statement
 }
-\keyword{internal}

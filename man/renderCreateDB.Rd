@@ -9,4 +9,3 @@ renderCreateDB(schema, db, newDB)
 \description{
 Render SQL to Create Database
 }
-\keyword{internal}

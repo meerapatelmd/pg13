@@ -18,4 +18,3 @@ clearCache(db)
 \description{
 This function will clear a cache subdirectory of the cache root directory, the path of which will be {db/schema}.
 }
-\keyword{internal}

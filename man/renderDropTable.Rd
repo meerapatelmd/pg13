@@ -9,4 +9,3 @@ renderDropTable(schema, tableName, if_exists = TRUE)
 \description{
 Drop a table if it exists
 }
-\keyword{internal}

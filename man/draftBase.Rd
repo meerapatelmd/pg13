@@ -12,4 +12,3 @@ draftBase(fields = "*", distinct = FALSE, schema, tableName)
 \description{
 Construct the SELECT {fields} FROM {schema}.{table} base query. The SQL Statement is not terminated for the addition of other parameters generated using "construct" functions.
 }
-\keyword{internal}

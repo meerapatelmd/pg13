@@ -16,4 +16,3 @@ loadCachedJoin(..., db, schema)
 \description{
 This function will load the cached resultset from a SQL query created by the buildJoinQuery function to a subdirectory of the cache root directory, the path of which will be {db/schema}.
 }
-\keyword{internal}

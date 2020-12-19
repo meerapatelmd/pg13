@@ -9,4 +9,3 @@ local_file_query(file, dbname = "athena", port = 5432)
 \description{
 Query local Postgess from a file
 }
-\keyword{internal}

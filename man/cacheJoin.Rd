@@ -18,4 +18,3 @@ cacheJoin(.data, ..., db, schema)
 \description{
 This function will cache the resultset from a SQL query created by buildJoinQuery to a subdirectory of the cache root directory, the path of which will be {db/schema}.
 }
-\keyword{internal}

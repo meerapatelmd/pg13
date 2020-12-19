@@ -18,4 +18,3 @@ Other list functions:
 \code{\link{ls_tables}()}
 }
 \concept{list functions}
-\keyword{internal}

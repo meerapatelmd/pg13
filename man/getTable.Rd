@@ -9,4 +9,3 @@ getTable(conn, schema, tableName)
 \description{
 Get Full Table
 }
-\keyword{internal}

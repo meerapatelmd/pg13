@@ -9,4 +9,3 @@ readTable(conn, schema, tableName, verbose = TRUE, render_sql = TRUE)
 \description{
 Shortcut for a \verb{SELECT *} SQL statement.
 }
-\keyword{internal}

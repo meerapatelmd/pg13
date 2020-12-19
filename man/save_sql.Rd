@@ -20,4 +20,3 @@ Export a sql statement to a file
 
 Export a sql statement to a file
 }
-\keyword{internal}

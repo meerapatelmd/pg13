@@ -28,4 +28,3 @@ if(interactive()){
 \seealso{
 \code{\link[SqlRender]{render}}
 }
-\keyword{internal}

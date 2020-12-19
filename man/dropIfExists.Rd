@@ -12,4 +12,3 @@ dropIfExists(conn, schema, ...)
 \description{
 Drop a schema if it exists.
 }
-\keyword{internal}

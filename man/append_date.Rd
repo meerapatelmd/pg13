@@ -9,4 +9,3 @@ append_date(name)
 \description{
 Date is appended in "YYYY_mm_dd" Format
 }
-\keyword{internal}

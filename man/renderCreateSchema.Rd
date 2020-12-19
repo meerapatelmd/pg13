@@ -9,4 +9,3 @@ renderCreateSchema(schema)
 \description{
 Renders a SQL statement as a string that creates a schema.
 }
-\keyword{internal}

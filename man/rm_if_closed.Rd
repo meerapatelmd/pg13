@@ -20,4 +20,3 @@ If a connection is not open, it is removed from the parent environment from whic
 
 If a connection is not open, it is removed from the parent environment from which this function is called.
 }
-\keyword{internal}

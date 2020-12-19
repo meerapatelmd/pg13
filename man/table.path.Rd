@@ -13,4 +13,3 @@ construct schemaTableName from the schema and tableName
 
 construct schemaTableName from the schema and tableName
 }
-\keyword{internal}

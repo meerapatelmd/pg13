@@ -9,4 +9,3 @@ createSchema(conn, schema)
 \description{
 Create a Schema
 }
-\keyword{internal}

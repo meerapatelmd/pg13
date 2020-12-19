@@ -9,4 +9,3 @@ typewrite_activity(activity)
 \description{
 Typewrite Activity
 }
-\keyword{internal}

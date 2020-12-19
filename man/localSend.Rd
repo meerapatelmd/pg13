@@ -9,4 +9,3 @@ localSend(sql_statement, dbname = "athena", port = 5432)
 \description{
 Send a SQL Statement to a Local Postgres
 }
-\keyword{internal}

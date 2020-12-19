@@ -9,4 +9,3 @@ draftTablePath(schema, tableName)
 \description{
 construct schemaTableName from the schema and tableName
 }
-\keyword{internal}

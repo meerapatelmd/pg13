@@ -16,4 +16,3 @@ renderRowCount(fields = "*", distinct = FALSE, schema, tableName)
 \description{
 Render SQL for a Table Row Count
 }
-\keyword{internal}

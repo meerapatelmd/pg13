@@ -9,4 +9,3 @@ quietly.connDB(...)
 \description{
 Connect without Console Messages
 }
-\keyword{internal}

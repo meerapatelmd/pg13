@@ -16,4 +16,3 @@ Drop a schema if it exists.
 
 Drop a schema if it exists.
 }
-\keyword{internal}

@@ -28,4 +28,3 @@ Connect to a Postgres Database
 
 Connect to a Postgres Database
 }
-\keyword{internal}

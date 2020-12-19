@@ -29,4 +29,3 @@ SQL statement as a character string.
 \description{
 A SQL query is built using the given arguments. Currently, only 1 whereIn and whereNot in parameters can be set.
 }
-\keyword{internal}

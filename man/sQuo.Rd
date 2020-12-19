@@ -9,4 +9,3 @@ sQuo(vector)
 \description{
 Wrap with Single Quotes
 }
-\keyword{internal}

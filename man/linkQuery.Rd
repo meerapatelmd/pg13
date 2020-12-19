@@ -9,4 +9,3 @@ linkQuery(conn, link)
 \description{
 Query using a link to SQL file
 }
-\keyword{internal}

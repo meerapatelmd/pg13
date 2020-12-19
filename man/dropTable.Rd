@@ -23,4 +23,3 @@ dropTable(
 \description{
 Drop a Table
 }
-\keyword{internal}

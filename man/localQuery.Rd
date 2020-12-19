@@ -9,4 +9,3 @@ localQuery(sql_statement, dbname = "athena", port = 5432)
 \description{
 Query local Postgess
 }
-\keyword{internal}

@@ -9,4 +9,3 @@ renderLsSchema()
 \description{
 Renders a SQL statement that will list all schema in a database.
 }
-\keyword{internal}

@@ -23,4 +23,3 @@ Other logical functions:
 \code{\link{schema_exists}()}
 }
 \concept{logical functions}
-\keyword{internal}

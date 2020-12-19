@@ -12,4 +12,3 @@ rename_table(conn, schema, tableName, newTableName, ...)
 \description{
 This function will rename a table in a schema, but not move it out of a schema.
 }
-\keyword{internal}

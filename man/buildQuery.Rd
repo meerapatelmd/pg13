@@ -42,4 +42,3 @@ A SQL query is built using the given arguments. Currently, only 1 whereIn and wh
 
 A SQL query is built using the given arguments. Currently, only 1 whereIn and whereNot in parameters can be set.
 }
-\keyword{internal}

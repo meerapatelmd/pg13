@@ -9,4 +9,3 @@ connDB(user, password, port, server)
 \description{
 Connect to a Postgres Database
 }
-\keyword{internal}

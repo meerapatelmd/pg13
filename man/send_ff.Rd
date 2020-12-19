@@ -13,4 +13,3 @@ Send Function Factor
 
 Send Function Factor
 }
-\keyword{internal}

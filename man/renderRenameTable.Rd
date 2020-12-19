@@ -9,4 +9,3 @@ renderRenameTable(schema, tableName, newTableName)
 \description{
 This will rename a table within a schema, but not move the table out of a schema.
 }
-\keyword{internal}

@@ -12,4 +12,3 @@ constructRandom(n)
 \description{
 Construct ORDER BY RANDOM()
 }
-\keyword{internal}

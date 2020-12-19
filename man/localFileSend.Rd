@@ -9,4 +9,3 @@ localFileSend(file, dbname = "athena", port = 5432)
 \description{
 Send Statement to a local Postgess from a file
 }
-\keyword{internal}

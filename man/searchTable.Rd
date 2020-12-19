@@ -80,4 +80,3 @@ Other table functions:
 \code{\link{search_table}()}
 }
 \concept{table functions}
-\keyword{internal}

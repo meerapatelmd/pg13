@@ -22,4 +22,3 @@ Customize a connection function.
 
 Customize a connection function.
 }
-\keyword{internal}

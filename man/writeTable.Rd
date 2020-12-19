@@ -22,4 +22,3 @@ writeTable(
 \description{
 Unlike the dropTable and renameTable functions, this function is a wrapper around the \code{DatabaseConnector::dbWriteTable()} function rather than one where a SQL statement is rendered using the SqlRender package. This function that converts all inputs to a dataframe, especially in cases where the input is a tibble, in which case an error would be thrown when writing.
 }
-\keyword{internal}

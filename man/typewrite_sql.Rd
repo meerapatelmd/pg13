@@ -9,4 +9,3 @@ typewrite_sql(sql_statement)
 \description{
 Typewrite SQL
 }
-\keyword{internal}

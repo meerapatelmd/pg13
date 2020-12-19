@@ -37,4 +37,3 @@ Other local functions:
 \code{\link{make_local_conn_details}()}
 }
 \concept{local functions}
-\keyword{internal}

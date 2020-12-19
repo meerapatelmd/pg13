@@ -9,4 +9,3 @@ refresh_table(conn, schema, tableName, .data)
 \description{
 A refresh is when a table needs to be overwritten and the table that is being overwritten is off-loaded to another table with today's date and the index of iterations for that day.
 }
-\keyword{internal}

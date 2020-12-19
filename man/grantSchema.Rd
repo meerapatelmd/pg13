@@ -21,4 +21,3 @@ OUTPUT_DESCRIPTION
 \description{
 Grant all privileges to a schema to either a group or a user.
 }
-\keyword{internal}

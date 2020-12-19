@@ -19,4 +19,3 @@ Render SQL to grant all privileges to a schema a user or a group
 \seealso{
 \code{\link[SqlRender]{render}},\code{\link[SqlRender]{readSql}}
 }
-\keyword{internal}

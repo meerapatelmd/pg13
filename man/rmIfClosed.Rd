@@ -12,4 +12,3 @@ rmIfClosed(conn)
 \description{
 (Deprecated) This function removes a connection object from the Global Environment if it is closed.
 }
-\keyword{internal}

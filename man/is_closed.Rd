@@ -15,4 +15,3 @@ TRUE if the connection is closed and FALSE invisibly if it is open.
 \description{
 This function checks if a connection object is closed.
 }
-\keyword{internal}

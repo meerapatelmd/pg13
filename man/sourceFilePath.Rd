@@ -20,4 +20,3 @@ This function provides the path for files installed within a given package's lib
 
 This function provides the path for files installed within a given package's library.
 }
-\keyword{internal}

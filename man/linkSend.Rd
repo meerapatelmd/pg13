@@ -9,4 +9,3 @@ linkSend(conn, link)
 \description{
 Send a statument using a link to SQL file
 }
-\keyword{internal}

@@ -31,4 +31,3 @@ Draft a SQL that creates a table using DDL derived from a dataframe. Drafting is
 \code{\link[SqlRender]{render}}
 \code{\link[pg13]{send}}
 }
-\keyword{internal}

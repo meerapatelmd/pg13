@@ -18,4 +18,3 @@ fileSend(conn, file, ...)
 \description{
 Send Query to any Postgres connection
 }
-\keyword{internal}

@@ -18,4 +18,3 @@ createTableFromDF(
 \description{
 Derive DDL using the data classes of each field in a dataframe. The map between the R data classes and the Postgresql data types can be found at \code{\link{renderCreateTableFromDF}}. The dataframe can then be appended to the table using \code{\link{appendTable}}. This method is favorable to a direct call to \code{\link{writeTable}} because in some cases, future appends to the table may not adhere to the data definitions created at the time of writing. For example, \code{\link{writeTable}} defaults to \code{VARCHAR(255)} for all character classes whereas future appends may contain text greater than 255 characters, resulting in error. This function rolls all character classes to \code{TEXT} data types instead.
 }
-\keyword{internal}

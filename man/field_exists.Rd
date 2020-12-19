@@ -26,4 +26,3 @@ Other logical functions:
 \code{\link{table_exists}()}
 }
 \concept{logical functions}
-\keyword{internal}
