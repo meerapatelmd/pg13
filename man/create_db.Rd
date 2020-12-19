@@ -7,8 +7,6 @@
 create_db(conn, dbname, ...)
 }
 \arguments{
-\item{conn}{Connection object}
-
 \item{dbname}{Database name.}
 
 \item{...}{Additional arguments passed to \code{DatabaseConnector::dbSendStatement()}.}

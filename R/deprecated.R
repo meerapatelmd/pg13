@@ -68,39 +68,6 @@ construct_in <-
 
 
 
-#' Construct a join part of a SQL Statement
-#' @description Construct {join type} JOIN {schema.table.column2} ON {schema.table.column2} = {schema.table.column1} part of the sql statement
-#' @import SqlRender
-#' @keywords internal
-
-construct_join <-
-        function(schema,
-                 tableName,
-                 column,
-                 joinType = "LEFT",
-                 joinOnSchema,
-                 joinOnTableName,
-                 joinOnColumn) {
-
-
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
-
-                SqlRender::render(SqlRender::readSql(paste0(path, "/join.sql")),
-                                  schema1 = schema,
-                                  tableName1 = tableName,
-                                  column1 = column,
-                                  joinType = joinType,
-                                  schema2 = joinOnSchema,
-                                  tableName2 = joinOnTableName,
-                                  column2 = joinOnColumn)
-
-        }
-
-
-
-
-
 #' Construct LIMIT
 #' @description (Deprecated)  This is a non-terminal render, meaning that the SQL component will not be terminated with a semicolon in order to construct complex SQL queries.
 #' @import SqlRender
@@ -5706,4 +5673,119 @@ buildQuery <-
             terminateBuild()
 
 
+    }
+
+
+#' Send Function Factor
+#' @export
+
+send_ff <-
+    function(
+        user,
+        password,
+        port,
+        server) {
+
+        function(sql_statement,
+                 verbose = TRUE,
+                 render_sql = TRUE) {
+
+            conn <- connect(user = user,
+                            password = password,
+                            port = port,
+                            server = server,
+                            verbose = verbose)
+
+            on.exit(expr = dc(conn = conn,
+                              verbose = verbose))
+
+
+            send(conn = conn,
+                 sql_statement = sql_statement,
+                 verbose = verbose,
+                 render_sql = render_sql)
+
+
+        }
+
+
+    }
+
+
+
+#' Send a List of SQL Statements
+#' @description
+#' Iteratively send a list of SQL Statements such as the object returned by \code{\link{parseSQL}}.
+#' @import progress
+#' @param conn Connection object
+#' @param sqlList list object of queries
+#' @param verbose If TRUE, the SQL is printed back before executing
+#' @param progressBar If TRUE, a progress bar is returned in the console.
+#' @param skipErrors If TRUE, if a SQL execution returns an error, the statement is printed back in red in the console and the iteration will proceed to the next sql statement in line.
+#' @param errorFile (optional) path to the error file where any errors are written to if not null.
+#' @param ... Additional arguments to pass onto the DatabaseConnector::dbGetQuery function
+#' @export
+
+send_list <-
+    function(conn,
+             sqlList,
+             verbose = TRUE,
+             progressBar = TRUE,
+             skipErrors = TRUE,
+             errorFile = NULL,
+             ...) {
+
+        if (!is.list(sqlList)) {
+
+            stop("'sqlList' must be a list")
+
+        }
+
+        if (progressBar) {
+
+            pb <- progress::progress_bar$new(total = length(sql_list),
+                                             format = "[:bar] :elapsedfull :current/:total (:percent)",
+                                             clear = FALSE)
+            pb$tick(0)
+            Sys.sleep(.2)
+
+        }
+
+        for (i in 1:length(sqlList)) {
+
+            sql <- sql_list[[i]]
+
+            if (verbose) {
+                secretary::typewrite("\n", sql)
+            }
+
+            if (progressBar) {
+                pb$tick()
+                Sys.sleep(.2)
+            }
+
+
+            if (skipErrors) {
+
+                tryCatch(send(conn = conn,
+                              sql_statement = sql,
+                              ...),
+                         error = function(err) {
+                             secretary::typewrite_error("\n", sql)
+                             if (!is.null(errorFile)) {
+                                 .writeErrorReport(message = err$message,
+                                                   sql = sql,
+                                                   errorFile = errorFile)
+                             }
+                         })
+
+
+            } else {
+
+                send(conn = conn,
+                     sql_statement = sql,
+                     ...)
+            }
+
+        }
     }

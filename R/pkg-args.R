@@ -15,8 +15,8 @@
 #' @param .data A dataframe or tibble.
 #' @param db name of database
 #' @param sqlQuery sql statement of length 1 that will be the sole key for cache retrieval.
-#' @param object        R object to cache.
-#' @param dirs          Argument passed to \code{\link[R.cache]{saveCache}}, \code{\link[R.cache]{findCache}}, and/or \code{\link[R.cache]{loadCache}}\.\
+#' @param object  R object to cache.
+#' @param dirs Argument passed to \code{\link[R.cache]{saveCache}}, \code{\link[R.cache]{findCache}}, and/or \code{\link[R.cache]{loadCache}}
 #' @param remove        If TRUE, the Connection object argument is removed from the parent environment.
 #' @param distinct if TRUE, the DISTINCT fields will be selected for.
 #' @param vector vector of values that the SQL query is filtering for
@@ -46,6 +46,21 @@
 #' @param instSubdir Name of subdirectory in the inst/ folder
 #' @param FileName Name of file in subdirectory
 #' @param package Package name
+#' @param table Target table for the operation.
+#' @param select_table_fields The fields to select for in the first table
+#' @param select_join_on_fields The fields to select for in the table being join to the first table
+#' @param column Column to join on.
+#' @param join_on_schema Schema of the table that is being joined to the first table.
+#' @param join_on_table  Table that is being joined to the first table.
+#' @param join_on_column Column in the `join_on_table` that is joined onto the `column` of the first table.
+#' @param kind Type of join. Defaults to left, and options include "LEFT", "RIGHT", "INNER", or "FULL"
 #'
-#' @name base_args
+#' @param where_in_field Paired with `where_in_vector`, adds a "WHERE {field} IN ({vector})" clause to the query corresponding to the field-value pair.
+#' @param where_not_in_field Paired with `where_not_in_vector`, adds a "WHERE {field} NOT IN ({vector})" clause to the query corresponding to the field-value pair.
+#' @param limit (Optional) Integer of the row limit. Takes precedence over `random` if both arguments are provided.
+#' @param random (Optional) Integer of the random number of rows to return. Is preceded by `limit` if both `limit` and `random` are provided.
+#'
+#' @name args
+#' @keywords internal
+#' @export
 NULL
