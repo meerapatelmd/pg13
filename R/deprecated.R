@@ -1,7 +1,7 @@
 #' Append Current Date to a String
 #' @description Date is appended in "YYYY_mm_dd" Format
 #' @import stringr
-#' @noRd
+#' @keywords internal
 
 append_date <-
         function(name) {
@@ -13,7 +13,7 @@ append_date <-
 #' @description Construct the SELECT {fields} FROM {schema}.{table} base query. The SQL Statement is not terminated for the addition of other parameters generated using "construct" functions.
 #' @param distinct if TRUE, the DISTINCT fields will be selected for.
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 construct_base <-
         function(fields = "*",
@@ -51,7 +51,7 @@ construct_base <-
 #' @description (Deprecated)  This is a non-terminal render, meaning that the SQL component will not be terminated with a semicolon in order to construct complex SQL queries.
 #' @import SqlRender
 #' @param vector vector of values that the SQL query is filtering for
-#' @noRd
+#' @keywords internal
 
 
 construct_in <-
@@ -71,7 +71,7 @@ construct_in <-
 #' Construct a join part of a SQL Statement
 #' @description Construct {join type} JOIN {schema.table.column2} ON {schema.table.column2} = {schema.table.column1} part of the sql statement
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 construct_join <-
         function(schema,
@@ -105,7 +105,7 @@ construct_join <-
 #' @description (Deprecated)  This is a non-terminal render, meaning that the SQL component will not be terminated with a semicolon in order to construct complex SQL queries.
 #' @import SqlRender
 #' @param n rows to limit to
-#' @noRd
+#' @keywords internal
 
 
 construct_limit <-
@@ -126,7 +126,7 @@ construct_limit <-
 #' Construct ORDER BY RANDOM()
 #' @param n Row number desired in the output
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 
 construct_random <-
@@ -147,7 +147,7 @@ construct_random <-
 
 #' Construct schemaTableName
 #' @description (Deprecated)  construct schemaTableName from the schema and tableName
-#' @noRd
+#' @keywords internal
 
 construct_schema_table_name <-
         function(schema,
@@ -173,7 +173,7 @@ construct_schema_table_name <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
-#' @noRd
+#' @keywords internal
 
 
 construct_where_in <-
@@ -204,7 +204,7 @@ construct_where_in <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param term Character string that the field parameter is searched for.
-#' @noRd
+#' @keywords internal
 
 
 construct_where_like <-
@@ -230,7 +230,7 @@ construct_where_like <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
-#' @noRd
+#' @keywords internal
 
 
 construct_where_lower_in <-
@@ -260,7 +260,7 @@ construct_where_lower_in <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param term Character string that the field parameter is searched for.
-#' @noRd
+#' @keywords internal
 
 
 construct_where_lower_like <-
@@ -287,7 +287,7 @@ construct_where_lower_like <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
-#' @noRd
+#' @keywords internal
 
 
 construct_where_lower_not_in <-
@@ -318,7 +318,7 @@ construct_where_lower_not_in <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
-#' @noRd
+#' @keywords internal
 
 
 construct_where_not_in <-
@@ -347,7 +347,7 @@ construct_where_not_in <-
 #' @param file File to write to.
 #' @param ... Additional arguments passed to the readr::write_lines function
 #' @importFrom readr write_lines
-#' @noRd
+#' @keywords internal
 
 save_sql <-
         function(sql_statement,
@@ -367,7 +367,7 @@ save_sql <-
 #' Drop a Postgres schema
 #' @description Drop a schema if it exists.
 #' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
-#' @noRd
+#' @keywords internal
 
 drop_schema <-
         function(conn,
@@ -398,7 +398,7 @@ drop_schema <-
 #' @description When 2 WHERE constructs are included in the SQL Statement, they are concatenated and the 2nd "WHERE" is replaced with an "AND".
 #' @param AND If TRUE, the WHERE constructs are concatenated with "AND". If FALSE, the concatenation is performed with an "OR".
 #' @import stringr
-#' @noRd
+#' @keywords internal
 
 concat_where_constructs <-
     function(sql_construct,
@@ -466,7 +466,7 @@ concat_where_constructs <-
 #' @param schema schema where `tableName` is located.
 #' @param .data dataframe to append
 #' @param ... Additional arguments passed to DatabaseConnector::dbAppendTable
-#' @noRd
+#' @keywords internal
 
 
 append_table2 <-
@@ -497,7 +497,7 @@ append_table2 <-
 #' @import DatabaseConnector
 #' @description Unlike the dropTable and renameTable functions, this function is a wrapper around the DatabaseConnector::dbWriteTable function rather than one where a SQL statement is rendered using the SqlRender package. This function that converts all inputs to the data.frame class, especially in cases where the input is a tibble, in which case an error would be thrown when writing.
 #' @param ... Additional arguments passed to DatabaseConnector::dbWriteTable
-#' @noRd
+#' @keywords internal
 
 
 write_table2 <-
@@ -521,7 +521,7 @@ write_table2 <-
     }
 
 #' Get Full Table
-#' @noRd
+#' @keywords internal
 
 
 get_table <-
@@ -542,7 +542,7 @@ get_table <-
 #' @import stringr
 #' @import secretary
 #' @import purrr
-#' @noRd
+#' @keywords internal
 
 
 refresh_table <-
@@ -606,7 +606,7 @@ refresh_table <-
 #' Rename a table in a Postgres schema
 #' @description This function will rename a table in a schema, but not move it out of a schema.
 #' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
-#' @noRd
+#' @keywords internal
 
 rename_table <-
     function(conn,
@@ -640,7 +640,7 @@ rename_table <-
 #' TRUE if the connection is closed and FALSE invisibly if it is open.
 #'
 #' @rdname is_closed
-#' @noRd
+#' @keywords internal
 
 is_closed <-
     function(conn) {
@@ -667,7 +667,7 @@ is_closed <-
 #' @param conn Postgres connection object
 #'
 #' @rdname rm_if_closed
-#' @noRd
+#' @keywords internal
 
 rm_if_closed <-
     function(conn) {
@@ -690,7 +690,7 @@ rm_if_closed <-
 #' @param instSubdir Name of subdirectory in the inst/ folder
 #' @param FileName Name of file in subdirectory
 #' @param package Package name
-#' @noRd
+#' @keywords internal
 
 
 source_file_path <-
@@ -703,7 +703,7 @@ source_file_path <-
     }
 
 #' Terminate a SQL Statement with a semicolon
-#' @noRd
+#' @keywords internal
 
 terminate_build <-
     function(sql_statement) {
@@ -719,7 +719,7 @@ terminate_build <-
 
 #' Execute SQL
 #' @description This function differs from the send() and query() functions in that it provides additional features such as a progress bar and time estimations.
-#' @noRd
+#' @keywords internal
 
 execute <-
         function(conn,
@@ -749,7 +749,7 @@ execute <-
 
 #' Query local Postgess from a file
 #' @import DatabaseConnector
-#' @noRd
+#' @keywords internal
 
 local_file_query <-
     function (file,
@@ -775,7 +775,7 @@ local_file_query <-
 
 #' Send Statement to a local Postgess from a file
 #' @import DatabaseConnector
-#' @noRd
+#' @keywords internal
 
 local_file_send <-
     function (file,
@@ -803,7 +803,7 @@ local_file_send <-
 
 #' Query local Postgess
 #' @import DatabaseConnector
-#' @noRd
+#' @keywords internal
 
 local_query <-
     function (sql_statement,
@@ -830,7 +830,7 @@ local_query <-
 
 
 #' Send a SQL Statement to a Local Postgres
-#' @noRd
+#' @keywords internal
 
 
 local_send <-
@@ -870,7 +870,7 @@ local_send <-
 #' @import centipede
 #' @return
 #' List of sql statements
-#' @noRd
+#' @keywords internal
 
 parse_sql <-
         function(sql_statement) {
@@ -892,7 +892,7 @@ parse_sql <-
 #' @param file File to write to.
 #' @param ... Additional arguments passed to the readr::write_lines function
 #' @importFrom readr write_lines
-#' @noRd
+#' @keywords internal
 
 save_sql <-
         function(sql_statement,
@@ -928,7 +928,7 @@ save_sql <-
 #' @return SQL statement as a character string.
 #' @import purrr
 #' @import stringr
-#' @noRd
+#' @keywords internal
 
 buildJoinQuery <-
     function(fields = "*",
@@ -1173,7 +1173,7 @@ buildJoinQuery <-
 #' @return SQL statement as a character string.
 #' @import purrr
 #' @import stringr
-#' @noRd
+#' @keywords internal
 
 buildQuery <-
     function(fields = "*",
@@ -1397,7 +1397,7 @@ buildQuery <-
 
 #' Writes a Like SQL Query
 #' @return a SQL Query as a character string.
-#' @noRd
+#' @keywords internal
 
 buildQueryLike <-
         function(fields = "*",
@@ -1448,7 +1448,7 @@ buildQueryLike <-
 #' Writes a SQL Query Loop
 #' @description This function writes a SQL Query that loops over the words in a string.
 #' @return a SQL Query as a character string.
-#' @noRd
+#' @keywords internal
 
 buildQueryString <-
         function(fields = "*",
@@ -1549,7 +1549,7 @@ buildQueryString <-
 
 
 #' Terminate a SQL Statement with a semicolon
-#' @noRd
+#' @keywords internal
 
 terminateBuild <-
     function(sql_statement) {
@@ -1574,7 +1574,7 @@ terminateBuild <-
 #' @param db name of database
 #' @param schema name of schema
 #' @import R.cache
-#' @noRd
+#' @keywords internal
 
 cacheJoin <-
         function(.data,
@@ -1598,7 +1598,7 @@ cacheJoin <-
 #' @param db name of database
 #' @param schema name of schema
 #' @import R.cache
-#' @noRd
+#' @keywords internal
 
 cacheQuery <-
         function(.data,
@@ -1621,7 +1621,7 @@ cacheQuery <-
 #' @param db name of database
 #' @param schema name of schema
 #' @import R.cache
-#' @noRd
+#' @keywords internal
 
 clearCache <-
         function(db) {
@@ -1641,7 +1641,7 @@ clearCache <-
 #' @param db name of database
 #' @param schema name of schema
 #' @import R.cache
-#' @noRd
+#' @keywords internal
 
 loadCachedJoin <-
         function(...,
@@ -1662,7 +1662,7 @@ loadCachedJoin <-
 #' @param db name of database
 #' @param schema name of schema
 #' @import R.cache
-#' @noRd
+#' @keywords internal
 
 loadCachedQuery <-
         function(sqlQuery,
@@ -1698,7 +1698,7 @@ loadCachedQuery <-
 #'
 #' @rdname cache
 #' @family cache functions
-#' @noRd
+#' @keywords internal
 
 cache <-
         function(object,
@@ -1731,7 +1731,7 @@ cache <-
 #' @rdname loadCache
 #' @family cache functions
 #' @importFrom R.cache findCache loadCache
-#' @noRd
+#' @keywords internal
 
 loadCache <-
         function(sql_statement,
@@ -1795,7 +1795,7 @@ NULL
 #' @keywords internal
 #'
 #' @importFrom DatabaseConnector createConnectionDetails connect
-#' @noRd
+#' @keywords internal
 
 
 connDB <-
@@ -1823,7 +1823,7 @@ connDB <-
 #'
 #' @rdname connect
 #'
-#' @noRd
+#' @keywords internal
 
 connect <-
         function() {
@@ -1840,7 +1840,7 @@ connect <-
 #' @inheritParams connect
 #'
 #' @rdname connect_ff
-#' @noRd
+#' @keywords internal
 
 connect_ff <-
         function() {
@@ -1850,7 +1850,7 @@ connect_ff <-
 
 #' Connect without Console Messages
 #' @keywords internal
-#' @noRd
+#' @keywords internal
 
 quietly.connDB <-
         function() {
@@ -1872,7 +1872,7 @@ quietly.connDB <-
 #'
 #' @importFrom DatabaseConnector dbDisconnect
 #'
-#' @noRd
+#' @keywords internal
 
 dc <-
         function(conn,
@@ -1905,7 +1905,7 @@ dc <-
 #'
 #' @rdname rm_if_closed
 #'
-#' @noRd
+#' @keywords internal
 
 
 rm_if_closed <-
@@ -1934,7 +1934,7 @@ rm_if_closed <-
 #'  \code{\link[rlang]{list2}}
 #'  \code{\link[SqlRender]{render}}
 #' @rdname createTable
-#' @noRd
+#' @keywords internal
 #' @importFrom rlang list2
 #' @importFrom SqlRender render
 
@@ -1999,7 +1999,7 @@ draftCreateTable <-
 #'  \code{\link[SqlRender]{render}}
 #'  \code{\link[pg13]{send}}
 #' @rdname createTable
-#' @noRd
+#' @keywords internal
 #' @importFrom rlang list2
 #' @importFrom SqlRender render
 
@@ -2040,7 +2040,7 @@ createTable <-
 #' @seealso
 #'  \code{\link[forcats]{fct_collapse}}
 #' @rdname draftCreateTableFromDF
-#' @noRd
+#' @keywords internal
 #' @importFrom forcats fct_collapse
 
 draftCreateTableFromDF <-
@@ -2127,7 +2127,7 @@ draftCreateTableFromDF <-
 #' Derive DDL using the data classes of each field in a dataframe. The map between the R data classes and the Postgresql data types can be found at \code{\link{renderCreateTableFromDF}}. The dataframe can then be appended to the table using \code{\link{appendTable}}. This method is favorable to a direct call to \code{\link{writeTable}} because in some cases, future appends to the table may not adhere to the data definitions created at the time of writing. For example, \code{\link{writeTable}} defaults to `VARCHAR(255)` for all character classes whereas future appends may contain text greater than 255 characters, resulting in error. This function rolls all character classes to `TEXT` data types instead.
 #'
 #' @rdname createTableFromDF
-#' @noRd
+#' @keywords internal
 
 createTableFromDF <-
         function(conn,
@@ -2164,7 +2164,7 @@ createTableFromDF <-
 #' @inheritParams base_args
 #' @param dbname Database name.
 #' @param ... Additional arguments passed to `DatabaseConnector::dbSendStatement()`.
-#' @noRd
+#' @keywords internal
 
 createDB <-
     function(conn,
@@ -2188,7 +2188,7 @@ createDB <-
 #' Rename a table in a Postgres schema
 #' @description This function will rename a table in a schema, but not move it out of a schema.
 #' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
-#' @noRd
+#' @keywords internal
 
 renameDB <-
     function(conn,
@@ -2220,7 +2220,7 @@ renameDB <-
 #' Append Current Date to a String
 #' @description Date is appended in "YYYY_mm_dd" Format
 #' @import stringr
-#' @noRd
+#' @keywords internal
 
 appendDate <-
         function(name) {
@@ -2232,7 +2232,7 @@ appendDate <-
 #' @description Construct the SELECT {fields} FROM {schema}.{table} base query. The SQL Statement is not terminated for the addition of other parameters generated using "construct" functions.
 #' @param distinct if TRUE, the DISTINCT fields will be selected for.
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 constructBase <-
         function(fields = "*",
@@ -2270,7 +2270,7 @@ constructBase <-
 #' @description (Deprecated)  This is a non-terminal render, meaning that the SQL component will not be terminated with a semicolon in order to construct complex SQL queries.
 #' @import SqlRender
 #' @param vector vector of values that the SQL query is filtering for
-#' @noRd
+#' @keywords internal
 
 
 constructIn <-
@@ -2290,7 +2290,7 @@ constructIn <-
 #' Construct a join part of a SQL Statement
 #' @description Construct {join type} JOIN {schema.table.column2} ON {schema.table.column2} = {schema.table.column1} part of the sql statement
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 constructJoin <-
         function(schema,
@@ -2324,7 +2324,7 @@ constructJoin <-
 #' @description (Deprecated)  This is a non-terminal render, meaning that the SQL component will not be terminated with a semicolon in order to construct complex SQL queries.
 #' @import SqlRender
 #' @param n rows to limit to
-#' @noRd
+#' @keywords internal
 
 
 constructLimit <-
@@ -2345,7 +2345,7 @@ constructLimit <-
 #' Construct ORDER BY RANDOM()
 #' @param n Row number desired in the output
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 
 constructRandom <-
@@ -2366,7 +2366,7 @@ constructRandom <-
 
 #' Construct schemaTableName
 #' @description (Deprecated)  construct schemaTableName from the schema and tableName
-#' @noRd
+#' @keywords internal
 
 constructSchemaTableName <-
         function(schema,
@@ -2392,7 +2392,7 @@ constructSchemaTableName <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
-#' @noRd
+#' @keywords internal
 
 
 constructWhereIn <-
@@ -2423,7 +2423,7 @@ constructWhereIn <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param term Character string that the field parameter is searched for.
-#' @noRd
+#' @keywords internal
 
 
 constructWhereLike <-
@@ -2449,7 +2449,7 @@ constructWhereLike <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
-#' @noRd
+#' @keywords internal
 
 
 constructWhereLowerIn <-
@@ -2479,7 +2479,7 @@ constructWhereLowerIn <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param term Character string that the field parameter is searched for.
-#' @noRd
+#' @keywords internal
 
 
 constructWhereLowerLike <-
@@ -2506,7 +2506,7 @@ constructWhereLowerLike <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
-#' @noRd
+#' @keywords internal
 
 
 constructWhereLowerNotIn <-
@@ -2537,7 +2537,7 @@ constructWhereLowerNotIn <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
-#' @noRd
+#' @keywords internal
 
 
 constructWhereNotIn <-
@@ -2566,7 +2566,7 @@ constructWhereNotIn <-
 #' @param file File to write to.
 #' @param ... Additional arguments passed to the readr::write_lines function
 #' @importFrom readr write_lines
-#' @noRd
+#' @keywords internal
 
 saveSQL <-
         function(sql_statement,
@@ -2586,7 +2586,7 @@ saveSQL <-
 #' Drop a Postgres schema
 #' @description Drop a schema if it exists.
 #' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
-#' @noRd
+#' @keywords internal
 
 dropSchema <-
         function(conn,
@@ -2617,7 +2617,7 @@ dropSchema <-
 #' @description When 2 WHERE constructs are included in the SQL Statement, they are concatenated and the 2nd "WHERE" is replaced with an "AND".
 #' @param AND If TRUE, the WHERE constructs are concatenated with "AND". If FALSE, the concatenation is performed with an "OR".
 #' @import stringr
-#' @noRd
+#' @keywords internal
 
 concatWhereConstructs <-
     function(sql_construct,
@@ -2685,7 +2685,7 @@ concatWhereConstructs <-
 #' @param schema schema where `tableName` is located.
 #' @param .data dataframe to append
 #' @param ... Additional arguments passed to DatabaseConnector::dbAppendTable
-#' @noRd
+#' @keywords internal
 
 
 appendTable2 <-
@@ -2716,7 +2716,7 @@ appendTable2 <-
 #' @import DatabaseConnector
 #' @description Unlike the dropTable and renameTable functions, this function is a wrapper around the DatabaseConnector::dbWriteTable function rather than one where a SQL statement is rendered using the SqlRender package. This function that converts all inputs to the data.frame class, especially in cases where the input is a tibble, in which case an error would be thrown when writing.
 #' @param ... Additional arguments passed to DatabaseConnector::dbWriteTable
-#' @noRd
+#' @keywords internal
 
 
 writeTable2 <-
@@ -2740,7 +2740,7 @@ writeTable2 <-
     }
 
 #' Get Full Table
-#' @noRd
+#' @keywords internal
 
 
 getTable <-
@@ -2761,7 +2761,7 @@ getTable <-
 #' @import stringr
 #' @import secretary
 #' @import purrr
-#' @noRd
+#' @keywords internal
 
 
 refreshTable <-
@@ -2825,7 +2825,7 @@ refreshTable <-
 #' Rename a table in a Postgres schema
 #' @description This function will rename a table in a schema, but not move it out of a schema.
 #' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
-#' @noRd
+#' @keywords internal
 
 renameTable <-
     function(conn,
@@ -2859,7 +2859,7 @@ renameTable <-
 #' TRUE if the connection is closed and FALSE invisibly if it is open.
 #'
 #' @rdname isClosed
-#' @noRd
+#' @keywords internal
 
 isClosed <-
     function(conn) {
@@ -2886,7 +2886,7 @@ isClosed <-
 #' @param conn Postgres connection object
 #'
 #' @rdname rmIfClosed
-#' @noRd
+#' @keywords internal
 
 rmIfClosed <-
     function(conn) {
@@ -2909,7 +2909,7 @@ rmIfClosed <-
 #' @param instSubdir Name of subdirectory in the inst/ folder
 #' @param FileName Name of file in subdirectory
 #' @param package Package name
-#' @noRd
+#' @keywords internal
 
 
 sourceFilePath <-
@@ -2922,7 +2922,7 @@ sourceFilePath <-
     }
 
 #' Terminate a SQL Statement with a semicolon
-#' @noRd
+#' @keywords internal
 
 terminateBuild <-
     function(sql_statement) {
@@ -2938,7 +2938,7 @@ terminateBuild <-
 
 #' Execute SQL
 #' @description This function differs from the send() and query() functions in that it provides additional features such as a progress bar and time estimations.
-#' @noRd
+#' @keywords internal
 
 execute <-
         function(conn,
@@ -2968,7 +2968,7 @@ execute <-
 
 #' Query local Postgess from a file
 #' @import DatabaseConnector
-#' @noRd
+#' @keywords internal
 
 localFileQuery <-
     function (file,
@@ -2994,7 +2994,7 @@ localFileQuery <-
 
 #' Send Statement to a local Postgess from a file
 #' @import DatabaseConnector
-#' @noRd
+#' @keywords internal
 
 localFileSend <-
     function (file,
@@ -3022,7 +3022,7 @@ localFileSend <-
 
 #' Query local Postgess
 #' @import DatabaseConnector
-#' @noRd
+#' @keywords internal
 
 localQuery <-
     function (sql_statement,
@@ -3049,7 +3049,7 @@ localQuery <-
 
 
 #' Send a SQL Statement to a Local Postgres
-#' @noRd
+#' @keywords internal
 
 
 localSend <-
@@ -3089,7 +3089,7 @@ localSend <-
 #' @import centipede
 #' @return
 #' List of sql statements
-#' @noRd
+#' @keywords internal
 
 parseSQL <-
         function(sql_statement) {
@@ -3111,7 +3111,7 @@ parseSQL <-
 #' @param file File to write to.
 #' @param ... Additional arguments passed to the readr::write_lines function
 #' @importFrom readr write_lines
-#' @noRd
+#' @keywords internal
 
 saveSQL <-
         function(sql_statement,
@@ -3146,7 +3146,7 @@ saveSQL <-
 #' @description Construct the SELECT {fields} FROM {schema}.{table} base query. The SQL Statement is not terminated for the addition of other parameters generated using "construct" functions.
 #' @param distinct if TRUE, the DISTINCT fields will be selected for.
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 draftBase <-
     function(fields = "*",
@@ -3180,7 +3180,7 @@ draftBase <-
 #' @description This is a non-terminal render, meaning that the SQL component will not be terminated with a semicolon in order to construct complex SQL queries.
 #' @import SqlRender
 #' @param vector vector of values that the SQL query is filtering for
-#' @noRd
+#' @keywords internal
 
 
 draftIn <-
@@ -3199,7 +3199,7 @@ draftIn <-
 #' Construct a join part of a SQL Statement
 #' @description Construct {join type} JOIN {schema.table.column2} ON {schema.table.column2} = {schema.table.column1} part of the sql statement
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 draftJoin <-
     function(schema,
@@ -3228,7 +3228,7 @@ draftJoin <-
 #' @description This is a non-terminal render, meaning that the SQL component will not be terminated with a semicolon in order to construct complex SQL queries.
 #' @import SqlRender
 #' @param n rows to limit to
-#' @noRd
+#' @keywords internal
 
 
 draftLimit <-
@@ -3244,7 +3244,7 @@ draftLimit <-
 #' Construct ORDER BY RANDOM()
 #' @param n Row number desired in the output
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 
 draftRandom <-
@@ -3258,7 +3258,7 @@ draftRandom <-
 
 #' Construct schemaTableName
 #' @description construct schemaTableName from the schema and tableName
-#' @noRd
+#' @keywords internal
 
 draftTablePath <-
         function(schema,
@@ -3275,7 +3275,7 @@ draftTablePath <-
 
 #' Construct schemaTableName
 #' @description construct schemaTableName from the schema and tableName
-#' @noRd
+#' @keywords internal
 
 table.path <-
     function(schema,
@@ -3295,7 +3295,7 @@ table.path <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
-#' @noRd
+#' @keywords internal
 
 
 draftWhereIn <-
@@ -3319,7 +3319,7 @@ draftWhereIn <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param term Character string that the field parameter is searched for.
-#' @noRd
+#' @keywords internal
 
 
 draftWhereLike <-
@@ -3339,7 +3339,7 @@ draftWhereLike <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
-#' @noRd
+#' @keywords internal
 
 
 draftWhereLowerIn <-
@@ -3362,7 +3362,7 @@ draftWhereLowerIn <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param term Character string that the field parameter is searched for.
-#' @noRd
+#' @keywords internal
 
 
 draftWhereLowerLike <-
@@ -3384,7 +3384,7 @@ draftWhereLowerLike <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
-#' @noRd
+#' @keywords internal
 
 
 draftWhereLowerNotIn <-
@@ -3408,7 +3408,7 @@ draftWhereLowerNotIn <-
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
-#' @noRd
+#' @keywords internal
 
 
 draftWhereNotIn <-
@@ -3433,7 +3433,7 @@ draftWhereNotIn <-
 #' @rdname pasteWheres
 #'
 #' @importFrom rlang list2
-#' @noRd
+#' @keywords internal
 
 pasteWheres <-
     function(...) {
@@ -3460,7 +3460,7 @@ pasteWheres <-
 #' @description
 #' Get the name of the database that the connection object is connected to.
 #'
-#' @noRd
+#' @keywords internal
 #' @rdname getConnDB
 
 getConnDB <-
@@ -3480,7 +3480,7 @@ getConnDB <-
 #' Fields for the given table are returned in lowercase.
 #'
 #' @importFrom DatabaseConnector dbListFields
-#' @noRd
+#' @keywords internal
 #'
 #' @rdname lsFields
 #' @family list functions
@@ -3532,7 +3532,7 @@ lsFields <-
 #' @param field Character string to check for in the given table.
 #'
 #' @rdname field_exists
-#' @noRd
+#' @keywords internal
 #' @family logical functions
 
 field_exists <-
@@ -3564,7 +3564,7 @@ field_exists <-
 #' @description
 #' List all the schemas in a database in lowercase.
 #'
-#' @noRd
+#' @keywords internal
 #' @family list functions
 
 lsSchema <-
@@ -3592,7 +3592,7 @@ lsSchema <-
 #' @inheritParams base_args
 #'
 #' @rdname schema_exists
-#' @noRd
+#' @keywords internal
 #' @family logical functions
 
 
@@ -3633,7 +3633,7 @@ schema_exists <-
 #'
 #' @rdname lsTables
 #'
-#' @noRd
+#' @keywords internal
 #' @family list functions
 
 lsTables <-
@@ -3679,7 +3679,7 @@ lsTables <-
 #'
 #' @rdname table_exists
 #'
-#' @noRd
+#' @keywords internal
 #' @family logical functions
 
 table_exists <-
@@ -3739,7 +3739,7 @@ NULL
 #'  \code{\link[DatabaseConnector]{createConnectionDetails}}
 #' @rdname makeLocalConnDetails
 #' @family local functions
-#' @noRd
+#' @keywords internal
 #' @importFrom DatabaseConnector createConnectionDetails
 
 makeLocalConnDetails <-
@@ -3767,7 +3767,7 @@ makeLocalConnDetails <-
 #'  \code{\link[DatabaseConnector]{connect}}
 #' @rdname localConnect
 #' @family local functions
-#' @noRd
+#' @keywords internal
 #' @importFrom DatabaseConnector connect
 
 localConnect <-
@@ -3790,7 +3790,7 @@ localConnect <-
 #' @param ... Additional arguments to pass onto the DatabaseConnector::dbGetQuery function
 #' @import DatabaseConnector
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 fileQuery <-
     function(conn,
@@ -3816,7 +3816,7 @@ fileQuery <-
 #' @param ... Additional arguments to pass onto the DatabaseConnector::dbGetQuery function
 #' @import DatabaseConnector
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 fileSend <-
     function(conn,
@@ -3843,7 +3843,7 @@ fileSend <-
 #' Query using a link to SQL file
 #' @import DatabaseConnector
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 linkQuery <-
     function(conn,
@@ -3871,7 +3871,7 @@ linkQuery <-
 #' Send a statument using a link to SQL file
 #' @import DatabaseConnector
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 linkSend <-
     function(conn,
@@ -3908,7 +3908,7 @@ linkSend <-
 
 #' Render SQL to copy a file to a table
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 renderCopy <-
     function(schema,
@@ -3929,7 +3929,7 @@ renderCopy <-
 
 #' Render SQL to Create Database
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 renderCreateDB <-
     function(schema,
@@ -3952,7 +3952,7 @@ renderCreateDB <-
 #' @description
 #' Renders a SQL statement as a string that creates a schema.
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 renderCreateSchema <-
     function(schema) {
@@ -3973,7 +3973,7 @@ renderCreateSchema <-
 #' @description Drop a schema if it exists
 #' @param cascade If TRUE, a DROP SCHEMA CASCADE is performed.
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 renderDropSchema <-
     function(schema,
@@ -4015,7 +4015,7 @@ renderDropSchema <-
 #' Render SQL to Drop a Table
 #' @description Drop a table if it exists
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 renderDropTable <-
     function(schema,
@@ -4057,7 +4057,7 @@ renderDropTable <-
 #' @seealso
 #'  \code{\link[SqlRender]{render}},\code{\link[SqlRender]{readSql}}
 #' @rdname renderGrantSchema
-#' @noRd
+#' @keywords internal
 #' @importFrom SqlRender render readSql
 
 renderGrantSchema <-
@@ -4107,7 +4107,7 @@ renderGrantSchema <-
 #' @seealso
 #'  \code{\link[SqlRender]{render}}
 #' @rdname renderInfoSchemaCols
-#' @noRd
+#' @keywords internal
 #' @importFrom SqlRender render
 
 
@@ -4133,7 +4133,7 @@ renderInfoSchemaCols <-
 #' @description
 #' Renders a SQL statement that will list all schema in a database.
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 renderLsSchema <-
     function() {
@@ -4154,7 +4154,7 @@ renderLsSchema <-
 #' Render SQL to Rename a Table
 #' @description This will rename a table within a schema, but not move the table out of a schema.
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 renderRenameDB <-
     function(schema,
@@ -4176,7 +4176,7 @@ renderRenameDB <-
 #' Render SQL to Rename a Table
 #' @description This will rename a table within a schema, but not move the table out of a schema.
 #' @import SqlRender
-#' @noRd
+#' @keywords internal
 
 renderRenameTable <-
     function(schema,
@@ -4200,7 +4200,7 @@ renderRenameTable <-
 #' @param fields Fields selected for. Defaults to "*".
 #' @param distinct If TRUE, the distinct row count will be returned.
 #' @param schema If NULL, defaults to "public"
-#' @noRd
+#' @keywords internal
 
 renderRowCount <-
     function(fields = "*",
@@ -4294,7 +4294,7 @@ renderRowCount <-
 
 
 
-#' @noRd
+#' @keywords internal
 
 reservedWords <-
         function() {
@@ -4304,7 +4304,7 @@ reservedWords <-
 #' @title
 #' Is a string a reserve word?
 #'
-#' @noRd
+#' @keywords internal
 
 isReserved <-
         function(...) {
@@ -4324,7 +4324,7 @@ isReserved <-
 #' Drop a Postgres schema
 #' @description Drop a schema if it exists.
 #' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
-#' @noRd
+#' @keywords internal
 
 dropSchema <-
     function(conn,
@@ -4351,7 +4351,7 @@ dropSchema <-
 #' Drop a Postgres schema
 #' @description Drop a schema if it exists.
 #' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
-#' @noRd
+#' @keywords internal
 
 dropCascade <-
         function(conn,
@@ -4382,7 +4382,7 @@ dropCascade <-
 #' @param group PARAM_DESCRIPTION, Default: NULL
 #' @return OUTPUT_DESCRIPTION
 #' @rdname grantSchema
-#' @noRd
+#' @keywords internal
 
 grantSchema <-
         function(conn,
@@ -4444,7 +4444,7 @@ dataTypeInfo <-
 #' Drop a Postgres schema
 #' @description Drop a schema if it exists.
 #' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
-#' @noRd
+#' @keywords internal
 
 dropCascade <-
         function(conn,
@@ -4464,7 +4464,7 @@ dropCascade <-
 #' Drop a Postgres schema
 #' @description Drop a schema if it exists.
 #' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
-#' @noRd
+#' @keywords internal
 
 dropIfExists <-
         function(conn,
@@ -4482,7 +4482,7 @@ dropIfExists <-
 
 
 #' Create a Schema
-#' @noRd
+#' @keywords internal
 
 createSchema <-
         function(conn,
@@ -4518,7 +4518,7 @@ createSchema <-
 #'
 #' @rdname summarizeSchema
 #'
-#' @noRd
+#' @keywords internal
 #'
 #' @importFrom purrr map
 #' @importFrom tibble as_tibble_col
@@ -4608,7 +4608,7 @@ summarizeSchema <-
 #' @param sql_statement SQL to send
 #' @param ... Additional arguments to pass onto the DatabaseConnector::dbSendStatement function
 #' @import DatabaseConnector
-#' @noRd
+#' @keywords internal
 
 send <-
     function(conn,
@@ -4645,7 +4645,7 @@ send <-
     }
 
 #' Send Function Factor
-#' @noRd
+#' @keywords internal
 
 send_ff <-
     function(
@@ -4692,7 +4692,7 @@ send_ff <-
 #' @param skipErrors If TRUE, if a SQL execution returns an error, the statement is printed back in red in the console and the iteration will proceed to the next sql statement in line.
 #' @param errorFile (optional) path to the error file where any errors are written to if not null.
 #' @param ... Additional arguments to pass onto the DatabaseConnector::dbGetQuery function
-#' @noRd
+#' @keywords internal
 
 sendList <-
     function(conn,
@@ -4788,7 +4788,7 @@ sendList <-
 #'  \code{\link[tidyr]{pivot_wider}}
 #'  \code{\link[secretary]{typewrite_bold}}
 #' @rdname summarizeDB
-#' @noRd
+#' @keywords internal
 #' @importFrom purrr map
 #' @importFrom dplyr bind_rows select distinct mutate everything
 #' @importFrom progress progress_bar
@@ -4923,7 +4923,7 @@ summarizeDB <-
 #'
 #' @importFrom DatabaseConnector dbAppendTable
 #'
-#' @noRd
+#' @keywords internal
 
 
 appendTable <-
@@ -4989,7 +4989,7 @@ appendTable <-
 #'
 #' @rdname writeTable
 #'
-#' @noRd
+#' @keywords internal
 
 
 writeTable <-
@@ -5058,7 +5058,7 @@ writeTable <-
 #' @param           ...         Additional arguments passed to `DatabaseConnector::dbSendStatement()`
 #'
 #' @rdname dropTable
-#' @noRd
+#' @keywords internal
 
 dropTable <-
     function(conn,
@@ -5124,7 +5124,7 @@ dropTable <-
 #' @description
 #' A Staging Table is one that is dropped on exit in the parent frame from which the function is being called.
 #'
-#' @noRd
+#' @keywords internal
 #' @rdname writeStagingTable
 
 writeStagingTable <-
@@ -5173,7 +5173,7 @@ writeStagingTable <-
 #'
 #' @inheritParams base_args
 #'
-#' @noRd
+#' @keywords internal
 
 
 readTable <-
@@ -5235,7 +5235,7 @@ readTable <-
 #' @family table functions
 #' @example inst/example/table.R
 #'
-#' @noRd
+#' @keywords internal
 
 
 searchTable <-
@@ -5360,7 +5360,7 @@ searchTable <-
 #' @name %>%
 #' @rdname pipe
 #' @keywords internal
-#' @noRd
+#' @keywords internal
 #' @importFrom magrittr %>%
 #' @usage lhs \%>\% rhs
 NULL
@@ -5372,7 +5372,7 @@ NULL
 #' @name sQuo
 #' @rdname sQuo
 #' @keywords internal
-#' @noRd
+#' @keywords internal
 
 sQuo <-
         function(vector) {
@@ -5389,7 +5389,7 @@ sQuo <-
 #'
 #' @importFrom stringr str_replace_all
 #'
-#' @noRd
+#' @keywords internal
 
 affix_date <-
         function(string) {
@@ -5400,7 +5400,7 @@ affix_date <-
 #' Typewrite SQL
 #' @importFrom secretary typewrite greenTxt
 #' @importFrom stringr str_replace_all
-#' @noRd
+#' @keywords internal
 
 typewrite_sql <-
         function (sql_statement)
@@ -5414,7 +5414,7 @@ typewrite_sql <-
 #' Typewrite Activity
 #' @importFrom secretary typewrite greenTxt
 #' @importFrom stringr str_replace_all
-#' @noRd
+#' @keywords internal
 
 typewrite_activity <-
         function (activity)
@@ -5431,7 +5431,7 @@ typewrite_activity <-
 #' @param instSubdir Name of subdirectory in the inst/ folder
 #' @param FileName Name of file in subdirectory
 #' @param package Package name
-#' @noRd
+#' @keywords internal
 
 
 sourceFilePath <-
@@ -5450,7 +5450,7 @@ sourceFilePath <-
 
 
 
-#' @noRd
+#' @keywords internal
 
 readView <-
         function(conn,
@@ -5466,7 +5466,7 @@ readView <-
 
         }
 
-#' @noRd
+#' @keywords internal
 
 refreshMatView <-
         function(conn,
@@ -5486,4 +5486,224 @@ refreshMatView <-
 
 
 
+#' Build a SQL Query
+#' @description A SQL query is built using the given arguments. Currently, only 1 whereIn and whereNot in parameters can be set.
+#' @return SQL statement as a character string.
+#' @import purrr
+#' @import stringr
+#' @keywords internal
 
+buildQuery <-
+    function(fields = "*",
+             distinct = FALSE,
+             schema,
+             tableName,
+             whereInField = NULL,
+             whereInVector = NULL,
+             whereNotInField = NULL,
+             whereNotInVector = NULL,
+             caseInsensitive = TRUE,
+             n = NULL,
+             n_type = c("limit", "random")) {
+
+        ######
+        # QA to make sure all whereIn and n  arguments have been supplied in pairs
+        #####
+        whereIns <- list(whereInField, whereInVector) %>%
+            purrr::set_names(c("field", "vector")) %>%
+            purrr::keep(~!is.null(.))
+        whereNotIns <- list(whereNotInField, whereNotInVector) %>%
+            purrr::set_names(c("field", "vector")) %>%
+            purrr::keep(~!is.null(.))
+
+
+        list(whereIns, whereNotIns) %>%
+            purrr::map2(list("whereIn", "whereNotIn"),
+                        function(x,y) if (!(length(x) %in% c(0,2))) {stop('both "', y, '" arguments must be supplied')})
+
+        ######
+        # QA to make sure all n arugments have been supplied
+        #####
+
+        if (length(n) == 1 & length(n_type) != 1) {
+
+            n_type <- "limit"
+
+            warning('"n_type" set to "limit"')
+
+        }
+
+        #####
+        # Start
+        #####
+        sql_construct  <- constructBase(fields = fields,
+                                        distinct = distinct,
+                                        schema = schema,
+                                        tableName = tableName)
+
+
+        if (caseInsensitive) {
+
+
+            # If WhereIn arguments are not null include it in build
+            if (length(whereIns) == 2) {
+
+                sql_construct <-
+                    paste(sql_construct,
+                          constructWhereLowerIn(field = whereIns$field,
+                                                vector = tolower(whereIns$vector)),
+                          collapse = " ")
+
+                # If WhereNotIn arguments are supplied on top of the WhereIn, add them to the query by modifying the constructWhereNotIn output by replacing the second "WHERE" with "AND"
+                if (length(whereNotIns) == 2) {
+
+
+                    sql_construct <-
+                        paste(sql_construct,
+                              "AND",
+                              constructWhereLowerNotIn(field = whereNotIns$field,
+                                                       vector = tolower(whereNotIns$vector)) %>%
+                                  stringr::str_remove_all("WHERE") %>%
+                                  trimws(),
+                              collapse = " ")
+
+
+                }
+
+            } else {
+
+                # Building a query if only whereNotIn arguments were supplied
+                if (length(whereNotIns) == 2) {
+
+
+                    sql_construct <-
+                        paste(sql_construct,
+                              constructWhereLowerNotIn(field = whereNotIns$field,
+                                                       vector = tolower(whereNotIns$vector)),
+                              collapse = " ")
+
+
+                }
+
+
+
+            }
+
+            # If n arguments are not null include it in build, as either a limit or random sample of size n
+            if (!is.null(n)) {
+
+                if (n_type == "limit") {
+
+                    sql_construct <-
+                        paste(sql_construct,
+                              constructLimit(n = n),
+                              collapse = " ")
+
+                } else if (n_type == "random") {
+
+                    sql_construct <-
+                        paste(sql_construct,
+                              constructRandom(n = n),
+                              collapse = " ")
+
+                } else {
+
+                    warning('"n_type" not recognized and "n" removed from build')
+
+
+                }
+
+            }
+
+
+
+
+
+
+
+
+
+        } else {
+
+
+
+            # If WhereIn arguments are not null include it in build
+            if (length(whereIns) == 2) {
+
+                sql_construct <-
+                    paste(sql_construct,
+                          constructWhereIn(field = whereIns$field,
+                                           vector = whereIns$vector),
+                          collapse = " ")
+
+                # If WhereNotIn arguments are supplied on top of the WhereIn, add them to the query by modifying the constructWhereNotIn output by replacing the second "WHERE" with "AND"
+                if (length(whereNotIns) == 2) {
+
+
+                    sql_construct <-
+                        paste(sql_construct,
+                              "AND",
+                              constructWhereNotIn(field = whereNotIns$field,
+                                                  vector = whereNotIns$vector) %>%
+                                  stringr::str_remove_all("WHERE") %>%
+                                  trimws(),
+                              collapse = " ")
+
+
+                }
+
+            } else {
+
+                # Building a query if only whereNotIn arguments were supplied
+                if (length(whereNotIns) == 2) {
+
+
+                    sql_construct <-
+                        paste(sql_construct,
+                              constructWhereNotIn(field = whereNotIns$field,
+                                                  vector = whereNotIns$vector),
+                              collapse = " ")
+
+
+                }
+
+
+
+            }
+
+            # If n arguments are not null include it in build, as either a limit or random sample of size n
+            if (!is.null(n)) {
+
+                if (n_type == "limit") {
+
+                    sql_construct <-
+                        paste(sql_construct,
+                              constructLimit(n = n),
+                              collapse = " ")
+
+                } else if (n_type == "random") {
+
+                    sql_construct <-
+                        paste(sql_construct,
+                              constructRandom(n = n),
+                              collapse = " ")
+
+                } else {
+
+                    warning('"n_type" not recognized and "n" removed from build')
+
+
+                }
+
+            }
+
+        }
+
+        #Add a semicolon to finish the query
+        sql_construct %>%
+            stringr::str_replace_all(pattern = "[\n]{2,}",
+                                     replacement = "\n") %>%
+            terminateBuild()
+
+
+    }

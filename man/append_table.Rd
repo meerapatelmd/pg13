@@ -35,6 +35,8 @@ Like the writeTable function, this function is a wrapper around a DatabaseConnec
 }
 \seealso{
 Other table functions: 
+\code{\link{appendTable}()},
+\code{\link{searchTable}()},
 \code{\link{search_table}()}
 }
 \concept{table functions}

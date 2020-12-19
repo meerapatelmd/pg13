@@ -3,6 +3,7 @@
 #' @param distinct if TRUE, the DISTINCT fields will be selected for.
 #' @import SqlRender
 #' @export
+#' @rdname draft_base
 
 draft_base <-
     function(fields = "*",
@@ -37,6 +38,7 @@ draft_base <-
 #' @import SqlRender
 #' @param vector vector of values that the SQL query is filtering for
 #' @export
+#' @rdname draft_in
 
 
 draft_in <-
@@ -56,6 +58,7 @@ draft_in <-
 #' @description Construct {join type} JOIN {schema.table.column2} ON {schema.table.column2} = {schema.table.column1} part of the sql statement
 #' @import SqlRender
 #' @export
+#' @rdname draft_join
 
 draft_join <-
     function(schema,
@@ -85,6 +88,7 @@ draft_join <-
 #' @import SqlRender
 #' @param n rows to limit to
 #' @export
+#' @rdname draft_limit
 
 
 draft_limit <-

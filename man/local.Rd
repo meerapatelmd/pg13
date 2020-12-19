@@ -31,11 +31,15 @@ This function combines the process of creating a connectionDetails object and ma
 
 \seealso{
 Other local functions: 
+\code{\link{localConnect}()},
 \code{\link{local_connect}()},
+\code{\link{makeLocalConnDetails}()},
 \code{\link{make_local_conn_details}()}
 
 Other local functions: 
+\code{\link{localConnect}()},
 \code{\link{local_connect}()},
+\code{\link{makeLocalConnDetails}()},
 \code{\link{make_local_conn_details}()}
 }
 \concept{local functions}
