@@ -189,6 +189,7 @@ send <-
                         typewrite_sql(sql_statement = sql_statement)
 
                 } else {
+
                 if (!missing(conn_fun)) {
 
                         conn <- eval(rlang::parse_expr(conn_fun))

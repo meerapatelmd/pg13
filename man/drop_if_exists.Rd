@@ -4,7 +4,16 @@
 \alias{drop_if_exists}
 \title{Drop a Postgres schema}
 \usage{
-drop_if_exists(conn, schema, ...)
+drop_if_exists(
+  conn,
+  conn_fun,
+  schema,
+  cascade = FALSE,
+  verbose = TRUE,
+  render_sql = TRUE,
+  render_only = FALSE,
+  ...
+)
 }
 \arguments{
 \item{...}{Additional arguments passed to the DatabaseConnector::dbSendStatement function}

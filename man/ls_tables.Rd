@@ -4,7 +4,7 @@
 \alias{ls_tables}
 \title{List Tables}
 \usage{
-ls_tables(conn, schema, verbose = TRUE, render_sql = TRUE)
+ls_tables(conn, conn_fun, schema, verbose = TRUE, render_sql = TRUE)
 }
 \description{
 List Tables

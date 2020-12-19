@@ -207,52 +207,6 @@ drop_table <-
 
     }
 
-#' @title
-#' Write a Table that is Dropped On Exit
-#'
-#' @description
-#' A Staging Table is one that is dropped on exit in the parent frame from which the function is being called.
-#'
-#' @export
-#' @rdname write_staging_table
-
-write_staging_table <-
-    function(conn,
-             conn_fun,
-             schema,
-             tableName,
-             data,
-             drop_existing = FALSE,
-             verbose = TRUE,
-             render_sql = TRUE,
-             ...) {
-
-            writeTable(conn = conn,
-                       conn_fun = conn_fun,
-                       schema = schema,
-                       tableName = tableName,
-                       data = data,
-                       drop_existing = drop_existing,
-                       verbose = verbose,
-                       render_sql = render_sql,
-                       ... = ...)
-
-
-            do.call(what = on.exit,
-                    args = list(substitute(dropTable(conn = conn,
-                                         conn_fun = conn_fun,
-                                         schema = schema,
-                                         tableName = tableName,
-                                         if_exists = TRUE,
-                                         verbose = verbose,
-                                         render_sql = render_sql)),
-                                add = TRUE,
-                                after = FALSE),
-                    envir = parent.frame())
-
-
-
-    }
 
 #' @title
 #' Read an Entire Table

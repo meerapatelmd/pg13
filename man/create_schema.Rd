@@ -4,7 +4,16 @@
 \alias{create_schema}
 \title{Create a Schema}
 \usage{
-create_schema(conn, schema)
+create_schema(
+  conn,
+  conn_fun,
+  schema,
+  sql_statement,
+  verbose = TRUE,
+  render_sql = TRUE,
+  render_only = FALSE,
+  ...
+)
 }
 \description{
 Create a Schema

@@ -22,6 +22,19 @@ check_conn <-
 
 
 #' @keywords internal
+#' @rdname check_conn_type
+
+check_conn_type <-
+        function(conn) {
+                if (!.hasSlot(conn, name = "jConnection")) {
+                        cli::cli_alert_danger(text = "Connection not JDBC")
+                } else {
+                        cli::cli_alert_success(text = "JDBC connection")
+                }
+        }
+
+
+#' @keywords internal
 #' @rdname check_data_rows
 
 check_data_rows <-

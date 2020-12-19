@@ -31,7 +31,7 @@ ls_fields <-
 
             }
 
-            resultset <- database_connector::db_list_fields(conn = conn,
+            resultset <- DatabaseConnector::dbListFields(conn = conn,
                                                         name = tableName,
                                                         schema = schema)
 
@@ -95,12 +95,14 @@ field_exists <-
 ls_schema <-
         function(conn,
                  verbose = TRUE,
-                 render_sql = TRUE) {
+                 render_sql = TRUE,
+                 render_only = FALSE) {
 
                 query(conn = conn,
                       sql_statement = "SELECT nspname FROM pg_catalog.pg_namespace;",
                       verbose = verbose,
-                      render_sql = render_sql) %>%
+                      render_sql = render_sql,
+                      render_only = render_only) %>%
                 unlist() %>%
                 unname() %>%
                 tolower()
@@ -127,7 +129,7 @@ schema_exists <-
 
 
                     schemas <-
-                        lsSchema(conn = conn,
+                        ls_schema(conn = conn,
                                  verbose = FALSE,
                                  render_sql = FALSE)
 
@@ -163,9 +165,18 @@ schema_exists <-
 
 ls_tables <-
     function(conn,
+             conn_fun,
              schema,
              verbose = TRUE,
              render_sql = TRUE) {
+
+
+            if (!missing(conn_fun)) {
+
+                conn <- eval(rlang::parse_expr(conn_fun))
+                on.exit(dc(conn = conn))
+
+            }
 
 
             if (render_sql) {
@@ -182,7 +193,7 @@ ls_tables <-
             }
 
 
-            resultset <- database_connector::db_list_tables(conn = conn,
+            resultset <- DatabaseConnector::dbListTables(conn = conn,
                                                         schema = schema)
 
             if (verbose) {

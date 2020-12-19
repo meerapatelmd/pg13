@@ -4,15 +4,20 @@
 \alias{drop_cascade}
 \title{Drop a Postgres schema}
 \usage{
-drop_cascade(conn, schema, ...)
-
-drop_cascade(conn, schema, ...)
+drop_cascade(
+  conn,
+  conn_fun,
+  schema,
+  if_exists = TRUE,
+  verbose = TRUE,
+  render_sql = TRUE,
+  render_only = FALSE,
+  ...
+)
 }
 \arguments{
 \item{...}{Additional arguments passed to the DatabaseConnector::dbSendStatement function}
 }
 \description{
-Drop a schema if it exists.
-
 Drop a schema if it exists.
 }

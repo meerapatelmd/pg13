@@ -5,21 +5,52 @@
 
 drop_schema <-
     function(conn,
+             conn_fun,
              schema,
              cascade = FALSE,
              if_exists = TRUE,
+             verbose = TRUE,
+             render_sql = TRUE,
+             render_only = FALSE,
              ...) {
 
 
-            .Deprecated("dropCascade")
+            if (if_exists) {
+
+                if_exists_clause <- "IF EXISTS"
+
+            } else {
+
+                if_exists_clause <- NULL
+
+            }
 
 
-            sql_statement <- render_drop_schema(schema = schema,
-                                               cascade = cascade,
-                                              if_exists = if_exists)
+            if (cascade) {
+
+                cascade_clause <- "CASCADE"
+
+            } else {
+
+                cascade_clause <- NULL
+
+            }
+
+
+            sql_statement <-
+            SqlRender::render(
+                "DROP SCHEMA @if_exists_clause @schema @cascade_clause;",
+                schema = schema,
+                if_exists_clause = if_exists_clause,
+                cascade_clause = cascade_clause
+            )
 
             send(conn = conn,
-                   sql_statement = sql_statement,
+                 conn_fun = conn_fun,
+                 sql_statement = sql_statement,
+                 verbose = verbose,
+                 render_sql = render_sql,
+                 render_only = render_only,
                    ...)
 
     }
@@ -32,22 +63,27 @@ drop_schema <-
 
 drop_cascade <-
         function(conn,
+                 conn_fun,
                  schema,
+                 if_exists = TRUE,
+                 verbose = TRUE,
+                 render_sql = TRUE,
+                 render_only = FALSE,
                  ...) {
 
-
-                sql_statement <- sql_render::render("drop schema @schema cascade;", schema = schema)
-
-                send(conn = conn,
-                     sql_statement = sql_statement,
-                     ...)
+            drop_schema(
+                conn = conn,
+                conn_fun = conn_fun,
+                schema = schema,
+                cascade = TRUE,
+                if_exists = if_exists,
+                verbose = verbose,
+                render_sql = render_sql,
+                render_only = render_only,
+                ...
+            )
 
         }
-
-
-
-
-
 
 #' @title
 #' Grant All Privileges to a Schema
@@ -84,15 +120,18 @@ grant_schema <-
 
 
 
+#' @export
 
-
-
-
-data_type_info <-
+table_data_type_info <-
         function(conn,
-                 schema,
+                 conn_fun,
                  tableName,
-                 render_sql = TRUE) {
+                 sql_statement,
+                 verbose = TRUE,
+                 render_sql = TRUE,
+                 warn_no_rows = TRUE,
+                 render_only = FALSE,
+                 ...) {
 
 
                 sql_statement <-
@@ -107,35 +146,17 @@ data_type_info <-
                                 tableName = tableName
                         )
 
-                query(
-                        conn = conn,
-                        sql_statement = sql_statement,
-                        render_sql = render_sql)
+                query(conn = conn,
+                      conn_fun = conn_fun,
+                      sql_statement = sql_statement,
+                      verbose = verbose,
+                      render_sql = render_sql,
+                      warn_no_rows = warn_no_rows,
+                      render_only = render_only,
+                      ... )
 
         }
 
-
-
-
-
-#' Drop a Postgres schema
-#' @description Drop a schema if it exists.
-#' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
-#' @export
-
-drop_cascade <-
-        function(conn,
-                 schema,
-                 ...) {
-
-
-                sql_statement <- sql_render::render("drop schema @schema cascade;", schema = schema)
-
-                send(conn = conn,
-                     sql_statement = sql_statement,
-                     ...)
-
-        }
 
 
 #' Drop a Postgres schema
@@ -145,15 +166,26 @@ drop_cascade <-
 
 drop_if_exists <-
         function(conn,
+                 conn_fun,
                  schema,
+                 cascade = FALSE,
+                 verbose = TRUE,
+                 render_sql = TRUE,
+                 render_only = FALSE,
                  ...) {
 
 
-                sql_statement <- sql_render::render("drop schema if exists @schema;", schema = schema)
-
-                send(conn = conn,
-                     sql_statement = sql_statement,
-                     ...)
+            drop_schema(
+                conn = conn,
+                conn_fun = conn_fun,
+                schema = schema,
+                cascade = cascade,
+                if_exists = TRUE,
+                verbose = verbose,
+                render_sql = render_sql,
+                render_only = render_only,
+                ...
+            )
 
         }
 
@@ -163,13 +195,25 @@ drop_if_exists <-
 
 create_schema <-
         function(conn,
-                 schema) {
+                 conn_fun,
+                 schema,
+                 sql_statement,
+                 verbose = TRUE,
+                 render_sql = TRUE,
+                 render_only = FALSE,
+                 ...) {
 
                 send(conn = conn,
+                     conn_fun = conn_fun,
+                     verbose = verbose,
+                     render_sql = render_sql,
+                     render_only = render_only,
+                     sql_statement =
                      SqlRender::render(
                              "CREATE SCHEMA @schema;",
                              schema = schema
-                     ))
+                     ),
+                     ...)
         }
 
 
