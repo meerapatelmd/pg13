@@ -1,4 +1,4 @@
 ## ----setup--------------------------------------------------------------------
 library(htmltools)
-includeHTML(path = "rmd/search-table.nb.html")
+includeHTML(path = "rmd/exact-string-match.nb.html")
 

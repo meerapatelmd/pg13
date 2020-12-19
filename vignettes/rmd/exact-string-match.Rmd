@@ -1,5 +1,5 @@
 ---
-title: "Search a Table for a Value"
+title: "Exact String Match"
 output:
   html_document:
     df_print: paged
@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Search for an Exact String Match  
 
 ```{r setup}
 library(pg13)
