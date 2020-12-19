@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Construct a base SQL query — constructBase • pg13</title>
+<title>Create a Table with a Dataframe — createTableFromDF • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Construct a base SQL query — constructBase" />
-<meta property="og:description" content="Construct the SELECT fields FROM schema.table base query. The SQL Statement is not terminated for the addition of other parameters generated using &quot;construct&quot; functions." />
+<meta property="og:title" content="Create a Table with a Dataframe — createTableFromDF" />
+<meta property="og:description" content="Derive DDL using the data classes of each field in a dataframe. The map between the R data classes and the Postgresql data types can be found at renderCreateTableFromDF. The dataframe can then be appended to the table using appendTable. This method is favorable to a direct call to writeTable because in some cases, future appends to the table may not adhere to the data definitions created at the time of writing. For example, writeTable defaults to VARCHAR(255) for all character classes whereas future appends may contain text greater than 255 characters, resulting in error. This function rolls all character classes to TEXT data types instead." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,25 +119,26 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Construct a base SQL query</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/deprec.R'><code>R/deprec.R</code></a></small>
-    <div class="hidden name"><code>constructBase.Rd</code></div>
+    <h1>Create a Table with a Dataframe</h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/createTable.R'><code>R/createTable.R</code></a></small>
+    <div class="hidden name"><code>createTableFromDF.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Construct the SELECT fields FROM schema.table base query. The SQL Statement is not terminated for the addition of other parameters generated using "construct" functions.</p>
+    <p>Derive DDL using the data classes of each field in a dataframe. The map between the R data classes and the Postgresql data types can be found at <code>renderCreateTableFromDF</code>. The dataframe can then be appended to the table using <code><a href='appendTable.html'>appendTable</a></code>. This method is favorable to a direct call to <code><a href='writeTable.html'>writeTable</a></code> because in some cases, future appends to the table may not adhere to the data definitions created at the time of writing. For example, <code><a href='writeTable.html'>writeTable</a></code> defaults to <code>VARCHAR(255)</code> for all character classes whereas future appends may contain text greater than 255 characters, resulting in error. This function rolls all character classes to <code>TEXT</code> data types instead.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>constructBase</span><span class='op'>(</span>fields <span class='op'>=</span> <span class='st'>"*"</span>, distinct <span class='op'>=</span> <span class='cn'>FALSE</span>, schema <span class='op'>=</span> <span class='st'>"public"</span>, <span class='va'>tableName</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>createTableFromDF</span><span class='op'>(</span>
+  <span class='va'>conn</span>,
+  <span class='va'>conn_fun</span>,
+  <span class='va'>schema</span>,
+  <span class='va'>tableName</span>,
+  if_not_exists <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>data</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  render_sql <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>distinct</th>
-      <td><p>if TRUE, the DISTINCT fields will be selected for.</p></td>
-    </tr>
-    </table>
 
 
   </div>
