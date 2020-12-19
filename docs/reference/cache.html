@@ -47,7 +47,8 @@
 
 
 <meta property="og:title" content="Cache a Resultset — cache" />
-<meta property="og:description" content="Cache a resultset with the SQL Statement as the key to a &quot;fantasia&quot; cache directory using a wrapper around the saveCache function." />
+<meta property="og:description" content="Cache a resultset with the SQL Statement as the key to a &quot;fantasia&quot; cache directory using a wrapper around the saveCache function.
+Cache a resultset with the SQL Statement as the key to a &quot;fantasia&quot; cache directory using a wrapper around the saveCache function." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -135,15 +136,18 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Cache a Resultset</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/cache.R'><code>R/cache.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/cache.R'><code>R/cache.R</code></a>, <a href='https://github.com/meerapatelmd/pg13/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a></small>
     <div class="hidden name"><code>cache.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Cache a resultset with the SQL Statement as the key to a "fantasia" cache directory using a wrapper around the <code><a href='https://rdrr.io/pkg/R.cache/man/saveCache.html'>saveCache</a></code> function.</p>
+<p>Cache a resultset with the SQL Statement as the key to a "fantasia" cache directory using a wrapper around the <code><a href='https://rdrr.io/pkg/R.cache/man/saveCache.html'>saveCache</a></code> function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cache</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>sql_statement</span>, <span class='va'>dirs</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>cache</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>sql_statement</span>, <span class='va'>dirs</span><span class='op'>)</span>
+
+<span class='fu'>cache</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>sql_statement</span>, <span class='va'>dirs</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,9 +169,14 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Invisibly returns the path to the cache file.</p>
+<p>Invisibly returns the path to the cache file.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other cache functions: 
+<code><a href='loadCache.html'>loadCache</a>()</code>,
+<code><a href='load_cache.html'>load_cache</a>()</code></p>
+<p>Other cache functions: 
+<code><a href='loadCache.html'>loadCache</a>()</code>,
 <code><a href='load_cache.html'>load_cache</a>()</code></p></div>
 
   </div>

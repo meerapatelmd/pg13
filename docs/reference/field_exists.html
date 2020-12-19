@@ -47,7 +47,8 @@
 
 
 <meta property="og:title" content="Does a field exist? — field_exists" />
-<meta property="og:description" content="Logical that checks if a field exists in a table. The field argument is formatted into lowercase prior to being checked." />
+<meta property="og:description" content="Logical that checks if a field exists in a table. The field argument is formatted into lowercase prior to being checked.
+Logical that checks if a field exists in a table. The field argument is formatted into lowercase prior to being checked." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -135,15 +136,18 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Does a field exist?</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/list.R'><code>R/list.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a>, <a href='https://github.com/meerapatelmd/pg13/blob/master/R/list.R'><code>R/list.R</code></a></small>
     <div class="hidden name"><code>field_exists.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Logical that checks if a field exists in a table. The <code>field</code> argument is formatted into lowercase prior to being checked.</p>
+<p>Logical that checks if a field exists in a table. The <code>field</code> argument is formatted into lowercase prior to being checked.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>field_exists</span><span class='op'>(</span><span class='va'>conn</span>, <span class='va'>schema</span>, <span class='va'>tableName</span>, <span class='va'>field</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>field_exists</span><span class='op'>(</span><span class='va'>conn</span>, <span class='va'>schema</span>, <span class='va'>tableName</span>, <span class='va'>field</span><span class='op'>)</span>
+
+<span class='fu'>field_exists</span><span class='op'>(</span><span class='va'>conn</span>, <span class='va'>schema</span>, <span class='va'>tableName</span>, <span class='va'>field</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -169,6 +173,9 @@
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other logical functions: 
+<code><a href='schema_exists.html'>schema_exists</a>()</code>,
+<code><a href='table_exists.html'>table_exists</a>()</code></p>
+<p>Other logical functions: 
 <code><a href='schema_exists.html'>schema_exists</a>()</code>,
 <code><a href='table_exists.html'>table_exists</a>()</code></p></div>
 

@@ -47,7 +47,8 @@
 
 
 <meta property="og:title" content="Draft SQL to Create a Table — draft_create_table" />
-<meta property="og:description" content="Draft a SQL that creates a table using DDL derived from a dataframe. Drafting is stopped if the given tablename or fields in the dataframe are a SQL reserve word." />
+<meta property="og:description" content="Draft a SQL that creates a table using DDL derived from a dataframe. Drafting is stopped if the given tablename or fields in the dataframe are a SQL reserve word.
+Draft a SQL that creates a table using DDL derived from a dataframe. Drafting is stopped if the given tablename or fields in the dataframe are a SQL reserve word." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -135,15 +136,28 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Draft SQL to Create a Table</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/createTable.R'><code>R/createTable.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/createTable.R'><code>R/createTable.R</code></a>, <a href='https://github.com/meerapatelmd/pg13/blob/master/R/create_table.R'><code>R/create_table.R</code></a></small>
     <div class="hidden name"><code>create_table.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Draft a SQL that creates a table using DDL derived from a dataframe. Drafting is stopped if the given tablename or fields in the dataframe are a SQL reserve word.</p>
+<p>Draft a SQL that creates a table using DDL derived from a dataframe. Drafting is stopped if the given tablename or fields in the dataframe are a SQL reserve word.</p>
     </div>
 
     <pre class="usage"><span class='fu'>draft_create_table</span><span class='op'>(</span><span class='va'>schema</span>, <span class='va'>tableName</span>, if_not_exists <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='fu'>create_table</span><span class='op'>(</span>
+  <span class='va'>conn</span>,
+  <span class='va'>schema</span>,
+  <span class='va'>tableName</span>,
+  if_not_exists <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  render_sql <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+
+<span class='fu'>draft_create_table</span><span class='op'>(</span><span class='va'>schema</span>, <span class='va'>tableName</span>, if_not_exists <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='fu'>create_table</span><span class='op'>(</span>
   <span class='va'>conn</span>,
@@ -167,6 +181,11 @@
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rlang.r-lib.org/reference/list2.html'>list2</a></code>
+<code><a href='https://ohdsi.github.io/SqlRender/reference/render.html'>render</a></code></p>
+<p><code><a href='https://rlang.r-lib.org/reference/list2.html'>list2</a></code>
+<code><a href='https://ohdsi.github.io/SqlRender/reference/render.html'>render</a></code>
+<code><a href='send.html'>send</a></code></p>
+<p><code><a href='https://rlang.r-lib.org/reference/list2.html'>list2</a></code>
 <code><a href='https://ohdsi.github.io/SqlRender/reference/render.html'>render</a></code></p>
 <p><code><a href='https://rlang.r-lib.org/reference/list2.html'>list2</a></code>
 <code><a href='https://ohdsi.github.io/SqlRender/reference/render.html'>render</a></code>

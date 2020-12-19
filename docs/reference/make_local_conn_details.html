@@ -167,15 +167,17 @@ Connect and disconnect to a local Postgres database that does not require creden
 
     
 
-<p>This function returns a connectionDetails class object for functions that make the database connection within its caller environment, such as those belonging to the OHDSI Feature Extraction package. A connection can be made by passing the connectionDetails class object to the <code><a href='https://ohdsi.github.io/DatabaseConnector/reference/connect.html'>connect</a></code>. This process can be simplified into a single function call with <code>localConnect</code>, which performs both operations but will not return a connectionDetails object if it is desired as a return value.</p>
+<p>This function returns a connectionDetails class object for functions that make the database connection within its caller environment, such as those belonging to the OHDSI Feature Extraction package. A connection can be made by passing the connectionDetails class object to the <code><a href='https://ohdsi.github.io/DatabaseConnector/reference/connect.html'>connect</a></code>. This process can be simplified into a single function call with <code><a href='localConnect.html'>localConnect</a></code>, which performs both operations but will not return a connectionDetails object if it is desired as a return value.</p>
 
-<p>This function returns a connectionDetails class object for functions that make the database connection within its caller environment, such as those belonging to the OHDSI Feature Extraction package. A connection can be made by passing the connectionDetails class object to the <code><a href='https://ohdsi.github.io/DatabaseConnector/reference/connect.html'>connect</a></code>. This process can be simplified into a single function call with <code>localConnect</code>, which performs both operations but will not return a connectionDetails object if it is desired as a return value.</p>
+<p>This function returns a connectionDetails class object for functions that make the database connection within its caller environment, such as those belonging to the OHDSI Feature Extraction package. A connection can be made by passing the connectionDetails class object to the <code><a href='https://ohdsi.github.io/DatabaseConnector/reference/connect.html'>connect</a></code>. This process can be simplified into a single function call with <code><a href='localConnect.html'>localConnect</a></code>, which performs both operations but will not return a connectionDetails object if it is desired as a return value.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://ohdsi.github.io/DatabaseConnector/reference/createConnectionDetails.html'>createConnectionDetails</a></code></p>
 <p>Other local functions: 
+<code><a href='localConnect.html'>localConnect</a>()</code>,
 <code><a href='local_connect.html'>local_connect</a>()</code>,
-<code><a href='local.html'>local</a>()</code></p></div>
+<code><a href='local.html'>local</a>()</code>,
+<code><a href='makeLocalConnDetails.html'>makeLocalConnDetails</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
