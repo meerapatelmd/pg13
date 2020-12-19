@@ -20,9 +20,6 @@ List Tables
 }
 \seealso{
 Other list functions: 
-\code{\link{lsFields}()},
-\code{\link{lsSchema}()},
-\code{\link{lsTables}()},
 \code{\link{ls_fields}()},
 \code{\link{ls_schema}()}
 }

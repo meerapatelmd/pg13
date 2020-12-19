@@ -11,9 +11,6 @@ Fields for the given table are returned in lowercase.
 }
 \seealso{
 Other list functions: 
-\code{\link{lsFields}()},
-\code{\link{lsSchema}()},
-\code{\link{lsTables}()},
 \code{\link{ls_schema}()},
 \code{\link{ls_tables}()}
 }
