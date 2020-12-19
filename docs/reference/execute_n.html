@@ -135,7 +135,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Query with more than 1 SQL Statements</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/query.R'><code>R/query.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/sql.R'><code>R/sql.R</code></a></small>
     <div class="hidden name"><code>execute_n.Rd</code></div>
     </div>
 
@@ -145,9 +145,11 @@
 
     <pre class="usage"><span class='fu'>execute_n</span><span class='op'>(</span>
   <span class='va'>conn</span>,
+  <span class='va'>conn_fun</span>,
   <span class='va'>sql_statements</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
   render_sql <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  render_only <span class='op'>=</span> <span class='cn'>FALSE</span>,
   profile <span class='op'>=</span> <span class='cn'>FALSE</span>,
   progressBar <span class='op'>=</span> <span class='cn'>TRUE</span>,
   reportOverallTime <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -173,6 +175,10 @@
     <tr>
       <th>render_sql</th>
       <td><p>If TRUE, the SQL statement for the operation is returned in the console.</p></td>
+    </tr>
+    <tr>
+      <th>render_only</th>
+      <td><p>If TRUE, <code>sql_statement</code> is printed to the console, but the query is not run. This is an option to QA SQL if a query is throwing errors.</p></td>
     </tr>
     <tr>
       <th>profile</th>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Construct a join part of a SQL Statement — construct_join • pg13</title>
+<title>Drop V Tables — drop_all_staging_tables • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Construct a join part of a SQL Statement — construct_join" />
-<meta property="og:description" content="Construct join type JOIN schema.table.column2 ON schema.table.column2 = schema.table.column1 part of the sql statement" />
+<meta property="og:title" content="Drop V Tables — drop_all_staging_tables" />
+<meta property="og:description" content="Drop tables written by functions in this package that follow the &quot;Stamped&quot; naming convention of &quot;V&quot; followed by 14 integers representing the timestamp of the transaction. This function will clear any of the tables that strictly follows this pattern. An expiration period can optionally be applied where the date and time of the transaction is parsed from the table name and will be dropped only if the difference between the system time and timestamp in the table name is greater than the time_diff_hours argument." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -134,26 +134,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Construct a join part of a SQL Statement</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a></small>
-    <div class="hidden name"><code>construct_join.Rd</code></div>
+    <h1>Drop V Tables</h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/drop_all_staging_tables.R'><code>R/drop_all_staging_tables.R</code></a></small>
+    <div class="hidden name"><code>drop_all_staging_tables.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Construct join type JOIN schema.table.column2 ON schema.table.column2 = schema.table.column1 part of the sql statement</p>
+    <p>Drop tables written by functions in this package that follow the "Stamped" naming convention of "V" followed by 14 integers representing the timestamp of the transaction. This function will clear any of the tables that strictly follows this pattern. An expiration period can optionally be applied where the date and time of the transaction is parsed from the table name and will be dropped only if the difference between the system time and timestamp in the table name is greater than the <code>time_diff_hours</code> argument.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>construct_join</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>drop_all_staging_tables</span><span class='op'>(</span>
+  <span class='va'>conn</span>,
+  <span class='va'>conn_fun</span>,
   <span class='va'>schema</span>,
-  <span class='va'>tableName</span>,
-  <span class='va'>column</span>,
-  joinType <span class='op'>=</span> <span class='st'>"LEFT"</span>,
-  <span class='va'>joinOnSchema</span>,
-  <span class='va'>joinOnTableName</span>,
-  <span class='va'>joinOnColumn</span>
+  time_diff_hours <span class='op'>=</span> <span class='fl'>0</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  render_sql <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>time_diff_hours</th>
+      <td><p>Numeric designating the period of time in hours after which the the table should be considered expired. If 0, all tables will be dropped.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>If an expiration period is provided with a <code>time_diff_hours</code> greater than 0, a console message of the names of any tables following this convention remain in <code>schema</code>. If <code>time_diff_hours</code> is 0, all tables are dropped.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

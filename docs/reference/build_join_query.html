@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build a JOIN SQL Query — build_join_query • pg13</title>
+<title>Build a Query for a Join — build_join_query • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Build a JOIN SQL Query — build_join_query" />
-<meta property="og:description" content="A SQL query is built using the given arguments. Currently, only 1 whereIn and whereNot in parameters can be set." />
+<meta property="og:title" content="Build a Query for a Join — build_join_query" />
+<meta property="og:description" content="Build a query the joins 2 tables, respectively aliased as a and b in the query itself." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -134,38 +134,112 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Build a JOIN SQL Query</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/build1.R'><code>R/build1.R</code></a></small>
+    <h1>Build a Query for a Join</h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/build.R'><code>R/build.R</code></a></small>
     <div class="hidden name"><code>build_join_query.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A SQL query is built using the given arguments. Currently, only 1 whereIn and whereNot in parameters can be set.</p>
+    <p>Build a query the joins 2 tables, respectively aliased as <code>a</code> and <code>b</code> in the query itself.</p>
     </div>
 
     <pre class="usage"><span class='fu'>build_join_query</span><span class='op'>(</span>
-  fields <span class='op'>=</span> <span class='st'>"*"</span>,
+  select_table_fields <span class='op'>=</span> <span class='st'>"*"</span>,
+  select_join_on_fields <span class='op'>=</span> <span class='st'>"*"</span>,
   distinct <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>schema</span>,
-  <span class='va'>tableName</span>,
+  <span class='va'>table</span>,
   <span class='va'>column</span>,
-  <span class='va'>joinOnSchema</span>,
-  <span class='va'>joinOnTableName</span>,
-  <span class='va'>joinOnColumn</span>,
-  joinType <span class='op'>=</span> <span class='st'>"LEFT"</span>,
-  whereInField <span class='op'>=</span> <span class='cn'>NULL</span>,
-  whereInVector <span class='op'>=</span> <span class='cn'>NULL</span>,
-  whereNotInField <span class='op'>=</span> <span class='cn'>NULL</span>,
-  whereNotInVector <span class='op'>=</span> <span class='cn'>NULL</span>,
-  caseInsensitive <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  n <span class='op'>=</span> <span class='cn'>NULL</span>,
-  n_type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"limit"</span>, <span class='st'>"random"</span><span class='op'>)</span>
+  <span class='va'>join_on_schema</span>,
+  <span class='va'>join_on_table</span>,
+  <span class='va'>join_on_column</span>,
+  kind <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"LEFT"</span>, <span class='st'>"RIGHT"</span>, <span class='st'>"INNER"</span>, <span class='st'>"FULL"</span><span class='op'>)</span>,
+  <span class='va'>where_in_field</span>,
+  <span class='va'>where_in_vector</span>,
+  <span class='va'>where_in_join_on_field</span>,
+  <span class='va'>where_in_join_on_vector</span>,
+  <span class='va'>where_not_in_field</span>,
+  <span class='va'>where_not_in_vector</span>,
+  <span class='va'>where_not_in_join_on_field</span>,
+  <span class='va'>where_not_in_join_on_vector</span>,
+  <span class='va'>where_is_null_field</span>,
+  <span class='va'>where_is_not_null_field</span>,
+  <span class='va'>where_is_null_join_on_field</span>,
+  <span class='va'>where_is_not_null_join_on_field</span>,
+  <span class='va'>case_insensitive</span>,
+  <span class='va'>limit</span>,
+  <span class='va'>random</span>
 <span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>select_table_fields</th>
+      <td><p>The fields to select for in the first table</p></td>
+    </tr>
+    <tr>
+      <th>select_join_on_fields</th>
+      <td><p>The fields to select for in the table being join to the first table</p></td>
+    </tr>
+    <tr>
+      <th>distinct</th>
+      <td><p>If TRUE, the distinct row count will be returned.</p></td>
+    </tr>
+    <tr>
+      <th>schema</th>
+      <td><p>The target schema for the operation.</p></td>
+    </tr>
+    <tr>
+      <th>table</th>
+      <td><p>Target table for the operation.</p></td>
+    </tr>
+    <tr>
+      <th>column</th>
+      <td><p>Column to join on.</p></td>
+    </tr>
+    <tr>
+      <th>join_on_schema</th>
+      <td><p>Schema of the table that is being joined to the first table.</p></td>
+    </tr>
+    <tr>
+      <th>join_on_table</th>
+      <td><p>Table that is being joined to the first table.</p></td>
+    </tr>
+    <tr>
+      <th>join_on_column</th>
+      <td><p>Column in the <code>join_on_table</code> that is joined onto the <code>column</code> of the first table.</p></td>
+    </tr>
+    <tr>
+      <th>kind</th>
+      <td><p>Type of join. Defaults to left, and options include "LEFT", "RIGHT", "INNER", or "FULL"</p></td>
+    </tr>
+    <tr>
+      <th>where_in_field</th>
+      <td><p>Paired with <code>where_in_vector</code>, adds a "WHERE field IN (vector)" clause to the query corresponding to the field-value pair.</p></td>
+    </tr>
+    <tr>
+      <th>where_not_in_field</th>
+      <td><p>Paired with <code>where_not_in_vector</code>, adds a "WHERE field NOT IN (vector)" clause to the query corresponding to the field-value pair.</p></td>
+    </tr>
+    <tr>
+      <th>case_insensitive</th>
+      <td><p>If TRUE, both sides of the query are converted to lowercase.</p></td>
+    </tr>
+    <tr>
+      <th>limit</th>
+      <td><p>(Optional) Integer of the row limit. Takes precedence over <code>random</code> if both arguments are provided.</p></td>
+    </tr>
+    <tr>
+      <th>random</th>
+      <td><p>(Optional) Integer of the random number of rows to return. Is preceded by <code>limit</code> if both <code>limit</code> and <code>random</code> are provided.</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>SQL statement as a character string.</p>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/cli/man/cli_alert.html'>cli_alert</a></code>
+<code><a href='https://ohdsi.github.io/SqlRender/reference/render.html'>render</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build a SQL Query — build_query • pg13</title>
+<title>Build a Simple SQL Query — build_query • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Build a SQL Query — build_query" />
-<meta property="og:description" content="A SQL query is built using the given arguments. Currently, only 1 whereIn and whereNot in parameters can be set." />
+<meta property="og:title" content="Build a Simple SQL Query — build_query" />
+<meta property="og:description" content="Build a Simple SQL Query" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -134,34 +134,117 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Build a SQL Query</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/build1.R'><code>R/build1.R</code></a></small>
+    <h1>Build a Simple SQL Query</h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/build.R'><code>R/build.R</code></a></small>
     <div class="hidden name"><code>build_query.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A SQL query is built using the given arguments. Currently, only 1 whereIn and whereNot in parameters can be set.</p>
+    <p>Build a Simple SQL Query</p>
     </div>
 
     <pre class="usage"><span class='fu'>build_query</span><span class='op'>(</span>
   fields <span class='op'>=</span> <span class='st'>"*"</span>,
   distinct <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>schema</span>,
-  <span class='va'>tableName</span>,
-  whereInField <span class='op'>=</span> <span class='cn'>NULL</span>,
-  whereInVector <span class='op'>=</span> <span class='cn'>NULL</span>,
-  whereNotInField <span class='op'>=</span> <span class='cn'>NULL</span>,
-  whereNotInVector <span class='op'>=</span> <span class='cn'>NULL</span>,
-  caseInsensitive <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  n <span class='op'>=</span> <span class='cn'>NULL</span>,
-  n_type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"limit"</span>, <span class='st'>"random"</span><span class='op'>)</span>
+  <span class='va'>table</span>,
+  <span class='va'>where_in_field</span>,
+  <span class='va'>where_in_vector</span>,
+  <span class='va'>where_not_in_field</span>,
+  <span class='va'>where_not_in_vector</span>,
+  <span class='va'>where_is_null_field</span>,
+  <span class='va'>where_is_not_null_field</span>,
+  case_insensitive <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>limit</span>,
+  <span class='va'>random</span>
 <span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>fields</th>
+      <td><p>Fields selected for. Defaults to "*".</p></td>
+    </tr>
+    <tr>
+      <th>distinct</th>
+      <td><p>If TRUE, the distinct row count will be returned.</p></td>
+    </tr>
+    <tr>
+      <th>schema</th>
+      <td><p>The target schema for the operation.</p></td>
+    </tr>
+    <tr>
+      <th>table</th>
+      <td><p>Target table for the operation.</p></td>
+    </tr>
+    <tr>
+      <th>where_in_field</th>
+      <td><p>Paired with <code>where_in_vector</code>, adds a "WHERE field IN (vector)" clause to the query corresponding to the field-value pair.</p></td>
+    </tr>
+    <tr>
+      <th>where_not_in_field</th>
+      <td><p>Paired with <code>where_not_in_vector</code>, adds a "WHERE field NOT IN (vector)" clause to the query corresponding to the field-value pair.</p></td>
+    </tr>
+    <tr>
+      <th>case_insensitive</th>
+      <td><p>If TRUE, both sides of the query are converted to lowercase.</p></td>
+    </tr>
+    <tr>
+      <th>limit</th>
+      <td><p>(Optional) Integer of the row limit. Takes precedence over <code>random</code> if both arguments are provided.</p></td>
+    </tr>
+    <tr>
+      <th>random</th>
+      <td><p>(Optional) Integer of the random number of rows to return. Is preceded by <code>limit</code> if both <code>limit</code> and <code>random</code> are provided.</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>SQL statement as a character string.</p>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/cli/man/cli_alert.html'>cli_alert</a></code>
+<code><a href='https://ohdsi.github.io/SqlRender/reference/render.html'>render</a></code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Building SQL Statements using R</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://meerapatelmd.github.io/pg13/'>pg13</a></span><span class='op'>)</span>
+
+<span class='co'># Build a Simple Query</span>
+<span class='fu'>build_query</span><span class='op'>(</span>schema <span class='op'>=</span> <span class='st'>"public"</span>,
+            table <span class='op'>=</span> <span class='st'>"concept_synonym"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "SELECT *\nFROM public.concept_synonym"</div><div class='input'>
+<span class='fu'>build_query</span><span class='op'>(</span>distinct <span class='op'>=</span> <span class='cn'>TRUE</span>,
+            schema <span class='op'>=</span> <span class='st'>"public"</span>,
+            table <span class='op'>=</span> <span class='st'>"concept_synonym"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "SELECT DISTINCT *\nFROM public.concept_synonym\n"</div><div class='input'>
+
+<span class='fu'>build_query</span><span class='op'>(</span>fields <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"concept_id"</span>, <span class='st'>"concept_name"</span><span class='op'>)</span>,
+            distinct <span class='op'>=</span> <span class='cn'>TRUE</span>,
+            schema <span class='op'>=</span> <span class='st'>"public"</span>,
+            table <span class='op'>=</span> <span class='st'>"concept_synonym"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "SELECT DISTINCT concept_id,concept_name\nFROM public.concept_synonym\n"</div><div class='input'>
+<span class='co'># WHERE filters may be applied, but will be ignored if the field-value pair is not provided</span>
+<span class='fu'>build_query</span><span class='op'>(</span>fields <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"concept_id"</span>, <span class='st'>"concept_name"</span><span class='op'>)</span>,
+            schema <span class='op'>=</span> <span class='st'>"public"</span>,
+            table <span class='op'>=</span> <span class='st'>"concept_synonym"</span>,
+            where_in_field <span class='op'>=</span> <span class='st'>"concept_synonym"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'><span style='color: #BBBB00;'>!</span><span> both `where_in_field` &amp; `where_in_vector` required. Ignoring</span>
+#&gt; <span class='message'>  filter...</span></div><div class='output co'>#&gt; [1] "SELECT concept_id,concept_name\nFROM public.concept_synonym"</div><div class='input'>
+<span class='co'># The query defaults to transforming elements to lowercase for case insensitivity that can be turned off</span>
+<span class='fu'>build_query</span><span class='op'>(</span>fields <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"concept_id"</span>, <span class='st'>"concept_name"</span><span class='op'>)</span>,
+            schema <span class='op'>=</span> <span class='st'>"public"</span>,
+            table <span class='op'>=</span> <span class='st'>"concept_synonym"</span>,
+            where_in_field <span class='op'>=</span> <span class='st'>"concept_synonym"</span>,
+            where_in_vector <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Myocardial Infarction"</span>, <span class='st'>"Heart Attack"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "SELECT concept_id,concept_name\nFROM public.concept_synonym\nWHERE\nLOWER(a.concept_synonym::varchar) IN ('myocardial infarction','heart attack')"</div><div class='input'>
+<span class='fu'>build_query</span><span class='op'>(</span>fields <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"concept_id"</span>, <span class='st'>"concept_name"</span><span class='op'>)</span>,
+            schema <span class='op'>=</span> <span class='st'>"public"</span>,
+            table <span class='op'>=</span> <span class='st'>"concept_synonym"</span>,
+            where_in_field <span class='op'>=</span> <span class='st'>"concept_synonym"</span>,
+            where_in_vector <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Myocardial Infarction"</span>, <span class='st'>"Heart Attack"</span><span class='op'>)</span>,
+            case_insensitive <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "SELECT concept_id,concept_name\nFROM public.concept_synonym\nWHERE\na.concept_synonym IN ('Myocardial Infarction','Heart Attack')"</div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

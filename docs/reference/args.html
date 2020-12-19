@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Arguments — base_args • pg13</title>
+<title>Arguments — args • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Arguments — base_args" />
+<meta property="og:title" content="Arguments — args" />
 <meta property="og:description" content="Arguments" />
 <meta property="og:image" content="/logo.png" />
 
@@ -135,8 +135,8 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Arguments</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/args-package.R'><code>R/args-package.R</code></a></small>
-    <div class="hidden name"><code>base_args.Rd</code></div>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/pkg-args.R'><code>R/pkg-args.R</code></a></small>
+    <div class="hidden name"><code>args.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -202,6 +202,10 @@
     <tr>
       <th>object</th>
       <td><p>R object to cache.</p></td>
+    </tr>
+    <tr>
+      <th>dirs</th>
+      <td><p>Argument passed to <code><a href='https://rdrr.io/pkg/R.cache/man/saveCache.html'>saveCache</a></code>, <code><a href='https://rdrr.io/pkg/R.cache/man/findCache.html'>findCache</a></code>, and/or <code><a href='https://rdrr.io/pkg/R.cache/man/loadCache.html'>loadCache</a></code></p></td>
     </tr>
     <tr>
       <th>remove</th>
@@ -314,6 +318,54 @@
     <tr>
       <th>package</th>
       <td><p>Package name</p></td>
+    </tr>
+    <tr>
+      <th>table</th>
+      <td><p>Target table for the operation.</p></td>
+    </tr>
+    <tr>
+      <th>select_table_fields</th>
+      <td><p>The fields to select for in the first table</p></td>
+    </tr>
+    <tr>
+      <th>select_join_on_fields</th>
+      <td><p>The fields to select for in the table being join to the first table</p></td>
+    </tr>
+    <tr>
+      <th>column</th>
+      <td><p>Column to join on.</p></td>
+    </tr>
+    <tr>
+      <th>join_on_schema</th>
+      <td><p>Schema of the table that is being joined to the first table.</p></td>
+    </tr>
+    <tr>
+      <th>join_on_table</th>
+      <td><p>Table that is being joined to the first table.</p></td>
+    </tr>
+    <tr>
+      <th>join_on_column</th>
+      <td><p>Column in the <code>join_on_table</code> that is joined onto the <code>column</code> of the first table.</p></td>
+    </tr>
+    <tr>
+      <th>kind</th>
+      <td><p>Type of join. Defaults to left, and options include "LEFT", "RIGHT", "INNER", or "FULL"</p></td>
+    </tr>
+    <tr>
+      <th>where_in_field</th>
+      <td><p>Paired with <code>where_in_vector</code>, adds a "WHERE field IN (vector)" clause to the query corresponding to the field-value pair.</p></td>
+    </tr>
+    <tr>
+      <th>where_not_in_field</th>
+      <td><p>Paired with <code>where_not_in_vector</code>, adds a "WHERE field NOT IN (vector)" clause to the query corresponding to the field-value pair.</p></td>
+    </tr>
+    <tr>
+      <th>limit</th>
+      <td><p>(Optional) Integer of the row limit. Takes precedence over <code>random</code> if both arguments are provided.</p></td>
+    </tr>
+    <tr>
+      <th>random</th>
+      <td><p>(Optional) Integer of the random number of rows to return. Is preceded by <code>limit</code> if both <code>limit</code> and <code>random</code> are provided.</p></td>
     </tr>
     </table>
 

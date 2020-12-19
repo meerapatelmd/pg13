@@ -143,7 +143,16 @@
     <p>Create a Schema</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_schema</span><span class='op'>(</span><span class='va'>conn</span>, <span class='va'>schema</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>create_schema</span><span class='op'>(</span>
+  <span class='va'>conn</span>,
+  <span class='va'>conn_fun</span>,
+  <span class='va'>schema</span>,
+  <span class='va'>sql_statement</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  render_sql <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  render_only <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
 
 

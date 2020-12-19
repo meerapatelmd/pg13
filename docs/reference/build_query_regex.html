@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Send Function Factor — send_ff • pg13</title>
+<title>Build a Regex Query — build_query_regex • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="Send Function Factor — send_ff" />
-<meta property="og:description" content="Send Function Factor
-Send Function Factor" />
+<meta property="og:title" content="Build a Regex Query — build_query_regex" />
+<meta property="og:description" content="Build a query that searches for a regular expression." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -135,21 +134,65 @@ Send Function Factor" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Send Function Factor</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a></small>
-    <div class="hidden name"><code>send_ff.Rd</code></div>
+    <h1>Build a Regex Query</h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/build.R'><code>R/build.R</code></a></small>
+    <div class="hidden name"><code>build_query_regex.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Send Function Factor</p>
-<p>Send Function Factor</p>
+    <p>Build a query that searches for a regular expression.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>send_ff</span><span class='op'>(</span><span class='va'>user</span>, <span class='va'>password</span>, <span class='va'>port</span>, <span class='va'>server</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>build_query_regex</span><span class='op'>(</span>
+  fields <span class='op'>=</span> <span class='st'>"*"</span>,
+  distinct <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>schema</span>,
+  <span class='va'>table</span>,
+  <span class='va'>where_regex_field</span>,
+  <span class='va'>regex</span>,
+  invert <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  case_insensitive <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>limit</span>,
+  <span class='va'>random</span>
+<span class='op'>)</span></pre>
 
-<span class='fu'>send_ff</span><span class='op'>(</span><span class='va'>user</span>, <span class='va'>password</span>, <span class='va'>port</span>, <span class='va'>server</span><span class='op'>)</span></pre>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>fields</th>
+      <td><p>Fields selected for. Defaults to "*".</p></td>
+    </tr>
+    <tr>
+      <th>distinct</th>
+      <td><p>If TRUE, the distinct row count will be returned.</p></td>
+    </tr>
+    <tr>
+      <th>schema</th>
+      <td><p>The target schema for the operation.</p></td>
+    </tr>
+    <tr>
+      <th>table</th>
+      <td><p>Target table for the operation.</p></td>
+    </tr>
+    <tr>
+      <th>case_insensitive</th>
+      <td><p>If TRUE, both sides of the query are converted to lowercase.</p></td>
+    </tr>
+    <tr>
+      <th>limit</th>
+      <td><p>(Optional) Integer of the row limit. Takes precedence over <code>random</code> if both arguments are provided.</p></td>
+    </tr>
+    <tr>
+      <th>random</th>
+      <td><p>(Optional) Integer of the random number of rows to return. Is preceded by <code>limit</code> if both <code>limit</code> and <code>random</code> are provided.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/cli/man/cli_alert.html'>cli_alert</a></code>
+<code><a href='https://ohdsi.github.io/SqlRender/reference/render.html'>render</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
