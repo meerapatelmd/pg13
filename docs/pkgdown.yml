@@ -1,6 +1,8 @@
 pandoc: 2.3.1
 pkgdown: 1.6.1
 pkgdown_sha: ~
-articles: {}
-last_built: 2020-12-19T00:10Z
+articles:
+  rmd/search-table: search-table.html
+  search-table: search-table.html
+last_built: 2020-12-19T00:35Z
 
