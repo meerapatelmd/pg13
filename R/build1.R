@@ -23,6 +23,10 @@ build_join_query <-
              where_not_in_vector,
              where_not_in_join_on_field,
              where_not_in_join_on_vector,
+             where_is_null_field,
+             where_is_not_null_field,
+             where_is_null_join_on_field,
+             where_is_not_null_join_on_field,
              case_insensitive,
              n,
              n_type = c("limit", "random")) {
@@ -101,9 +105,9 @@ build_join_query <-
                         cli::cli_alert_warning("both `where_in_join_on_field` & `where_in_join_on_vector` required. Ignoring filter...", wrap = TRUE)
                     } else if (!missing(where_in_join_on_field) && !missing(where_in_join_on_vector)) {
 
-                        if (is.character(where_ins_join_on)) {
+                        if (is.character(where_in_join_on_vector)) {
 
-                            where_ins_join_on <- s_quo(vector = where_ins_join_on)
+                            where_in_join_on_vector <- s_quo(vector = where_in_join_on_vector)
 
                         }
 
@@ -122,6 +126,12 @@ build_join_query <-
                     cli::cli_alert_warning("both `where_not_in_field` & `where_not_in_vector` required. Ignoring filter...", wrap = TRUE)
                 } else if (!missing(where_not_in_field) && !missing(where_not_in_vector)) {
 
+                    if (is.character(where_not_in_vector)) {
+
+                        where_not_in_vector <- s_quo(vector = where_not_in_vector)
+
+                    }
+
                     where_not_ins <- list(field = where_not_in_field,
                                       vector = where_not_in_vector)
 
@@ -137,6 +147,13 @@ build_join_query <-
                 cli::cli_alert_warning("both `where_not_in_join_on_field` & `where_not_in_join_on_vector` required. Ignoring filter...", wrap = TRUE)
             } else if (!missing(where_not_in_join_on_field) && !missing(where_not_in_join_on_vector)) {
 
+
+                if (is.character(where_not_in_join_on_vector)) {
+
+                    where_not_in_join_on_vector <- s_quo(vector = where_not_in_join_on_vector)
+
+                }
+
                 where_not_ins_join_on <- list(field = where_not_in_join_on_field,
                                       vector = where_not_in_join_on_vector)
 
@@ -147,13 +164,136 @@ build_join_query <-
             }
 
 
+                    if (!missing(where_is_null_field)) {
+
+                        where[[length(where)+1]] <- SqlRender::render("a.@field IS NULL", field = where_is_null_field)
+                        names(where)[length(where)] <- "where_is_null_field"
+
+                    }
+
+                    if (!missing(where_is_not_null_field)) {
+
+                        where[[length(where)+1]] <- SqlRender::render("a.@field IS NOT NULL", field = where_is_not_null_field)
+                        names(where)[length(where)] <- "where_is_not_null_field"
+
+                    }
+
+                    if (!missing(where_is_null_join_on_field)) {
+
+                        where[[length(where)+1]] <- SqlRender::render("b.@field IS NULL", field = where_is_null_join_on_field)
+                        names(where)[length(where)] <- "where_is_null_join_on_field"
+
+                    }
+
+                    if (!missing(where_is_not_null_join_on_field)) {
+
+                        where[[length(where)+1]] <- SqlRender::render("b.@field IS NOT NULL", field = where_is_not_null_join_on_field)
+                        names(where)[length(where)] <- "where_is_not_null_join_on_field"
+
+                    }
+
+
+
                     if (length(where) > 0) {
 
                         sql_statement <- sprintf("%s
                                                  WHERE
                                                  ", sql_statement)
+
+                        where_clauses <- vector()
+                        if ("where_ins" %in% names(where)) {
+
+                            field <- where$where_ins$field
+                            vector <- where$where_ins$vector
+
+                            where_in_clause_a <-
+                                SqlRender::render(
+                                    "a.@field IN (@vector)",
+                                    field = field,
+                                    vector = vector
+                            )
+
+                            where_clauses <-
+                                c(where_clauses,
+                                  where_in_clause_a)
+
+                        }
+
+                        if ("where_ins_join_on" %in% names(where)) {
+
+                            field <- where$where_ins_join_on$field
+                            vector <- where$where_ins_join_on$vector
+
+                            where_in_clause_b <-
+                                SqlRender::render(
+                                    "b.@field IN (@vector)",
+                                    field = field,
+                                    vector = vector
+                                )
+
+                            where_clauses <-
+                                c(where_clauses,
+                                  where_in_clause_b)
+
+                        }
+
+                        if ("where_not_ins" %in% names(where)) {
+
+                            field <- where$where_not_ins$field
+                            vector <- where$where_not_ins$vector
+
+                            where_not_in_clause_a <-
+                                SqlRender::render(
+                                    "a.@field NOT IN (@vector)",
+                                    field = field,
+                                    vector = vector
+                                )
+
+                            where_clauses <-
+                                c(where_clauses,
+                                  where_not_in_clause_a)
+
+                        }
+
+                        if ("where_not_ins_join_on" %in% names(where)) {
+
+                            field <- where$where_not_ins_join_on$field
+                            vector <- where$where_not_ins_join_on$vector
+
+                            where_not_in_clause_b <-
+                                SqlRender::render(
+                                    "b.@field NOT IN (@vector)",
+                                    field = field,
+                                    vector = vector
+                                )
+
+                            where_clauses <-
+                                c(where_clauses,
+                                  where_not_in_clause_b)
+
+                        }
+
+
                     }
 
+                    null_field_args <- c("where_is_null_field",
+                                    "where_is_null_join_on_field",
+                                    "where_is_not_null_field",
+                                    "where_is_not_null_join_on_field")
+
+                    if (any(null_field_args %in% names(where))) {
+
+                    null_where_clauses <- unlist(where[names(where) %in% c("where_is_null_field",
+                                                                     "where_is_null_join_on_field",
+                                                                     "where_is_not_null_field",
+                                                                     "where_is_not_null_join_on_field")])
+
+                    return(paste(c(null_where_clauses, where_clauses), collapse = " AND \n"))
+
+                    } else {
+
+                        return(paste(c(where_clauses), collapse = " AND \n"))
+                    }
 
                     ######
                     # QA to make sure all whereIn and n  arguments have been supplied in pairs
