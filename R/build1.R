@@ -14,7 +14,7 @@ build_join_query <-
              join_on_schema,
              join_on_table,
              join_on_column,
-             kind = "LEFT",
+             kind = c("left", "right", "inner", "full"),
              where_in_field,
              where_in_vector,
              where_in_join_on_field,
@@ -30,6 +30,12 @@ build_join_query <-
              case_insensitive,
              n,
              n_type = c("limit", "random")) {
+
+
+                    kind <-
+                    match.arg(arg = kind,
+                              choices = c("left", "right", "inner", "full"),
+                              several.ok = FALSE)
 
                     # +++
                     # Base Query
@@ -206,12 +212,24 @@ build_join_query <-
                             field <- where$where_ins$field
                             vector <- where$where_ins$vector
 
-                            where_in_clause_a <-
-                                SqlRender::render(
-                                    "a.@field IN (@vector)",
-                                    field = field,
-                                    vector = vector
-                            )
+
+                            if (case_insensitive && is.character(vector)) {
+
+                                where_in_clause_a <-
+                                    SqlRender::render(
+                                        "LOWER(a.@field::varchar) IN (@vector)",
+                                        field = field,
+                                        vector = tolower(vector)
+                                    )
+
+                            } else {
+                                where_in_clause_a <-
+                                    SqlRender::render(
+                                        "a.@field IN (@vector)",
+                                        field = field,
+                                        vector = vector
+                                )
+                            }
 
                             where_clauses <-
                                 c(where_clauses,
@@ -224,12 +242,24 @@ build_join_query <-
                             field <- where$where_ins_join_on$field
                             vector <- where$where_ins_join_on$vector
 
-                            where_in_clause_b <-
-                                SqlRender::render(
-                                    "b.@field IN (@vector)",
-                                    field = field,
-                                    vector = vector
-                                )
+                            if (case_insensitive && is.character(vector)) {
+
+                                where_in_clause_b <-
+                                    SqlRender::render(
+                                        "LOWER(b.@field::varchar) IN (@vector)",
+                                        field = field,
+                                        vector = tolower(vector)
+                                    )
+
+                            } else {
+
+                                where_in_clause_b <-
+                                    SqlRender::render(
+                                        "b.@field IN (@vector)",
+                                        field = field,
+                                        vector = vector
+                                    )
+                            }
 
                             where_clauses <-
                                 c(where_clauses,
@@ -242,12 +272,23 @@ build_join_query <-
                             field <- where$where_not_ins$field
                             vector <- where$where_not_ins$vector
 
+                            if (case_insensitive && is.character(vector)) {
+
+                                where_not_in_clause_a <-
+                                    SqlRender::render(
+                                        "LOWER(a.@field::varchar) NOT IN (@vector)",
+                                        field = field,
+                                        vector = tolower(vector)
+                                    )
+
+                            } else {
                             where_not_in_clause_a <-
                                 SqlRender::render(
                                     "a.@field NOT IN (@vector)",
                                     field = field,
                                     vector = vector
                                 )
+                            }
 
                             where_clauses <-
                                 c(where_clauses,
@@ -260,12 +301,23 @@ build_join_query <-
                             field <- where$where_not_ins_join_on$field
                             vector <- where$where_not_ins_join_on$vector
 
+
+                            if (case_insensitive && is.character(vector)) {
+                                where_not_in_clause_b <-
+                                    SqlRender::render(
+                                        "LOWER(b.@field::varchar) NOT IN (@vector)",
+                                        field = field,
+                                        vector = tolower(vector)
+                                    )
+
+                            } else {
                             where_not_in_clause_b <-
                                 SqlRender::render(
                                     "b.@field NOT IN (@vector)",
                                     field = field,
                                     vector = vector
                                 )
+                            }
 
                             where_clauses <-
                                 c(where_clauses,
@@ -287,30 +339,18 @@ build_join_query <-
                                                                      "where_is_not_null_field",
                                                                      "where_is_not_null_join_on_field")])
 
-                    return(paste(c(null_where_clauses, where_clauses), collapse = " AND \n"))
+                    final_where <- paste(c(null_where_clauses, where_clauses), collapse = " AND \n")
 
                     } else {
 
-                        return(paste(c(where_clauses), collapse = " AND \n"))
+                        final_where <- paste(where_clauses, collapse = " AND \n")
                     }
 
+                    sql_statement <- paste0(sql_statement, final_where)
                     }
 
-                    ######
-                    # QA to make sure all whereIn and n  arguments have been supplied in pairs
-                    #####
-                    where_ins <- list(where_in_field, where_in_vector) %>%
-                                        purrr::set_names(c("field", "vector")) %>%
-                                        purrr::keep(~!is.null(.))
-                    where_not_ins <- list(where_not_in_field, where_not_in_vector) %>%
-                                        purrr::set_names(c("field", "vector")) %>%
-                                        purrr::keep(~!is.null(.))
 
-
-                    list(where_ins, where_not_ins) %>%
-                        purrr::map2(list("whereIn", "whereNotIn"),
-                                   function(x,y) if (!(length(x) %in% c(0,2))) {stop('both "', y, '" arguments must be supplied')})
-
+                    return(sql_statement)
                     ######
                     # QA to make sure all n arugments have been supplied
                     #####
