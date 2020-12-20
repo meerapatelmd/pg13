@@ -38,9 +38,9 @@ reference:
       - ends_with('_ff')
   - title: Logging
     desc:  >
-      Create a logging system of tables and functions
+      Create a logging system of functions for a project.
     contents:
-      - contains('log')
+      - starts_with('log')
   - title: Logicals
     desc: >
       Logical questions on connection or database attributes
@@ -51,4 +51,6 @@ reference:
     desc: >
       Summarize counts and valuesets at the field level across a subset of fields, an entire table or an entire schema
     contents:
-      - starts_with('summarize_')
+      - summarize_fields
+      - summarize_table
+      - summarize_schema
