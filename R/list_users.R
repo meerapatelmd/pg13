@@ -1,10 +1,10 @@
 #' @title
 #' List Users
-#' @rdname list_users
+#' @rdname ls_users
 #' @export
 
 
-list_users <-
+ls_users <-
         function(conn,
                  conn_fun,
                  verbose = TRUE,
