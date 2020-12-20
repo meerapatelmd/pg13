@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Summarize a Schema — summarize_schema • pg13</title>
+<title>Summarize all Fields in a Schema — summarize_schema • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Summarize a Schema — summarize_schema" />
-<meta property="og:description" content="Summarize a Schema" />
+<meta property="og:title" content="Summarize all Fields in a Schema — summarize_schema" />
+<meta property="og:description" content="summarize_field gets the total rows, distinct value count, valueset, and null counts for a single field in a table. To get the summary of more than 1 field, see summarize_fields. To summarize an entire table or schema without hand-selecting fields, see summarize_table and summarize_schema respectively." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -95,21 +95,6 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/rmd/exact-string-match.html">Exact String Match</a>
-    </li>
-    <li>
-      <a href="../articles/search-table.html">Search a Table for a Value</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -134,43 +119,628 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Summarize a Schema</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/schema_funs.R'><code>R/schema_funs.R</code></a></small>
+    <h1>Summarize all Fields in a Schema</h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/summary.R'><code>R/summary.R</code></a></small>
     <div class="hidden name"><code>summarize_schema.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Summarize a Schema</p>
+    <p><code><a href='summarize_field.html'>summarize_field</a></code> gets the total rows, distinct value count, valueset, and null counts for a single field in a table. To get the summary of more than 1 field, see <code><a href='summarize_fields.html'>summarize_fields</a></code>. To summarize an entire table or schema without hand-selecting fields, see <code><a href='summarize_table.html'>summarize_table</a></code> and <code>summarize_schema</code> respectively.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>summarize_schema</span><span class='op'>(</span><span class='va'>conn</span>, <span class='va'>schema</span>, <span class='va'>resultTableName</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>summarize_schema</span><span class='op'>(</span>
+  <span class='va'>conn</span>,
+  <span class='va'>conn_fun</span>,
+  <span class='va'>schema</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  render_sql <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  render_only <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  warn_no_rows <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>conn</th>
-      <td><p>Postgres connection</p></td>
-    </tr>
-    <tr>
-      <th>schema</th>
-      <td><p>Schema to summarize</p></td>
-    </tr>
-    <tr>
-      <th>resultTableName</th>
-      <td><p>Table that the final output will be written to.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>New Table in the same schema</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://meerapatelmd.github.io/pg13/'>pg13</a></span><span class='op'>)</span>
+<span class='va'>create_test_schema</span> <span class='op'>&lt;-</span>
+        <span class='kw'>function</span><span class='op'>(</span><span class='va'>conn</span><span class='op'>)</span> <span class='op'>{</span>
 
-    <div class='dont-index'><p><code><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></code>
-<code><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></code>
-<code><a href='https://dplyr.tidyverse.org/reference/bind.html'>bind</a></code>,<code><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></code></p></div>
+                <span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='schema_exists.html'>schema_exists</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
+                                   schema <span class='op'>=</span> <span class='st'>"test_schema"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
+                        <span class='fu'>cli</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/cli/man/cli_rule.html'>cli_rule</a></span><span class='op'>(</span><span class='st'>"Create 'test_schema' Schema"</span><span class='op'>)</span>
+
+                        <span class='fu'><a href='create_schema.html'>create_schema</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
+                                      schema <span class='op'>=</span> <span class='st'>"test_schema"</span><span class='op'>)</span>
+
+                <span class='op'>}</span>
+        <span class='op'>}</span>
+
+
+<span class='va'>conn</span> <span class='op'>&lt;-</span> <span class='fu'><a href='local_connect.html'>local_connect</a></span><span class='op'>(</span>dbname <span class='op'>=</span> <span class='st'>"pg13_test"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Connecting using PostgreSQL driver</div><div class='input'><span class='fu'>create_test_schema</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; <span class='message'>── Create 'test_schema' Schema ─────────────────────────────────────────────────</span></div><div class='output co'>#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:53]	</span><span style='color: #00BB00;'>SQL:</span><span> CREATE SCHEMA test_schema;
+#&gt; [2020-12-20 16:29:53]	Sending...
+#&gt; [2020-12-20 16:29:53]	Sending...complete</div><div class='input'><span class='fu'><a href='write_table.html'>write_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
+            schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
+            table_name <span class='op'>=</span> <span class='st'>"test_table"</span>,
+            drop_existing <span class='op'>=</span> <span class='cn'>TRUE</span>,
+            data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>A <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, B <span class='op'>=</span> <span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [2020-12-20 16:29:53]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table;
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Dropping...</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:53]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table;
+#&gt; [2020-12-20 16:29:53]	Sending...
+#&gt; [2020-12-20 16:29:53]	Sending...complete
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Dropping...complete</span><span>
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Writing...</span><span>
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Writing...complete</span><span></div><div class='input'>
+<span class='fu'><a href='write_table.html'>write_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
+            schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
+            table_name <span class='op'>=</span> <span class='st'>"test_table2"</span>,
+            drop_existing <span class='op'>=</span> <span class='cn'>TRUE</span>,
+            data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>C <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='fl'>3</span><span class='op'>)</span>, D <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>TRUE</span>, <span class='cn'>FALSE</span>, <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [2020-12-20 16:29:53]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table2;
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Dropping...</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:53]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table2;
+#&gt; [2020-12-20 16:29:53]	Sending...
+#&gt; [2020-12-20 16:29:53]	Sending...complete
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Dropping...complete</span><span>
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Writing...</span><span></div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to max; returning -Inf</span></div><div class='output co'>#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Writing...complete</span><span></div><div class='input'>
+<span class='fu'><a href='write_table.html'>write_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
+            schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
+            table_name <span class='op'>=</span> <span class='st'>"test_table3"</span>,
+            drop_existing <span class='op'>=</span> <span class='cn'>TRUE</span>,
+            data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>E <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1.25</span>, <span class='fl'>343.31341</span>, <span class='fl'>5</span><span class='op'>)</span>,
+                              G <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>-</span><span class='fl'>100</span>, <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>-</span><span class='fl'>1000</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [2020-12-20 16:29:53]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table3;
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Dropping...</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:53]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table3;
+#&gt; [2020-12-20 16:29:53]	Sending...
+#&gt; [2020-12-20 16:29:53]	Sending...complete
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Dropping...complete</span><span>
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Writing...</span><span>
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Writing...complete</span><span></div><div class='input'>
+<span class='fu'><a href='summarize_fields.html'>summarize_fields</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>, schema <span class='op'>=</span> <span class='st'>"test_schema"</span>, table <span class='op'>=</span> <span class='st'>"test_table"</span>, fields <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:53]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.test_table;
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:53]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT a FROM test_schema.test_table) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:53]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT a FROM test_schema.test_table;
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:53]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(a) FROM test_schema.test_table WHERE a IS NULL;
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:53]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.test_table;
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:53]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT b FROM test_schema.test_table) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:53]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT b FROM test_schema.test_table;
+#&gt; [2020-12-20 16:29:53]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(b) FROM test_schema.test_table WHERE b IS NULL;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span></div><div class='output co'>#&gt; $A
+#&gt; $A$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $A$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $A$VALUESET
+#&gt;   a
+#&gt; 1 3
+#&gt; 2 2
+#&gt; 3 1
+#&gt; 
+#&gt; $A$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; $B
+#&gt; $B$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $B$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $B$VALUESET
+#&gt;   b
+#&gt; 1 a
+#&gt; 2 b
+#&gt; 3 c
+#&gt; 
+#&gt; $B$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; </div><div class='input'>
+<span class='co'># Case is ignored</span>
+<span class='fu'><a href='summarize_fields.html'>summarize_fields</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>, schema <span class='op'>=</span> <span class='st'>"test_schema"</span>, table <span class='op'>=</span> <span class='st'>"test_table"</span>, fields <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.test_table;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT a FROM test_schema.test_table) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT a FROM test_schema.test_table;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(a) FROM test_schema.test_table WHERE a IS NULL;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.test_table;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT b FROM test_schema.test_table) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT b FROM test_schema.test_table;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(b) FROM test_schema.test_table WHERE b IS NULL;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span></div><div class='output co'>#&gt; $a
+#&gt; $a$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $a$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $a$VALUESET
+#&gt;   a
+#&gt; 1 3
+#&gt; 2 2
+#&gt; 3 1
+#&gt; 
+#&gt; $a$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; $b
+#&gt; $b$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $b$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $b$VALUESET
+#&gt;   b
+#&gt; 1 a
+#&gt; 2 b
+#&gt; 3 c
+#&gt; 
+#&gt; $b$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; </div><div class='input'><span class='fu'><a href='summarize_fields.html'>summarize_fields</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>, schema <span class='op'>=</span> <span class='st'>"test_schema"</span>, table <span class='op'>=</span> <span class='st'>"test_table2"</span>, fields <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"c"</span>, <span class='st'>"D"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.test_table2;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT c FROM test_schema.test_table2) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT c FROM test_schema.test_table2;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(c) FROM test_schema.test_table2 WHERE c IS NULL;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.test_table2;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT d FROM test_schema.test_table2) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT d FROM test_schema.test_table2;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(d) FROM test_schema.test_table2 WHERE d IS NULL;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span></div><div class='output co'>#&gt; $c
+#&gt; $c$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $c$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     1
+#&gt; 
+#&gt; $c$VALUESET
+#&gt;      c
+#&gt; 1 &lt;NA&gt;
+#&gt; 
+#&gt; $c$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; $D
+#&gt; $D$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $D$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     2
+#&gt; 
+#&gt; $D$VALUESET
+#&gt;       d
+#&gt; 1  TRUE
+#&gt; 2 FALSE
+#&gt; 
+#&gt; $D$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; </div><div class='input'>
+
+<span class='co'># To summarize an entire table (all the fields without manually inputting them)</span>
+<span class='fu'><a href='summarize_table.html'>summarize_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>, schema <span class='op'>=</span> <span class='st'>"test_schema"</span>, table <span class='op'>=</span> <span class='st'>"test_table3"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Listing Fields...</span><span>
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Listing Fields...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:54]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.test_table3;
+#&gt; [2020-12-20 16:29:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT e FROM test_schema.test_table3) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT e FROM test_schema.test_table3;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(e) FROM test_schema.test_table3 WHERE e IS NULL;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.test_table3;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT g FROM test_schema.test_table3) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT g FROM test_schema.test_table3;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(g) FROM test_schema.test_table3 WHERE g IS NULL;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span></div><div class='output co'>#&gt; $e
+#&gt; $e$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $e$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $e$VALUESET
+#&gt;          e
+#&gt; 1 343.3134
+#&gt; 2   1.2500
+#&gt; 3   5.0000
+#&gt; 
+#&gt; $e$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; $g
+#&gt; $g$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $g$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $g$VALUESET
+#&gt;            g
+#&gt; 1 2018-03-26
+#&gt; 2 2020-12-20
+#&gt; 3 2020-09-11
+#&gt; 
+#&gt; $g$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; </div><div class='input'>
+<span class='co'># An entire schema can also be summarized</span>
+<span class='fu'>summarize_schema</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>, schema <span class='op'>=</span> <span class='st'>"test_schema"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Listing Tables...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Listing Tables...completed</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Listing Fields...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Listing Fields...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.TEST_TABLE;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT a FROM test_schema.TEST_TABLE) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT a FROM test_schema.TEST_TABLE;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(a) FROM test_schema.TEST_TABLE WHERE a IS NULL;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.TEST_TABLE;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT b FROM test_schema.TEST_TABLE) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT b FROM test_schema.TEST_TABLE;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(b) FROM test_schema.TEST_TABLE WHERE b IS NULL;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Listing Fields...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Listing Fields...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.TEST_TABLE2;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT c FROM test_schema.TEST_TABLE2) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT c FROM test_schema.TEST_TABLE2;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(c) FROM test_schema.TEST_TABLE2 WHERE c IS NULL;
+#&gt; [2020-12-20 16:29:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.TEST_TABLE2;
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:56]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT d FROM test_schema.TEST_TABLE2) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT d FROM test_schema.TEST_TABLE2;
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(d) FROM test_schema.TEST_TABLE2 WHERE d IS NULL;
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Listing Fields...</span><span>
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Listing Fields...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.TEST_TABLE3;
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:56]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT e FROM test_schema.TEST_TABLE3) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT e FROM test_schema.TEST_TABLE3;
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(e) FROM test_schema.TEST_TABLE3 WHERE e IS NULL;
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.TEST_TABLE3;
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:56]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT g FROM test_schema.TEST_TABLE3) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT g FROM test_schema.TEST_TABLE3;
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(g) FROM test_schema.TEST_TABLE3 WHERE g IS NULL;
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:29:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span></div><div class='output co'>#&gt; $TEST_TABLE
+#&gt; $TEST_TABLE$a
+#&gt; $TEST_TABLE$a$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE$a$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE$a$VALUESET
+#&gt;   a
+#&gt; 1 3
+#&gt; 2 2
+#&gt; 3 1
+#&gt; 
+#&gt; $TEST_TABLE$a$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; $TEST_TABLE$b
+#&gt; $TEST_TABLE$b$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE$b$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE$b$VALUESET
+#&gt;   b
+#&gt; 1 a
+#&gt; 2 b
+#&gt; 3 c
+#&gt; 
+#&gt; $TEST_TABLE$b$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; $TEST_TABLE2
+#&gt; $TEST_TABLE2$c
+#&gt; $TEST_TABLE2$c$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE2$c$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     1
+#&gt; 
+#&gt; $TEST_TABLE2$c$VALUESET
+#&gt;      c
+#&gt; 1 &lt;NA&gt;
+#&gt; 
+#&gt; $TEST_TABLE2$c$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; $TEST_TABLE2$d
+#&gt; $TEST_TABLE2$d$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE2$d$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     2
+#&gt; 
+#&gt; $TEST_TABLE2$d$VALUESET
+#&gt;       d
+#&gt; 1  TRUE
+#&gt; 2 FALSE
+#&gt; 
+#&gt; $TEST_TABLE2$d$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; $TEST_TABLE3
+#&gt; $TEST_TABLE3$e
+#&gt; $TEST_TABLE3$e$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE3$e$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE3$e$VALUESET
+#&gt;          e
+#&gt; 1 343.3134
+#&gt; 2   1.2500
+#&gt; 3   5.0000
+#&gt; 
+#&gt; $TEST_TABLE3$e$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; $TEST_TABLE3$g
+#&gt; $TEST_TABLE3$g$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE3$g$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE3$g$VALUESET
+#&gt;            g
+#&gt; 1 2018-03-26
+#&gt; 2 2020-12-20
+#&gt; 3 2020-09-11
+#&gt; 
+#&gt; $TEST_TABLE3$g$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; </div><div class='input'>
+
+<span class='fu'><a href='drop_schema.html'>drop_schema</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
+            schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
+            cascade <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:29:56]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP SCHEMA IF EXISTS test_schema CASCADE;
+#&gt; [2020-12-20 16:29:56]	Sending...
+#&gt; [2020-12-20 16:29:56]	Sending...complete</div><div class='input'>
+<span class='fu'><a href='dc.html'>dc</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [2020-12-20 16:29:56]	Postgres connection closed</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

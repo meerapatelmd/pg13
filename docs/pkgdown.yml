@@ -1,8 +1,6 @@
 pandoc: 2.3.1
 pkgdown: 1.6.1
 pkgdown_sha: ~
-articles:
-  rmd/exact-string-match: exact-string-match.html
-  search-table: search-table.html
-last_built: 2020-12-20T19:50Z
+articles: {}
+last_built: 2020-12-20T21:26Z
 

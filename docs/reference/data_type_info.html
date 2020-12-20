@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Drop a Postgres schema — drop_cascade • pg13</title>
+<title>Get Field Datatypes — data_type_info • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Drop a Postgres schema — drop_cascade" />
-<meta property="og:description" content="Drop a schema if it exists." />
+<meta property="og:title" content="Get Field Datatypes — data_type_info" />
+<meta property="og:description" content="Get Field Datatypes" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,34 +119,27 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Drop a Postgres schema</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/schema.R'><code>R/schema.R</code></a></small>
-    <div class="hidden name"><code>drop_cascade.Rd</code></div>
+    <h1>Get Field Datatypes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/data_type_info.R'><code>R/data_type_info.R</code></a></small>
+    <div class="hidden name"><code>data_type_info.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Drop a schema if it exists.</p>
+    <p>Get Field Datatypes</p>
     </div>
 
-    <pre class="usage"><span class='fu'>drop_cascade</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>data_type_info</span><span class='op'>(</span>
   <span class='va'>conn</span>,
   <span class='va'>conn_fun</span>,
-  <span class='va'>schema</span>,
-  if_exists <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>table</span>,
+  <span class='va'>sql_statement</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
   render_sql <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  warn_no_rows <span class='op'>=</span> <span class='cn'>TRUE</span>,
   render_only <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>...</th>
-      <td><p>Additional arguments passed to the DatabaseConnector::dbSendStatement function</p></td>
-    </tr>
-    </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -170,62 +163,52 @@
 </div><div class='output co'>#&gt; Connecting using PostgreSQL driver</div><div class='input'><span class='fu'>create_test_schema</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
 #&gt; 			</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; <span class='message'>── Create 'test_schema' Schema ─────────────────────────────────────────────────</span></div><div class='output co'>#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
-#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:27:20]	</span><span style='color: #00BB00;'>SQL:</span><span> CREATE SCHEMA test_schema;
-#&gt; [2020-12-20 16:27:20]	Sending...
-#&gt; [2020-12-20 16:27:20]	Sending...complete</div><div class='input'><span class='fu'><a href='write_table.html'>write_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:27:13]	</span><span style='color: #00BB00;'>SQL:</span><span> CREATE SCHEMA test_schema;
+#&gt; [2020-12-20 16:27:13]	Sending...
+#&gt; [2020-12-20 16:27:13]	Sending...complete</div><div class='input'><span class='fu'><a href='write_table.html'>write_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
             schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
             table_name <span class='op'>=</span> <span class='st'>"test_table"</span>,
             drop_existing <span class='op'>=</span> <span class='cn'>TRUE</span>,
             data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>A <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, B <span class='op'>=</span> <span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2020-12-20 16:27:20]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table;
-#&gt; [2020-12-20 16:27:20]	</span><span style='color: #BBBB00;'>Dropping...</span><span>
+</div><div class='output co'>#&gt; [2020-12-20 16:27:13]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table;
+#&gt; [2020-12-20 16:27:13]	</span><span style='color: #BBBB00;'>Dropping...</span><span>
 #&gt; ── Checks ──────────────────────────────────────────────────────────────────────
-#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:27:20]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table;
-#&gt; [2020-12-20 16:27:20]	Sending...
-#&gt; [2020-12-20 16:27:20]	Sending...complete
-#&gt; [2020-12-20 16:27:20]	</span><span style='color: #BBBB00;'>Dropping...complete</span><span>
-#&gt; [2020-12-20 16:27:20]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
-#&gt; [2020-12-20 16:27:20]	</span><span style='color: #BBBB00;'>Writing...</span><span>
-#&gt; [2020-12-20 16:27:20]	</span><span style='color: #BBBB00;'>Writing...complete</span><span></div><div class='input'>
-<span class='fu'><a href='write_table.html'>write_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
-            schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
-            table_name <span class='op'>=</span> <span class='st'>"test_table2"</span>,
-            drop_existing <span class='op'>=</span> <span class='cn'>TRUE</span>,
-            data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>C <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='fl'>3</span><span class='op'>)</span>, D <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>TRUE</span>, <span class='cn'>FALSE</span>, <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2020-12-20 16:27:20]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table2;
-#&gt; [2020-12-20 16:27:20]	</span><span style='color: #BBBB00;'>Dropping...</span><span>
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:27:13]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table;
+#&gt; [2020-12-20 16:27:13]	Sending...
+#&gt; [2020-12-20 16:27:13]	Sending...complete
+#&gt; [2020-12-20 16:27:13]	</span><span style='color: #BBBB00;'>Dropping...complete</span><span>
+#&gt; [2020-12-20 16:27:13]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
+#&gt; [2020-12-20 16:27:13]	</span><span style='color: #BBBB00;'>Writing...</span><span>
+#&gt; [2020-12-20 16:27:13]	</span><span style='color: #BBBB00;'>Writing...complete</span><span></div><div class='input'>
+<span class='fu'>data_type_info</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
+               table <span class='op'>=</span> <span class='st'>"test_table"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:27:13]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT column_name as field, udt_name as data_type FROM information_schema.columns WHERE table_name = 'test_table'
+#&gt; [2020-12-20 16:27:13]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-20 16:27:13]	</span><span style='color: #BBBB00;'>Querying...complete</span><span></div><div class='output co'>#&gt;   field data_type
+#&gt; 1     a      int4
+#&gt; 2     b   varchar</div><div class='input'>
+
+
+<span class='fu'><a href='drop_table.html'>drop_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
+           schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
+           table <span class='op'>=</span> <span class='st'>"test_table"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [2020-12-20 16:27:13]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table;
+#&gt; [2020-12-20 16:27:13]	</span><span style='color: #BBBB00;'>Dropping...</span><span>
 #&gt; ── Checks ──────────────────────────────────────────────────────────────────────
-#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:27:20]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table2;
-#&gt; [2020-12-20 16:27:20]	Sending...
-#&gt; [2020-12-20 16:27:20]	Sending...complete
-#&gt; [2020-12-20 16:27:20]	</span><span style='color: #BBBB00;'>Dropping...complete</span><span>
-#&gt; [2020-12-20 16:27:20]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
-#&gt; [2020-12-20 16:27:20]	</span><span style='color: #BBBB00;'>Writing...</span><span></div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to max; returning -Inf</span></div><div class='output co'>#&gt; [2020-12-20 16:27:20]	</span><span style='color: #BBBB00;'>Writing...complete</span><span></div><div class='input'>
-<span class='fu'><a href='write_table.html'>write_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
-            schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
-            table_name <span class='op'>=</span> <span class='st'>"test_table3"</span>,
-            drop_existing <span class='op'>=</span> <span class='cn'>TRUE</span>,
-            data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>E <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1.25</span>, <span class='fl'>343.31341</span>, <span class='fl'>5</span><span class='op'>)</span>,
-                              G <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>-</span><span class='fl'>100</span>, <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>-</span><span class='fl'>1000</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2020-12-20 16:27:20]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table3;
-#&gt; [2020-12-20 16:27:20]	</span><span style='color: #BBBB00;'>Dropping...</span><span>
-#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
-#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:27:20]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table3;
-#&gt; [2020-12-20 16:27:20]	Sending...
-#&gt; [2020-12-20 16:27:20]	Sending...complete
-#&gt; [2020-12-20 16:27:20]	</span><span style='color: #BBBB00;'>Dropping...complete</span><span>
-#&gt; [2020-12-20 16:27:20]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
-#&gt; [2020-12-20 16:27:20]	</span><span style='color: #BBBB00;'>Writing...</span><span>
-#&gt; [2020-12-20 16:27:20]	</span><span style='color: #BBBB00;'>Writing...complete</span><span></div><div class='input'>
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:27:13]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table;
+#&gt; [2020-12-20 16:27:13]	Sending...
+#&gt; [2020-12-20 16:27:13]	Sending...complete
+#&gt; [2020-12-20 16:27:13]	</span><span style='color: #BBBB00;'>Dropping...complete</span><span></div><div class='input'>
 <span class='fu'><a href='drop_schema.html'>drop_schema</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
             schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
             cascade <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
-#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:27:20]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP SCHEMA IF EXISTS test_schema CASCADE;
-#&gt; [2020-12-20 16:27:20]	Sending...
-#&gt; [2020-12-20 16:27:20]	Sending...complete</div><div class='input'>
+#&gt; 			</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-20 16:27:13]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP SCHEMA IF EXISTS test_schema CASCADE;
+#&gt; [2020-12-20 16:27:13]	Sending...
+#&gt; [2020-12-20 16:27:13]	Sending...complete</div><div class='input'>
 <span class='fu'><a href='dc.html'>dc</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2020-12-20 16:27:20]	Postgres connection closed</div></span></pre>
+</div><div class='output co'>#&gt; [2020-12-20 16:27:13]	Postgres connection closed</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
