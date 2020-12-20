@@ -14,7 +14,7 @@
 ls_fields <-
     function(conn,
              schema,
-             tableName,
+             table,
              verbose = TRUE,
              render_sql = TRUE) {
 
@@ -32,7 +32,7 @@ ls_fields <-
             }
 
             resultset <- DatabaseConnector::dbListFields(conn = conn,
-                                                        name = tableName,
+                                                        name = table,
                                                         schema = schema)
 
             if (verbose) {
@@ -75,7 +75,32 @@ ls_schema <-
         }
 
 
+#' @title
+#' List Databases
+#'
+#' @description
+#' List all the databases in a connection
+#'
+#' @export
+#' @family list functions
+#' @rdname ls_db
 
+ls_db <-
+    function(conn,
+             verbose = TRUE,
+             render_sql = TRUE,
+             render_only = FALSE) {
+
+        query(conn = conn,
+              sql_statement = "SELECT datname FROM pg_database WHERE datistemplate = false;",
+              verbose = verbose,
+              render_sql = render_sql,
+              render_only = render_only) %>%
+            unlist() %>%
+            unname() %>%
+            tolower()
+
+    }
 
 #' @title
 #' List Tables
