@@ -1,25 +1,14 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param conn PARAM_DESCRIPTION
-#' @param conn_fun PARAM_DESCRIPTION
-#' @param schema PARAM_DESCRIPTION
-#' @param table PARAM_DESCRIPTION
-#' @param field PARAM_DESCRIPTION
-#' @param verbose PARAM_DESCRIPTION, Default: TRUE
-#' @param render_sql PARAM_DESCRIPTION, Default: TRUE
-#' @param render_only PARAM_DESCRIPTION, Default: FALSE
-#' @param warn_no_rows PARAM_DESCRIPTION, Default: TRUE
-#' @param ... PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' @title
+#' Summarize the Counts and Values of a Field
+#'
+#' @description
+#' \code{\link{summarize_field}} gets the total rows, distinct value count, valueset, and null counts for a single field in a table. To get the summary of more than 1 field, see \code{\link{summarize_fields}}. To summarize an entire table or schema without hand-selecting fields, see \code{\link{summarize_table}} and \code{\link{summarize_schema}} respectively.
+#'
+#'
+#'
 #' @rdname summarize_field
 #' @export
+#' @example inst/example/summary.R
 summarize_field <-
         function(conn,
                  conn_fun,
@@ -45,7 +34,8 @@ summarize_field <-
                 }
 
                 sql_statements <-
-                        list(DISTINCT_COUNT = sprintf("WITH valueset AS (SELECT DISTINCT %s FROM %s.%s) SELECT COUNT(*) FROM valueset;", field, schema, table),
+                        list(TOTAL_ROWS = sprintf("SELECT COUNT(*) FROM %s.%s;", schema, table),
+                                DISTINCT_VALUE_COUNT = sprintf("WITH valueset AS (SELECT DISTINCT %s FROM %s.%s) SELECT COUNT(*) FROM valueset;", field, schema, table),
                              VALUESET = sprintf("SELECT DISTINCT %s FROM %s.%s;", field, schema, table),
                              NULL_COUNT = sprintf("SELECT COUNT(%s) FROM %s.%s WHERE %s IS NULL;", field, schema, table, field)
                              )
@@ -74,28 +64,13 @@ summarize_field <-
         }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param conn PARAM_DESCRIPTION
-#' @param conn_fun PARAM_DESCRIPTION
-#' @param schema PARAM_DESCRIPTION
-#' @param table PARAM_DESCRIPTION
-#' @param fields PARAM_DESCRIPTION
-#' @param verbose PARAM_DESCRIPTION, Default: TRUE
-#' @param render_sql PARAM_DESCRIPTION, Default: TRUE
-#' @param render_only PARAM_DESCRIPTION, Default: FALSE
-#' @param warn_no_rows PARAM_DESCRIPTION, Default: TRUE
-#' @param ... PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' @title
+#' Summarize 1 or more Fields
+#' @inheirt summarize_field description
 #' @rdname summarize_fields
 #' @export
+#' @example inst/example/summary.R
+
 summarize_fields <-
         function(conn,
                  conn_fun,
@@ -132,25 +107,10 @@ summarize_fields <-
         }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param conn PARAM_DESCRIPTION
-#' @param conn_fun PARAM_DESCRIPTION
-#' @param schema PARAM_DESCRIPTION
-#' @param table PARAM_DESCRIPTION
-#' @param verbose PARAM_DESCRIPTION, Default: TRUE
-#' @param render_sql PARAM_DESCRIPTION, Default: TRUE
-#' @param render_only PARAM_DESCRIPTION, Default: FALSE
-#' @param warn_no_rows PARAM_DESCRIPTION, Default: TRUE
-#' @param ... PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' @title
+#' Summarize all Fields in a Table
+#' @inheirt summarize_field description
+#' @example inst/example/summary.R
 #' @rdname summarize_table
 #' @export
 summarize_table <-
@@ -185,24 +145,10 @@ summarize_table <-
         }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param conn PARAM_DESCRIPTION
-#' @param conn_fun PARAM_DESCRIPTION
-#' @param schema PARAM_DESCRIPTION
-#' @param verbose PARAM_DESCRIPTION, Default: TRUE
-#' @param render_sql PARAM_DESCRIPTION, Default: TRUE
-#' @param render_only PARAM_DESCRIPTION, Default: FALSE
-#' @param warn_no_rows PARAM_DESCRIPTION, Default: TRUE
-#' @param ... PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' @title
+#' Summarize all Fields in a Schema
+#' @inheirt summarize_field description
+#' @example inst/example/summary.R
 #' @rdname summarize_schema
 #' @export
 summarize_schema <-
