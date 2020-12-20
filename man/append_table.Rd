@@ -23,22 +23,6 @@ Like the writeTable function, this function is a wrapper around a DatabaseConnec
 }
 \examples{
 library(pg13)
-conn <- local_connect(dbname = "postgres")
-create_test_db <-
-        function(conn) {
-
-                if (!db_exists(conn = conn,
-                          db_name = "pg13_test")) {
-
-                        cli::cli_rule("Create 'pg13_test' Database")
-
-                        create_db(conn = conn,
-                                  db_name = "pg13_test")
-
-                }
-
-        }
-
 create_test_schema <-
         function(conn) {
 
@@ -52,10 +36,6 @@ create_test_schema <-
 
                 }
         }
-
-create_test_db(conn = conn)
-dc(conn = conn)
-
 
 conn <- local_connect(dbname = "pg13_test")
 create_test_schema(conn = conn)

@@ -66,7 +66,7 @@ summarize_field <-
 
 #' @title
 #' Summarize 1 or more Fields
-#' @inheirt summarize_field description
+#' @inherit summarize_field description
 #' @rdname summarize_fields
 #' @export
 #' @example inst/example/summary.R
@@ -109,7 +109,7 @@ summarize_fields <-
 
 #' @title
 #' Summarize all Fields in a Table
-#' @inheirt summarize_field description
+#' @inherit summarize_field description
 #' @example inst/example/summary.R
 #' @rdname summarize_table
 #' @export
@@ -147,7 +147,7 @@ summarize_table <-
 
 #' @title
 #' Summarize all Fields in a Schema
-#' @inheirt summarize_field description
+#' @inherit summarize_field description
 #' @example inst/example/summary.R
 #' @rdname summarize_schema
 #' @export
