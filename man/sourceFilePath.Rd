@@ -5,8 +5,6 @@
 \title{Get SourceFile Path}
 \usage{
 sourceFilePath(instSubdir, FileName, package)
-
-sourceFilePath(instSubdir, FileName, package)
 }
 \arguments{
 \item{instSubdir}{Name of subdirectory in the inst/ folder}
@@ -16,7 +14,5 @@ sourceFilePath(instSubdir, FileName, package)
 \item{package}{Package name}
 }
 \description{
-This function provides the path for files installed within a given package's library.
-
 This function provides the path for files installed within a given package's library.
 }

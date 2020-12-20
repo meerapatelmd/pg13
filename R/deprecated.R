@@ -308,29 +308,6 @@ construct_where_not_in <-
         }
 
 
-
-#' Export a sql statement to a file
-#' @param sql_statement sql statement R object
-#' @param file File to write to.
-#' @param ... Additional arguments passed to the readr::write_lines function
-#' @importFrom readr write_lines
-#' @export
-
-save_sql <-
-        function(sql_statement,
-                 file,
-                 append = TRUE,
-                 ...) {
-
-                .Deprecated("write_sql_file")
-
-                readr::write_lines(x = sql_statement,
-                                   path = file,
-                                   append = append,
-                                   ...
-                )
-        }
-
 #' Concatenate 2 WHERE constructs
 #' @description When 2 WHERE constructs are included in the SQL Statement, they are concatenated and the 2nd "WHERE" is replaced with an "AND".
 #' @param AND If TRUE, the WHERE constructs are concatenated with "AND". If FALSE, the concatenation is performed with an "OR".
@@ -622,22 +599,6 @@ rm_if_closed <-
     }
 
 
-#' Get SourceFile Path
-#' @description This function provides the path for files installed within a given package's library.
-#' @param instSubdir Name of subdirectory in the inst/ folder
-#' @param FileName Name of file in subdirectory
-#' @param package Package name
-#' @export
-
-
-source_file_path <-
-    function(instSubdir,
-             FileName,
-             package) {
-
-        .Deprecated()
-        paste0(system.file(package = package), "/", instSubdir, "/", FileName)
-    }
 
 #' Terminate a SQL Statement with a semicolon
 #' @export
@@ -785,44 +746,6 @@ parse_sql <-
                         centipede::no_blank() %>%
                         as.list()
         }
-
-
-
-
-
-#' Export a sql statement to a file
-#' @param sql_statement sql statement R object
-#' @param file File to write to.
-#' @param ... Additional arguments passed to the readr::write_lines function
-#' @importFrom readr write_lines
-#' @export
-
-save_sql <-
-        function(sql_statement,
-                 file,
-                 append = TRUE,
-                 ...) {
-
-                .Deprecated("write_sql_file")
-
-                readr::write_lines(x = sql_statement,
-                                   path = file,
-                                   append = append,
-                                   ...
-                                   )
-        }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1723,43 +1646,6 @@ connDB <-
 quietly.connDB <-
         function() {
                 "dummy"
-        }
-
-#' @title
-#' Disconnect a Connection
-#'
-#' @description
-#' Disconnect a Postgres Connection object with the option of removing the object from the parent environment.
-#'
-#' @inheritParams base_args
-#' @param verbose If TRUE, returns a console message when the connection has been closed.
-#' @param ...           Additional arguments passed to \code{\link[DatabaseConnector]{dbDisconnect}}.
-#' @param remove        If TRUE, the Connection object argument is removed from the parent environment.
-#'
-#' @rdname dc
-#'
-#' @importFrom DatabaseConnector dbDisconnect
-#'
-#' @export
-
-dc <-
-        function(conn,
-                 ...,
-                 verbose = TRUE,
-                 remove = FALSE) {
-
-                DatabaseConnector::dbDisconnect(conn = conn,
-                                                ...)
-
-                if (verbose) {
-                        secretary::typewrite("Postgres connection closed")
-                }
-
-                if (remove) {
-
-                        rm(list = deparse(substitute(conn)), envir = parent.frame())
-
-                }
         }
 
 
@@ -3384,48 +3270,6 @@ lsSchema <-
                 tolower()
 
         }
-
-#' @title
-#' Does a schema exist?
-#'
-#' @description
-#' Logical that checks if a schema exists in the database. The `schema` argument is in formatted in all lowercase prior to checking against what is present in the database.
-#'
-#'
-#' @inheritParams base_args
-#'
-#' @rdname schema_exists
-#' @export
-#' @family logical functions
-
-
-schema_exists <-
-    function(conn,
-             schema) {
-
-
-                    schemas <-
-                        lsSchema(conn = conn,
-                                 verbose = FALSE,
-                                 render_sql = FALSE)
-
-
-
-                if (tolower(schema) %in% schemas) {
-
-                    TRUE
-
-                } else {
-
-                    FALSE
-                }
-
-
-    }
-
-
-
-
 
 #' @title
 #' List Tables
@@ -5127,32 +4971,6 @@ typewrite_activity <-
 
 
 
-
-
-#' Get SourceFile Path
-#' @description This function provides the path for files installed within a given package's library.
-#' @param instSubdir Name of subdirectory in the inst/ folder
-#' @param FileName Name of file in subdirectory
-#' @param package Package name
-#' @export
-
-
-sourceFilePath <-
-        function(instSubdir,
-                 FileName,
-                 package) {
-                paste0(system.file(package = package), "/", instSubdir, "/", FileName)
-        }
-
-
-
-
-
-
-
-
-
-
 #' @export
 
 readView <-
@@ -5185,42 +5003,6 @@ refreshMatView <-
                      render_sql = render_sql)
 
         }
-
-
-#' Send Function Factor
-#' @export
-
-send_ff <-
-    function(
-        user,
-        password,
-        port,
-        server) {
-
-        function(sql_statement,
-                 verbose = TRUE,
-                 render_sql = TRUE) {
-
-            conn <- connect(user = user,
-                            password = password,
-                            port = port,
-                            server = server,
-                            verbose = verbose)
-
-            on.exit(expr = dc(conn = conn,
-                              verbose = verbose))
-
-
-            send(conn = conn,
-                 sql_statement = sql_statement,
-                 verbose = verbose,
-                 render_sql = render_sql)
-
-
-        }
-
-
-    }
 
 
 

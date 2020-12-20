@@ -5,11 +5,7 @@
 \title{Send Function Factor}
 \usage{
 send_ff(user, password, port, server)
-
-send_ff(user, password, port, server)
 }
 \description{
-Send Function Factor
-
 Send Function Factor
 }
