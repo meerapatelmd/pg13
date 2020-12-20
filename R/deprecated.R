@@ -4561,56 +4561,6 @@ summarizeSchema <-
                          final_output)
 }
 
-
-
-
-
-
-
-
-
-
-#' Send a SQL Statement to Postgres
-#' @param conn Connection object
-#' @param sql_statement SQL to send
-#' @param ... Additional arguments to pass onto the DatabaseConnector::dbSendStatement function
-#' @import DatabaseConnector
-#' @export
-
-send <-
-    function(conn,
-             sql_statement,
-             verbose = TRUE,
-             render_sql = TRUE,
-             ...) {
-
-
-        brake_closed_conn(conn = conn)
-
-        if (render_sql) {
-
-            typewrite_sql(sql_statement = sql_statement)
-
-        }
-
-        if (verbose) {
-
-            secretary::typewrite("Sending...")
-
-        }
-
-        DatabaseConnector::dbSendStatement(conn = conn,
-                                           statement = sql_statement,
-                                           ...)
-
-        if (verbose) {
-
-            secretary::typewrite("Sending...complete")
-
-        }
-
-    }
-
 #' Send Function Factor
 #' @export
 
