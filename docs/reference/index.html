@@ -132,8 +132,8 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-database-management" class="hasAnchor"><a href="#section-database-management" class="anchor"></a>Database Management</h2>
+          <p class="section-desc"><p>Create and drop databases</p></p>
         </th>
       </tr>
       
@@ -144,33 +144,149 @@
       <tr>
         
         <td>
-          <p><code><a href="affix_date.html">affix_date()</a></code> <code><a href="affix_date.html">affix_date()</a></code> </p>
+          <p><code><a href="create_db.html">create_db()</a></code> </p>
         </td>
-        <td><p>Affix the System Date to a String</p></td>
+        <td><p>Create a New Database</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="appendDate.html">appendDate()</a></code> </p>
+          <p><code><a href="drop_db.html">drop_db()</a></code> </p>
         </td>
-        <td><p>Append Current Date to a String</p></td>
+        <td><p>Drop a Database</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="appendTable.html">appendTable()</a></code> </p>
+          <p><code><a href="get_conn_db.html">get_conn_db()</a></code> </p>
         </td>
-        <td><p>Append a Table</p></td>
+        <td><p>Get Connection Database</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="appendTable2.html">appendTable2()</a></code> </p>
+          <p><code><a href="ls_db.html">ls_db()</a></code> </p>
         </td>
-        <td><p>Append to am Existing Table</p></td>
+        <td><p>List Databases</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="append_date.html">append_date()</a></code> </p>
+          <p><code><a href="rename_db.html">rename_db()</a></code> </p>
         </td>
-        <td><p>Append Current Date to a String</p></td>
+        <td><p>Rename a Database</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="render_create_db.html">render_create_db()</a></code> </p>
+        </td>
+        <td><p>Render SQL to Create Database</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="render_rename_db.html">render_rename_db()</a></code> </p>
+        </td>
+        <td><p>Render SQL to Rename a Table</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-schema-management" class="hasAnchor"><a href="#section-schema-management" class="anchor"></a>Schema Management</h2>
+          <p class="section-desc"><p>Create and drop schemas</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="create_schema.html">create_schema()</a></code> </p>
+        </td>
+        <td><p>Create a Schema</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="drop_schema.html">drop_schema()</a></code> </p>
+        </td>
+        <td><p>Drop a Postgres schema</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="grant_all_in_schema.html">grant_all_in_schema()</a></code> </p>
+        </td>
+        <td><p>Grant All Privileges on all Tables</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ls_schema.html">ls_schema()</a></code> </p>
+        </td>
+        <td><p>List Schemas</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="render_create_schema.html">render_create_schema()</a></code> </p>
+        </td>
+        <td><p>Render SQL to Create a Schema</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="render_drop_schema.html">render_drop_schema()</a></code> </p>
+        </td>
+        <td><p>Render SQL to Drop a Schema</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="render_grant_schema.html">render_grant_schema()</a></code> </p>
+        </td>
+        <td><p>Render GRANT ALL PRIVILEGES</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="render_ls_schema.html">render_ls_schema()</a></code> </p>
+        </td>
+        <td><p>Render SQL to List All Schema</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="summarize_schema.html">summarize_schema()</a></code> </p>
+        </td>
+        <td><p>Summarize all Fields in a Schema</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="drop_cascade.html">drop_cascade()</a></code> </p>
+        </td>
+        <td><p>Drop a Postgres schema</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-table-management" class="hasAnchor"><a href="#section-table-management" class="anchor"></a>Table Management</h2>
+          <p class="section-desc"><p>Read, write, append, and drop tables</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="write_table.html">write_table()</a></code> </p>
+        </td>
+        <td><p>Write a Table</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="read_table.html">read_table()</a></code> </p>
+        </td>
+        <td><p>Read an Entire Table</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="drop_table.html">drop_table()</a></code> </p>
+        </td>
+        <td><p>Drop a Table</p></td>
       </tr><tr>
         
         <td>
@@ -180,46 +296,23 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="append_table2.html">append_table2()</a></code> </p>
+          <p><code><a href="search_table.html">search_table()</a></code> </p>
         </td>
-        <td><p>Append to am Existing Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="brake_closed_conn.html">brake_closed_conn()</a></code> </p>
-        </td>
-        <td><p>Brake if the Connection is Closed</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="brake_ff.html">brake_ff()</a></code> </p>
-        </td>
-        <td><p>Create a Brake Function</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="buildJoinQuery.html">buildJoinQuery()</a></code> </p>
-        </td>
-        <td><p>Build a JOIN SQL Query</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="buildQuery.html">buildQuery()</a></code> <code><a href="buildQuery.html">buildQuery()</a></code> </p>
-        </td>
-        <td><p>Build a SQL Query</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="buildQueryLike.html">buildQueryLike()</a></code> </p>
-        </td>
-        <td><p>Writes a Like SQL Query</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="buildQueryString.html">buildQueryString()</a></code> </p>
-        </td>
-        <td><p>Writes a SQL Query Loop</p></td>
-      </tr><tr>
+        <td><p>Search a Table for a Value</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-build" class="hasAnchor"><a href="#section-build" class="anchor"></a>Build</h2>
+          <p class="section-desc"><p>Build queries of predetermined styles</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="build_join_query.html">build_join_query()</a></code> </p>
@@ -249,510 +342,31 @@
           <p><code><a href="build_query_string.html">build_query_string()</a></code> </p>
         </td>
         <td><p>Build a Query the Loops Over String</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-sql-function-factories" class="hasAnchor"><a href="#section-sql-function-factories" class="anchor"></a>SQL Function Factories</h2>
+          <p class="section-desc"><p>Set defaults for all or some of the arguments of a selection of functions</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
-          <p><code><a href="cache.html">cache()</a></code> <code><a href="cache.html">cache()</a></code> </p>
+          <p><code><a href="brake_ff.html">brake_ff()</a></code> </p>
         </td>
-        <td><p>Cache a Resultset</p></td>
+        <td><p>Create a Brake Function</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="cacheJoin.html">cacheJoin()</a></code> </p>
-        </td>
-        <td><p>Cache a Resultset from a Join</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="cacheQuery.html">cacheQuery()</a></code> </p>
-        </td>
-        <td><p>Cache a Query Resultset</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="cache_join.html">cache_join()</a></code> </p>
-        </td>
-        <td><p>Cache a Resultset from a Join</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="cache_query.html">cache_query()</a></code> </p>
-        </td>
-        <td><p>Cache a Query Resultset</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="clearCache.html">clearCache()</a></code> </p>
-        </td>
-        <td><p>Clear a Cache</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="clear_cache.html">clear_cache()</a></code> </p>
-        </td>
-        <td><p>Clear a Cache</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="concatWhereConstructs.html">concatWhereConstructs()</a></code> </p>
-        </td>
-        <td><p>Concatenate 2 WHERE constructs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="concat_where_constructs.html">concat_where_constructs()</a></code> </p>
-        </td>
-        <td><p>Concatenate 2 WHERE constructs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="connDB.html">connDB()</a></code> </p>
-        </td>
-        <td><p>Connect to a Postgres Database</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="connect.html">connect()</a></code> <code><a href="connect.html">connect()</a></code> </p>
-        </td>
-        <td><p>Connect to a Postgres Database</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="connect_ff.html">connect_ff()</a></code> <code><a href="connect_ff.html">connect_ff()</a></code> </p>
+          <p><code><a href="connect_ff.html">connect_ff()</a></code> </p>
         </td>
         <td><p>Connection Function Factory</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="connection.html">connection</a></code> </p>
-        </td>
-        <td><p>Postgres Connection</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="constructBase.html">constructBase()</a></code> </p>
-        </td>
-        <td><p>Construct a base SQL query</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="constructIn.html">constructIn()</a></code> </p>
-        </td>
-        <td><p>Render y in "WHERE x IN (y)"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="constructJoin.html">constructJoin()</a></code> </p>
-        </td>
-        <td><p>Construct a join part of a SQL Statement</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="constructLimit.html">constructLimit()</a></code> </p>
-        </td>
-        <td><p>Construct LIMIT</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="constructRandom.html">constructRandom()</a></code> </p>
-        </td>
-        <td><p>Construct ORDER BY RANDOM()</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="constructSchemaTableName.html">constructSchemaTableName()</a></code> </p>
-        </td>
-        <td><p>Construct schemaTableName</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="constructWhereIn.html">constructWhereIn()</a></code> </p>
-        </td>
-        <td><p>Render x in "WHERE x IN y"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="constructWhereLike.html">constructWhereLike()</a></code> </p>
-        </td>
-        <td><p>Render "WHERE x LIKE y"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="constructWhereLowerIn.html">constructWhereLowerIn()</a></code> </p>
-        </td>
-        <td><p>Render "WHERE lowercase x IN y" Component</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="constructWhereLowerLike.html">constructWhereLowerLike()</a></code> </p>
-        </td>
-        <td><p>Render WHERE lowercase x LIKE y</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="constructWhereLowerNotIn.html">constructWhereLowerNotIn()</a></code> </p>
-        </td>
-        <td><p>Render "WHERE lowercase x NOT IN y"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="constructWhereNotIn.html">constructWhereNotIn()</a></code> </p>
-        </td>
-        <td><p>Render "WHERE x NOT IN y"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="construct_base.html">construct_base()</a></code> </p>
-        </td>
-        <td><p>Construct a base SQL query</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="construct_in.html">construct_in()</a></code> </p>
-        </td>
-        <td><p>Render y in "WHERE x IN (y)"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="construct_limit.html">construct_limit()</a></code> </p>
-        </td>
-        <td><p>Construct LIMIT</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="construct_random.html">construct_random()</a></code> </p>
-        </td>
-        <td><p>Construct ORDER BY RANDOM()</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="construct_schema_table_name.html">construct_schema_table_name()</a></code> </p>
-        </td>
-        <td><p>Construct schemaTableName</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="construct_where_in.html">construct_where_in()</a></code> </p>
-        </td>
-        <td><p>Render x in "WHERE x IN y"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="construct_where_like.html">construct_where_like()</a></code> </p>
-        </td>
-        <td><p>Render "WHERE x LIKE y"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="construct_where_lower_in.html">construct_where_lower_in()</a></code> </p>
-        </td>
-        <td><p>Render "WHERE lowercase x IN y" Component</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="construct_where_lower_like.html">construct_where_lower_like()</a></code> </p>
-        </td>
-        <td><p>Render WHERE lowercase x LIKE y</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="construct_where_lower_not_in.html">construct_where_lower_not_in()</a></code> </p>
-        </td>
-        <td><p>Render "WHERE lowercase x NOT IN y"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="construct_where_not_in.html">construct_where_not_in()</a></code> </p>
-        </td>
-        <td><p>Render "WHERE x NOT IN y"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="createDB.html">createDB()</a></code> </p>
-        </td>
-        <td><p>Create a New Database</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="createSchema.html">createSchema()</a></code> </p>
-        </td>
-        <td><p>Create a Schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="createTable.html">draftCreateTable()</a></code> <code><a href="createTable.html">createTable()</a></code> </p>
-        </td>
-        <td><p>Draft SQL to Create a Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="createTableFromDF.html">createTableFromDF()</a></code> </p>
-        </td>
-        <td><p>Create a Table with a Dataframe</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="create_db.html">create_db()</a></code> </p>
-        </td>
-        <td><p>Create a New Database</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="create_log.html">create_log()</a></code> </p>
-        </td>
-        <td><p>FUNCTION_TITLE</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="create_schema.html">create_schema()</a></code> </p>
-        </td>
-        <td><p>Create a Schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="create_table.html">draft_create_table()</a></code> <code><a href="create_table.html">create_table()</a></code> </p>
-        </td>
-        <td><p>Draft SQL to Create a Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="create_table_from_df.html">create_table_from_df()</a></code> </p>
-        </td>
-        <td><p>Create a Table with a Dataframe</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="data_type_info.html">data_type_info()</a></code> </p>
-        </td>
-        <td><p>Get Field Datatypes</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="db_exists.html">db_exists()</a></code> </p>
-        </td>
-        <td><p>Does a database exist?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dc.html">dc()</a></code> <code><a href="dc.html">dc()</a></code> </p>
-        </td>
-        <td><p>Disconnect a Connection</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draftBase.html">draftBase()</a></code> </p>
-        </td>
-        <td><p>Construct a base SQL query</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draftCreateTableFromDF.html">draftCreateTableFromDF()</a></code> </p>
-        </td>
-        <td><p>Draft the SQL to Create Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draftIn.html">draftIn()</a></code> </p>
-        </td>
-        <td><p>Render y in "WHERE x IN (y)"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draftJoin.html">draftJoin()</a></code> </p>
-        </td>
-        <td><p>Construct a join part of a SQL Statement</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draftLimit.html">draftLimit()</a></code> </p>
-        </td>
-        <td><p>Construct LIMIT</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draftRandom.html">draftRandom()</a></code> </p>
-        </td>
-        <td><p>Construct ORDER BY RANDOM()</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draftTablePath.html">draftTablePath()</a></code> </p>
-        </td>
-        <td><p>Construct schemaTableName</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draftWhereIn.html">draftWhereIn()</a></code> </p>
-        </td>
-        <td><p>Render x in "WHERE x IN y"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draftWhereLike.html">draftWhereLike()</a></code> </p>
-        </td>
-        <td><p>Render "WHERE x LIKE y"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draftWhereLowerIn.html">draftWhereLowerIn()</a></code> </p>
-        </td>
-        <td><p>Render "WHERE lowercase x IN y" Component</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draftWhereLowerLike.html">draftWhereLowerLike()</a></code> </p>
-        </td>
-        <td><p>Render WHERE lowercase x LIKE y</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draftWhereLowerNotIn.html">draftWhereLowerNotIn()</a></code> </p>
-        </td>
-        <td><p>Render "WHERE lowercase x NOT IN y"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draftWhereNotIn.html">draftWhereNotIn()</a></code> </p>
-        </td>
-        <td><p>Render "WHERE x NOT IN y"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draft_base.html">draft_base()</a></code> </p>
-        </td>
-        <td><p>Construct a base SQL query</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draft_create_table_from_df.html">draft_create_table_from_df()</a></code> </p>
-        </td>
-        <td><p>Draft the SQL to Create Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draft_in.html">draft_in()</a></code> </p>
-        </td>
-        <td><p>Render y in "WHERE x IN (y)"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draft_join.html">draft_join()</a></code> </p>
-        </td>
-        <td><p>Construct a join part of a SQL Statement</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draft_limit.html">draft_limit()</a></code> </p>
-        </td>
-        <td><p>Construct LIMIT</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draft_random.html">draft_random()</a></code> </p>
-        </td>
-        <td><p>Construct ORDER BY RANDOM()</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draft_table_path.html">draft_table_path()</a></code> </p>
-        </td>
-        <td><p>Construct schemaTableName</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draft_where_in.html">draft_where_in()</a></code> </p>
-        </td>
-        <td><p>Render x in "WHERE x IN y"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draft_where_like.html">draft_where_like()</a></code> </p>
-        </td>
-        <td><p>Render "WHERE x LIKE y"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draft_where_lower_in.html">draft_where_lower_in()</a></code> </p>
-        </td>
-        <td><p>Render "WHERE lowercase x IN y" Component</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draft_where_lower_like.html">draft_where_lower_like()</a></code> </p>
-        </td>
-        <td><p>Render WHERE lowercase x LIKE y</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draft_where_lower_not_in.html">draft_where_lower_not_in()</a></code> </p>
-        </td>
-        <td><p>Render "WHERE lowercase x NOT IN y"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draft_where_not_in.html">draft_where_not_in()</a></code> </p>
-        </td>
-        <td><p>Render "WHERE x NOT IN y"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dropCascade.html">dropCascade()</a></code> <code><a href="dropCascade.html">dropCascade()</a></code> </p>
-        </td>
-        <td><p>Drop a Postgres schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dropIfExists.html">dropIfExists()</a></code> </p>
-        </td>
-        <td><p>Drop a Postgres schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dropSchema.html">dropSchema()</a></code> <code><a href="dropSchema.html">dropSchema()</a></code> </p>
-        </td>
-        <td><p>Drop a Postgres schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dropTable.html">dropTable()</a></code> </p>
-        </td>
-        <td><p>Drop a Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="drop_all_staging_tables.html">drop_all_staging_tables()</a></code> </p>
-        </td>
-        <td><p>Drop V Tables</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="drop_cascade.html">drop_cascade()</a></code> </p>
-        </td>
-        <td><p>Drop a Postgres schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="drop_db.html">drop_db()</a></code> </p>
-        </td>
-        <td><p>Drop a Database</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="drop_if_exists.html">drop_if_exists()</a></code> </p>
-        </td>
-        <td><p>Drop a Postgres schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="drop_schema.html">drop_schema()</a></code> <code><a href="drop_schema.html">drop_schema()</a></code> </p>
-        </td>
-        <td><p>Drop a Postgres schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="drop_table.html">drop_table()</a></code> </p>
-        </td>
-        <td><p>Drop a Table</p></td>
       </tr><tr>
         
         <td>
@@ -762,51 +376,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="execute.html">execute()</a></code> <code><a href="execute.html">execute()</a></code> </p>
-        </td>
-        <td><p>Execute SQL</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="execute_fun_ff.html">execute_fun_ff()</a></code> </p>
         </td>
         <td><p>Execute Function Factory using Connection Expression</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="execute_n.html">execute_n()</a></code> </p>
-        </td>
-        <td><p>Query with more than 1 SQL Statements</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="field_exists.html">field_exists()</a></code> <code><a href="field_exists.html">field_exists()</a></code> </p>
-        </td>
-        <td><p>Does a field exist?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="fileQuery.html">fileQuery()</a></code> </p>
-        </td>
-        <td><p>Send Query to any Postgres connection</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="fileSend.html">fileSend()</a></code> </p>
-        </td>
-        <td><p>Send Query to any Postgres connection</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="file_query.html">file_query()</a></code> </p>
-        </td>
-        <td><p>Send Query to any Postgres connection</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="file_send.html">file_send()</a></code> </p>
-        </td>
-        <td><p>Send Query to any Postgres connection</p></td>
       </tr><tr>
         
         <td>
@@ -816,231 +388,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="flag_no_rows.html">flag_no_rows()</a></code> </p>
-        </td>
-        <td><p>Flag if Data Has 0 Rows</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="getConnDB.html">getConnDB()</a></code> </p>
-        </td>
-        <td><p>Get Connection Database</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="getTable.html">getTable()</a></code> </p>
-        </td>
-        <td><p>Get Full Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_conn_db.html">get_conn_db()</a></code> </p>
-        </td>
-        <td><p>Get Connection Database</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_table.html">get_table()</a></code> </p>
-        </td>
-        <td><p>Get Full Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="grantSchema.html">grantSchema()</a></code> </p>
-        </td>
-        <td><p>Grant All Privileges to a Schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="grant_all_in_schema.html">grant_all_in_schema()</a></code> </p>
-        </td>
-        <td><p>Grant All Privileges on all Tables</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ij2.html">ij2()</a></code> </p>
-        </td>
-        <td><p>Second Generation Inner Join</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="isClosed.html">isClosed()</a></code> </p>
-        </td>
-        <td><p>Is the Connection Closed?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="isReserved.html">isReserved()</a></code> </p>
-        </td>
-        <td><p>Is a string a reserve word?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_closed.html">is_closed()</a></code> </p>
-        </td>
-        <td><p>Is the Connection Closed?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_conn_open.html">is_conn_open()</a></code> </p>
-        </td>
-        <td><p>Is the Connection Open?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_reserved.html">is_reserved()</a></code> </p>
-        </td>
-        <td><p>Is a string a reserve word?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="join2.html">join2()</a></code> </p>
-        </td>
-        <td><p>2nd Generation Join</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="join2_ff.html">join2_ff()</a></code> </p>
         </td>
         <td><p>Second Generation Join Function Factory</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="kill.html">kill()</a></code> </p>
-        </td>
-        <td><p>Kill All Connections</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="linkQuery.html">linkQuery()</a></code> </p>
-        </td>
-        <td><p>Query using a link to SQL file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="linkSend.html">linkSend()</a></code> </p>
-        </td>
-        <td><p>Send a statument using a link to SQL file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="link_query.html">link_query()</a></code> </p>
-        </td>
-        <td><p>Query using a link to SQL file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="link_send.html">link_send()</a></code> </p>
-        </td>
-        <td><p>Send a statument using a link to SQL file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="lj2.html">lj2()</a></code> </p>
-        </td>
-        <td><p>Second Generation Left Join</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="loadCache.html">loadCache()</a></code> </p>
-        </td>
-        <td><p>Load a Cached Resultset from a SQL Query</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="loadCachedJoin.html">loadCachedJoin()</a></code> </p>
-        </td>
-        <td><p>Load a Cached Join Resultset</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="loadCachedQuery.html">loadCachedQuery()</a></code> </p>
-        </td>
-        <td><p>Load a Cached Query Resultset</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="load_cache.html">load_cache()</a></code> </p>
-        </td>
-        <td><p>Load a Cached Resultset from a SQL Query</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="load_cached_join.html">load_cached_join()</a></code> </p>
-        </td>
-        <td><p>Load a Cached Join Resultset</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="load_cached_query.html">load_cached_query()</a></code> </p>
-        </td>
-        <td><p>Load a Cached Query Resultset</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="local.html">local</a></code> </p>
-        </td>
-        <td><p>Local Postgres Database Function Family</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="localConnect.html">localConnect()</a></code> </p>
-        </td>
-        <td><p>Connect to a Local Postgres Database</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="localFileQuery.html">localFileQuery()</a></code> </p>
-        </td>
-        <td><p>Query local Postgess from a file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="localFileSend.html">localFileSend()</a></code> </p>
-        </td>
-        <td><p>Send Statement to a local Postgess from a file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="localQuery.html">localQuery()</a></code> </p>
-        </td>
-        <td><p>Query local Postgess</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="localSend.html">localSend()</a></code> </p>
-        </td>
-        <td><p>Send a SQL Statement to a Local Postgres</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="local_connect.html">local_connect()</a></code> </p>
-        </td>
-        <td><p>Connect to a Local Postgres Database</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="local_file_query.html">local_file_query()</a></code> </p>
-        </td>
-        <td><p>Query local Postgess from a file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="local_file_send.html">local_file_send()</a></code> </p>
-        </td>
-        <td><p>Send Statement to a local Postgess from a file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="local_query.html">local_query()</a></code> </p>
-        </td>
-        <td><p>Query local Postgess</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="local_send.html">local_send()</a></code> </p>
-        </td>
-        <td><p>Send a SQL Statement to a Local Postgres</p></td>
       </tr><tr>
         
         <td>
@@ -1062,103 +412,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="lsFields.html">lsFields()</a></code> </p>
-        </td>
-        <td><p>List Fields</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="lsSchema.html">lsSchema()</a></code> </p>
-        </td>
-        <td><p>List Schemas</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="lsTables.html">lsTables()</a></code> </p>
-        </td>
-        <td><p>List Tables</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ls_db.html">ls_db()</a></code> </p>
-        </td>
-        <td><p>List Databases</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ls_fields.html">ls_fields()</a></code> </p>
-        </td>
-        <td><p>List Fields</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ls_schema.html">ls_schema()</a></code> </p>
-        </td>
-        <td><p>List Schemas</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ls_tables.html">ls_tables()</a></code> </p>
-        </td>
-        <td><p>List Tables</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ls_users.html">ls_users()</a></code> </p>
-        </td>
-        <td><p>List Users</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="makeLocalConnDetails.html">makeLocalConnDetails()</a></code> </p>
-        </td>
-        <td><p>Make a local Postgres Connection Details object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="make_local_conn_details.html">make_local_conn_details()</a></code> </p>
-        </td>
-        <td><p>Make a local Postgres Connection Details object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="migrate.html">migrate()</a></code> </p>
-        </td>
-        <td><p>Migrate Tables</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="parseSQL.html">parseSQL()</a></code> </p>
-        </td>
-        <td><p>Parse SQL into Single Statements</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="parse_sql.html">parse_sql()</a></code> </p>
-        </td>
-        <td><p>Parse SQL into Single Statements</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pasteWheres.html">pasteWheres()</a></code> </p>
-        </td>
-        <td><p>Paste All Drafted Where Statements</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="paste_wheres.html">paste_wheres()</a></code> </p>
-        </td>
-        <td><p>Paste All Drafted Where Statements</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pg13.html">pg13</a></code> </p>
-        </td>
-        <td><p>pg13
-Wrappers to DatabaseConnector and SqlRender Packages</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="q_creds_ff.html">q_creds_ff()</a></code> </p>
         </td>
         <td><p>Query Function Factory</p></td>
@@ -1171,225 +424,77 @@ Wrappers to DatabaseConnector and SqlRender Packages</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="query.html">query()</a></code> </p>
+          <p><code><a href="send_ff.html">send_ff()</a></code> <code><a href="send_ff.html">send_ff()</a></code> </p>
         </td>
-        <td><p>Send Query to any Postgres connection</p></td>
+        <td><p>Send Function Factor</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-logging" class="hasAnchor"><a href="#section-logging" class="anchor"></a>Logging</h2>
+          <p class="section-desc"><p>Create a logging system of tables and functions</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="create_log.html">create_log()</a></code> </p>
+        </td>
+        <td><p>FUNCTION_TITLE</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="quietly.connDB.html">quietly.connDB()</a></code> </p>
+          <p><code><a href="log_error_ff.html">log_error_ff()</a></code> </p>
         </td>
-        <td><p>Connect without Console Messages</p></td>
+        <td><p>FUNCTION_TITLE</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="readTable.html">readTable()</a></code> </p>
+          <p><code><a href="log_start_ff.html">log_start_ff()</a></code> </p>
         </td>
-        <td><p>Read an Entire Table</p></td>
+        <td><p>FUNCTION_TITLE</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="read_table.html">read_table()</a></code> </p>
+          <p><code><a href="log_stop_ff.html">log_stop_ff()</a></code> </p>
         </td>
-        <td><p>Read an Entire Table</p></td>
+        <td><p>FUNCTION_TITLE</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-logicals" class="hasAnchor"><a href="#section-logicals" class="anchor"></a>Logicals</h2>
+          <p class="section-desc"><p>Logical questions on connection or database attributes</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="db_exists.html">db_exists()</a></code> </p>
+        </td>
+        <td><p>Does a database exist?</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="refreshTable.html">refreshTable()</a></code> </p>
+          <p><code><a href="drop_if_exists.html">drop_if_exists()</a></code> </p>
         </td>
-        <td><p>Refresh Table with New Data</p></td>
+        <td><p>Drop a Postgres schema</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="refresh_table.html">refresh_table()</a></code> </p>
+          <p><code><a href="field_exists.html">field_exists()</a></code> </p>
         </td>
-        <td><p>Refresh Table with New Data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="renameDB.html">renameDB()</a></code> </p>
-        </td>
-        <td><p>Rename a table in a Postgres schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="renameTable.html">renameTable()</a></code> </p>
-        </td>
-        <td><p>Rename a table in a Postgres schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rename_db.html">rename_db()</a></code> </p>
-        </td>
-        <td><p>Rename a Database</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rename_table.html">rename_table()</a></code> </p>
-        </td>
-        <td><p>Rename a table in a Postgres schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="renderCopy.html">renderCopy()</a></code> </p>
-        </td>
-        <td><p>Render SQL to copy a file to a table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="renderCreateDB.html">renderCreateDB()</a></code> </p>
-        </td>
-        <td><p>Render SQL to Create Database</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="renderCreateSchema.html">renderCreateSchema()</a></code> </p>
-        </td>
-        <td><p>Render SQL to Create a Schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="renderDropSchema.html">renderDropSchema()</a></code> </p>
-        </td>
-        <td><p>Render SQL to Drop a Schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="renderDropTable.html">renderDropTable()</a></code> </p>
-        </td>
-        <td><p>Render SQL to Drop a Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="renderGrantSchema.html">renderGrantSchema()</a></code> </p>
-        </td>
-        <td><p>Render GRANT ALL PRIVILEGES</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="renderInfoSchemaCols.html">renderInfoSchemaCols()</a></code> </p>
-        </td>
-        <td><p>Render SQL that returns Column Information</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="renderLsSchema.html">renderLsSchema()</a></code> </p>
-        </td>
-        <td><p>Render SQL to List All Schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="renderRenameDB.html">renderRenameDB()</a></code> </p>
-        </td>
-        <td><p>Render SQL to Rename a Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="renderRenameTable.html">renderRenameTable()</a></code> </p>
-        </td>
-        <td><p>Render SQL to Rename a Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="renderRowCount.html">renderRowCount()</a></code> </p>
-        </td>
-        <td><p>Render SQL for a Table Row Count</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="render_copy.html">render_copy()</a></code> </p>
-        </td>
-        <td><p>Render SQL to copy a file to a table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="render_create_db.html">render_create_db()</a></code> </p>
-        </td>
-        <td><p>Render SQL to Create Database</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="render_create_schema.html">render_create_schema()</a></code> </p>
-        </td>
-        <td><p>Render SQL to Create a Schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="render_drop_schema.html">render_drop_schema()</a></code> </p>
-        </td>
-        <td><p>Render SQL to Drop a Schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="render_drop_table.html">render_drop_table()</a></code> </p>
-        </td>
-        <td><p>Render SQL to Drop a Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="render_grant_schema.html">render_grant_schema()</a></code> </p>
-        </td>
-        <td><p>Render GRANT ALL PRIVILEGES</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="render_info_schema_cols.html">render_info_schema_cols()</a></code> </p>
-        </td>
-        <td><p>Render SQL that returns Column Information</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="render_ls_schema.html">render_ls_schema()</a></code> </p>
-        </td>
-        <td><p>Render SQL to List All Schema</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="render_rename_db.html">render_rename_db()</a></code> </p>
-        </td>
-        <td><p>Render SQL to Rename a Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="render_rename_table.html">render_rename_table()</a></code> </p>
-        </td>
-        <td><p>Render SQL to Rename a Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="render_row_count.html">render_row_count()</a></code> </p>
-        </td>
-        <td><p>Render SQL for a Table Row Count</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rmIfClosed.html">rmIfClosed()</a></code> </p>
-        </td>
-        <td><p>Remove a Closed Connection Object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rm_if_closed.html">rm_if_closed()</a></code> <code><a href="rm_if_closed.html">rm_if_closed()</a></code> <code><a href="rm_if_closed.html">rm_if_closed()</a></code> </p>
-        </td>
-        <td><p>Remove a Closed Connection Object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="s_quo.html">s_quo()</a></code> </p>
-        </td>
-        <td><p>Wrap with Single Quotes</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="saveSQL.html">saveSQL()</a></code> <code><a href="saveSQL.html">saveSQL()</a></code> </p>
-        </td>
-        <td><p>Export a sql statement to a file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="save_sql.html">save_sql()</a></code> <code><a href="save_sql.html">save_sql()</a></code> </p>
-        </td>
-        <td><p>Export a sql statement to a file</p></td>
+        <td><p>Does a field exist?</p></td>
       </tr><tr>
         
         <td>
@@ -1399,64 +504,41 @@ Wrappers to DatabaseConnector and SqlRender Packages</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="searchTable.html">searchTable()</a></code> </p>
+          <p><code><a href="table_exists.html">table_exists()</a></code> </p>
         </td>
-        <td><p>Search a Table for a Value</p></td>
+        <td><p>Does a table exist?</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="search_table.html">search_table()</a></code> </p>
+          <p><code><a href="is_closed.html">is_closed()</a></code> </p>
         </td>
-        <td><p>Search a Table for a Value</p></td>
+        <td><p>Is the Connection Closed?</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="send.html">send()</a></code> </p>
+          <p><code><a href="is_conn_open.html">is_conn_open()</a></code> </p>
         </td>
-        <td><p>Send a SQL Statement to Postgres</p></td>
+        <td><p>Is the Connection Open?</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sendList.html">sendList()</a></code> </p>
+          <p><code><a href="is_reserved.html">is_reserved()</a></code> </p>
         </td>
-        <td><p>Send a List of SQL Statements</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="send_ff.html">send_ff()</a></code> <code><a href="send_ff.html">send_ff()</a></code> </p>
-        </td>
-        <td><p>Send Function Factor</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="send_list.html">send_list()</a></code> </p>
-        </td>
-        <td><p>Send a List of SQL Statements</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sourceFilePath.html">sourceFilePath()</a></code> <code><a href="sourceFilePath.html">sourceFilePath()</a></code> </p>
-        </td>
-        <td><p>Get SourceFile Path</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="source_file_path.html">source_file_path()</a></code> <code><a href="source_file_path.html">source_file_path()</a></code> </p>
-        </td>
-        <td><p>Get SourceFile Path</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="summarizeDB.html">summarizeDB()</a></code> </p>
-        </td>
-        <td><p>FUNCTION_TITLE</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="summarizeSchema.html">summarizeSchema()</a></code> </p>
-        </td>
-        <td><p>Summarize a Schema</p></td>
-      </tr><tr>
+        <td><p>Is a string a reserve word?</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-summaries" class="hasAnchor"><a href="#section-summaries" class="anchor"></a>Summaries</h2>
+          <p class="section-desc"><p>Summarize counts and valuesets at the field level across a subset of fields, an entire table or an entire schema</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="summarize_field.html">summarize_field()</a></code> </p>
@@ -1480,84 +562,6 @@ Wrappers to DatabaseConnector and SqlRender Packages</p></td>
           <p><code><a href="summarize_table.html">summarize_table()</a></code> </p>
         </td>
         <td><p>Summarize all Fields in a Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="table.path.html">table.path()</a></code> <code><a href="table.path.html">table.path()</a></code> </p>
-        </td>
-        <td><p>Construct schemaTableName</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="table_exists.html">table_exists()</a></code> <code><a href="table_exists.html">table_exists()</a></code> </p>
-        </td>
-        <td><p>Does a table exist?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="terminateBuild.html">terminateBuild()</a></code> <code><a href="terminateBuild.html">terminateBuild()</a></code> </p>
-        </td>
-        <td><p>Terminate a SQL Statement with a semicolon</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="terminate_build.html">terminate_build()</a></code> <code><a href="terminate_build.html">terminate_build()</a></code> </p>
-        </td>
-        <td><p>Terminate a SQL Statement with a semicolon</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="typewrite_activity.html">typewrite_activity()</a></code> </p>
-        </td>
-        <td><p>Typewrite Activity</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="typewrite_sql.html">typewrite_sql()</a></code> </p>
-        </td>
-        <td><p>Typewrite SQL</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="writeStagingTable.html">writeStagingTable()</a></code> </p>
-        </td>
-        <td><p>Write a Table that is Dropped On Exit</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="writeTable.html">writeTable()</a></code> </p>
-        </td>
-        <td><p>Write a Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="writeTable2.html">writeTable2()</a></code> </p>
-        </td>
-        <td><p>Write a Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="write_sql_file.html">write_sql_file()</a></code> </p>
-        </td>
-        <td><p>Export a sql statement to a file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="write_staging_table.html">write_staging_table()</a></code> </p>
-        </td>
-        <td><p>Write a Staging Table.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="write_table.html">write_table()</a></code> </p>
-        </td>
-        <td><p>Write a Table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="write_table2.html">write_table2()</a></code> </p>
-        </td>
-        <td><p>Write a Table</p></td>
       </tr>
     </tbody>
     </table>

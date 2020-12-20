@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build a SQL Query — buildQuery • pg13</title>
+<title>Draft SQL to Create a Table — draft_create_table • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Build a SQL Query — buildQuery" />
-<meta property="og:description" content="A SQL query is built using the given arguments. Currently, only 1 whereIn and whereNot in parameters can be set." />
+<meta property="og:title" content="Draft SQL to Create a Table — draft_create_table" />
+<meta property="og:description" content="Draft a SQL that creates a table using DDL derived from a dataframe. Drafting is stopped if the given tablename or fields in the dataframe are a SQL reserve word." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,33 +119,30 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Build a SQL Query</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a></small>
-    <div class="hidden name"><code>buildQuery.Rd</code></div>
+    <h1>Draft SQL to Create a Table</h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/create_table.R'><code>R/create_table.R</code></a></small>
+    <div class="hidden name"><code>draft_create_table.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A SQL query is built using the given arguments. Currently, only 1 whereIn and whereNot in parameters can be set.</p>
+    <p>Draft a SQL that creates a table using DDL derived from a dataframe. Drafting is stopped if the given tablename or fields in the dataframe are a SQL reserve word.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>buildQuery</span><span class='op'>(</span>
-  fields <span class='op'>=</span> <span class='st'>"*"</span>,
-  distinct <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  <span class='va'>schema</span>,
-  <span class='va'>tableName</span>,
-  whereInField <span class='op'>=</span> <span class='cn'>NULL</span>,
-  whereInVector <span class='op'>=</span> <span class='cn'>NULL</span>,
-  whereNotInField <span class='op'>=</span> <span class='cn'>NULL</span>,
-  whereNotInVector <span class='op'>=</span> <span class='cn'>NULL</span>,
-  caseInsensitive <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  n <span class='op'>=</span> <span class='cn'>NULL</span>,
-  n_type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"limit"</span>, <span class='st'>"random"</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>draft_create_table</span><span class='op'>(</span><span class='va'>schema</span>, <span class='va'>table_name</span>, if_not_exists <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>...</th>
+      <td><p>Named vector of field names and their corresponding data definition.</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>SQL statement as a character string.</p>
+    <div class='dont-index'><p><code><a href='https://rlang.r-lib.org/reference/list2.html'>list2</a></code>
+<code><a href='https://ohdsi.github.io/SqlRender/reference/render.html'>render</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
