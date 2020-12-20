@@ -12,14 +12,14 @@
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @examples
+#' @examples 
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
 #' @rdname summarize_field
-#' @export
+#' @export 
 summarize_field <-
         function(conn,
                  conn_fun,
@@ -88,14 +88,14 @@ summarize_field <-
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @examples
+#' @examples 
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
 #' @rdname summarize_fields
-#' @export
+#' @export 
 summarize_fields <-
         function(conn,
                  conn_fun,
@@ -145,14 +145,14 @@ summarize_fields <-
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @examples
+#' @examples 
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
 #' @rdname summarize_table
-#' @export
+#' @export 
 summarize_table <-
         function(
                 conn,
@@ -197,14 +197,14 @@ summarize_table <-
 #' @param ... PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @examples
+#' @examples 
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
 #' @rdname summarize_schema
-#' @export
+#' @export 
 summarize_schema <-
         function( conn,
                   conn_fun,
