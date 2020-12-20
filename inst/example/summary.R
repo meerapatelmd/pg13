@@ -41,8 +41,16 @@ summarize_fields(conn = conn, schema = "test_schema", table = "test_table", fiel
 summarize_fields(conn = conn, schema = "test_schema", table = "test_table", fields = c("a", "b"))
 summarize_fields(conn = conn, schema = "test_schema", table = "test_table2", fields = c("c", "D"))
 
-# drop_schema(conn = conn,
-#             schema = "test_schema",
-#             cascade = TRUE)
-#
-# dc(conn = conn)
+
+# To summarize an entire table (all the fields without manually inputting them)
+summarize_table(conn = conn, schema = "test_schema", table = "test_table3")
+
+# An entire schema can also be summarized
+summarize_schema(conn = conn, schema = "test_schema")
+
+
+drop_schema(conn = conn,
+            schema = "test_schema",
+            cascade = TRUE)
+
+dc(conn = conn)
