@@ -19,7 +19,7 @@ append_table <-
         function(conn,
                  conn_fun,
                  schema,
-                 tableName,
+                 table,
                  data,
                  verbose = TRUE,
                  render_sql = TRUE,
@@ -36,7 +36,7 @@ append_table <-
                 brake_closed_conn(conn = conn)
                 flag_no_rows(data = data)
 
-                schema_table_name <- sprintf("%s.%s", schema, table_name)
+                schema_table <- sprintf("%s.%s", schema, table)
 
 
                 if (render_sql) {
@@ -52,7 +52,7 @@ append_table <-
                 }
 
                 DatabaseConnector::dbAppendTable(conn = conn,
-                                                 name = schemaTableName,
+                                                 name = schema_table,
                                                  value = as.data.frame(data),
                                                  ...)
 
@@ -85,7 +85,7 @@ write_table <-
         function(conn,
                  conn_fun,
                  schema,
-                 tableName,
+                 table_name,
                  data,
                  drop_existing = FALSE,
                  verbose = TRUE,
@@ -105,10 +105,14 @@ write_table <-
 
                 if (drop_existing) {
 
-                    dropTable(conn = conn,
-                              schema = schema,
-                              tableName = tableName,
-                              if_exists = TRUE)
+                    drop_table(conn = conn,
+                               conn_fun = conn_fun,
+                               schema = schema,
+                               table = table_name,
+                               if_exists = TRUE,
+                               verbose = verbose,
+                               render_sql = render_sql)
+
                 }
 
                 schema_table_name <- sprintf("%s.%s", schema, table_name)
@@ -127,7 +131,7 @@ write_table <-
                 }
 
                 DatabaseConnector::dbWriteTable(conn = conn,
-                                                name = schemaTableName,
+                                                name = schema_table_name,
                                                 value = as.data.frame(data),
                                                 ...)
 
@@ -153,10 +157,11 @@ drop_table <-
     function(conn,
              conn_fun,
              schema,
-             tableName,
+             table,
              if_exists = TRUE,
              verbose = TRUE,
              render_sql = TRUE,
+             render_only = FALSE,
              ...) {
 
             if (!missing(conn_fun)) {
@@ -171,11 +176,11 @@ drop_table <-
 
             if (if_exists) {
 
-                sql_statement <- sprintf("drop table if exists %s.%s;", schema, table_name)
+                sql_statement <- sprintf("DROP TABLE IF EXISTS %s.%s;", schema, table)
 
             } else {
 
-                sql_statement <- sprintf("drop table %s.%s;", schema, table_name)
+                sql_statement <- sprintf("DROP TABLE %s.%s;", schema, table)
 
             }
 
@@ -194,8 +199,9 @@ drop_table <-
 
             send(conn = conn,
                  sql_statement = sql_statement,
-                 verbose = FALSE,
-                 render_sql = FALSE,
+                 verbose = verbose,
+                 render_sql = render_sql,
+                 render_only = render_only,
                  ...)
 
 
@@ -222,7 +228,7 @@ drop_table <-
 read_table <-
         function(conn,
                  schema,
-                 tableName,
+                 table,
                  verbose = TRUE,
                  render_sql = TRUE) {
 
@@ -284,7 +290,7 @@ read_table <-
 search_table <-
         function(conn,
                  schema,
-                 tableName,
+                 table,
                  ...,
                  values,
                  case_insensitive = TRUE,
@@ -308,7 +314,7 @@ search_table <-
 
                         fields <- ls_fields(conn = conn,
                                            schema = schema,
-                                           tableName = tableName,
+                                           table = table,
                                            verbose = verbose,
                                            render_sql = FALSE)
 
@@ -331,12 +337,12 @@ search_table <-
                                 SqlRender::render(
                                                     "
                                                     SELECT *
-                                                    FROM @schema.@tableName t
+                                                    FROM @schema.@table t
                                                     WHERE LOWER(t.@Field::varchar) IN (@values)
                                                     ;
                                                     ",
                                     schema = schema,
-                                    tableName = tableName,
+                                    table = table,
                                     Field = Field,
                                     values = values
                                 )
@@ -347,12 +353,12 @@ search_table <-
                             SqlRender::render(
                                                 "
                                                 SELECT *
-                                                FROM @schema.@tableName t
+                                                FROM @schema.@table t
                                                 WHERE t.@Field::varchar IN (@values)
                                                 ;
                                                 ",
                                 schema = schema,
-                                tableName = tableName,
+                                table = table,
                                 Field = Field,
                                 values = values
                             )
