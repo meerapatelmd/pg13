@@ -4,12 +4,14 @@
 \alias{create_db}
 \title{Create a New Database}
 \usage{
-create_db(conn, dbname, ...)
-}
-\arguments{
-\item{dbname}{Database name.}
-
-\item{...}{Additional arguments passed to \code{DatabaseConnector::dbSendStatement()}.}
+create_db(
+  conn,
+  db_name,
+  verbose = TRUE,
+  render_sql = TRUE,
+  render_only = FALSE,
+  ...
+)
 }
 \description{
 Create a New Database

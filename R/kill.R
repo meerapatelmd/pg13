@@ -5,12 +5,14 @@
 #' @seealso
 #'  \code{\link[SqlRender]{render}}
 #' @importFrom SqlRender render
+#' @export
 
 
 kill <-
         function(conn,
                  verbose = TRUE,
-                 render_sql = TRUE) {
+                 render_sql = TRUE,
+                 render_only = FALSE) {
 
                 send(conn = conn,
                      sql_statement =
@@ -22,6 +24,7 @@ kill <-
                                         dbname = getConnDB(conn = conn)
                                         ),
                      verbose = verbose,
-                     render_sql = render_sql
+                     render_sql = render_sql,
+                     render_only = render_only
                 )
         }

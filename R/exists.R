@@ -15,16 +15,16 @@
 field_exists <-
         function(conn,
                  schema,
-                 tableName,
+                 table,
                  field) {
 
                 fields <- ls_fields(conn = conn,
                                     schema = schema,
-                                    tableName = tableName,
+                                    table = table,
                                     verbose = FALSE,
                                     render_sql = FALSE)
 
-                if (tolower(field) %in% Fields) {
+                if (tolower(field) %in% fields) {
 
                         TRUE
 
@@ -87,7 +87,7 @@ schema_exists <-
 table_exists <-
         function(conn,
                  schema,
-                 tableName) {
+                 table_name) {
 
 
                 tables <- ls_tables(conn = conn,
@@ -95,7 +95,37 @@ table_exists <-
                                     verbose = FALSE,
                                     render_sql = FALSE)
 
-                if (toupper(tableName) %in% Tables) {
+                if (toupper(table_name) %in% tables) {
+
+                        TRUE
+
+                } else {
+
+                        FALSE
+                }
+        }
+
+
+#' @title
+#' Does a database exist?
+#'
+#' @inheritParams base_args
+#'
+#' @rdname db_exists
+#'
+#' @export
+#' @family logical functions
+
+db_exists <-
+        function(conn,
+                 db_name) {
+
+
+                dbs <- ls_db(conn = conn,
+                                    verbose = FALSE,
+                                    render_sql = FALSE)
+
+                if (tolower(db_name) %in% dbs) {
 
                         TRUE
 

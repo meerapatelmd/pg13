@@ -197,7 +197,6 @@ create_schema <-
         function(conn,
                  conn_fun,
                  schema,
-                 sql_statement,
                  verbose = TRUE,
                  render_sql = TRUE,
                  render_only = FALSE,

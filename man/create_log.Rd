@@ -10,7 +10,8 @@ create_log(
   schema,
   log_table,
   verbose = TRUE,
-  render_sql = TRUE
+  render_sql = TRUE,
+  render_only = FALSE
 )
 }
 \arguments{

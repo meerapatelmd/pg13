@@ -9,22 +9,22 @@ draft_base <-
     function(fields = "*",
              distinct = FALSE,
              schema,
-             tableName) {
+             table_name) {
 
             if (distinct) {
 
-                    SqlRender::render("SELECT DISTINCT @fields FROM @schema.@tableName",
+                    SqlRender::render("SELECT DISTINCT @fields FROM @schema.@table_name",
                                       fields = fields,
                                       schema = schema,
-                                      tableName = tableName)
+                                      table_name = table_name)
 
 
             } else {
 
-                    SqlRender::render("SELECT @fields FROM @schema.@tableName",
+                    SqlRender::render("SELECT @fields FROM @schema.@table_name",
                                               fields = fields,
                                               schema = schema,
-                                              tableName = tableName)
+                                              table_name = table_name)
 
             }
 
@@ -139,11 +139,11 @@ draft_table_path <-
 
 table.path <-
     function(schema,
-             tableName) {
+             table_name) {
 
-        SqlRender::render("@schema.@tableName",
+        SqlRender::render("@schema.@table_name",
                           schema = schema,
-                          tableName = tableName)
+                          table_name = table_name)
 
     }
 

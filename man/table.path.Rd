@@ -4,9 +4,9 @@
 \alias{table.path}
 \title{Construct schemaTableName}
 \usage{
-table.path(schema, tableName)
+table.path(schema, table_name)
 
-table.path(schema, tableName)
+table.path(schema, table_name)
 }
 \description{
 construct schemaTableName from the schema and tableName

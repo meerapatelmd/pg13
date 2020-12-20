@@ -4,7 +4,7 @@
 \alias{kill}
 \title{Kill All Connections}
 \usage{
-kill(conn, verbose = TRUE, render_sql = TRUE)
+kill(conn, verbose = TRUE, render_sql = TRUE, render_only = FALSE)
 }
 \description{
 Kill All Connections

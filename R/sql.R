@@ -21,6 +21,7 @@ query <-
             if (render_only) {
 
                     typewrite_sql(sql_statement = sql_statement)
+                    invisible(sql_statement)
 
             } else {
 
@@ -115,6 +116,7 @@ execute_n <-
 
                     sapply(sql_statements,
                            FUN = typewrite_sql)
+                invisible(sql_statements)
 
 
             } else {
@@ -187,6 +189,7 @@ send <-
                 if (render_only) {
 
                         typewrite_sql(sql_statement = sql_statement)
+                        invisible(sql_statement)
 
                 } else {
 

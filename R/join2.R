@@ -11,7 +11,7 @@ join2 <-
                  kind = c("left", "right", "inner", "full"),
                  data,
                  schema,
-                 tableName,
+                 table_name,
                  ...,
                  cast_to_varchar = TRUE,
                  case_insensitive = TRUE,
@@ -24,16 +24,16 @@ join2 <-
                           choices = c("left", "right", "inner", "full"),
                           several.ok = FALSE)
 
-                tableName <-
+                table_name <-
                         writeVTable(
-                                writeSchema = writeSchema,
+                                write_schema = write_schema,
                                 data = data,
                                 verbose = verbose
                         )
 
                 on.exit(dropWriteTable(
-                        writeSchema = writeSchema,
-                        tableName = tableName,
+                        write_schema = write_schema,
+                        table_name = table_name,
                         verbose = verbose
                 ))
 
@@ -51,7 +51,7 @@ join2 <-
                         SqlRender::render(
                                 "
                               SELECT *
-                              FROM @writeSchema.@tableName t
+                              FROM @write_schema.@table_name t
                               @join_type JOIN @omopSchema.@omopTable omop
                               ON @join_clause
                               ;
@@ -59,8 +59,8 @@ join2 <-
                                 omopSchema = omopSchema,
                                 omopTable = omopTable,
                                 join_type = join_type,
-                                writeSchema = writeSchema,
-                                tableName = tableName,
+                                write_schema = write_schema,
+                                table_name = table_name,
                                 join_clause = join_clause)
 
 
@@ -174,7 +174,7 @@ draft_join_on <-
 #' @export
 
 join2_ff <-
-        function(writeSchema,
+        function(write_schema,
                  omopSchema,
                  omopTable,
                  join_type) {
@@ -183,7 +183,7 @@ join2_ff <-
                          omopSchema,
                          omopTable,
                          ...,
-                         writeSchema,
+                         write_schema,
                          cast_to_varchar = TRUE,
                          case_insensitive = TRUE,
                          render_sql = TRUE,
@@ -196,7 +196,7 @@ join2_ff <-
                                 omopSchema = omopSchema,
                                 omopTable = omopTable,
                                 ...,
-                                writeSchema = writeSchema,
+                                write_schema = write_schema,
                                 join_type = join_type,
                                 cast_to_varchar = cast_to_varchar,
                                 case_insensitive = case_insensitive,

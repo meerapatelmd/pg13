@@ -4,7 +4,7 @@
 \alias{draft_base}
 \title{Construct a base SQL query}
 \usage{
-draft_base(fields = "*", distinct = FALSE, schema, tableName)
+draft_base(fields = "*", distinct = FALSE, schema, table_name)
 }
 \arguments{
 \item{distinct}{if TRUE, the DISTINCT fields will be selected for.}

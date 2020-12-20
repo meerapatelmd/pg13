@@ -26,7 +26,8 @@ create_log <-
                  schema,
                  log_table,
                  verbose = TRUE,
-                 render_sql = TRUE) {
+                 render_sql = TRUE,
+                 render_only = FALSE) {
 
                 sql_statement <-
                         SqlRender::render(
@@ -43,7 +44,8 @@ create_log <-
                 send(conn = conn,
                            sql_statement = sql_statement,
                            verbose = verbose,
-                           render_sql = render_sql)
+                           render_sql = render_sql,
+                     render_only = render_only)
 
         }
 
