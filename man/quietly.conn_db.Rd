@@ -4,7 +4,7 @@
 \alias{quietly.conn_db}
 \title{Connect without Console Messages}
 \usage{
-quietly.conn_db()
+quietly.conn_db(...)
 }
 \description{
 Connect without Console Messages

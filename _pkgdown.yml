@@ -25,6 +25,7 @@ reference:
       - drop_table
       - append_table
       - search_table
+      - contains('staging')
   - title: Build
     desc: >
       Build queries of predetermined styles

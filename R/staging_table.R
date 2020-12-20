@@ -4,9 +4,13 @@
 #' @description
 #' A `Staging Table` is one that is named automatically in a naming convention of "V" followed by 14 integers representing the timestamp of the transaction. The staging table can optionally be dropped on exit in the parent frame from which the function is being called when `drop_on_exit` is set to TRUE.
 #'
+#' @return
+#' String of the staging table
+#'
 #' @export
 #' @rdname write_staging_table
 #' @inheritParams args
+#' @example inst/example/staging_table.R
 
 write_staging_table <-
         function(conn,
@@ -75,6 +79,7 @@ write_staging_table <-
 #' @importFrom purrr map
 #' @export
 #' @rdname drop_all_staging_tables
+#' @example inst/example/staging_table.R
 
 drop_all_staging_tables <-
         function(conn,
