@@ -13,6 +13,7 @@
 #' @importFrom DatabaseConnector dbAppendTable
 #'
 #' @export
+#' @example inst/example/table.R
 
 
 append_table <-
@@ -79,7 +80,7 @@ append_table <-
 #' @rdname write_table
 #'
 #' @export
-
+#' @example inst/example/table.R
 
 write_table <-
         function(conn,
@@ -152,6 +153,7 @@ write_table <-
 #'
 #' @rdname drop_table
 #' @export
+#' @example inst/example/table.R
 
 drop_table <-
     function(conn,
@@ -223,17 +225,20 @@ drop_table <-
 #' @inheritParams base_args
 #'
 #' @export
-
+#' @example inst/example/table.R
 
 read_table <-
         function(conn,
                  schema,
                  table,
                  verbose = TRUE,
-                 render_sql = TRUE) {
+                 render_sql = TRUE,
+                 warn_no_rows = TRUE,
+                 render_only = FALSE,
+                 ...) {
 
 
-            sql_statement <- sprintf("select * from %s.%s;", schema, table_name)
+            sql_statement <- sprintf("SELECT * FROM %s.%s;", schema, table)
 
             if (render_sql) {
 
@@ -249,10 +254,13 @@ read_table <-
             }
 
             resultset <-
-            query(conn = conn,
-                  sql_statement = sql_statement,
-                  verbose = FALSE,
-                  render_sql = FALSE)
+                query(conn = conn,
+                      sql_statement = sql_statement,
+                      verbose = verbose,
+                      render_sql = render_sql,
+                      warn_no_rows = warn_no_rows,
+                      render_only = render_only,
+                      ...)
 
             if (verbose) {
 
@@ -285,7 +293,7 @@ read_table <-
 #' @example inst/example/table.R
 #'
 #' @export
-
+#' @example inst/example/table.R
 
 search_table <-
         function(conn,
@@ -326,7 +334,7 @@ search_table <-
 
 
                 sql_statements <- list()
-                for (Field in Fields) {
+                for (field in fields) {
 
                     i <- 1+length(sql_statements)
 
@@ -343,7 +351,7 @@ search_table <-
                                                     ",
                                     schema = schema,
                                     table = table,
-                                    Field = Field,
+                                    Field = field,
                                     values = values
                                 )
 
@@ -359,7 +367,7 @@ search_table <-
                                                 ",
                                 schema = schema,
                                 table = table,
-                                Field = Field,
+                                Field = field,
                                 values = values
                             )
 
