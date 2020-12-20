@@ -88,3 +88,71 @@ summarize_fields <-
         }
 
 
+summarize_table <-
+        function(
+                conn,
+                conn_fun,
+                schema,
+                table,
+                verbose = TRUE,
+                render_sql = TRUE,
+                render_only = FALSE,
+                warn_no_rows = TRUE,
+                ...
+        ) {
+
+                fields <- ls_fields(conn = conn,
+                                    schema = schema,
+                                    table = table,
+                                    verbose = verbose,
+                                    render_sql = render_sql)
+
+                summarize_fields(conn = conn,
+                                 conn_fun = conn_fun,
+                                 schema = schema,
+                                 table = table,
+                                 fields = fields,
+                                 verbose = verbose,
+                                 render_sql = render_sql,
+                                 render_only = render_only,
+                                 warn_no_rows = warn_no_rows,
+                                 ...)
+        }
+
+
+summarize_schema <-
+        function( conn,
+                  conn_fun,
+                  schema,
+                  verbose = TRUE,
+                  render_sql = TRUE,
+                  render_only = FALSE,
+                  warn_no_rows = TRUE,
+                  ...) {
+
+
+                tables <- ls_tables(conn = conn,
+                                    schema = schema,
+                                    verbose = verbose,
+                                    render_sql = render_sql)
+
+                output <- list()
+                for (i in seq_along(tables)) {
+
+                        table <- tables[i]
+
+                        output[[i]] <-
+                                summarize_table(conn = conn,
+                                                schema = schema,
+                                                table = table,
+                                                verbose = verbose,
+                                                render_sql = render_sql,
+                                                render_only = render_only,
+                                                warn_no_rows = warn_no_rows,
+                                                ...)
+
+                        names(output)[i] <- table
+                }
+
+                output
+        }
