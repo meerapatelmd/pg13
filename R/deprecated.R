@@ -331,36 +331,6 @@ save_sql <-
                 )
         }
 
-#' Drop a Postgres schema
-#' @description Drop a schema if it exists.
-#' @param ... Additional arguments passed to the DatabaseConnector::dbSendStatement function
-#' @export
-
-drop_schema <-
-        function(conn,
-                 schema,
-                 cascade = FALSE,
-                 if_exists = TRUE,
-                 ...) {
-
-
-                .Deprecated("dropCascade")
-
-
-                sql_statement <- render_drop_schema(schema = schema,
-                                                  cascade = cascade,
-                                                  if_exists = if_exists)
-
-                send(conn = conn,
-                     sql_statement = sql_statement,
-                     ...)
-
-        }
-
-
-
-
-
 #' Concatenate 2 WHERE constructs
 #' @description When 2 WHERE constructs are included in the SQL Statement, they are concatenated and the 2nd "WHERE" is replaced with an "AND".
 #' @param AND If TRUE, the WHERE constructs are concatenated with "AND". If FALSE, the concatenation is performed with an "OR".
@@ -678,40 +648,6 @@ terminate_build <-
         paste0(sql_statement, ";")
 
     }
-
-
-
-
-
-
-#' Execute SQL
-#' @description This function differs from the send() and query() functions in that it provides additional features such as a progress bar and time estimations.
-#' @export
-
-execute <-
-        function(conn,
-                 sql_statement,
-                 profile = FALSE,
-                 progressBar = TRUE,
-                 reportOverallTime = TRUE,
-                 ...) {
-
-                .Deprecated(new = "queries")
-                DatabaseConnector::executeSql(connection = conn,
-                                              sql = sql_statement,
-                                              profile = profile,
-                                              progressBar = progressBar,
-                                              reportOverallTime = reportOverallTime,
-                                              ...)
-        }
-
-
-
-
-
-
-
-
 
 
 #' Query local Postgess from a file
@@ -1780,41 +1716,6 @@ connDB <-
                 DatabaseConnector::connect(conn_details)
         }
 
-
-#' @title
-#' Connect to a Postgres Database
-#'
-#' @inheritParams DatabaseConnector::createConnectionDetails
-#' @param verbose If TRUE, returns console messages when a connection has been secured.
-#' @inherit DatabaseConnector::connect return
-#'
-#' @rdname connect
-#'
-#' @export
-
-connect <-
-        function() {
-                "dummy"
-        }
-
-
-#' @title
-#' Connection Function Factory
-#'
-#' @description
-#' Customize a connection function.
-#'
-#' @inheritParams connect
-#'
-#' @rdname connect_ff
-#' @export
-
-connect_ff <-
-        function() {
-                "dummy"
-        }
-
-
 #' Connect without Console Messages
 #' @export
 #' @export
@@ -1860,34 +1761,6 @@ dc <-
 
                 }
         }
-
-
-#' @title
-#' Remove a Closed Connection Object
-#'
-#' @description
-#' If a connection is not open, it is removed from the parent environment from which this function is called.
-#'
-#' @inheritParams base_args
-#'
-#' @rdname rm_if_closed
-#'
-#' @export
-
-
-rm_if_closed <-
-        function(conn) {
-
-                if (!is_conn_open(conn = conn)) {
-
-                        rm(list = deparse(substitute(conn)), envir = parent.frame())
-
-                }
-
-
-        }
-
-
 
 
 
@@ -3489,43 +3362,6 @@ lsFields <-
 
 
 #' @title
-#' Does a field exist?
-#'
-#' @description
-#' Logical that checks if a field exists in a table. The `field` argument is formatted into lowercase prior to being checked.
-#'
-#'
-#' @inheritParams base_args
-#' @param field Character string to check for in the given table.
-#'
-#' @rdname field_exists
-#' @export
-#' @family logical functions
-
-field_exists <-
-    function(conn,
-             schema,
-             tableName,
-             field) {
-
-        Fields <- lsFields(conn = conn,
-                             schema = schema,
-                             tableName = tableName,
-                             verbose = FALSE,
-                             render_sql = FALSE)
-
-        if (tolower(field) %in% Fields) {
-
-            TRUE
-
-        } else {
-
-            FALSE
-        }
-    }
-
-
-#' @title
 #' List Schemas
 #'
 #' @description
@@ -3637,40 +3473,6 @@ lsTables <-
 
 
     }
-
-
-#' @title
-#' Does a table exist?
-#'
-#' @inheritParams base_args
-#'
-#' @rdname table_exists
-#'
-#' @export
-#' @family logical functions
-
-table_exists <-
-    function(conn,
-             schema,
-             tableName) {
-
-
-        Tables <- lsTables(conn = conn,
-                           schema = schema,
-                           verbose = FALSE,
-                           render_sql = FALSE)
-
-        if (toupper(tableName) %in% Tables) {
-
-            TRUE
-
-        } else {
-
-            FALSE
-        }
-    }
-
-
 
 
 
@@ -5298,22 +5100,6 @@ sQuo <-
         }
 
 
-#' @title
-#' Affix the System Date to a String
-#'
-#' @description
-#' Date is affixed at the end of a string in "YYYY_mm_dd" Format
-#'
-#' @importFrom stringr str_replace_all
-#'
-#' @export
-
-affix_date <-
-        function(string) {
-                paste0(name, "_", stringr::str_replace_all(as.character(Sys.Date()), "[-]{1}", "_"))
-        }
-
-
 #' Typewrite SQL
 #' @importFrom secretary typewrite greenTxt
 #' @importFrom stringr str_replace_all
@@ -5399,231 +5185,6 @@ refreshMatView <-
                      render_sql = render_sql)
 
         }
-
-
-
-
-#' Build a SQL Query
-#' @description A SQL query is built using the given arguments. Currently, only 1 whereIn and whereNot in parameters can be set.
-#' @return SQL statement as a character string.
-#' @import purrr
-#' @import stringr
-#' @export
-
-buildQuery <-
-    function(fields = "*",
-             distinct = FALSE,
-             schema,
-             tableName,
-             whereInField = NULL,
-             whereInVector = NULL,
-             whereNotInField = NULL,
-             whereNotInVector = NULL,
-             caseInsensitive = TRUE,
-             n = NULL,
-             n_type = c("limit", "random")) {
-
-        ######
-        # QA to make sure all whereIn and n  arguments have been supplied in pairs
-        #####
-        whereIns <- list(whereInField, whereInVector) %>%
-            purrr::set_names(c("field", "vector")) %>%
-            purrr::keep(~!is.null(.))
-        whereNotIns <- list(whereNotInField, whereNotInVector) %>%
-            purrr::set_names(c("field", "vector")) %>%
-            purrr::keep(~!is.null(.))
-
-
-        list(whereIns, whereNotIns) %>%
-            purrr::map2(list("whereIn", "whereNotIn"),
-                        function(x,y) if (!(length(x) %in% c(0,2))) {stop('both "', y, '" arguments must be supplied')})
-
-        ######
-        # QA to make sure all n arugments have been supplied
-        #####
-
-        if (length(n) == 1 & length(n_type) != 1) {
-
-            n_type <- "limit"
-
-            warning('"n_type" set to "limit"')
-
-        }
-
-        #####
-        # Start
-        #####
-        sql_construct  <- constructBase(fields = fields,
-                                        distinct = distinct,
-                                        schema = schema,
-                                        tableName = tableName)
-
-
-        if (caseInsensitive) {
-
-
-            # If WhereIn arguments are not null include it in build
-            if (length(whereIns) == 2) {
-
-                sql_construct <-
-                    paste(sql_construct,
-                          constructWhereLowerIn(field = whereIns$field,
-                                                vector = tolower(whereIns$vector)),
-                          collapse = " ")
-
-                # If WhereNotIn arguments are supplied on top of the WhereIn, add them to the query by modifying the constructWhereNotIn output by replacing the second "WHERE" with "AND"
-                if (length(whereNotIns) == 2) {
-
-
-                    sql_construct <-
-                        paste(sql_construct,
-                              "AND",
-                              constructWhereLowerNotIn(field = whereNotIns$field,
-                                                       vector = tolower(whereNotIns$vector)) %>%
-                                  stringr::str_remove_all("WHERE") %>%
-                                  trimws(),
-                              collapse = " ")
-
-
-                }
-
-            } else {
-
-                # Building a query if only whereNotIn arguments were supplied
-                if (length(whereNotIns) == 2) {
-
-
-                    sql_construct <-
-                        paste(sql_construct,
-                              constructWhereLowerNotIn(field = whereNotIns$field,
-                                                       vector = tolower(whereNotIns$vector)),
-                              collapse = " ")
-
-
-                }
-
-
-
-            }
-
-            # If n arguments are not null include it in build, as either a limit or random sample of size n
-            if (!is.null(n)) {
-
-                if (n_type == "limit") {
-
-                    sql_construct <-
-                        paste(sql_construct,
-                              constructLimit(n = n),
-                              collapse = " ")
-
-                } else if (n_type == "random") {
-
-                    sql_construct <-
-                        paste(sql_construct,
-                              constructRandom(n = n),
-                              collapse = " ")
-
-                } else {
-
-                    warning('"n_type" not recognized and "n" removed from build')
-
-
-                }
-
-            }
-
-
-
-
-
-
-
-
-
-        } else {
-
-
-
-            # If WhereIn arguments are not null include it in build
-            if (length(whereIns) == 2) {
-
-                sql_construct <-
-                    paste(sql_construct,
-                          constructWhereIn(field = whereIns$field,
-                                           vector = whereIns$vector),
-                          collapse = " ")
-
-                # If WhereNotIn arguments are supplied on top of the WhereIn, add them to the query by modifying the constructWhereNotIn output by replacing the second "WHERE" with "AND"
-                if (length(whereNotIns) == 2) {
-
-
-                    sql_construct <-
-                        paste(sql_construct,
-                              "AND",
-                              constructWhereNotIn(field = whereNotIns$field,
-                                                  vector = whereNotIns$vector) %>%
-                                  stringr::str_remove_all("WHERE") %>%
-                                  trimws(),
-                              collapse = " ")
-
-
-                }
-
-            } else {
-
-                # Building a query if only whereNotIn arguments were supplied
-                if (length(whereNotIns) == 2) {
-
-
-                    sql_construct <-
-                        paste(sql_construct,
-                              constructWhereNotIn(field = whereNotIns$field,
-                                                  vector = whereNotIns$vector),
-                              collapse = " ")
-
-
-                }
-
-
-
-            }
-
-            # If n arguments are not null include it in build, as either a limit or random sample of size n
-            if (!is.null(n)) {
-
-                if (n_type == "limit") {
-
-                    sql_construct <-
-                        paste(sql_construct,
-                              constructLimit(n = n),
-                              collapse = " ")
-
-                } else if (n_type == "random") {
-
-                    sql_construct <-
-                        paste(sql_construct,
-                              constructRandom(n = n),
-                              collapse = " ")
-
-                } else {
-
-                    warning('"n_type" not recognized and "n" removed from build')
-
-
-                }
-
-            }
-
-        }
-
-        #Add a semicolon to finish the query
-        sql_construct %>%
-            stringr::str_replace_all(pattern = "[\n]{2,}",
-                                     replacement = "\n") %>%
-            terminateBuild()
-
-
-    }
 
 
 #' Send Function Factor

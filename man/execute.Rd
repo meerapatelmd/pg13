@@ -12,18 +12,7 @@ execute(
   reportOverallTime = TRUE,
   ...
 )
-
-execute(
-  conn,
-  sql_statement,
-  profile = FALSE,
-  progressBar = TRUE,
-  reportOverallTime = TRUE,
-  ...
-)
 }
 \description{
-This function differs from the send() and query() functions in that it provides additional features such as a progress bar and time estimations.
-
 This function differs from the send() and query() functions in that it provides additional features such as a progress bar and time estimations.
 }

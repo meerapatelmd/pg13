@@ -17,28 +17,10 @@ buildQuery(
   n = NULL,
   n_type = c("limit", "random")
 )
-
-buildQuery(
-  fields = "*",
-  distinct = FALSE,
-  schema,
-  tableName,
-  whereInField = NULL,
-  whereInVector = NULL,
-  whereNotInField = NULL,
-  whereNotInVector = NULL,
-  caseInsensitive = TRUE,
-  n = NULL,
-  n_type = c("limit", "random")
-)
 }
 \value{
 SQL statement as a character string.
-
-SQL statement as a character string.
 }
 \description{
-A SQL query is built using the given arguments. Currently, only 1 whereIn and whereNot in parameters can be set.
-
 A SQL query is built using the given arguments. Currently, only 1 whereIn and whereNot in parameters can be set.
 }

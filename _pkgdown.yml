@@ -1,0 +1,53 @@
+navbar:
+  structure:
+    left:  [home, reference, news]
+    right: [github]
+
+
+reference:
+  - title: Database Management
+    desc: >
+      Create and drop databases
+    contents:
+      - ends_with('_db')
+  - title: Schema Management
+    desc: >
+      Create and drop schemas
+    contents:
+      - ends_with('_schema')
+      - ends_with('_cascade')
+  - title: Table Management
+    desc: >
+      Read, write, append, and drop tables
+    contents:
+      - write_table
+      - read_table
+      - drop_table
+      - append_table
+      - search_table
+  - title: Build
+    desc: >
+      Build queries of predetermined styles
+    contents:
+      - starts_with('build_')
+  - title: SQL Function Factories
+    desc: >
+      Set defaults for all or some of the arguments of a selection of functions
+    contents:
+      - ends_with('_ff')
+  - title: Logging
+    desc:  >
+      Create a logging system of tables and functions
+    contents:
+      - contains('log')
+  - title: Logicals
+    desc: >
+      Logical questions on connection or database attributes
+    contents:
+      - ends_with('_exists')
+      - starts_with('is_')
+  - title: Summaries
+    desc: >
+      Summarize counts and valuesets at the field level across a subset of fields, an entire table or an entire schema
+    contents:
+      - starts_with('summarize_')

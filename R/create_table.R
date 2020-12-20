@@ -7,7 +7,7 @@
 #' @seealso
 #'  \code{\link[rlang]{list2}}
 #'  \code{\link[SqlRender]{render}}
-#' @rdname create_table
+#' @rdname draft_create_table
 #' @export
 #' @importFrom rlang list2
 #' @importFrom SqlRender render

@@ -115,29 +115,3 @@ dc <-
 
                 }
         }
-
-
-#' @title
-#' Remove a Closed Connection Object
-#'
-#' @description
-#' If a connection is not open, it is removed from the parent environment from which this function is called.
-#'
-#' @inheritParams base_args
-#'
-#' @rdname rm_if_closed
-#'
-#' @export
-
-
-rm_if_closed <-
-        function(conn) {
-
-                if (!is_conn_open(conn = conn)) {
-
-                        rm(list = deparse(substitute(conn)), envir = parent.frame())
-
-                }
-
-
-        }
