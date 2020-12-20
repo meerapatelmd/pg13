@@ -2,7 +2,7 @@
 #' @rdname data_type_info
 #' @title
 #' Get Field Datatypes
-#' @importFrom SqlRender::render
+#' @importFrom SqlRender render
 #' @example inst/example/data_type_info.R
 
 data_type_info <-
