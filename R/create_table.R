@@ -14,7 +14,7 @@
 
 draft_create_table <-
         function(schema,
-                 tableName,
+                 table_name,
                  if_not_exists = TRUE,
                  ...) {
 
@@ -22,7 +22,7 @@ draft_create_table <-
                 ddl <- rlang::list2(...)
                 fields <- names(ddl)
 
-                if (any(isReserved(tableName, fields))) {
+                if (any(isReserved(table_name, fields))) {
 
                         stop("Cannot use reserved sql words.")
 
@@ -36,12 +36,12 @@ draft_create_table <-
                         sql_statement <-
                                 SqlRender::render(
                                         "
-                                        CREATE TABLE IF NOT EXISTS @schema.@tableName (
+                                        CREATE TABLE IF NOT EXISTS @schema.@table_name (
                                                 @ddl
                                         );
                                         ",
                                         schema = schema,
-                                        tableName = tableName,
+                                        table_name = table_name,
                                         ddl = ddl
                                 )
 
@@ -50,12 +50,12 @@ draft_create_table <-
                         sql_statement <-
                                 SqlRender::render(
                                         "
-                                        CREATE TABLE @schema.@tableName (
+                                        CREATE TABLE @schema.@table_name (
                                                 @ddl
                                         );
                                         ",
                                         schema = schema,
-                                        tableName = tableName,
+                                        table_name = table_name,
                                         ddl = ddl
                                 )
 
@@ -80,7 +80,7 @@ draft_create_table <-
 create_table <-
         function(conn,
                  schema,
-                 tableName,
+                 table_name,
                  if_not_exists = TRUE,
                  ...,
                  verbose = TRUE,
@@ -90,7 +90,7 @@ create_table <-
                 sql_statement <-
                 draftCreateTable(
                         schema = schema,
-                        tableName = tableName,
+                        table_name = table_name,
                         if_not_exists = if_not_exists,
                         ...
                 )
@@ -119,7 +119,7 @@ create_table <-
 
 draft_create_table_from_df <-
         function(schema,
-                 tableName,
+                 table_name,
                  data,
                  if_not_exists = TRUE) {
 
@@ -150,7 +150,7 @@ draft_create_table_from_df <-
                 ddl <- make_ddl(data = data)
                 fields <- names(ddl)
 
-                if (any(isReserved(tableName, fields))) {
+                if (any(isReserved(table_name, fields))) {
 
                         stop("Cannot use reserved sql words.")
 
@@ -164,12 +164,12 @@ draft_create_table_from_df <-
                         sql_statement <-
                                 SqlRender::render(
                                         "
-                                        CREATE TABLE IF NOT EXISTS @schema.@tableName (
+                                        CREATE TABLE IF NOT EXISTS @schema.@table_name (
                                                 @ddl
                                         );
                                         ",
                                         schema = schema,
-                                        tableName = tableName,
+                                        table_name = table_name,
                                         ddl = ddl
                                 )
 
@@ -178,12 +178,12 @@ draft_create_table_from_df <-
                         sql_statement <-
                                 SqlRender::render(
                                         "
-                                        CREATE TABLE @schema.@tableName (
+                                        CREATE TABLE @schema.@table_name (
                                                 @ddl
                                         );
                                         ",
                                         schema = schema,
-                                        tableName = tableName,
+                                        table_name = table_name,
                                         ddl = ddl
                                 )
 
@@ -207,14 +207,14 @@ create_table_from_df <-
         function(conn,
                  conn_fun,
                  schema,
-                 tableName,
+                 table_name,
                  if_not_exists = TRUE,
                  data,
                  verbose = TRUE,
                  render_sql = TRUE) {
 
                 sql_statement <- draft_create_table_from_df(schema = schema,
-                                                    tableName = tableName,
+                                                    table_name = table_name,
                                                     data = data,
                                                     if_not_exists = if_not_exists)
 
