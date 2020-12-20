@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Send a SQL Statement to Postgres — send • pg13</title>
+<title>List Users — ls_users • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Send a SQL Statement to Postgres — send" />
-<meta property="og:description" content="Send a SQL Statement to Postgres" />
+<meta property="og:title" content="List Users — ls_users" />
+<meta property="og:description" content="List Users" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -134,41 +134,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Send a SQL Statement to Postgres</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/sql.R'><code>R/sql.R</code></a></small>
-    <div class="hidden name"><code>send.Rd</code></div>
+    <h1>List Users</h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/ls_users.R'><code>R/ls_users.R</code></a></small>
+    <div class="hidden name"><code>ls_users.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Send a SQL Statement to Postgres</p>
+    <p>List Users</p>
     </div>
 
-    <pre class="usage"><span class='fu'>send</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>ls_users</span><span class='op'>(</span>
   <span class='va'>conn</span>,
   <span class='va'>conn_fun</span>,
-  <span class='va'>sql_statement</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
   render_sql <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  warn_no_rows <span class='op'>=</span> <span class='cn'>TRUE</span>,
   render_only <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>conn</th>
-      <td><p>Connection object</p></td>
-    </tr>
-    <tr>
-      <th>sql_statement</th>
-      <td><p>SQL to send</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Additional arguments to pass onto the DatabaseConnector::dbSendStatement function</p></td>
-    </tr>
-    </table>
 
 
   </div>
