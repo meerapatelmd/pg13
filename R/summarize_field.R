@@ -11,6 +11,7 @@ summarize_field <-
                  ...) {
 
 
+                field <- tolower(field)
                 if (!field_exists(
                                 conn = conn,
                                 schema = schema,
@@ -24,8 +25,7 @@ summarize_field <-
                 sql_statements <-
                         list(DISTINCT_COUNT = sprintf("WITH valueset AS (SELECT DISTINCT %s FROM %s.%s) SELECT COUNT(*) FROM valueset;", field, schema, table),
                              VALUESET = sprintf("SELECT DISTINCT %s FROM %s.%s;", field, schema, table),
-                             NULL_COUNT = sprintf("SELECT COUNT(%s) FROM %s.%s WHERE %s IS NULL;", field, schema, table, field),
-                             NA_COUNT = sprintf("SELECT COUNT(%s) FROM %s.%s WHERE %s IN ('NA');", field, schema, table, field)
+                             NULL_COUNT = sprintf("SELECT COUNT(%s) FROM %s.%s WHERE %s IS NULL;", field, schema, table, field)
                              )
 
                 output <- list()
@@ -52,6 +52,39 @@ summarize_field <-
         }
 
 
+summarize_fields <-
+        function(conn,
+                 conn_fun,
+                 schema,
+                 table,
+                 fields,
+                 verbose = TRUE,
+                 render_sql = TRUE,
+                 render_only = FALSE,
+                 warn_no_rows = TRUE,
+                 ...) {
 
+                output <- list()
+                for (field in fields) {
+
+                        output[[length(output)+1]] <-
+                                summarize_field(conn = conn,
+                                                conn_fun = conn_fun,
+                                                schema = schema,
+                                                table = table,
+                                                field = field,
+                                                verbose = verbose,
+                                                render_sql = render_sql,
+                                                render_only = render_only,
+                                                warn_no_rows = warn_no_rows,
+                                                ...)
+
+                        names(output)[length(output)] <- field
+
+                }
+
+                output
+
+        }
 
 
