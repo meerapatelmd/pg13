@@ -23,7 +23,7 @@ cache <-
                  dirs) {
 
                 key <- list(sql_statement)
-                x <- r.cache::save_cache(object = object,
+                x <- r.cache::saveCache(object = object,
                                         key = key,
                                         dirs = dirs)
                 invisible(x)
