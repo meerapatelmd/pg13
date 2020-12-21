@@ -26,7 +26,7 @@ conn_db <-
                  port,
                  server) {
 
-                conn_details <- database_connector::create_connection_details(dbms = "postgresql",
+                conn_details <- DatabaseConnector::create_connection_details(dbms = "postgresql",
                                                                            user = user,
                                                                            password = password,
                                                                            port = port,

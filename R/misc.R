@@ -12,7 +12,7 @@ file_query <-
              file,
              ...) {
 
-        sql_statement <- sql_render::read_sql(source_file = file)
+        sql_statement <- sqlRender::readSql(source_file = file)
 
         query(conn = conn,
               sql_statement = sql_statement,
@@ -38,7 +38,7 @@ file_send <-
              file,
              ...) {
 
-        sql_statement <- sql_render::read_sql(source_file = file)
+        sql_statement <- SqlRender::readSql(source_file = file)
 
         send(conn = conn,
               sql_statement = sql_statement,

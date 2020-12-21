@@ -21,7 +21,10 @@ Depends:
     DatabaseConnector 
 Imports: 
     centipede,
+    cli,
     dplyr,
+    forcats,
+    lubridate,
     magrittr,
     progress,
     purrr,
