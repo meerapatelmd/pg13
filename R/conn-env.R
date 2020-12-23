@@ -11,8 +11,7 @@ pg13_env <- setClass("pg_env",
                    contains = c("environment"),
                    slots = c(update_datetime = "POSIXct"))
 
-
-
+#' @noRd
 
 setMethod(f = "[[<-",
           signature = c("pg_env", "character", "missing"),
@@ -22,5 +21,3 @@ setMethod(f = "[[<-",
                   x@update_datetime <- Sys.time() # and the update time
                   x})
 
-
-pg13_connection_env <- pg13_env(update_datetime = Sys.time())
