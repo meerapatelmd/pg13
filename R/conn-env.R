@@ -48,6 +48,13 @@ open_conn <-
         function(conn_fun,
                  conn_name) {
 
+
+                if (!("pg13_connection_env" %in% ls())) {
+
+                        pg13_connection_env <<- pg13_env(update_datetime = Sys.time())
+
+                }
+
                 if (conn_name %in% ls(envir = pg13_connection_env)) {
 
                        if (is_conn_open(pg13_connection_env[[conn_name]])) {
@@ -127,4 +134,22 @@ close_conn <-
 
                 }
 
+        }
+
+
+
+show_conn <-
+        function() {
+                output <- list()
+                conn_names <- names(pg13_connection_env)
+
+                for (i in seq_along(conn_names)) {
+
+                        output[[i]] <-
+                                structure(
+                                        conn_names[i],
+                                        is_open = is_conn_open(pg13_connection_env[[conn_names[i]]])
+                                )
+                }
+                output
         }
