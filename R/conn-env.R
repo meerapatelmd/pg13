@@ -4,7 +4,7 @@
 #' @description
 #' This an optional environment class that stores all the connections using this package.
 #'
-#' @export pg13_env
+#' @noRd
 
 
 pg13_env <- setClass("pg_env",
