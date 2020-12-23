@@ -56,8 +56,7 @@ open_conn <-
                 if (!("pg13_connection_env" %in% ls())) {
 
                         pg13_connection_env <<-
-                                new("pg13_env",
-                                    update_datetime = Sys.time())
+                                pg13_env(update_datetime = Sys.time())
 
                 }
 
