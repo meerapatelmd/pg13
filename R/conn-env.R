@@ -12,6 +12,7 @@ pg13_env <- setClass("pg_env",
                    contains = c("environment"),
                    slots = c(update_datetime = "POSIXct"))
 
+
 #' @export
 #' @rdname pg13_env_methods
 
@@ -56,7 +57,7 @@ open_conn <-
 
                         pg13_connection_env <<-
                                 new("pg13_env",
-                                    pg13_env(update_datetime = Sys.time()))
+                                    update_datetime = Sys.time())
 
                 }
 
