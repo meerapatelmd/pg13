@@ -36,7 +36,9 @@
 
                                 if (verbose) {
 
-                                        secretary::typewrite(conn$output)
+                                        db_name <- conn@jConnection$getCatalog()
+
+                                        secretary::typewrite(sprintf("%s to %s", conn$output, db_name))
 
                                 }
 
@@ -66,7 +68,12 @@
                         }
 
 
+
+                if (!("pg13_connection_env" %in% ls())) {
+
                 pg13_connection_env <<- pg13_env(update_datetime = Sys.time())
+
+                }
 
 
         }

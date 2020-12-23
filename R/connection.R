@@ -90,6 +90,45 @@ quietly.conn_db <-
 #' @param ...           Additional arguments passed to \code{\link[DatabaseConnector]{dbDisconnect}}.
 #' @param remove        If TRUE, the Connection object argument is removed from the parent environment.
 #'
+#' @rdname dc0
+#'
+#' @importFrom DatabaseConnector dbDisconnect
+#'
+#' @export
+
+dc0 <-
+        function(conn,
+                 ...,
+                 verbose = TRUE,
+                 remove = FALSE) {
+
+                DatabaseConnector::dbDisconnect(conn = conn,
+                                                ...)
+
+                if (verbose) {
+                        secretary::typewrite("Postgres connection closed")
+                }
+
+                if (remove) {
+
+                        rm(list = deparse(substitute(conn)), envir = parent.frame())
+
+                }
+        }
+
+
+
+#' @title
+#' Disconnect a Connection
+#'
+#' @description
+#' Disconnect a Postgres Connection object with the option of removing the object from the parent environment.
+#'
+#' @inheritParams args
+#' @param verbose If TRUE, returns a console message when the connection has been closed.
+#' @param ...           Additional arguments passed to \code{\link[DatabaseConnector]{dbDisconnect}}.
+#' @param remove        If TRUE, the Connection object argument is removed from the parent environment.
+#'
 #' @rdname dc
 #'
 #' @importFrom DatabaseConnector dbDisconnect
@@ -102,11 +141,28 @@ dc <-
                  verbose = TRUE,
                  remove = FALSE) {
 
-                DatabaseConnector::dbDisconnect(conn = conn,
-                                                ...)
 
-                if (verbose) {
-                        secretary::typewrite("Postgres connection closed")
+                db_name <-
+                        tryCatch(
+                          get_conn_db(conn = conn),
+                          error = function(e) "Error"
+                                )
+
+
+                if (identical(x = db_name,
+                              y = "Error")) {
+
+                        if (verbose) {secretary::typewrite("Postgres connection was already closed")}
+
+                } else {
+
+                        DatabaseConnector::dbDisconnect(conn = conn,
+                                                        ...)
+
+                        if (verbose) {
+                                secretary::typewrite(sprintf("Postgres connection to '%s' closed", db_name))
+                        }
+
                 }
 
                 if (remove) {
