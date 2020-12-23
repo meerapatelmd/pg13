@@ -5,6 +5,7 @@
 #' This an optional environment class that stores all the connections using this package.
 #'
 #' @export
+#' @rdname pg13_env
 
 
 pg13_env <- setClass("pg_env",
@@ -12,6 +13,7 @@ pg13_env <- setClass("pg_env",
                    slots = c(update_datetime = "POSIXct"))
 
 #' @export
+#' @rdname pg13_env_methods
 
 setMethod(f = "[[<-",
           signature = c("pg_env", "character", "missing"),
