@@ -4,16 +4,16 @@
 \alias{dc}
 \title{Disconnect a Connection}
 \usage{
-dc(conn, ..., verbose = TRUE, remove = FALSE)
+dc(conn, verbose = TRUE, remove = FALSE)
 }
 \arguments{
 \item{conn}{Connection object}
 
-\item{...}{Additional arguments passed to \code{\link[DatabaseConnector]{dbDisconnect}}.}
-
 \item{verbose}{If TRUE, returns a console message when the connection has been closed.}
 
 \item{remove}{If TRUE, the Connection object argument is removed from the parent environment.}
+
+\item{...}{Additional arguments passed to \code{\link[DatabaseConnector]{dbDisconnect}}.}
 }
 \description{
 Disconnect a Postgres Connection object with the option of removing the object from the parent environment.

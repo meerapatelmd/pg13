@@ -137,7 +137,6 @@ dc0 <-
 
 dc <-
         function(conn,
-                 ...,
                  verbose = TRUE,
                  remove = FALSE) {
 
@@ -156,8 +155,7 @@ dc <-
 
                 } else {
 
-                        DatabaseConnector::dbDisconnect(conn = conn,
-                                                        ...)
+                        DatabaseConnector::dbDisconnect(conn = conn)
 
                         if (verbose) {
                                 secretary::typewrite(sprintf("Postgres connection to '%s' closed", db_name))

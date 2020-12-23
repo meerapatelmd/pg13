@@ -53,21 +53,24 @@ open_conn <-
                  verbose = TRUE) {
 
 
-                if (!("pg13_connection_env" %in% ls())) {
+                if (!("pg13_connection_env" %in% ls(envir = globalenv()))) {
 
                         pg13_connection_env <<-
                                 pg13_env(update_datetime = Sys.time())
 
                 }
 
-                print(ls(envir = pg13_connection_env))
-                secretary::press_enter()
+                # output <- do.call(what = ls,
+                #                 args = list(envir = pg13_connection_env),
+                #                 envir = parent.frame())
+                # print(output)
+                # secretary::press_enter()
+
                 if (conn_name %in% ls(envir = pg13_connection_env)) {
 
                        if (is_conn_open(pg13_connection_env[[conn_name]])) {
 
-                               secretary::typewrite(cli::cli_alert_danger("Open connection '%s' already exists."))
-                               stop()
+                               cli::cli_alert_danger(sprintf("Open connection '%s' already exists.", conn_name))
 
 
                        } else {
@@ -126,7 +129,7 @@ close_conn <-
 
                 if (all) {
 
-                        conns <- names(pg13_connection_env)
+                        conns <- ls(envir = pg13_connection_env)
 
                 } else {
 
