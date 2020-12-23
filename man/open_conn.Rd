@@ -2,30 +2,17 @@
 % Please edit documentation in R/conn-env.R
 \name{open_conn}
 \alias{open_conn}
-\title{FUNCTION_TITLE}
+\title{Open a Connection in the \code{pg13_connection_env}}
 \usage{
 open_conn(conn_fun, conn_name, verbose = TRUE)
 }
 \arguments{
-\item{conn_fun}{Function call for the connection as a character string.}
+\item{conn_fun}{Function call for the connection as a character string such as "local_connect()".}
 
 \item{conn_name}{Name of the connection object in the \code{pg13_connection_env} environment}
 }
-\value{
-OUTPUT_DESCRIPTION
-}
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
-}
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+Connect to a database and assign it to the \code{pg13_connection_env}. This is a method to keep mulitple database connections organized during a crosswalk project. Existing connection objects will not be overwritten If the connection object of the provided name already exists. If the \code{pg13_connection_env} does not exist in the Global Environment, it will also be created at this point beforehand.
 }
 \seealso{
 \code{\link[secretary]{c("typewrite", "typewrite")}},\code{\link[secretary]{italicize}}

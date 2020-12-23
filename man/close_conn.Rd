@@ -2,32 +2,17 @@
 % Please edit documentation in R/conn-env.R
 \name{close_conn}
 \alias{close_conn}
-\title{FUNCTION_TITLE}
+\title{Close Connections in \code{pg13_connection_env}}
 \usage{
 close_conn(..., all = FALSE, verbose = TRUE)
 }
 \arguments{
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{Names of the connections to close.}
 
 \item{all}{Close all connections in the \code{pg13_connection_env} environment?}
-
-\item{verbose}{PARAM_DESCRIPTION, Default: TRUE}
-}
-\value{
-OUTPUT_DESCRIPTION
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
-}
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+Close the specified list of connection objects in the \code{pg13_connection_env} or close all connections, a feature is handy for making sure all connections are closed at the end of a session.
 }
 \seealso{
 \code{\link[rlang]{list2}}

@@ -25,18 +25,13 @@ setMethod(f = "[[<-",
                   x})
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title
+#' Open a Connection in the `pg13_connection_env`
+#' @description
+#' Connect to a database and assign it to the `pg13_connection_env`. This is a method to keep mulitple database connections organized during a crosswalk project. Existing connection objects will not be overwritten If the connection object of the provided name already exists. If the `pg13_connection_env` does not exist in the Global Environment, it will also be created at this point beforehand.
+#'
 #' @param conn_name Name of the connection object in the `pg13_connection_env` environment
-#' @param conn_fun Function call for the connection as a character string.
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' @param conn_fun Function call for the connection as a character string such as "local_connect()".
 #' @seealso
 #'  \code{\link[secretary]{c("typewrite", "typewrite")}},\code{\link[secretary]{italicize}}
 #'  \code{\link[cli]{cli_alert}}
@@ -60,11 +55,6 @@ open_conn <-
 
                 }
 
-                # output <- do.call(what = ls,
-                #                 args = list(envir = pg13_connection_env),
-                #                 envir = parent.frame())
-                # print(output)
-                # secretary::press_enter()
 
                 if (conn_name %in% ls(envir = pg13_connection_env)) {
 
@@ -103,19 +93,12 @@ open_conn <-
         }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param ... PARAM_DESCRIPTION
+#' @title
+#' Close Connections in `pg13_connection_env`
+#' @description
+#' Close the specified list of connection objects in the `pg13_connection_env` or close all connections, a feature is handy for making sure all connections are closed at the end of a session.
+#' @param ... Names of the connections to close.
 #' @param all Close all connections in the `pg13_connection_env` environment?
-#' @param verbose PARAM_DESCRIPTION, Default: TRUE
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
 #' @seealso
 #'  \code{\link[rlang]{list2}}
 #' @rdname close_conn
@@ -148,8 +131,17 @@ close_conn <-
         }
 
 
+#' @title
+#' See the Connections in `pg13_connection_env`
+#' @description
+#' See the connection objects in the `pg13_connection_env` along with their open status.
+#' @seealso
+#'  \code{\link[rlang]{list2}}
+#' @rdname see_conn
+#' @export
+#' @importFrom rlang list2
 
-show_conn <-
+see_conn <-
         function() {
                 output <- list()
                 conn_names <- names(pg13_connection_env)
