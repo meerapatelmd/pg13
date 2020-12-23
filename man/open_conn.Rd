@@ -4,7 +4,7 @@
 \alias{open_conn}
 \title{FUNCTION_TITLE}
 \usage{
-open_conn(conn_fun, conn_name)
+open_conn(conn_fun, conn_name, verbose = TRUE)
 }
 \arguments{
 \item{conn_fun}{Function call for the connection as a character string.}

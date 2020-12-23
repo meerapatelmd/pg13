@@ -4,14 +4,14 @@
 #' @description
 #' This an optional environment class that stores all the connections using this package.
 #'
-#' @noRd
+#' @export
 
 
 pg13_env <- setClass("pg_env",
                    contains = c("environment"),
                    slots = c(update_datetime = "POSIXct"))
 
-#' @noRd
+#' @export
 
 setMethod(f = "[[<-",
           signature = c("pg_env", "character", "missing"),
@@ -46,20 +46,26 @@ setMethod(f = "[[<-",
 
 open_conn <-
         function(conn_fun,
-                 conn_name) {
+                 conn_name,
+                 verbose = TRUE) {
 
 
                 if (!("pg13_connection_env" %in% ls())) {
 
-                        pg13_connection_env <<- pg13_env(update_datetime = Sys.time())
+                        pg13_connection_env <<-
+                                new("pg13_env",
+                                    pg13_env(update_datetime = Sys.time()))
 
                 }
 
+                print(ls(envir = pg13_connection_env))
+                secretary::press_enter()
                 if (conn_name %in% ls(envir = pg13_connection_env)) {
 
                        if (is_conn_open(pg13_connection_env[[conn_name]])) {
 
                                secretary::typewrite(cli::cli_alert_danger("Open connection '%s' already exists."))
+                               stop()
 
 
                        } else {
