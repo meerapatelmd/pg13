@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Query Function Factory using Connection Expression — q_fun_ff • pg13</title>
+<title>Close Connections in pg13_connection_env — close_conn • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Query Function Factory using Connection Expression — q_fun_ff" />
-<meta property="og:description" content="Query Function Factory using Connection Expression" />
+<meta property="og:title" content="Close Connections in pg13_connection_env — close_conn" />
+<meta property="og:description" content="Close the specified list of connection objects in the pg13_connection_env or close all connections, a feature is handy for making sure all connections are closed at the end of a session." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,18 +119,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Query Function Factory using Connection Expression</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/FF.R'><code>R/FF.R</code></a></small>
-    <div class="hidden name"><code>q_fun_ff.Rd</code></div>
+    <h1>Close Connections in <code>pg13_connection_env</code></h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/conn-env.R'><code>R/conn-env.R</code></a></small>
+    <div class="hidden name"><code>close_conn.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Query Function Factory using Connection Expression</p>
+    <p>Close the specified list of connection objects in the <code>pg13_connection_env</code> or close all connections, a feature is handy for making sure all connections are closed at the end of a session.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>q_fun_ff</span><span class='op'>(</span><span class='va'>connect_fun</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>close_conn</span><span class='op'>(</span><span class='va'>...</span>, all <span class='op'>=</span> <span class='cn'>FALSE</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>...</th>
+      <td><p>Names of the connections to close.</p></td>
+    </tr>
+    <tr>
+      <th>all</th>
+      <td><p>Close all connections in the <code>pg13_connection_env</code> environment?</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://rlang.r-lib.org/reference/list2.html'>list2</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

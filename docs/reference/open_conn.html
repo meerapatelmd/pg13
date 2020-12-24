@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Query Function Factory using Connection Expression — q_fun_ff • pg13</title>
+<title>Open a Connection in the pg13_connection_env — open_conn • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Query Function Factory using Connection Expression — q_fun_ff" />
-<meta property="og:description" content="Query Function Factory using Connection Expression" />
+<meta property="og:title" content="Open a Connection in the pg13_connection_env — open_conn" />
+<meta property="og:description" content="Connect to a database and assign it to the pg13_connection_env. This is a method to keep mulitple database connections organized during a crosswalk project. Existing connection objects will not be overwritten If the connection object of the provided name already exists. If the pg13_connection_env does not exist in the Global Environment, it will also be created at this point beforehand." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,18 +119,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Query Function Factory using Connection Expression</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/FF.R'><code>R/FF.R</code></a></small>
-    <div class="hidden name"><code>q_fun_ff.Rd</code></div>
+    <h1>Open a Connection in the <code>pg13_connection_env</code></h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/conn-env.R'><code>R/conn-env.R</code></a></small>
+    <div class="hidden name"><code>open_conn.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Query Function Factory using Connection Expression</p>
+    <p>Connect to a database and assign it to the <code>pg13_connection_env</code>. This is a method to keep mulitple database connections organized during a crosswalk project. Existing connection objects will not be overwritten If the connection object of the provided name already exists. If the <code>pg13_connection_env</code> does not exist in the Global Environment, it will also be created at this point beforehand.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>q_fun_ff</span><span class='op'>(</span><span class='va'>connect_fun</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>open_conn</span><span class='op'>(</span><span class='va'>conn_fun</span>, <span class='va'>conn_name</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>conn_fun</th>
+      <td><p>Function call for the connection as a character string such as "local_connect()".</p></td>
+    </tr>
+    <tr>
+      <th>conn_name</th>
+      <td><p>Name of the connection object in the <code>pg13_connection_env</code> environment</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/c.html'>c("typewrite", "typewrite")</a></code>,<code><a href='https://meerapatelmd.github.io/secretary/reference/italicize.html'>italicize</a></code>
+<code><a href='https://rdrr.io/pkg/cli/man/cli_alert.html'>cli_alert</a></code>
+<code><a href='https://rlang.r-lib.org/reference/parse_expr.html'>parse_expr</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
