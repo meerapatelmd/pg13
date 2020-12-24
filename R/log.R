@@ -79,14 +79,16 @@ log_start_ff <-
                 function(activity,
                          conn,
                          verbose = TRUE,
-                         render_sql = TRUE) {
+                         render_sql = TRUE,
+                         render_only = FALSE) {
 
                         create_log(datetime_field = datetime_field,
                                    conn = conn,
                                    schema = schema,
                                    log_table = log_table,
                                    verbose = verbose,
-                                   render_sql = render_sql)
+                                   render_sql = render_sql,
+                                   render_only = render_only)
 
 
                         output <-
@@ -97,10 +99,12 @@ log_start_ff <-
                                              activity,
                                              status)
 
-                        appendTable(conn = conn,
+                        append_table(conn = conn,
                                     schema = schema,
-                                    tableName = log_table,
-                                    data = output)
+                                    table = log_table,
+                                    data = output,
+                                    verbose = verbose,
+                                    render_sql = render_sql)
 
                 }
 
@@ -137,14 +141,16 @@ log_stop_ff <-
                 function(activity,
                          conn,
                          verbose = TRUE,
-                         render_sql = TRUE) {
+                         render_sql = TRUE,
+                         render_only = FALSE) {
 
                         create_log(datetime_field = datetime_field,
                                    conn = conn,
                                    schema = schema,
                                    log_table = log_table,
                                    verbose = verbose,
-                                   render_sql = render_sql)
+                                   render_sql = render_sql,
+                                   render_only = render_only)
 
 
                         output <-
@@ -155,10 +161,12 @@ log_stop_ff <-
                                               activity,
                                               status)
 
-                        appendTable(conn = conn,
-                                    schema = schema,
-                                    tableName = log_table,
-                                    data = output)
+                        append_table(conn = conn,
+                                     schema = schema,
+                                     table = log_table,
+                                     data = output,
+                                     verbose = verbose,
+                                     render_sql = render_sql)
 
                 }
 
@@ -195,14 +203,16 @@ log_error_ff <-
                 function(activity,
                          conn,
                          verbose = TRUE,
-                         render_sql = TRUE) {
+                         render_sql = TRUE,
+                         render_only = FALSE) {
 
                         create_log(datetime_field = datetime_field,
                                    conn = conn,
                                    schema = schema,
                                    log_table = log_table,
                                    verbose = verbose,
-                                   render_sql = render_sql)
+                                   render_sql = render_sql,
+                                   render_only = render_only)
 
 
                         output <-
@@ -213,10 +223,12 @@ log_error_ff <-
                                               activity,
                                               status)
 
-                        appendTable(conn = conn,
-                                    schema = schema,
-                                    tableName = log_table,
-                                    data = output)
+                        append_table(conn = conn,
+                                     schema = schema,
+                                     table = log_table,
+                                     data = output,
+                                     verbose = verbose,
+                                     render_sql = render_sql)
 
                 }
 
