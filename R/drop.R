@@ -9,6 +9,7 @@
 #' @export
 #' @example inst/example/table.R
 #' @family table functions
+#' @family drop functions
 
 drop_table <-
         function(conn,

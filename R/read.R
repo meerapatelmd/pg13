@@ -9,6 +9,7 @@
 #' @export
 #' @example inst/example/table.R
 #' @family table functions
+#' @family read functions
 read_table <-
         function(conn,
                  conn_fun,

@@ -15,6 +15,7 @@
 #' @export
 #' @example inst/example/table.R
 #' @family table functions
+#' @family write functions
 
 append_table <-
         function(conn,
@@ -82,6 +83,7 @@ append_table <-
 #' @export
 #' @example inst/example/table.R
 #' @family table functions
+#' @family write functions
 
 write_table <-
         function(conn,

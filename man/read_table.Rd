@@ -114,4 +114,5 @@ Other table functions:
 \code{\link{search_table}()},
 \code{\link{write_table}()}
 }
+\concept{read functions}
 \concept{table functions}

@@ -121,4 +121,5 @@ Other table functions:
 \code{\link{searchTable}()},
 \code{\link{write_table}()}
 }
+\concept{search functions}
 \concept{table functions}

@@ -117,5 +117,9 @@ Other table functions:
 \code{\link{read_table}()},
 \code{\link{searchTable}()},
 \code{\link{search_table}()}
+
+Other write functions: 
+\code{\link{append_table}()}
 }
 \concept{table functions}
+\concept{write functions}

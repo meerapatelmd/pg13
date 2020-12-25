@@ -119,4 +119,5 @@ Other table functions:
 \code{\link{search_table}()},
 \code{\link{write_table}()}
 }
+\concept{drop functions}
 \concept{table functions}

@@ -123,5 +123,9 @@ Other table functions:
 \code{\link{searchTable}()},
 \code{\link{search_table}()},
 \code{\link{write_table}()}
+
+Other write functions: 
+\code{\link{write_table}()}
 }
 \concept{table functions}
+\concept{write functions}

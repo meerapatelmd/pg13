@@ -13,6 +13,7 @@
 #'
 #' @rdname search_table
 #' @family table functions
+#' @family search functions
 #' @example inst/example/table.R
 
 search_table <-
