@@ -36,7 +36,7 @@ devtools::install_github("meerapatelmd/pg13")
 
 ## Example  
 
-You can do a simple join on a dataframe in the R environment and an existing table in a single function call.  
+pg13 provides functions that simplifies queries such as joins from the R console. 
 
 First, a connection is made to Postgres. Here, I am connecting to my test database `pg13_test`. 
 
@@ -67,14 +67,15 @@ write_table(conn = conn,
             data = data.frame(A = 1:25, B = letters[1:25]))
 ```
 
-To demonstrate the join I then write the target table in the test database. I use the sample data: 
+I write a target table in the test database with sample data: 
 
 ```{r}
 test_table <- data.frame(A = 1:25, B = letters[1:25])
-test_table
+head(test_table)
 ```
 
-I use pg13 to write the data to the target `schema` and `table_name`. 
+The data is written to the target `schema` and `table_name` or "test_schema" and "test_table2" respectively. 
+
 ```{r}
 write_table(conn = conn,
             schema = "test_schema",
@@ -83,15 +84,15 @@ write_table(conn = conn,
             data = data.frame(A = 1:25, B = letters[1:25]))
 ```
 
-I create another dataframe in the R environment to serve as the input for this demonstration.  
+I create another dataframe in the R environment to serve as left-side table for this demonstration.  
 
 ```{r}
 test_data <-
         data.frame(A = 1:100, B = letters[1:100])
-test_data
+head(test_data)
 ```
 
-I can then perform a join between this dataframe and the written table, such as an inner join: 
+I can then perform various joins between this dataframe and the previously written table, such as an inner join 
 
 ```{r}
 join1(conn = conn,
@@ -104,7 +105,7 @@ join1(conn = conn,
       join_on_column = "A")
 ```
 
-Right join:  
+a right join
 
 ```{r}
 join1(conn = conn,
@@ -118,7 +119,8 @@ join1(conn = conn,
 
 ```
 
-Left join:  
+a left join 
+
 ```{r}
 join1(conn = conn,
       write_schema = "public",
@@ -130,7 +132,8 @@ join1(conn = conn,
       join_on_column = "A")
 ```
 
-Full join: 
+or a full join:  
+
 ```{r}
 join1(conn = conn,
       write_schema = "public",
@@ -142,7 +145,7 @@ join1(conn = conn,
       join_on_column = "A")
 ```
 
-```{r, include=FALSE}
+```{r, include=FALSE,eval=TRUE,results='hide'}
 drop_schema(conn = conn,
             schema = "test_schema",
             cascade = TRUE)
