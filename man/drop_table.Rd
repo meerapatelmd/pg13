@@ -115,10 +115,15 @@ Other table functions:
 \code{\link{appendTable}()},
 \code{\link{append_table}()},
 \code{\link{create_table}()},
+\code{\link{drop_all_staging_tables}()},
 \code{\link{read_table}()},
 \code{\link{searchTable}()},
 \code{\link{search_table}()},
+\code{\link{write_staging_table}()},
 \code{\link{write_table}()}
+
+Other drop functions: 
+\code{\link{drop_all_staging_tables}()}
 }
 \concept{drop functions}
 \concept{table functions}

@@ -111,22 +111,27 @@ dc(conn = conn)
 Other table functions: 
 \code{\link{appendTable}()},
 \code{\link{create_table}()},
+\code{\link{drop_all_staging_tables}()},
 \code{\link{drop_table}()},
 \code{\link{read_table}()},
 \code{\link{searchTable}()},
 \code{\link{search_table}()},
+\code{\link{write_staging_table}()},
 \code{\link{write_table}()}
 
 Other table functions: 
 \code{\link{appendTable}()},
 \code{\link{create_table}()},
+\code{\link{drop_all_staging_tables}()},
 \code{\link{drop_table}()},
 \code{\link{read_table}()},
 \code{\link{searchTable}()},
 \code{\link{search_table}()},
+\code{\link{write_staging_table}()},
 \code{\link{write_table}()}
 
 Other write functions: 
+\code{\link{write_staging_table}()},
 \code{\link{write_table}()}
 }
 \concept{table functions}

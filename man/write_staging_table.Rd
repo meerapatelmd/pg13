@@ -97,3 +97,25 @@ drop_all_staging_tables(conn = conn,
 
 dc(conn = conn)
 }
+\seealso{
+Other staging table functions: 
+\code{\link{drop_all_staging_tables}()}
+
+Other table functions: 
+\code{\link{appendTable}()},
+\code{\link{append_table}()},
+\code{\link{create_table}()},
+\code{\link{drop_all_staging_tables}()},
+\code{\link{drop_table}()},
+\code{\link{read_table}()},
+\code{\link{searchTable}()},
+\code{\link{search_table}()},
+\code{\link{write_table}()}
+
+Other write functions: 
+\code{\link{append_table}()},
+\code{\link{write_table}()}
+}
+\concept{staging table functions}
+\concept{table functions}
+\concept{write functions}

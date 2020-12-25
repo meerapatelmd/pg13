@@ -11,6 +11,10 @@
 #' @rdname write_staging_table
 #' @inheritParams args
 #' @example inst/example/staging_table.R
+#' @family staging table functions
+#' @family table functions
+#' @family write functions
+
 
 write_staging_table <-
         function(conn,
@@ -80,6 +84,9 @@ write_staging_table <-
 #' @export
 #' @rdname drop_all_staging_tables
 #' @example inst/example/staging_table.R
+#' @family staging table functions
+#' @family table functions
+#' @family drop functions
 
 drop_all_staging_tables <-
         function(conn,

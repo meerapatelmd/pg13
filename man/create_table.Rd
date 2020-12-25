@@ -33,10 +33,12 @@ Other create functions:
 Other table functions: 
 \code{\link{appendTable}()},
 \code{\link{append_table}()},
+\code{\link{drop_all_staging_tables}()},
 \code{\link{drop_table}()},
 \code{\link{read_table}()},
 \code{\link{searchTable}()},
 \code{\link{search_table}()},
+\code{\link{write_staging_table}()},
 \code{\link{write_table}()}
 }
 \concept{create functions}

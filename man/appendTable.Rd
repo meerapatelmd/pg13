@@ -25,10 +25,12 @@ Like the writeTable function, this function is a wrapper around a DatabaseConnec
 Other table functions: 
 \code{\link{append_table}()},
 \code{\link{create_table}()},
+\code{\link{drop_all_staging_tables}()},
 \code{\link{drop_table}()},
 \code{\link{read_table}()},
 \code{\link{searchTable}()},
 \code{\link{search_table}()},
+\code{\link{write_staging_table}()},
 \code{\link{write_table}()}
 }
 \concept{table functions}
