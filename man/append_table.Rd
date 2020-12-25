@@ -110,6 +110,7 @@ dc(conn = conn)
 \seealso{
 Other table functions: 
 \code{\link{appendTable}()},
+\code{\link{create_table}()},
 \code{\link{drop_table}()},
 \code{\link{read_table}()},
 \code{\link{searchTable}()},
@@ -118,6 +119,7 @@ Other table functions:
 
 Other table functions: 
 \code{\link{appendTable}()},
+\code{\link{create_table}()},
 \code{\link{drop_table}()},
 \code{\link{read_table}()},
 \code{\link{searchTable}()},

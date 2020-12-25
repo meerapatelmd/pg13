@@ -11,6 +11,8 @@
 #' @export
 #' @importFrom rlang list2
 #' @importFrom SqlRender render
+#' @family create functions
+#' @family draft functions
 
 draft_create_table <-
         function(schema,
@@ -76,6 +78,8 @@ draft_create_table <-
 #' @export
 #' @importFrom rlang list2
 #' @importFrom SqlRender render
+#' @family create functions
+#' @family table functions
 
 create_table <-
         function(conn,
@@ -116,6 +120,8 @@ create_table <-
 #' @rdname draft_create_table_from_df
 #' @export
 #' @importFrom forcats fct_collapse
+#' @family create functions
+#' @family draft functions
 
 draft_create_table_from_df <-
         function(schema,
@@ -202,6 +208,8 @@ draft_create_table_from_df <-
 #'
 #' @rdname create_table_from_df
 #' @export
+#' @family create functions
+#' @family draft functions
 
 create_table_from_df <-
         function(conn,
