@@ -53,6 +53,43 @@ check_data_rows <-
                 }
         }
 
+#' @keywords internal
+#' @rdname check_output_rows
+
+check_output_rows <-
+        function(data) {
+
+                cat("\t\t\t")
+
+                if (nrow(data) == 0) {
+
+                        cli::cli_alert_danger(text = "data has 0 rows")
+
+                } else {
+
+
+                        cli::cli_alert_success(text = "data")
+                }
+        }
+
+#' @keywords internal
+#' @rdname check_input_rows
+
+check_input_rows <-
+        function(data) {
+
+                cat("\t\t\t")
+
+                if (nrow(data) == 0) {
+
+                        cli::cli_alert_danger(text = "data has 0 rows")
+
+                } else {
+
+
+                        cli::cli_alert_success(text = "data")
+                }
+        }
 
 #' @keywords internal
 #' @rdname check_reserve_names

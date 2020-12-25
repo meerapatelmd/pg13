@@ -35,19 +35,8 @@ write_table(conn = conn,
             data = data.frame(E = c(1.25, 343.31341, 5),
                               G = c(Sys.Date(), Sys.Date()-100, Sys.Date()-1000)))
 
-summarize_fields(conn = conn, schema = "test_schema", table = "test_table", fields = c("A", "B"))
 
-# Case is ignored
-summarize_fields(conn = conn, schema = "test_schema", table = "test_table", fields = c("a", "b"))
-summarize_fields(conn = conn, schema = "test_schema", table = "test_table2", fields = c("c", "D"))
-
-
-# To summarize an entire table (all the fields without manually inputting them)
-summarize_table(conn = conn, schema = "test_schema", table = "test_table3")
-
-# An entire schema can also be summarized
-summarize_schema(conn = conn, schema = "test_schema")
-
+summarize_ta
 
 drop_schema(conn = conn,
             schema = "test_schema",
