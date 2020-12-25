@@ -2,32 +2,22 @@
 % Please edit documentation in R/log.R
 \name{log_error_ff}
 \alias{log_error_ff}
-\title{FUNCTION_TITLE}
+\title{Log an Error Function Factory}
 \usage{
-log_error_ff(datetime_field, schema, log_table)
+log_error_ff(datetime_field = "log_datetime", schema, log_table)
 }
 \arguments{
-\item{datetime_field}{PARAM_DESCRIPTION}
+\item{datetime_field}{Name of the datetime field. Defaults to \code{log_datetime}.}
 
-\item{schema}{PARAM_DESCRIPTION}
+\item{schema}{The target schema for the operation.}
 
-\item{log_table}{PARAM_DESCRIPTION}
+\item{log_table}{Log table name}
 }
 \value{
-OUTPUT_DESCRIPTION
+A function that logs an error of an activity.
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
-}
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+Create a function that will log an error for an activity to the provided \verb{Log Table}.
 }
 \seealso{
 \code{\link[tibble]{tibble}}

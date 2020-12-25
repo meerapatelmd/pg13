@@ -2,32 +2,22 @@
 % Please edit documentation in R/log.R
 \name{log_stop_ff}
 \alias{log_stop_ff}
-\title{FUNCTION_TITLE}
+\title{Log a Stop Function Factory}
 \usage{
-log_stop_ff(datetime_field, schema, log_table)
+log_stop_ff(datetime_field = "log_datetime", schema, log_table)
 }
 \arguments{
-\item{datetime_field}{PARAM_DESCRIPTION}
+\item{datetime_field}{Name of the datetime field. Defaults to \code{log_datetime}.}
 
-\item{schema}{PARAM_DESCRIPTION}
+\item{schema}{The target schema for the operation.}
 
-\item{log_table}{PARAM_DESCRIPTION}
+\item{log_table}{Log table name}
 }
 \value{
-OUTPUT_DESCRIPTION
+A function that logs the stop of an activity.
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
-}
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+Create a function that will log the stop of an activity to the provided \verb{Log Table}.
 }
 \seealso{
 \code{\link[tibble]{tibble}}

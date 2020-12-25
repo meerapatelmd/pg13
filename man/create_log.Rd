@@ -2,11 +2,12 @@
 % Please edit documentation in R/log.R
 \name{create_log}
 \alias{create_log}
-\title{FUNCTION_TITLE}
+\title{Create a Log Table}
 \usage{
 create_log(
-  datetime_field,
+  datetime_field = "log_datetime",
   conn,
+  conn_fun,
   schema,
   log_table,
   verbose = TRUE,
@@ -15,33 +16,20 @@ create_log(
 )
 }
 \arguments{
-\item{datetime_field}{PARAM_DESCRIPTION}
+\item{datetime_field}{Name of the datetime field. Defaults to \code{log_datetime}.}
 
-\item{conn}{PARAM_DESCRIPTION}
+\item{conn}{Connection object}
 
-\item{schema}{PARAM_DESCRIPTION}
+\item{schema}{The target schema for the operation.}
 
-\item{log_table}{PARAM_DESCRIPTION}
+\item{log_table}{Log table name}
 
-\item{verbose}{PARAM_DESCRIPTION, Default: TRUE}
+\item{verbose}{If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.}
 
-\item{render_sql}{PARAM_DESCRIPTION, Default: TRUE}
-}
-\value{
-OUTPUT_DESCRIPTION
+\item{render_sql}{If TRUE, the SQL statement for the operation is returned in the console.}
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
-}
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+Create a \verb{Log Table} if it does not already exist. A log table consists of a user-defined timestamp field, followed by \code{activity} and \code{status} fields.
 }
 \seealso{
 \code{\link[SqlRender]{render}}

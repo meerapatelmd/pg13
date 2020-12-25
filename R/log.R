@@ -1,19 +1,12 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param datetime_field PARAM_DESCRIPTION
-#' @param conn PARAM_DESCRIPTION
-#' @param schema PARAM_DESCRIPTION
-#' @param log_table PARAM_DESCRIPTION
-#' @param verbose PARAM_DESCRIPTION, Default: TRUE
-#' @param render_sql PARAM_DESCRIPTION, Default: TRUE
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' @title
+#' Create a Log Table
+#'
+#' @description
+#' Create a `Log Table` if it does not already exist. A log table consists of a user-defined timestamp field, followed by `activity` and `status` fields.
+#'
+#' @inheritParams args
+#' @param datetime_field Name of the datetime field. Defaults to `log_datetime`.
+#' @param log_table Log table name
 #' @seealso
 #'  \code{\link[SqlRender]{render}}
 #' @rdname create_log
@@ -21,8 +14,9 @@
 #' @importFrom SqlRender render
 
 create_log <-
-        function(datetime_field,
+        function(datetime_field = "log_datetime",
                  conn,
+                 conn_fun,
                  schema,
                  log_table,
                  verbose = TRUE,
@@ -42,6 +36,7 @@ create_log <-
                         )
 
                 send(conn = conn,
+                     conn_fun = conn_fun,
                            sql_statement = sql_statement,
                            verbose = verbose,
                            render_sql = render_sql,
@@ -50,19 +45,14 @@ create_log <-
         }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param datetime_field PARAM_DESCRIPTION
-#' @param schema PARAM_DESCRIPTION
-#' @param log_table PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' @title
+#' Log a Start Function Factory
+#' @description
+#' Create a function that will log a start of an activity to the provided `Log Table`.
+#' @inheritParams create_log
+#' @inheritParams args
+#' @return
+#' A function that logs the start of an activity.
 #' @seealso
 #'  \code{\link[tibble]{tibble}}
 #'  \code{\link[dplyr]{mutate}},\code{\link[dplyr]{select}},\code{\link[dplyr]{reexports}}
@@ -71,19 +61,21 @@ create_log <-
 #' @importFrom tibble tibble
 #' @importFrom dplyr mutate select all_of
 log_start_ff <-
-        function(datetime_field,
+        function(datetime_field = "log_datetime",
                  schema,
                  log_table) {
 
 
                 function(activity,
                          conn,
+                         conn_fun,
                          verbose = TRUE,
                          render_sql = TRUE,
                          render_only = FALSE) {
 
                         create_log(datetime_field = datetime_field,
                                    conn = conn,
+                                   conn_fun = conn_fun,
                                    schema = schema,
                                    log_table = log_table,
                                    verbose = verbose,
@@ -100,6 +92,7 @@ log_start_ff <-
                                              status)
 
                         append_table(conn = conn,
+                                     conn_fun = conn_fun,
                                     schema = schema,
                                     table = log_table,
                                     data = output,
@@ -112,19 +105,14 @@ log_start_ff <-
 
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param datetime_field PARAM_DESCRIPTION
-#' @param schema PARAM_DESCRIPTION
-#' @param log_table PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' @title
+#' Log a Stop Function Factory
+#' @description
+#' Create a function that will log the stop of an activity to the provided `Log Table`.
+#' @inheritParams create_log
+#' @inheritParams args
+#' @return
+#' A function that logs the stop of an activity.
 #' @seealso
 #'  \code{\link[tibble]{tibble}}
 #'  \code{\link[dplyr]{mutate}},\code{\link[dplyr]{select}},\code{\link[dplyr]{reexports}}
@@ -133,19 +121,21 @@ log_start_ff <-
 #' @importFrom tibble tibble
 #' @importFrom dplyr mutate select all_of
 log_stop_ff <-
-        function(datetime_field,
+        function(datetime_field = "log_datetime",
                  schema,
                  log_table) {
 
 
                 function(activity,
                          conn,
+                         conn_fun,
                          verbose = TRUE,
                          render_sql = TRUE,
                          render_only = FALSE) {
 
                         create_log(datetime_field = datetime_field,
                                    conn = conn,
+                                   conn_fun = conn_fun,
                                    schema = schema,
                                    log_table = log_table,
                                    verbose = verbose,
@@ -162,6 +152,7 @@ log_stop_ff <-
                                               status)
 
                         append_table(conn = conn,
+                                     conn_fun = conn_fun,
                                      schema = schema,
                                      table = log_table,
                                      data = output,
@@ -173,19 +164,14 @@ log_stop_ff <-
         }
 
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param datetime_field PARAM_DESCRIPTION
-#' @param schema PARAM_DESCRIPTION
-#' @param log_table PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' @title
+#' Log an Error Function Factory
+#' @description
+#' Create a function that will log an error for an activity to the provided `Log Table`.
+#' @inheritParams create_log
+#' @inheritParams args
+#' @return
+#' A function that logs an error of an activity.
 #' @seealso
 #'  \code{\link[tibble]{tibble}}
 #'  \code{\link[dplyr]{mutate}},\code{\link[dplyr]{select}},\code{\link[dplyr]{reexports}}
@@ -195,19 +181,21 @@ log_stop_ff <-
 #' @importFrom dplyr mutate select all_of
 
 log_error_ff <-
-        function(datetime_field,
+        function(datetime_field = "log_datetime",
                  schema,
                  log_table) {
 
 
                 function(activity,
                          conn,
+                         conn_fun,
                          verbose = TRUE,
                          render_sql = TRUE,
                          render_only = FALSE) {
 
                         create_log(datetime_field = datetime_field,
                                    conn = conn,
+                                   conn_fun = conn_fun,
                                    schema = schema,
                                    log_table = log_table,
                                    verbose = verbose,
