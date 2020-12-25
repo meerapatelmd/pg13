@@ -1,0 +1,156 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# pg13 <img src="man/figures/logo.png" align="right" alt="" width="120" />  
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Functionalized rendering, reading, and building of PostgreSQL statements using R. 
+Other functions from the DatabaseConnector package are migrated here with added 
+conditional steps, such as warning the user that a resultset has 0 rows, verbosity 
+such that it is interactively known what operations are taking place, or SQL 
+rendering in the console before the statement is sent and/or queried for 
+troubleshooting in a separate client.  
+
+## Installation
+
+Install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("meerapatelmd/pg13")
+```
+
+## Example  
+
+You can do a simple join on a dataframe in the R environment and an existing table in a single function call.  
+
+First, a connection is made to Postgres. Here, I am connecting to my test database `pg13_test`. 
+
+```{r}
+library(pg13)
+conn <- local_connect(dbname = "pg13_test")
+```
+
+```{r example_setup, include=FALSE}
+create_test_schema <-
+        function(conn) {
+
+                if (!schema_exists(conn = conn,
+                                   schema = "test_schema")) {
+
+                        create_schema(conn = conn,
+                                      schema = "test_schema")
+
+                }
+        }
+create_test_schema(conn = conn)
+
+# Write a table to join to without dropping
+write_table(conn = conn,
+            schema = "test_schema",
+            table_name = "test_table2",
+            drop_existing = TRUE,
+            data = data.frame(A = 1:25, B = letters[1:25]))
+```
+
+To demonstrate the join I then write the target table in the test database. I use the sample data: 
+
+```{r}
+test_table <- data.frame(A = 1:25, B = letters[1:25])
+test_table
+```
+
+I use pg13 to write the data to the target `schema` and `table_name`. 
+```{r}
+write_table(conn = conn,
+            schema = "test_schema",
+            table_name = "test_table2",
+            drop_existing = TRUE,
+            data = data.frame(A = 1:25, B = letters[1:25]))
+```
+
+I create another dataframe in the R environment to serve as the input for this demonstration.  
+
+```{r}
+test_data <-
+        data.frame(A = 1:100, B = letters[1:100])
+test_data
+```
+
+I can then perform a join between this dataframe and the written table, such as an inner join: 
+
+```{r}
+join1(conn = conn,
+      write_schema = "public",
+      data = test_data,
+      column = "A",
+      kind = "INNER",
+      join_on_schema = "test_schema",
+      join_on_table = "test_table2",
+      join_on_column = "A")
+```
+
+Right join:  
+
+```{r}
+join1(conn = conn,
+      write_schema = "public",
+      data = test_data,
+      column = "A",
+      kind = "RIGHT",
+      join_on_schema = "test_schema",
+      join_on_table = "test_table2",
+      join_on_column = "A")
+
+```
+
+Left join:  
+```{r}
+join1(conn = conn,
+      write_schema = "public",
+      data = test_data,
+      column = "A",
+      kind = "LEFT",
+      join_on_schema = "test_schema",
+      join_on_table = "test_table2",
+      join_on_column = "A")
+```
+
+Full join: 
+```{r}
+join1(conn = conn,
+      write_schema = "public",
+      data = test_data,
+      column = "A",
+      kind = "FULL",
+      join_on_schema = "test_schema",
+      join_on_table = "test_table2",
+      join_on_column = "A")
+```
+
+```{r, include=FALSE}
+drop_schema(conn = conn,
+            schema = "test_schema",
+            cascade = TRUE)
+
+dc(conn = conn)
+```
+
+## Code of Conduct
+  
+  Please note that the pg13 project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By 
+  contributing to this project, you agree to abide by its terms.
