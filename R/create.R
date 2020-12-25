@@ -1,3 +1,34 @@
+#' Create a Schema
+#' @export
+#' @rdname create_schema
+#' @example inst/example/schema.R
+#' @family schema functions
+#' @family create functions
+
+create_schema <-
+        function(conn,
+                 conn_fun,
+                 schema,
+                 verbose = TRUE,
+                 render_sql = TRUE,
+                 render_only = FALSE,
+                 ...) {
+
+                send(conn = conn,
+                     conn_fun = conn_fun,
+                     verbose = verbose,
+                     render_sql = render_sql,
+                     render_only = render_only,
+                     sql_statement =
+                             SqlRender::render(
+                                     "CREATE SCHEMA @schema;",
+                                     schema = schema
+                             ),
+                     ...)
+        }
+
+
+
 #' @title
 #' Draft SQL to Create a Table
 #'
