@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="Query with more than 1 SQL Statements — execute_n" />
-<meta property="og:description" content="Query multiple SQL Statements in a single function call." />
+<meta property="og:description" content="Query multiple SQL Statements in a single function call. A single statement is permitted and differs from the link{query} and link{send} functions by having providing the profile, progressBar, reportOverallTime, errorReportFile, and runAsBatch arguments that are passed to the link[DatabaseConnector]{executeSql}. If this function is throwing an error, the function will conversely loop over the sql statements individually." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pg13</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -125,7 +125,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Query multiple SQL Statements in a single function call.</p>
+    <p>Query multiple SQL Statements in a single function call. A single statement is permitted and differs from the <code>link{query}</code> and <code>link{send}</code> functions by having providing the <code>profile</code>, <code>progressBar</code>, <code>reportOverallTime</code>, <code>errorReportFile</code>, and <code>runAsBatch</code> arguments that are passed to the <code>link[DatabaseConnector]{executeSql}</code>. If this function is throwing an error, the function will conversely loop over the sql statements individually.</p>
     </div>
 
     <pre class="usage"><span class='fu'>execute_n</span><span class='op'>(</span>
@@ -160,10 +160,6 @@
     <tr>
       <th>render_sql</th>
       <td><p>If TRUE, the SQL statement for the operation is returned in the console.</p></td>
-    </tr>
-    <tr>
-      <th>render_only</th>
-      <td><p>If TRUE, <code>sql_statement</code> is printed to the console, but the query is not run. This is an option to QA SQL if a query is throwing errors.</p></td>
     </tr>
     <tr>
       <th>profile</th>

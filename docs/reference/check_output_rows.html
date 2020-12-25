@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Second Generation Left Join — lj2 • pg13</title>
+<title>Check that the outgoing data has rows — check_output_rows • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Second Generation Left Join — lj2" />
-<meta property="og:description" content="Second Generation Left Join" />
+<meta property="og:title" content="Check that the outgoing data has rows — check_output_rows" />
+<meta property="og:description" content="Check that the outgoing data has rows" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pg13</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -119,26 +119,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Second Generation Left Join</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/join2.R'><code>R/join2.R</code></a></small>
-    <div class="hidden name"><code>lj2.Rd</code></div>
+    <h1>Check that the outgoing data has rows</h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/utils-checks.R'><code>R/utils-checks.R</code></a></small>
+    <div class="hidden name"><code>check_output_rows.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Second Generation Left Join</p>
+    <p>Check that the outgoing data has rows</p>
     </div>
 
-    <pre class="usage"><span class='fu'>lj2</span><span class='op'>(</span>
-  <span class='va'>data</span>,
-  <span class='va'>omopSchema</span>,
-  <span class='va'>omopTable</span>,
-  <span class='va'>...</span>,
-  <span class='va'>write_schema</span>,
-  cast_to_varchar <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  case_insensitive <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  render_sql <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>check_output_rows</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span></pre>
 
 
 

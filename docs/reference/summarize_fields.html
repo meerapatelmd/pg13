@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pg13</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -142,6 +142,12 @@
 <span class='op'>)</span></pre>
 
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other summary functions: 
+<code><a href='summarize_field.html'>summarize_field</a>()</code>,
+<code><a href='summarize_schema.html'>summarize_schema</a>()</code>,
+<code><a href='summarize_table.html'>summarize_table</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://meerapatelmd.github.io/pg13/'>pg13</a></span><span class='op'>)</span>
@@ -161,50 +167,525 @@
 
 
 <span class='va'>conn</span> <span class='op'>&lt;-</span> <span class='fu'><a href='local_connect.html'>local_connect</a></span><span class='op'>(</span>dbname <span class='op'>=</span> <span class='st'>"pg13_test"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Connecting using PostgreSQL driver</div><div class='output co'>#&gt; <span class='error'>Error in rJava::.jcall(jdbcDriver, "Ljava/sql/Connection;", "connect",     as.character(url), p): org.postgresql.util.PSQLException: FATAL: database "pg13_test" does not exist</span></div><div class='input'><span class='fu'>create_test_schema</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
-#&gt; 			</div><div class='output co'>#&gt; <span class='error'>Error in check_conn(conn = conn): object 'conn' not found</span></div><div class='input'><span class='fu'><a href='write_table.html'>write_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
+</div><div class='output co'>#&gt; Connecting using PostgreSQL driver</div><div class='input'><span class='fu'>create_test_schema</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; <span class='message'>── Create 'test_schema' Schema ─────────────────────────────────────────────────</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54]	</span><span style='color: #00BB00;'>SQL:</span><span> CREATE SCHEMA test_schema;
+#&gt; [2020-12-25 17:17:54]	Sending...
+#&gt; [2020-12-25 17:17:54]	Sending...complete</div><div class='input'><span class='fu'><a href='write_table.html'>write_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
             schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
             table_name <span class='op'>=</span> <span class='st'>"test_table"</span>,
             drop_existing <span class='op'>=</span> <span class='cn'>TRUE</span>,
             data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>A <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, B <span class='op'>=</span> <span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in brake_closed_conn(conn = conn): connection is not open</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2020-12-25 17:17:54]	</span><span style='color: #BBBB00;'>Dropping test_schema.test_table...</span><span>
+#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table;
+#&gt; [2020-12-25 17:17:54]	Sending...
+#&gt; [2020-12-25 17:17:54]	Sending...complete
+#&gt; [2020-12-25 17:17:54]	</span><span style='color: #BBBB00;'>Dropping test_schema.test_table...complete</span><span>
+#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Data 'data' has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Table name 'test_table' is not a reserved word</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Field name 'a' is not a reserved word</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Field name 'b' is not a reserved word</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54]	</span><span style='color: #BBBB00;'>Writing test_schema.test_table...</span><span>
+#&gt; [2020-12-25 17:17:54]	</span><span style='color: #BBBB00;'>Writing test_schema.test_table...complete</span><span></div><div class='input'>
 <span class='fu'><a href='write_table.html'>write_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
             schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
             table_name <span class='op'>=</span> <span class='st'>"test_table2"</span>,
             drop_existing <span class='op'>=</span> <span class='cn'>TRUE</span>,
             data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>C <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='fl'>3</span><span class='op'>)</span>, D <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>TRUE</span>, <span class='cn'>FALSE</span>, <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in brake_closed_conn(conn = conn): connection is not open</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2020-12-25 17:17:54]	</span><span style='color: #BBBB00;'>Dropping test_schema.test_table2...</span><span>
+#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table2;
+#&gt; [2020-12-25 17:17:54]	Sending...
+#&gt; [2020-12-25 17:17:54]	Sending...complete
+#&gt; [2020-12-25 17:17:54]	</span><span style='color: #BBBB00;'>Dropping test_schema.test_table2...complete</span><span>
+#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Data 'data' has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Table name 'test_table2' is not a reserved word</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Field name 'c' is not a reserved word</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Field name 'd' is not a reserved word</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54]	</span><span style='color: #BBBB00;'>Writing test_schema.test_table2...</span><span></div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to max; returning -Inf</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54]	</span><span style='color: #BBBB00;'>Writing test_schema.test_table2...complete</span><span></div><div class='input'>
 <span class='fu'><a href='write_table.html'>write_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
             schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
             table_name <span class='op'>=</span> <span class='st'>"test_table3"</span>,
             drop_existing <span class='op'>=</span> <span class='cn'>TRUE</span>,
             data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>E <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1.25</span>, <span class='fl'>343.31341</span>, <span class='fl'>5</span><span class='op'>)</span>,
                               G <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>-</span><span class='fl'>100</span>, <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>-</span><span class='fl'>1000</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in brake_closed_conn(conn = conn): connection is not open</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2020-12-25 17:17:54]	</span><span style='color: #BBBB00;'>Dropping test_schema.test_table3...</span><span>
+#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP TABLE IF EXISTS test_schema.test_table3;
+#&gt; [2020-12-25 17:17:54]	Sending...
+#&gt; [2020-12-25 17:17:54]	Sending...complete
+#&gt; [2020-12-25 17:17:54]	</span><span style='color: #BBBB00;'>Dropping test_schema.test_table3...complete</span><span>
+#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Data 'data' has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Table name 'test_table3' is not a reserved word</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Field name 'e' is not a reserved word</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Field name 'g' is not a reserved word</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54]	</span><span style='color: #BBBB00;'>Writing test_schema.test_table3...</span><span>
+#&gt; [2020-12-25 17:17:54]	</span><span style='color: #BBBB00;'>Writing test_schema.test_table3...complete</span><span></div><div class='input'>
 <span class='fu'>summarize_fields</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>, schema <span class='op'>=</span> <span class='st'>"test_schema"</span>, table <span class='op'>=</span> <span class='st'>"test_table"</span>, fields <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListFields': object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.test_table;
+#&gt; [2020-12-25 17:17:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT a FROM test_schema.test_table) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-25 17:17:54]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:54]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:54] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT a FROM test_schema.test_table;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(a) FROM test_schema.test_table WHERE a IS NULL;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.test_table;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT b FROM test_schema.test_table) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT b FROM test_schema.test_table;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(b) FROM test_schema.test_table WHERE b IS NULL;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; $A
+#&gt; $A$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $A$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $A$VALUESET
+#&gt;   a
+#&gt; 1 3
+#&gt; 2 2
+#&gt; 3 1
+#&gt; 
+#&gt; $A$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; $B
+#&gt; $B$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $B$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $B$VALUESET
+#&gt;   b
+#&gt; 1 a
+#&gt; 2 b
+#&gt; 3 c
+#&gt; 
+#&gt; $B$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; </div><div class='input'>
 <span class='co'># Case is ignored</span>
 <span class='fu'>summarize_fields</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>, schema <span class='op'>=</span> <span class='st'>"test_schema"</span>, table <span class='op'>=</span> <span class='st'>"test_table"</span>, fields <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListFields': object 'conn' not found</span></div><div class='input'><span class='fu'>summarize_fields</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>, schema <span class='op'>=</span> <span class='st'>"test_schema"</span>, table <span class='op'>=</span> <span class='st'>"test_table2"</span>, fields <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"c"</span>, <span class='st'>"D"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListFields': object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.test_table;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT a FROM test_schema.test_table) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT a FROM test_schema.test_table;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(a) FROM test_schema.test_table WHERE a IS NULL;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.test_table;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT b FROM test_schema.test_table) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT b FROM test_schema.test_table;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(b) FROM test_schema.test_table WHERE b IS NULL;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; $a
+#&gt; $a$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $a$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $a$VALUESET
+#&gt;   a
+#&gt; 1 3
+#&gt; 2 2
+#&gt; 3 1
+#&gt; 
+#&gt; $a$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; $b
+#&gt; $b$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $b$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $b$VALUESET
+#&gt;   b
+#&gt; 1 a
+#&gt; 2 b
+#&gt; 3 c
+#&gt; 
+#&gt; $b$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; </div><div class='input'><span class='fu'>summarize_fields</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>, schema <span class='op'>=</span> <span class='st'>"test_schema"</span>, table <span class='op'>=</span> <span class='st'>"test_table2"</span>, fields <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"c"</span>, <span class='st'>"D"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.test_table2;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT c FROM test_schema.test_table2) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT c FROM test_schema.test_table2;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(c) FROM test_schema.test_table2 WHERE c IS NULL;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:55]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.test_table2;
+#&gt; [2020-12-25 17:17:55]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT d FROM test_schema.test_table2) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT d FROM test_schema.test_table2;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(d) FROM test_schema.test_table2 WHERE d IS NULL;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; $c
+#&gt; $c$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $c$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     1
+#&gt; 
+#&gt; $c$VALUESET
+#&gt;      c
+#&gt; 1 &lt;NA&gt;
+#&gt; 
+#&gt; $c$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; $D
+#&gt; $D$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $D$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     2
+#&gt; 
+#&gt; $D$VALUESET
+#&gt;       d
+#&gt; 1  TRUE
+#&gt; 2 FALSE
+#&gt; 
+#&gt; $D$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; </div><div class='input'>
 
 <span class='co'># To summarize an entire table (all the fields without manually inputting them)</span>
 <span class='fu'><a href='summarize_table.html'>summarize_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>, schema <span class='op'>=</span> <span class='st'>"test_schema"</span>, table <span class='op'>=</span> <span class='st'>"test_table3"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2020-12-23 20:22:18]	<span style='color: #00BB00;'>SQL:</span><span> N/A
-#&gt; [2020-12-23 20:22:18]	</span><span style='color: #BBBB00;'>Listing Fields...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListFields': object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Listing Fields...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Listing Fields...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.test_table3;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT e FROM test_schema.test_table3) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT e FROM test_schema.test_table3;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(e) FROM test_schema.test_table3 WHERE e IS NULL;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.test_table3;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT g FROM test_schema.test_table3) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT g FROM test_schema.test_table3;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(g) FROM test_schema.test_table3 WHERE g IS NULL;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; $e
+#&gt; $e$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $e$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $e$VALUESET
+#&gt;          e
+#&gt; 1 343.3134
+#&gt; 2   1.2500
+#&gt; 3   5.0000
+#&gt; 
+#&gt; $e$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; $g
+#&gt; $g$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $g$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $g$VALUESET
+#&gt;            g
+#&gt; 1 2020-09-16
+#&gt; 2 2020-12-25
+#&gt; 3 2018-03-31
+#&gt; 
+#&gt; $g$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; </div><div class='input'>
 <span class='co'># An entire schema can also be summarized</span>
 <span class='fu'><a href='summarize_schema.html'>summarize_schema</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>, schema <span class='op'>=</span> <span class='st'>"test_schema"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2020-12-23 20:22:18]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
-#&gt; [2020-12-23 20:22:18]	</span><span style='color: #BBBB00;'>Listing Tables...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListTables': object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Listing Tables...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Listing Tables...completed</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Listing Fields...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Listing Fields...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.TEST_TABLE;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT a FROM test_schema.TEST_TABLE) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT a FROM test_schema.TEST_TABLE;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(a) FROM test_schema.TEST_TABLE WHERE a IS NULL;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.TEST_TABLE;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT b FROM test_schema.TEST_TABLE) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:56]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT b FROM test_schema.TEST_TABLE;
+#&gt; [2020-12-25 17:17:56]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(b) FROM test_schema.TEST_TABLE WHERE b IS NULL;
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Listing Fields...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Listing Fields...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.TEST_TABLE2;
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT c FROM test_schema.TEST_TABLE2) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT c FROM test_schema.TEST_TABLE2;
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(c) FROM test_schema.TEST_TABLE2 WHERE c IS NULL;
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.TEST_TABLE2;
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT d FROM test_schema.TEST_TABLE2) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT d FROM test_schema.TEST_TABLE2;
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(d) FROM test_schema.TEST_TABLE2 WHERE d IS NULL;
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> N/A
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Listing Fields...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Listing Fields...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.TEST_TABLE3;
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT e FROM test_schema.TEST_TABLE3) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT e FROM test_schema.TEST_TABLE3;
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(e) FROM test_schema.TEST_TABLE3 WHERE e IS NULL;
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(*) FROM test_schema.TEST_TABLE3;
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> WITH valueset AS (SELECT DISTINCT g FROM test_schema.TEST_TABLE3) SELECT COUNT(*) FROM valueset;
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT DISTINCT g FROM test_schema.TEST_TABLE3;
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> SELECT COUNT(g) FROM test_schema.TEST_TABLE3 WHERE g IS NULL;
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...</span><span>
+#&gt; [2020-12-25 17:17:57]	</span><span style='color: #BBBB00;'>Querying...complete</span><span>
+#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Returned data has more than 0 rows</span></div><div class='output co'>#&gt; $TEST_TABLE
+#&gt; $TEST_TABLE$a
+#&gt; $TEST_TABLE$a$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE$a$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE$a$VALUESET
+#&gt;   a
+#&gt; 1 3
+#&gt; 2 2
+#&gt; 3 1
+#&gt; 
+#&gt; $TEST_TABLE$a$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; $TEST_TABLE$b
+#&gt; $TEST_TABLE$b$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE$b$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE$b$VALUESET
+#&gt;   b
+#&gt; 1 a
+#&gt; 2 b
+#&gt; 3 c
+#&gt; 
+#&gt; $TEST_TABLE$b$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; $TEST_TABLE2
+#&gt; $TEST_TABLE2$c
+#&gt; $TEST_TABLE2$c$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE2$c$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     1
+#&gt; 
+#&gt; $TEST_TABLE2$c$VALUESET
+#&gt;      c
+#&gt; 1 &lt;NA&gt;
+#&gt; 
+#&gt; $TEST_TABLE2$c$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; $TEST_TABLE2$d
+#&gt; $TEST_TABLE2$d$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE2$d$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     2
+#&gt; 
+#&gt; $TEST_TABLE2$d$VALUESET
+#&gt;       d
+#&gt; 1  TRUE
+#&gt; 2 FALSE
+#&gt; 
+#&gt; $TEST_TABLE2$d$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; $TEST_TABLE3
+#&gt; $TEST_TABLE3$e
+#&gt; $TEST_TABLE3$e$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE3$e$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE3$e$VALUESET
+#&gt;          e
+#&gt; 1 343.3134
+#&gt; 2   1.2500
+#&gt; 3   5.0000
+#&gt; 
+#&gt; $TEST_TABLE3$e$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; $TEST_TABLE3$g
+#&gt; $TEST_TABLE3$g$TOTAL_ROWS
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE3$g$DISTINCT_VALUE_COUNT
+#&gt;   count
+#&gt; 1     3
+#&gt; 
+#&gt; $TEST_TABLE3$g$VALUESET
+#&gt;            g
+#&gt; 1 2020-09-16
+#&gt; 2 2020-12-25
+#&gt; 3 2018-03-31
+#&gt; 
+#&gt; $TEST_TABLE3$g$NULL_COUNT
+#&gt;   count
+#&gt; 1     0
+#&gt; 
+#&gt; 
+#&gt; </div><div class='input'>
 
 <span class='fu'><a href='drop_schema.html'>drop_schema</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
             schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
             cascade <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; ── Checks ──────────────────────────────────────────────────────────────────────
-#&gt; 			</div><div class='output co'>#&gt; <span class='error'>Error in check_conn(conn = conn): object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Open connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57] 	</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> JDBC connection</span></div><div class='output co'>#&gt; [2020-12-25 17:17:57]	</span><span style='color: #00BB00;'>SQL:</span><span> DROP SCHEMA IF EXISTS test_schema CASCADE;
+#&gt; [2020-12-25 17:17:57]	Sending...
+#&gt; [2020-12-25 17:17:57]	Sending...complete</div><div class='input'>
 <span class='fu'><a href='dc.html'>dc</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2020-12-23 20:22:18]	Postgres connection was already closed</div></span></pre>
+</div><div class='output co'>#&gt; [2020-12-25 17:17:57]	Postgres connection to 'pg13_test' closed</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

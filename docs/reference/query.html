@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Send Query to any Postgres connection — query • pg13</title>
+<title>Query — query • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Send Query to any Postgres connection — query" />
-<meta property="og:description" content="Send Query to any Postgres connection" />
+<meta property="og:title" content="Query — query" />
+<meta property="og:description" content="Query" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pg13</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -119,13 +119,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Send Query to any Postgres connection</h1>
+    <h1>Query</h1>
     <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/sql.R'><code>R/sql.R</code></a></small>
     <div class="hidden name"><code>query.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Send Query to any Postgres connection</p>
+    <p>Query</p>
     </div>
 
     <pre class="usage"><span class='fu'>query</span><span class='op'>(</span>
@@ -134,7 +134,7 @@
   <span class='va'>sql_statement</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
   render_sql <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  warn_no_rows <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  warn_no_rows <span class='op'>=</span> <span class='st'>"deprecated"</span>,
   render_only <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
@@ -148,22 +148,25 @@
     </tr>
     <tr>
       <th>sql_statement</th>
-      <td><p>SQL Query</p></td>
+      <td><p>A SQL Statement.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.</p></td>
+    </tr>
+    <tr>
+      <th>render_sql</th>
+      <td><p>If TRUE, the SQL statement for the operation is returned in the console.</p></td>
     </tr>
     <tr>
       <th>warn_no_rows</th>
       <td><p>If TRUE, a warning is given that query has returned 0 rows.</p></td>
     </tr>
-    <tr>
-      <th>render_only</th>
-      <td><p>If TRUE, <code>sql_statement</code> is printed to the console, but the query is not run. This is an option to QA SQL if a query is throwing errors.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Additional arguments to pass onto <code>dbGetQuery</code></p></td>
-    </tr>
     </table>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://rlang.r-lib.org/reference/parse_expr.html'>parse_expr</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
