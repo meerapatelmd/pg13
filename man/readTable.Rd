@@ -6,17 +6,6 @@
 \usage{
 readTable(conn, schema, tableName, verbose = TRUE, render_sql = TRUE)
 }
-\arguments{
-\item{conn}{Connection object}
-
-\item{schema}{The target schema for the operation.}
-
-\item{tableName}{The target table in the \code{schema} for an operation or for writing functions, the name of the table that will be created.}
-
-\item{verbose}{If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.}
-
-\item{render_sql}{If TRUE, the SQL statement for the operation is returned in the console.}
-}
 \description{
 Shortcut for a \verb{SELECT *} SQL statement.
 }

@@ -17,21 +17,11 @@ search_table(
 )
 }
 \arguments{
-\item{conn}{Connection object}
-
-\item{schema}{The target schema for the operation.}
-
-\item{table}{Target table for the operation.}
-
 \item{...}{(Optional) Character strings of 1 or more fields in the table to search in.}
 
 \item{values}{Vector of length 1 or greater to search for.}
 
 \item{case_insensitive}{If TRUE, both sides of the query are converted to lowercase.}
-
-\item{verbose}{If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.}
-
-\item{render_sql}{If TRUE, the SQL statement for the operation is returned in the console.}
 }
 \description{
 Loop a query for a set of one or more values in a table across all the existing fields or optionally, a subset of the fields. Both the values and the table fields are ensured compatibility by 1. Converting each value in the \code{values} argument to the character class and 2. Casting each table field as varchar in the query.

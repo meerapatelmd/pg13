@@ -6,11 +6,6 @@
 \usage{
 table_exists(conn, schema, table_name)
 }
-\arguments{
-\item{conn}{Connection object}
-
-\item{schema}{The target schema for the operation.}
-}
 \description{
 Does a table exist?
 }
