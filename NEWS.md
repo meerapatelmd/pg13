@@ -1,3 +1,14 @@
+# pg13 1.1.0
+
+* Added join1 function
+
+
+# pg13 1.0.0
+
+* Change function naming conventions to snake case  
+* Deprecated camel case functions  
+
+
 # pg13 0.3.2
 
 * Added a `NEWS.md` file to track changes to the package.  

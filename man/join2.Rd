@@ -2,7 +2,7 @@
 % Please edit documentation in R/join2.R
 \name{join2}
 \alias{join2}
-\title{2nd Generation Join}
+\title{2nd Degree Join}
 \usage{
 join2(
   conn,
@@ -19,5 +19,5 @@ join2(
 )
 }
 \description{
-2nd Generation Join
+A \verb{Second Degree Join} is one where the \verb{JOIN ON} clause occurs on more than one column on the left and one column for each on the right.
 }

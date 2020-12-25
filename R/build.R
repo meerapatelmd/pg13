@@ -41,6 +41,9 @@ build_join_query <-
              random) {
 
 
+        .Deprecated(new = "draft_join1")
+
+
 
                     if (!missing(random) && distinct) {
 

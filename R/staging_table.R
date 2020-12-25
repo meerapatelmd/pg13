@@ -31,7 +31,7 @@ write_staging_table <-
                         sprintf("V%s",
                                 stringr::str_remove_all(as.character(Sys.time()),
                                                 pattern = "[^0-9]"))
-                        on.exit(return(table_name))
+
 
 
                 write_table(conn = conn,
@@ -59,6 +59,8 @@ write_staging_table <-
                         )
 
                 }
+
+                table_name
 
 
 
