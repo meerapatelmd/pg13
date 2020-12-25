@@ -75,6 +75,8 @@ join2 <-
 
 
 
+#' @title
+#' Draft a Join On
 #' @export
 #' @rdname draft_join_on
 

@@ -13,6 +13,8 @@ pg13_env <- setClass("pg_env",
                    slots = c(update_datetime = "POSIXct"))
 
 
+#' @title
+#' Methods: PG13 environment
 #' @export
 #' @rdname pg13_env_methods
 

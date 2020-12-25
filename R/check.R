@@ -1,3 +1,5 @@
+#' @title
+#' Check a Connection Object
 #' @keywords internal
 #' @rdname check_conn
 
@@ -8,6 +10,8 @@ check_conn <-
                 check_conn_type(conn = conn)
         }
 
+#' @title
+#' Check Outgoing Data
 #' @keywords internal
 #' @rdname check_outflow
 
@@ -28,6 +32,8 @@ check_outflow <-
                 check_field_names(field_names = field_names)
         }
 
+#' @title
+#' Check Incoming Data
 #' @keywords internal
 #' @rdname check_inflow
 

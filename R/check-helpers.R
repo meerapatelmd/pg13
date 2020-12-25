@@ -1,8 +1,13 @@
+#' @noRd
+
 typewrite_alert_danger <-
         function(text) {
                 cat(sprintf("[%s]", as.character(Sys.time())), "\t")
                 cli::cli_alert_danger(text = text)
         }
+
+
+#' @noRd
 
 typewrite_alert_success <-
         function(text) {
@@ -11,6 +16,8 @@ typewrite_alert_success <-
         }
 
 
+#' @title
+#' Check Connection Status
 #' @keywords internal
 #' @rdname check_conn_status
 
@@ -32,6 +39,8 @@ check_conn_status <-
         }
 
 
+#' @title
+#' Check if a Connection is JDBC
 #' @keywords internal
 #' @rdname check_conn_type
 
@@ -45,6 +54,8 @@ check_conn_type <-
         }
 
 
+#' @title
+#' Check that the data has rows
 #' @keywords internal
 #' @rdname check_data_rows
 
@@ -63,6 +74,8 @@ check_data_rows <-
                 }
         }
 
+#' @title
+#' Check that the outgoing data has rows
 #' @keywords internal
 #' @rdname check_output_rows
 
@@ -81,6 +94,8 @@ check_output_rows <-
                 }
         }
 
+#' @title
+#' Check that the incoming data has rows
 #' @keywords internal
 #' @rdname check_input_rows
 
@@ -100,6 +115,10 @@ check_input_rows <-
                 }
         }
 
+#' @title
+#' Check a field name
+#' @description
+#' Check that a field name is not a reserved SQL word.
 #' @keywords internal
 #' @rdname check_field_name
 
@@ -123,6 +142,10 @@ check_field_name <-
         }
 
 
+#' @title
+#' Check Table Name
+#' @description
+#' Check that a table name is not a reserved SQL word.
 #' @keywords internal
 #' @rdname check_table_name
 
@@ -146,6 +169,10 @@ check_table_name <-
         }
 
 
+#' @title
+#' Check a multiple field names
+#' @description
+#' Check that more than 1 field name is not a reserved SQL word.
 #' @keywords internal
 #' @rdname check_field_names
 
