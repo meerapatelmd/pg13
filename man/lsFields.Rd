@@ -16,6 +16,7 @@ Other list functions:
 \code{\link{ls_db}()},
 \code{\link{ls_fields}()},
 \code{\link{ls_schema}()},
-\code{\link{ls_tables}()}
+\code{\link{ls_tables}()},
+\code{\link{ls_users}()}
 }
 \concept{list functions}
