@@ -41,7 +41,6 @@ library(pg13)
 #> 
 #>     connect
 conn <- local_connect(dbname = "pg13_test")
-#> Connecting using PostgreSQL driver
 ```
 
 I write a target table in the test database with sample data:
@@ -59,7 +58,9 @@ head(test_table)
 ```
 
 The data is written to the target `schema` and `table_name` or
-“test\_schema” and “test\_table2” respectively.
+“test\_schema” and “test\_table2” respectively. Messages appear in the
+console along with timestamp that elaborate on the connection status,
+the data dimensions, and the passage of QA checks.
 
 ``` r
 write_table(conn = conn,
@@ -67,25 +68,25 @@ write_table(conn = conn,
             table_name = "test_table2",
             drop_existing = TRUE,
             data = data.frame(A = 1:25, B = letters[1:25]))
-#> [2020-12-25 17:41:43]    Dropping test_schema.test_table2...
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    Dropping test_schema.test_table2...
+#> [2020-12-25 17:44:49]    
 #> ✓ Open connection
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ JDBC connection
-#> [2020-12-25 17:41:43]    SQL: DROP TABLE IF EXISTS test_schema.test_table2;
-#> [2020-12-25 17:41:43]    Sending...
-#> [2020-12-25 17:41:43]    Sending...complete
-#> [2020-12-25 17:41:43]    Dropping test_schema.test_table2...complete
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS test_schema.test_table2;
+#> [2020-12-25 17:44:49]    Sending...
+#> [2020-12-25 17:44:49]    Sending...complete
+#> [2020-12-25 17:44:49]    Dropping test_schema.test_table2...complete
+#> [2020-12-25 17:44:49]    
 #> ✓ Data 'data' has more than 0 rows
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ Table name 'test_table2' is not a reserved word
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ Field name 'a' is not a reserved word
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ Field name 'b' is not a reserved word
-#> [2020-12-25 17:41:43]    Writing test_schema.test_table2...
-#> [2020-12-25 17:41:43]    Writing test_schema.test_table2...complete
+#> [2020-12-25 17:44:49]    Writing test_schema.test_table2...
+#> [2020-12-25 17:44:49]    Writing test_schema.test_table2...complete
 ```
 
 I create another dataframe in the R environment to serve as left-side
@@ -116,43 +117,43 @@ join1(conn = conn,
       join_on_schema = "test_schema",
       join_on_table = "test_table2",
       join_on_column = "A")
-#> [2020-12-25 17:41:43]    Dropping public.V20201225174143...
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    Dropping public.V20201225174449...
+#> [2020-12-25 17:44:49]    
 #> ✓ Open connection
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ JDBC connection
-#> [2020-12-25 17:41:43]    SQL: DROP TABLE IF EXISTS public.V20201225174143;
-#> [2020-12-25 17:41:43]    Sending...
-#> [2020-12-25 17:41:43]    Sending...complete
-#> [2020-12-25 17:41:43]    Dropping public.V20201225174143...complete
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS public.V20201225174449;
+#> [2020-12-25 17:44:49]    Sending...
+#> [2020-12-25 17:44:49]    Sending...complete
+#> [2020-12-25 17:44:49]    Dropping public.V20201225174449...complete
+#> [2020-12-25 17:44:49]    
 #> ✓ Data 'data' has more than 0 rows
-#> [2020-12-25 17:41:43]    
-#> ✓ Table name 'V20201225174143' is not a reserved word
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
+#> ✓ Table name 'V20201225174449' is not a reserved word
+#> [2020-12-25 17:44:49]    
 #> ✓ Field name 'a' is not a reserved word
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ Field name 'b' is not a reserved word
-#> [2020-12-25 17:41:43]    Writing public.V20201225174143...
-#> [2020-12-25 17:41:43]    Writing public.V20201225174143...complete
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    Writing public.V20201225174449...
+#> [2020-12-25 17:44:49]    Writing public.V20201225174449...complete
+#> [2020-12-25 17:44:49]    
 #> ✓ Open connection
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ JDBC connection
-#> [2020-12-25 17:41:43]    SQL: SELECT a.*, b.* FROM public.V20201225174143 a INNER JOIN test_schema.test_table2 b ON a.A = b.A
-#> [2020-12-25 17:41:43]    Querying...
-#> [2020-12-25 17:41:43]    Querying...complete
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    SQL: SELECT a.*, b.* FROM public.V20201225174449 a INNER JOIN test_schema.test_table2 b ON a.A = b.A
+#> [2020-12-25 17:44:49]    Querying...
+#> [2020-12-25 17:44:49]    Querying...complete
+#> [2020-12-25 17:44:49]    
 #> ✓ Returned data has more than 0 rows
-#> [2020-12-25 17:41:43]    Dropping public.V20201225174143...
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    Dropping public.V20201225174449...
+#> [2020-12-25 17:44:49]    
 #> ✓ Open connection
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ JDBC connection
-#> [2020-12-25 17:41:43]    SQL: DROP TABLE IF EXISTS public.V20201225174143;
-#> [2020-12-25 17:41:43]    Sending...
-#> [2020-12-25 17:41:43]    Sending...complete
-#> [2020-12-25 17:41:43]    Dropping public.V20201225174143...complete
+#> [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS public.V20201225174449;
+#> [2020-12-25 17:44:49]    Sending...
+#> [2020-12-25 17:44:49]    Sending...complete
+#> [2020-12-25 17:44:49]    Dropping public.V20201225174449...complete
 #>     a b  a b
 #> 1   1 a  1 a
 #> 2   2 b  2 b
@@ -192,43 +193,43 @@ join1(conn = conn,
       join_on_schema = "test_schema",
       join_on_table = "test_table2",
       join_on_column = "A")
-#> [2020-12-25 17:41:43]    Dropping public.V20201225174143...
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    Dropping public.V20201225174449...
+#> [2020-12-25 17:44:49]    
 #> ✓ Open connection
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ JDBC connection
-#> [2020-12-25 17:41:43]    SQL: DROP TABLE IF EXISTS public.V20201225174143;
-#> [2020-12-25 17:41:43]    Sending...
-#> [2020-12-25 17:41:43]    Sending...complete
-#> [2020-12-25 17:41:43]    Dropping public.V20201225174143...complete
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS public.V20201225174449;
+#> [2020-12-25 17:44:49]    Sending...
+#> [2020-12-25 17:44:49]    Sending...complete
+#> [2020-12-25 17:44:49]    Dropping public.V20201225174449...complete
+#> [2020-12-25 17:44:49]    
 #> ✓ Data 'data' has more than 0 rows
-#> [2020-12-25 17:41:43]    
-#> ✓ Table name 'V20201225174143' is not a reserved word
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
+#> ✓ Table name 'V20201225174449' is not a reserved word
+#> [2020-12-25 17:44:49]    
 #> ✓ Field name 'a' is not a reserved word
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ Field name 'b' is not a reserved word
-#> [2020-12-25 17:41:43]    Writing public.V20201225174143...
-#> [2020-12-25 17:41:43]    Writing public.V20201225174143...complete
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    Writing public.V20201225174449...
+#> [2020-12-25 17:44:49]    Writing public.V20201225174449...complete
+#> [2020-12-25 17:44:49]    
 #> ✓ Open connection
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ JDBC connection
-#> [2020-12-25 17:41:43]    SQL: SELECT a.*, b.* FROM public.V20201225174143 a RIGHT JOIN test_schema.test_table2 b ON a.A = b.A
-#> [2020-12-25 17:41:43]    Querying...
-#> [2020-12-25 17:41:43]    Querying...complete
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    SQL: SELECT a.*, b.* FROM public.V20201225174449 a RIGHT JOIN test_schema.test_table2 b ON a.A = b.A
+#> [2020-12-25 17:44:49]    Querying...
+#> [2020-12-25 17:44:49]    Querying...complete
+#> [2020-12-25 17:44:49]    
 #> ✓ Returned data has more than 0 rows
-#> [2020-12-25 17:41:43]    Dropping public.V20201225174143...
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    Dropping public.V20201225174449...
+#> [2020-12-25 17:44:49]    
 #> ✓ Open connection
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ JDBC connection
-#> [2020-12-25 17:41:43]    SQL: DROP TABLE IF EXISTS public.V20201225174143;
-#> [2020-12-25 17:41:43]    Sending...
-#> [2020-12-25 17:41:43]    Sending...complete
-#> [2020-12-25 17:41:43]    Dropping public.V20201225174143...complete
+#> [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS public.V20201225174449;
+#> [2020-12-25 17:44:49]    Sending...
+#> [2020-12-25 17:44:49]    Sending...complete
+#> [2020-12-25 17:44:49]    Dropping public.V20201225174449...complete
 #>     a b  a b
 #> 1   1 a  1 a
 #> 2   2 b  2 b
@@ -268,43 +269,43 @@ join1(conn = conn,
       join_on_schema = "test_schema",
       join_on_table = "test_table2",
       join_on_column = "A")
-#> [2020-12-25 17:41:43]    Dropping public.V20201225174143...
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    Dropping public.V20201225174449...
+#> [2020-12-25 17:44:49]    
 #> ✓ Open connection
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ JDBC connection
-#> [2020-12-25 17:41:43]    SQL: DROP TABLE IF EXISTS public.V20201225174143;
-#> [2020-12-25 17:41:43]    Sending...
-#> [2020-12-25 17:41:43]    Sending...complete
-#> [2020-12-25 17:41:43]    Dropping public.V20201225174143...complete
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS public.V20201225174449;
+#> [2020-12-25 17:44:49]    Sending...
+#> [2020-12-25 17:44:49]    Sending...complete
+#> [2020-12-25 17:44:49]    Dropping public.V20201225174449...complete
+#> [2020-12-25 17:44:49]    
 #> ✓ Data 'data' has more than 0 rows
-#> [2020-12-25 17:41:43]    
-#> ✓ Table name 'V20201225174143' is not a reserved word
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
+#> ✓ Table name 'V20201225174449' is not a reserved word
+#> [2020-12-25 17:44:49]    
 #> ✓ Field name 'a' is not a reserved word
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ Field name 'b' is not a reserved word
-#> [2020-12-25 17:41:43]    Writing public.V20201225174143...
-#> [2020-12-25 17:41:43]    Writing public.V20201225174143...complete
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    Writing public.V20201225174449...
+#> [2020-12-25 17:44:49]    Writing public.V20201225174449...complete
+#> [2020-12-25 17:44:49]    
 #> ✓ Open connection
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ JDBC connection
-#> [2020-12-25 17:41:43]    SQL: SELECT a.*, b.* FROM public.V20201225174143 a LEFT JOIN test_schema.test_table2 b ON a.A = b.A
-#> [2020-12-25 17:41:43]    Querying...
-#> [2020-12-25 17:41:43]    Querying...complete
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    SQL: SELECT a.*, b.* FROM public.V20201225174449 a LEFT JOIN test_schema.test_table2 b ON a.A = b.A
+#> [2020-12-25 17:44:49]    Querying...
+#> [2020-12-25 17:44:49]    Querying...complete
+#> [2020-12-25 17:44:49]    
 #> ✓ Returned data has more than 0 rows
-#> [2020-12-25 17:41:43]    Dropping public.V20201225174143...
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    Dropping public.V20201225174449...
+#> [2020-12-25 17:44:49]    
 #> ✓ Open connection
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ JDBC connection
-#> [2020-12-25 17:41:43]    SQL: DROP TABLE IF EXISTS public.V20201225174143;
-#> [2020-12-25 17:41:43]    Sending...
-#> [2020-12-25 17:41:43]    Sending...complete
-#> [2020-12-25 17:41:43]    Dropping public.V20201225174143...complete
+#> [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS public.V20201225174449;
+#> [2020-12-25 17:44:49]    Sending...
+#> [2020-12-25 17:44:49]    Sending...complete
+#> [2020-12-25 17:44:49]    Dropping public.V20201225174449...complete
 #>       a    b  a    b
 #> 1     1    a  1    a
 #> 2     2    b  2    b
@@ -419,43 +420,43 @@ join1(conn = conn,
       join_on_schema = "test_schema",
       join_on_table = "test_table2",
       join_on_column = "A")
-#> [2020-12-25 17:41:43]    Dropping public.V20201225174143...
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    Dropping public.V20201225174449...
+#> [2020-12-25 17:44:49]    
 #> ✓ Open connection
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ JDBC connection
-#> [2020-12-25 17:41:43]    SQL: DROP TABLE IF EXISTS public.V20201225174143;
-#> [2020-12-25 17:41:43]    Sending...
-#> [2020-12-25 17:41:43]    Sending...complete
-#> [2020-12-25 17:41:43]    Dropping public.V20201225174143...complete
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS public.V20201225174449;
+#> [2020-12-25 17:44:49]    Sending...
+#> [2020-12-25 17:44:49]    Sending...complete
+#> [2020-12-25 17:44:49]    Dropping public.V20201225174449...complete
+#> [2020-12-25 17:44:49]    
 #> ✓ Data 'data' has more than 0 rows
-#> [2020-12-25 17:41:43]    
-#> ✓ Table name 'V20201225174143' is not a reserved word
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
+#> ✓ Table name 'V20201225174449' is not a reserved word
+#> [2020-12-25 17:44:49]    
 #> ✓ Field name 'a' is not a reserved word
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ Field name 'b' is not a reserved word
-#> [2020-12-25 17:41:43]    Writing public.V20201225174143...
-#> [2020-12-25 17:41:43]    Writing public.V20201225174143...complete
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    Writing public.V20201225174449...
+#> [2020-12-25 17:44:49]    Writing public.V20201225174449...complete
+#> [2020-12-25 17:44:49]    
 #> ✓ Open connection
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ JDBC connection
-#> [2020-12-25 17:41:43]    SQL: SELECT a.*, b.* FROM public.V20201225174143 a FULL JOIN test_schema.test_table2 b ON a.A = b.A
-#> [2020-12-25 17:41:43]    Querying...
-#> [2020-12-25 17:41:43]    Querying...complete
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    SQL: SELECT a.*, b.* FROM public.V20201225174449 a FULL JOIN test_schema.test_table2 b ON a.A = b.A
+#> [2020-12-25 17:44:49]    Querying...
+#> [2020-12-25 17:44:49]    Querying...complete
+#> [2020-12-25 17:44:49]    
 #> ✓ Returned data has more than 0 rows
-#> [2020-12-25 17:41:43]    Dropping public.V20201225174143...
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    Dropping public.V20201225174449...
+#> [2020-12-25 17:44:49]    
 #> ✓ Open connection
-#> [2020-12-25 17:41:43]    
+#> [2020-12-25 17:44:49]    
 #> ✓ JDBC connection
-#> [2020-12-25 17:41:43]    SQL: DROP TABLE IF EXISTS public.V20201225174143;
-#> [2020-12-25 17:41:43]    Sending...
-#> [2020-12-25 17:41:43]    Sending...complete
-#> [2020-12-25 17:41:43]    Dropping public.V20201225174143...complete
+#> [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS public.V20201225174449;
+#> [2020-12-25 17:44:49]    Sending...
+#> [2020-12-25 17:44:49]    Sending...complete
+#> [2020-12-25 17:44:49]    Dropping public.V20201225174449...complete
 #>       a    b  a    b
 #> 1     1    a  1    a
 #> 2     2    b  2    b

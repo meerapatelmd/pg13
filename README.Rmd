@@ -40,7 +40,7 @@ pg13 provides functions that simplifies queries such as joins from the R console
 
 First, a connection is made to Postgres. Here, I am connecting to my test database `pg13_test`. 
 
-```{r}
+```{r,results='hide'}
 library(pg13)
 conn <- local_connect(dbname = "pg13_test")
 ```
@@ -74,7 +74,7 @@ test_table <- data.frame(A = 1:25, B = letters[1:25])
 head(test_table)
 ```
 
-The data is written to the target `schema` and `table_name` or "test_schema" and "test_table2" respectively. 
+The data is written to the target `schema` and `table_name` or "test_schema" and "test_table2" respectively. Messages appear in the console along with timestamp that elaborate on the connection status, the data dimensions, and the passage of QA checks. 
 
 ```{r}
 write_table(conn = conn,
