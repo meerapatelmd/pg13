@@ -12,7 +12,7 @@
 #' @rdname create_log
 #' @export
 #' @importFrom SqlRender render
-
+#' @family logging functions
 create_log <-
         function(datetime_field = "log_datetime",
                  conn,
@@ -60,6 +60,7 @@ create_log <-
 #' @export
 #' @importFrom tibble tibble
 #' @importFrom dplyr mutate select all_of
+#' @family logging functions
 log_start_ff <-
         function(datetime_field = "log_datetime",
                  schema,
@@ -120,6 +121,7 @@ log_start_ff <-
 #' @export
 #' @importFrom tibble tibble
 #' @importFrom dplyr mutate select all_of
+#' @family logging functions
 log_stop_ff <-
         function(datetime_field = "log_datetime",
                  schema,
@@ -179,6 +181,7 @@ log_stop_ff <-
 #' @export
 #' @importFrom tibble tibble
 #' @importFrom dplyr mutate select all_of
+#' @family logging functions
 
 log_error_ff <-
         function(datetime_field = "log_datetime",

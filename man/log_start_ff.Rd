@@ -22,4 +22,10 @@ Create a function that will log a start of an activity to the provided \verb{Log
 \seealso{
 \code{\link[tibble]{tibble}}
 \code{\link[dplyr]{mutate}},\code{\link[dplyr]{select}},\code{\link[dplyr]{reexports}}
+
+Other logging functions: 
+\code{\link{create_log}()},
+\code{\link{log_error_ff}()},
+\code{\link{log_stop_ff}()}
 }
+\concept{logging functions}

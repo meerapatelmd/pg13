@@ -33,4 +33,10 @@ Create a \verb{Log Table} if it does not already exist. A log table consists of 
 }
 \seealso{
 \code{\link[SqlRender]{render}}
+
+Other logging functions: 
+\code{\link{log_error_ff}()},
+\code{\link{log_start_ff}()},
+\code{\link{log_stop_ff}()}
 }
+\concept{logging functions}

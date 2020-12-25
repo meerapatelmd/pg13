@@ -22,4 +22,10 @@ Create a function that will log an error for an activity to the provided \verb{L
 \seealso{
 \code{\link[tibble]{tibble}}
 \code{\link[dplyr]{mutate}},\code{\link[dplyr]{select}},\code{\link[dplyr]{reexports}}
+
+Other logging functions: 
+\code{\link{create_log}()},
+\code{\link{log_start_ff}()},
+\code{\link{log_stop_ff}()}
 }
+\concept{logging functions}
