@@ -15,11 +15,22 @@ create_test_schema <-
 
 conn <- local_connect(dbname = "pg13_test")
 create_test_schema(conn = conn)
+
+# Write a table without dropping
+write_table(conn = conn,
+            schema = "test_schema",
+            table_name = "test_table2",
+            drop_existing = FALSE,
+            data = data.frame(A = 1:3, B = letters[1:3]))
+
+# Write a table with dropping
 write_table(conn = conn,
             schema = "test_schema",
             table_name = "test_table",
             drop_existing = TRUE,
             data = data.frame(A = 1:3, B = letters[1:3]))
+
+
 
 
 append_table(conn = conn,
@@ -57,6 +68,12 @@ search_table(conn = conn,
 drop_table(conn = conn,
            schema = "test_schema",
            table = "test_table",
+           if_exists = FALSE,
+           data = data.frame(A = 1:3, B = rep(NA_character_, 3)))
+
+drop_table(conn = conn,
+           schema = "test_schema",
+           table = "test_table2",
            if_exists = FALSE,
            data = data.frame(A = 1:3, B = rep(NA_character_, 3)))
 

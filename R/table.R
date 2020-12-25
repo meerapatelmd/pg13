@@ -14,7 +14,7 @@
 #'
 #' @export
 #' @example inst/example/table.R
-
+#' @family table functions
 
 append_table <-
         function(conn,
@@ -34,10 +34,10 @@ append_table <-
                             after = TRUE)
                 }
 
-                brake_closed_conn(conn = conn)
-                flag_no_rows(data = data)
+            check_conn(conn = conn)
+            check_outflow(data = data)
 
-                schema_table <- sprintf("%s.%s", schema, table)
+            schema_table <- sprintf("%s.%s", schema, table)
 
 
                 if (render_sql) {
@@ -48,7 +48,7 @@ append_table <-
 
                 if (verbose) {
 
-                    typewrite_activity("Appending...")
+                    typewrite_activity(sprintf("Appending %s...", schema_table))
 
                 }
 
@@ -59,7 +59,7 @@ append_table <-
 
                 if (verbose) {
 
-                    typewrite_activity("Appending...complete")
+                    typewrite_activity(sprintf("Appending %s...complete", schema_table))
 
                 }
 
@@ -81,6 +81,7 @@ append_table <-
 #'
 #' @export
 #' @example inst/example/table.R
+#' @family table functions
 
 write_table <-
         function(conn,
@@ -91,18 +92,20 @@ write_table <-
                  drop_existing = FALSE,
                  verbose = TRUE,
                  render_sql = TRUE,
+                 render_only = FALSE,
                  ...) {
 
-                if (!missing(conn_fun)) {
-                    conn <- eval(rlang::parse_expr(conn_fun))
-                    on.exit(dc(conn = conn,
-                               verbose = verbose),
-                            add = TRUE,
-                            after = TRUE)
-                }
 
-                brake_closed_conn(conn = conn)
-                flag_no_rows(data = data)
+            if (!missing(conn_fun)) {
+                conn <- eval(rlang::parse_expr(conn_fun))
+                on.exit(dc(conn = conn,
+                           verbose = verbose),
+                        add = TRUE,
+                        after = TRUE)
+            }
+
+
+                # <---! Performs any checks on the connection already so it is skipped --->
 
                 if (drop_existing) {
 
@@ -112,22 +115,27 @@ write_table <-
                                table = table_name,
                                if_exists = TRUE,
                                verbose = verbose,
-                               render_sql = render_sql)
+                               render_sql = render_sql,
+                               render_only = render_only)
+
+                } else {
+
+                    check_conn(conn = conn)
 
                 }
+
+
+                check_outflow(data = data,
+                              table_name = table_name)
 
                 schema_table_name <- sprintf("%s.%s", schema, table_name)
 
 
-                if (render_sql) {
-
-                    typewrite_sql(sql_statement = "N/A")
-
-                }
+                if (!render_only) {
 
                 if (verbose) {
 
-                    typewrite_activity("Writing...")
+                    typewrite_activity(sprintf("Writing %s...", schema_table_name))
 
                 }
 
@@ -138,82 +146,17 @@ write_table <-
 
                 if (verbose) {
 
-                    typewrite_activity("Writing...complete")
+                    typewrite_activity(sprintf("Writing %s...complete", schema_table_name))
+
+                }
+
+                } else {
+
+                    typewrite_activity(sprintf("No SQL to render for write_table()"))
 
                 }
 
         }
-
-#' @title
-#' Drop a Table
-#'
-#' @inheritParams base_args
-#' @param           if_exists   If TRUE, the table will be dropped only if it exists.
-#' @param           ...         Additional arguments passed to `DatabaseConnector::dbSendStatement()`
-#'
-#' @rdname drop_table
-#' @export
-#' @example inst/example/table.R
-
-drop_table <-
-    function(conn,
-             conn_fun,
-             schema,
-             table,
-             if_exists = TRUE,
-             verbose = TRUE,
-             render_sql = TRUE,
-             render_only = FALSE,
-             ...) {
-
-            if (!missing(conn_fun)) {
-                    conn <- eval(rlang::parse_expr(conn_fun))
-                    on.exit(dc(conn = conn,
-                               verbose = verbose),
-                            add = TRUE,
-                            after = TRUE)
-            }
-
-            brake_closed_conn(conn = conn)
-
-            if (if_exists) {
-
-                sql_statement <- sprintf("DROP TABLE IF EXISTS %s.%s;", schema, table)
-
-            } else {
-
-                sql_statement <- sprintf("DROP TABLE %s.%s;", schema, table)
-
-            }
-
-            if (render_sql) {
-
-                typewrite_sql(sql_statement = sql_statement)
-
-            }
-
-            if (verbose) {
-
-                typewrite_activity("Dropping...")
-
-            }
-
-
-            send(conn = conn,
-                 sql_statement = sql_statement,
-                 verbose = verbose,
-                 render_sql = render_sql,
-                 render_only = render_only,
-                 ...)
-
-
-            if (verbose) {
-
-                typewrite_activity("Dropping...complete")
-
-            }
-
-    }
 
 
 #' @title
@@ -226,9 +169,10 @@ drop_table <-
 #'
 #' @export
 #' @example inst/example/table.R
-
+#' @family table functions
 read_table <-
         function(conn,
+                 conn_fun,
                  schema,
                  table,
                  verbose = TRUE,
@@ -236,6 +180,16 @@ read_table <-
                  warn_no_rows = TRUE,
                  render_only = FALSE,
                  ...) {
+
+            if (!missing(conn_fun)) {
+                conn <- eval(rlang::parse_expr(conn_fun))
+                on.exit(dc(conn = conn,
+                           verbose = verbose),
+                        add = TRUE,
+                        after = TRUE)
+            }
+
+            check_conn(conn = conn)
 
 
             sql_statement <- sprintf("SELECT * FROM %s.%s;", schema, table)
@@ -249,7 +203,7 @@ read_table <-
 
             if (verbose) {
 
-                typewrite_activity("Reading...")
+                typewrite_activity(sprintf("Reading %s.%s...", schema, table))
 
             }
 
@@ -264,10 +218,12 @@ read_table <-
 
             if (verbose) {
 
-                typewrite_activity("Reading...complete")
+                typewrite_activity(sprintf("Reading %s.%s...complete", schema, table))
 
             }
 
+
+            check_inflow(data = resultset)
             resultset
 
         }
@@ -291,12 +247,10 @@ read_table <-
 #' @rdname search_table
 #' @family table functions
 #' @example inst/example/table.R
-#'
-#' @export
-#' @example inst/example/table.R
 
 search_table <-
         function(conn,
+                 conn_fun,
                  schema,
                  table,
                  ...,
@@ -305,7 +259,15 @@ search_table <-
                  verbose = TRUE,
                  render_sql = TRUE) {
 
-                brake_closed_conn(conn = conn)
+                if (!missing(conn_fun)) {
+                    conn <- eval(rlang::parse_expr(conn_fun))
+                    on.exit(dc(conn = conn,
+                               verbose = verbose),
+                            add = TRUE,
+                            after = TRUE)
+                }
+
+                check_conn(conn = conn)
 
                 # Format Values for SQL
                 values <- as.character(values)

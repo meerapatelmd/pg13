@@ -30,6 +30,9 @@ brake_ff <-
                  arguments) {
 
 
+                .Deprecated("`check_*` functions")
+
+
                 x <-
                 function() {
 

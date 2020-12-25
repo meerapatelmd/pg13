@@ -37,7 +37,6 @@ query <-
             # Checks
             # +++
 
-            cli::cat_rule("Checks")
             check_conn(conn = conn)
 
 
@@ -132,7 +131,7 @@ execute_n <-
                     # Checks
                     # +++
 
-                    cli::cat_rule("Checks")
+
                     check_conn(conn = conn)
 
             if (is.list(sql_statements)) {
@@ -203,7 +202,7 @@ send <-
                 # Checks
                 # +++
 
-                cli::cat_rule("Checks")
+
                 check_conn(conn = conn)
 
                 if (render_sql) {
