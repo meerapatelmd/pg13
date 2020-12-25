@@ -74,7 +74,6 @@ write_staging_table <-
 #' @return
 #' If an expiration period is provided with a `time_diff_hours` greater than 0, a console message of the names of any tables following this convention remain in `schema`. If `time_diff_hours` is 0, all tables are dropped.
 #'
-#' @inheritParams dropWriteTable
 #' @param time_diff_hours Numeric designating the period of time in hours after which the the table should be considered expired. If 0, all tables will be dropped.
 #'
 #' @importFrom stringr str_remove_all
