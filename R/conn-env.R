@@ -6,6 +6,8 @@
 #'
 #' @export
 #' @rdname pg13_env
+#' @family pg13 environment functions
+#' @family pg13 class functions
 
 
 pg13_env <- setClass("pg_env",
@@ -17,6 +19,8 @@ pg13_env <- setClass("pg_env",
 #' Methods: PG13 environment
 #' @export
 #' @rdname pg13_env_methods
+#' @family pg13 environment functions
+#' @family pg13 class functions
 
 setMethod(f = "[[<-",
           signature = c("pg_env", "character", "missing"),
@@ -43,6 +47,8 @@ setMethod(f = "[[<-",
 #' @importFrom secretary typewrite italicize
 #' @importFrom cli cli_alert_danger cli_alert_info
 #' @importFrom rlang parse_expr
+#' @family pg13 environment functions
+#' @family pg13 class connection functions
 
 open_conn <-
         function(conn_fun,
@@ -106,6 +112,8 @@ open_conn <-
 #' @rdname close_conn
 #' @export
 #' @importFrom rlang list2
+#' @family pg13 environment functions
+#' @family pg13 class connection functions
 
 close_conn <-
         function(...,
@@ -142,6 +150,8 @@ close_conn <-
 #' @rdname see_conn
 #' @export
 #' @importFrom rlang list2
+#' @family pg13 environment functions
+#' @family pg13 class connection functions
 
 see_conn <-
         function() {

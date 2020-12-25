@@ -77,3 +77,10 @@ drop_schema(conn = conn,
 
 dc(conn = conn)
 }
+\seealso{
+Other summary functions: 
+\code{\link{summarize_fields}()},
+\code{\link{summarize_field}()},
+\code{\link{summarize_schema}()}
+}
+\concept{summary functions}

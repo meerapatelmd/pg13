@@ -13,6 +13,7 @@
 #' @importFrom SqlRender render
 #' @family create functions
 #' @family draft functions
+#' @example inst/example/create_table.R
 
 draft_create_table <-
         function(schema,
@@ -80,6 +81,7 @@ draft_create_table <-
 #' @importFrom SqlRender render
 #' @family create functions
 #' @family table functions
+#' @example inst/example/create_table.R
 
 create_table <-
         function(conn,
@@ -92,7 +94,7 @@ create_table <-
 
 
                 sql_statement <-
-                draftCreateTable(
+                draft_create_table(
                         schema = schema,
                         table_name = table_name,
                         if_not_exists = if_not_exists,
@@ -122,6 +124,7 @@ create_table <-
 #' @importFrom forcats fct_collapse
 #' @family create functions
 #' @family draft functions
+#' @example inst/example/create_table.R
 
 draft_create_table_from_df <-
         function(schema,
@@ -209,7 +212,8 @@ draft_create_table_from_df <-
 #' @rdname create_table_from_df
 #' @export
 #' @family create functions
-#' @family draft functions
+#' @family table functions
+#' @example inst/example/create_table.R
 
 create_table_from_df <-
         function(conn,

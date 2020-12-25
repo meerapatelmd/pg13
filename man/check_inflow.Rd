@@ -9,3 +9,13 @@ check_inflow(data)
 \description{
 Check Incoming Data
 }
+\seealso{
+Other check functions: 
+\code{\link{check_conn}()},
+\code{\link{check_outflow}()}
+
+Other check data functions: 
+\code{\link{check_outflow}()}
+}
+\concept{check data functions}
+\concept{check functions}

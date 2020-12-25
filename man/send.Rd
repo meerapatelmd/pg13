@@ -14,13 +14,6 @@ send(
   ...
 )
 }
-\arguments{
-\item{conn}{Connection object}
-
-\item{sql_statement}{SQL to send}
-
-\item{...}{Additional arguments to pass onto the DatabaseConnector::dbSendStatement function}
-}
 \description{
 Send a SQL Statement to Postgres
 }

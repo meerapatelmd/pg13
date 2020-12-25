@@ -66,3 +66,17 @@ drop_schema(conn = conn,
 
 dc(conn = conn)
 }
+\seealso{
+Other schema functions: 
+\code{\link{create_schema}()},
+\code{\link{drop_cascade}()},
+\code{\link{drop_if_exists}()}
+
+Other drop functions: 
+\code{\link{drop_all_staging_tables}()},
+\code{\link{drop_cascade}()},
+\code{\link{drop_if_exists}()},
+\code{\link{drop_table}()}
+}
+\concept{drop functions}
+\concept{schema functions}

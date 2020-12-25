@@ -7,6 +7,12 @@
 field_exists(conn, schema, table, field)
 }
 \arguments{
+\item{conn}{Connection object}
+
+\item{schema}{The target schema for the operation.}
+
+\item{table}{Target table for the operation.}
+
 \item{field}{Character string to check for in the given table.}
 }
 \description{

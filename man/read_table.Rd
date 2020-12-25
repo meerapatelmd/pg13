@@ -16,6 +16,19 @@ read_table(
   ...
 )
 }
+\arguments{
+\item{conn}{Connection object}
+
+\item{schema}{The target schema for the operation.}
+
+\item{table}{Target table for the operation.}
+
+\item{verbose}{If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.}
+
+\item{render_sql}{If TRUE, the SQL statement for the operation is returned in the console.}
+
+\item{warn_no_rows}{If TRUE, a warning is given that query has returned 0 rows.}
+}
 \description{
 Shortcut for a \verb{SELECT *} SQL statement.
 }
@@ -136,6 +149,7 @@ dc(conn = conn)
 Other table functions: 
 \code{\link{appendTable}()},
 \code{\link{append_table}()},
+\code{\link{create_table_from_df}()},
 \code{\link{create_table}()},
 \code{\link{drop_all_staging_tables}()},
 \code{\link{drop_table}()},
@@ -143,6 +157,9 @@ Other table functions:
 \code{\link{search_table}()},
 \code{\link{write_staging_table}()},
 \code{\link{write_table}()}
+
+Other read functions: 
+\code{\link{read_view}()}
 }
 \concept{read functions}
 \concept{table functions}

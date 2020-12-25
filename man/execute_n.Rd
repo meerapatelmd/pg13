@@ -27,8 +27,6 @@ execute_n(
 
 \item{render_sql}{If TRUE, the SQL statement for the operation is returned in the console.}
 
-\item{render_only}{If TRUE, \code{sql_statement} is printed to the console, but the query is not run. This is an option to QA SQL if a query is throwing errors.}
-
 \item{profile}{When true, each separate statement is written to file prior to sending to
 the server, and the time taken to execute a statement is displayed.}
 
@@ -48,5 +46,5 @@ database platform does not support batched updates the query is executed without
 batching.}
 }
 \description{
-Query multiple SQL Statements in a single function call.
+Query multiple SQL Statements in a single function call. A single statement is permitted and differs from the \code{link{query}} and \code{link{send}} functions by having providing the \code{profile}, \code{progressBar}, \code{reportOverallTime}, \code{errorReportFile}, and \code{runAsBatch} arguments that are passed to the \code{link[DatabaseConnector]{executeSql}}. If this function is throwing an error, the function will conversely loop over the sql statements individually.
 }

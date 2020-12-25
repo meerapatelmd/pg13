@@ -7,6 +7,8 @@
 dc0(conn, ..., verbose = TRUE, remove = FALSE)
 }
 \arguments{
+\item{conn}{Connection object}
+
 \item{...}{Additional arguments passed to \code{\link[DatabaseConnector]{dbDisconnect}}.}
 
 \item{verbose}{If TRUE, returns a console message when the connection has been closed.}
@@ -16,3 +18,12 @@ dc0(conn, ..., verbose = TRUE, remove = FALSE)
 \description{
 Disconnect a Postgres Connection object with the option of removing the object from the parent environment.
 }
+\seealso{
+Other connection functions: 
+\code{\link{conn_db}()},
+\code{\link{connect_ff}()},
+\code{\link{connect}()},
+\code{\link{dc}()},
+\code{\link{quietly.conn_db}()}
+}
+\concept{connection functions}

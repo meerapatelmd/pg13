@@ -1,18 +1,17 @@
 #' @export
-#' @rdname data_type_info
+#' @rdname query_field_type
 #' @title
 #' Get Field Datatypes
 #' @importFrom SqlRender render
 #' @example inst/example/data_type_info.R
 
-data_type_info <-
+query_field_type <-
         function(conn,
                  conn_fun,
                  table,
                  sql_statement,
                  verbose = TRUE,
                  render_sql = TRUE,
-                 warn_no_rows = TRUE,
                  render_only = FALSE,
                  ...) {
 
@@ -34,7 +33,6 @@ data_type_info <-
                       sql_statement = sql_statement,
                       verbose = verbose,
                       render_sql = render_sql,
-                      warn_no_rows = warn_no_rows,
                       render_only = render_only,
                       ... )
 

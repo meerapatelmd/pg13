@@ -9,3 +9,10 @@ check_conn(conn)
 \description{
 Check a Connection Object
 }
+\seealso{
+Other check functions: 
+\code{\link{check_inflow}()},
+\code{\link{check_outflow}()}
+}
+\concept{check connection functions}
+\concept{check functions}

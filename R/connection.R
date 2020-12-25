@@ -18,6 +18,7 @@ NULL
 #'
 #' @importFrom DatabaseConnector createConnectionDetails connect
 #' @export
+#' @family connection functions
 
 
 conn_db <-
@@ -46,6 +47,7 @@ conn_db <-
 #' @rdname connect
 #'
 #' @export
+#' @family connection functions
 
 connect <-
         function() {
@@ -63,6 +65,7 @@ connect <-
 #'
 #' @rdname connect_ff
 #' @export
+#' @family connection functions
 
 connect_ff <-
         function() {
@@ -73,6 +76,7 @@ connect_ff <-
 #' Connect without Console Messages
 #' @keywords internal
 #' @export
+#' @family connection functions
 
 quietly.conn_db <-
         function() {
@@ -95,6 +99,7 @@ quietly.conn_db <-
 #' @importFrom DatabaseConnector dbDisconnect
 #'
 #' @export
+#' @family connection functions
 
 dc0 <-
         function(conn,
@@ -134,6 +139,7 @@ dc0 <-
 #' @importFrom DatabaseConnector dbDisconnect
 #'
 #' @export
+#' @family connection functions
 
 dc <-
         function(conn,

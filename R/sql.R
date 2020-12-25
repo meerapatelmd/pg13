@@ -1,11 +1,13 @@
-#' Send Query to any Postgres connection
-#' @param conn Connection object
-#' @param sql_statement SQL Query
-#' @param render_only If TRUE, `sql_statement` is printed to the console, but the query is not run. This is an option to QA SQL if a query is throwing errors.
-#' @param warn_no_rows If TRUE, a warning is given that query has returned 0 rows.
-#' @param ... Additional arguments to pass onto \code{\link[DatabaseConnector]{dbGetQuery}}
-#' @import DatabaseConnector
+#' @title
+#' Query
+#'
+#' @inheritParams args
+#' @seealso
+#'  \code{\link[rlang]{parse_expr}}
+#' @rdname query
 #' @export
+#' @importFrom rlang parse_expr
+#' @importFrom DatabaseConnector dbGetQuery
 
 query <-
     function(conn,
@@ -83,7 +85,7 @@ query <-
 #' Query with more than 1 SQL Statements
 #'
 #' @description
-#' Query multiple SQL Statements in a single function call.
+#' Query multiple SQL Statements in a single function call. A single statement is permitted and differs from the \code{link{query}} and \code{link{send}} functions by having providing the `profile`, `progressBar`, `reportOverallTime`, `errorReportFile`, and `runAsBatch` arguments that are passed to the \code{link[DatabaseConnector]{executeSql}}. If this function is throwing an error, the function will conversely loop over the sql statements individually.
 #'
 #' @inheritParams DatabaseConnector::executeSql
 #' @inheritParams args
@@ -152,25 +154,94 @@ execute_n <-
 
             }
 
-            DatabaseConnector::executeSql(connection = conn,
-                                          sql = sql_statement,
-                                          profile = profile,
-                                          progressBar = progressBar,
-                                          reportOverallTime = reportOverallTime,
-                                          errorReportFile = errorReportFile,
-                                          runAsBatch = runAsBatch)
-            cat("\n\n")
+            results <-
+            tryCatch(
+                DatabaseConnector::executeSql(connection = conn,
+                                              sql = sql_statement,
+                                              profile = profile,
+                                              progressBar = progressBar,
+                                              reportOverallTime = reportOverallTime,
+                                              errorReportFile = errorReportFile,
+                                              runAsBatch = runAsBatch),
+                error = function(e) "Error")
+
+
+            if (identical(results, "Error")) {
+
+                typewrite_activity("Executing...failed.")
+                typewrite_activity("Skipping over sql_statements causing errors.")
+
+                errors <- vector()
+                each_result <- list()
+                for (i in seq_along(sql_statements)) {
+
+                    if (render_sql) {
+
+                        typewrite_sql(sql_statement = sql_statements[i])
+                        cat("\n\n")
+
+                    }
+
+                    if (verbose) {
+
+                        typewrite_activity("Executing...")
+
+                    }
+
+                    results2 <-
+                        tryCatch(
+                            DatabaseConnector::executeSql(connection = conn,
+                                                          sql = sql_statements[i],
+                                                          profile = profile,
+                                                          progressBar = progressBar,
+                                                          reportOverallTime = reportOverallTime,
+                                                          errorReportFile = errorReportFile,
+                                                          runAsBatch = runAsBatch),
+                            error = function(e) "Error")
+
+                    if (verbose) {
+
+                        typewrite_activity("Executing...complete")
+
+                    }
+
+                    if (identical(results2, "Error")) {
+                        errors <-
+                            c(errors,
+                              sql_statements[i])
+                    } else {
+
+                        each_result[[length(each_result)+1]] <-
+                            results2
+                        names(each_result)[length(each_result)] <- sql_statements[i]
+                    }
+
+                }
+
+
+                list(RESULTS = each_result,
+                     ERRORS = errors)
+
+
+            } else {
+
+                cat("\n\n")
+                typewrite_activity("Executing...complete")
+                results
+
+            }
             }
     }
 
 
 
+#' @title
 #' Send a SQL Statement to Postgres
-#' @param conn Connection object
-#' @param sql_statement SQL to send
-#' @param ... Additional arguments to pass onto the DatabaseConnector::dbSendStatement function
-#' @import DatabaseConnector
+#' @rdname send
 #' @export
+#' @importFrom rlang parse_expr
+#' @importFrom secretary typewrite
+#' @importFrom DatabaseConnector dbSendStatement
 
 send <-
         function(conn,

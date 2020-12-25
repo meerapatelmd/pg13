@@ -16,6 +16,18 @@ append_table(
 )
 }
 \arguments{
+\item{conn}{Connection object}
+
+\item{schema}{The target schema for the operation.}
+
+\item{table}{Target table for the operation.}
+
+\item{data}{A dataframe or tibble.}
+
+\item{verbose}{If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.}
+
+\item{render_sql}{If TRUE, the SQL statement for the operation is returned in the console.}
+
 \item{...}{Additional arguments passed to \code{DatabaseConnector::dbAppendTable()}}
 }
 \description{
@@ -137,6 +149,7 @@ dc(conn = conn)
 \seealso{
 Other table functions: 
 \code{\link{appendTable}()},
+\code{\link{create_table_from_df}()},
 \code{\link{create_table}()},
 \code{\link{drop_all_staging_tables}()},
 \code{\link{drop_table}()},
@@ -148,6 +161,7 @@ Other table functions:
 
 Other table functions: 
 \code{\link{appendTable}()},
+\code{\link{create_table_from_df}()},
 \code{\link{create_table}()},
 \code{\link{drop_all_staging_tables}()},
 \code{\link{drop_table}()},

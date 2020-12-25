@@ -9,4 +9,13 @@ conn_db(user, password, port, server)
 \description{
 Connect to a Postgres Database
 }
+\seealso{
+Other connection functions: 
+\code{\link{connect_ff}()},
+\code{\link{connect}()},
+\code{\link{dc0}()},
+\code{\link{dc}()},
+\code{\link{quietly.conn_db}()}
+}
+\concept{connection functions}
 \keyword{internal}

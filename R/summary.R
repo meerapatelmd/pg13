@@ -9,6 +9,7 @@
 #' @rdname summarize_field
 #' @export
 #' @example inst/example/summary.R
+#' @family summary functions
 summarize_field <-
         function(conn,
                  conn_fun,
@@ -70,7 +71,7 @@ summarize_field <-
 #' @rdname summarize_fields
 #' @export
 #' @example inst/example/summary.R
-
+#' @family summary functions
 summarize_fields <-
         function(conn,
                  conn_fun,
@@ -113,6 +114,7 @@ summarize_fields <-
 #' @example inst/example/summary.R
 #' @rdname summarize_table
 #' @export
+#' @family summary functions
 summarize_table <-
         function(
                 conn,
@@ -151,6 +153,7 @@ summarize_table <-
 #' @example inst/example/summary.R
 #' @rdname summarize_schema
 #' @export
+#' @family summary functions
 summarize_schema <-
         function( conn,
                   conn_fun,

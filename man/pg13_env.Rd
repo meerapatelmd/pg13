@@ -8,3 +8,15 @@
 \description{
 This an optional environment class that stores all the connections using this package.
 }
+\seealso{
+Other pg13 environment functions: 
+\code{\link{[[<-,pg_env,character,missing,ANY-method}},
+\code{\link{close_conn}()},
+\code{\link{open_conn}()},
+\code{\link{see_conn}()}
+
+Other pg13 class functions: 
+\code{\link{[[<-,pg_env,character,missing,ANY-method}}
+}
+\concept{pg13 class functions}
+\concept{pg13 environment functions}

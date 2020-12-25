@@ -18,15 +18,84 @@ create_table_from_df(
 \description{
 Derive DDL using the data classes of each field in a dataframe. The map between the R data classes and the Postgresql data types can be found at \code{\link{renderCreateTableFromDF}}. The dataframe can then be appended to the table using \code{\link{appendTable}}. This method is favorable to a direct call to \code{\link{writeTable}} because in some cases, future appends to the table may not adhere to the data definitions created at the time of writing. For example, \code{\link{writeTable}} defaults to \code{VARCHAR(255)} for all character classes whereas future appends may contain text greater than 255 characters, resulting in error. This function rolls all character classes to \code{TEXT} data types instead.
 }
+\examples{
+library(pg13)
+create_test_schema <-
+        function(conn) {
+
+                if (!schema_exists(conn = conn,
+                                   schema = "test_schema")) {
+
+                        create_schema(conn = conn,
+                                      schema = "test_schema")
+
+                }
+        }
+
+conn <- local_connect(dbname = "pg13_test")
+create_test_schema(conn = conn)
+
+# Write a table
+write_table(conn = conn,
+            schema = "test_schema",
+            table_name = "test_table",
+            drop_existing = TRUE,
+            data = data.frame(A = 1:3, B = letters[1:3]))
+
+# Write the same table using create_table() instead
+create_table(conn = conn,
+             schema = "test_schema",
+             table_name = "test_table_b",
+             if_not_exists = TRUE,
+             A = "integer",
+             B = "varchar(1)")
+
+append_table(conn = conn,
+             schema = "test_schema",
+             table = "test_table_b",
+             data = data.frame(A = 1:3, B = letters[1:3]))
+
+# Under the hood is the draft_create_table()
+draft_create_table(schema = "test_schema",
+                   table_name = "test_table_b",
+                   A = "integer",
+                   B = "varchar(1)")
+
+# The DDL can be automatically discerned using create_table_from_df()
+create_table_from_df(conn = conn,
+                     schema = "test_schema",
+                     table_name = "test_table_c",
+                     data = data.frame(A = 1:3, B = letters[1:3]))
+
+# Under the hood is the draft_create_table_from_df()
+draft_create_table_from_df(schema = "test_schema",
+                           table_name = "test_table_c",
+                           data = data.frame(A = 1:3, B = letters[1:3]))
+
+drop_schema(conn = conn,
+            schema = "test_schema",
+            cascade = TRUE)
+
+dc(conn = conn)
+}
 \seealso{
 Other create functions: 
+\code{\link{create_schema}()},
 \code{\link{create_table}()},
 \code{\link{draft_create_table_from_df}()},
 \code{\link{draft_create_table}()}
 
-Other draft functions: 
-\code{\link{draft_create_table_from_df}()},
-\code{\link{draft_create_table}()}
+Other table functions: 
+\code{\link{appendTable}()},
+\code{\link{append_table}()},
+\code{\link{create_table}()},
+\code{\link{drop_all_staging_tables}()},
+\code{\link{drop_table}()},
+\code{\link{read_table}()},
+\code{\link{searchTable}()},
+\code{\link{search_table}()},
+\code{\link{write_staging_table}()},
+\code{\link{write_table}()}
 }
 \concept{create functions}
-\concept{draft functions}
+\concept{table functions}

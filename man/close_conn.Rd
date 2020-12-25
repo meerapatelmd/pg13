@@ -16,4 +16,16 @@ Close the specified list of connection objects in the \code{pg13_connection_env}
 }
 \seealso{
 \code{\link[rlang]{list2}}
+
+Other pg13 environment functions: 
+\code{\link{[[<-,pg_env,character,missing,ANY-method}},
+\code{\link{open_conn}()},
+\code{\link{pg_env-class}},
+\code{\link{see_conn}()}
+
+Other pg13 class connection functions: 
+\code{\link{open_conn}()},
+\code{\link{see_conn}()}
 }
+\concept{pg13 class connection functions}
+\concept{pg13 environment functions}

@@ -104,6 +104,7 @@ Other staging table functions:
 Other table functions: 
 \code{\link{appendTable}()},
 \code{\link{append_table}()},
+\code{\link{create_table_from_df}()},
 \code{\link{create_table}()},
 \code{\link{drop_all_staging_tables}()},
 \code{\link{drop_table}()},

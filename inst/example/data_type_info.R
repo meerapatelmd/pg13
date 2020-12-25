@@ -22,7 +22,7 @@ write_table(conn = conn,
             drop_existing = TRUE,
             data = data.frame(A = 1:3, B = letters[1:3]))
 
-data_type_info(conn = conn,
+query_field_type(conn = conn,
                table = "test_table")
 
 

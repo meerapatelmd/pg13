@@ -18,4 +18,16 @@ Connect to a database and assign it to the \code{pg13_connection_env}. This is a
 \code{\link[secretary]{c("typewrite", "typewrite")}},\code{\link[secretary]{italicize}}
 \code{\link[cli]{cli_alert}}
 \code{\link[rlang]{parse_expr}}
+
+Other pg13 environment functions: 
+\code{\link{[[<-,pg_env,character,missing,ANY-method}},
+\code{\link{close_conn}()},
+\code{\link{pg_env-class}},
+\code{\link{see_conn}()}
+
+Other pg13 class connection functions: 
+\code{\link{close_conn}()},
+\code{\link{see_conn}()}
 }
+\concept{pg13 class connection functions}
+\concept{pg13 environment functions}

@@ -9,3 +9,13 @@ check_outflow(data, table_name)
 \description{
 Check Outgoing Data
 }
+\seealso{
+Other check functions: 
+\code{\link{check_conn}()},
+\code{\link{check_inflow}()}
+
+Other check data functions: 
+\code{\link{check_inflow}()}
+}
+\concept{check data functions}
+\concept{check functions}

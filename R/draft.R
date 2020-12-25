@@ -4,6 +4,7 @@
 #' @import SqlRender
 #' @export
 #' @rdname draft_base
+#' @family draft functions
 
 draft_base <-
     function(fields = "*",
@@ -39,7 +40,7 @@ draft_base <-
 #' @param vector vector of values that the SQL query is filtering for
 #' @export
 #' @rdname draft_in
-
+#' @family draft functions
 
 draft_in <-
     function(vector) {
@@ -59,7 +60,7 @@ draft_in <-
 #' @import SqlRender
 #' @export
 #' @rdname draft_join
-
+#' @family draft functions
 draft_join <-
     function(schema,
              tableName,
@@ -89,7 +90,7 @@ draft_join <-
 #' @param n rows to limit to
 #' @export
 #' @rdname draft_limit
-
+#' @family draft functions
 
 draft_limit <-
     function(n) {
@@ -105,7 +106,7 @@ draft_limit <-
 #' @param n Row number desired in the output
 #' @import SqlRender
 #' @export
-
+#' @family draft functions
 
 draft_random <-
     function(n) {
@@ -119,7 +120,7 @@ draft_random <-
 #' Construct schemaTableName
 #' @description construct schemaTableName from the schema and tableName
 #' @export
-
+#' @family draft functions
 draft_table_path <-
         function(schema,
                  tableName) {
@@ -136,7 +137,7 @@ draft_table_path <-
 #' Construct schemaTableName
 #' @description construct schemaTableName from the schema and tableName
 #' @export
-
+#' @family draft functions
 table.path <-
     function(schema,
              table_name) {
@@ -156,7 +157,7 @@ table.path <-
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
 #' @export
-
+#' @family draft functions
 
 draft_where_in <-
     function(field,
@@ -180,7 +181,7 @@ draft_where_in <-
 #' @param field Single field to be filtered for
 #' @param term Character string that the field parameter is searched for.
 #' @export
-
+#' @family draft functions
 
 draft_where_like <-
     function(field,
@@ -200,7 +201,7 @@ draft_where_like <-
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
 #' @export
-
+#' @family draft functions
 
 draft_where_lower_in <-
     function(field,
@@ -223,7 +224,7 @@ draft_where_lower_in <-
 #' @param field Single field to be filtered for
 #' @param term Character string that the field parameter is searched for.
 #' @export
-
+#' @family draft functions
 
 draft_where_lower_like <-
     function(field,
@@ -245,7 +246,7 @@ draft_where_lower_like <-
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
 #' @export
-
+#' @family draft functions
 
 draft_where_lower_not_in <-
     function(field,
@@ -269,7 +270,7 @@ draft_where_lower_not_in <-
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
 #' @export
-
+#' @family draft functions
 
 draft_where_not_in <-
     function(field,
@@ -294,7 +295,7 @@ draft_where_not_in <-
 #'
 #' @importFrom rlang list2
 #' @export
-
+#' @family draft functions
 paste_wheres <-
     function(...) {
 

@@ -18,3 +18,12 @@ dc(conn, verbose = TRUE, remove = FALSE)
 \description{
 Disconnect a Postgres Connection object with the option of removing the object from the parent environment.
 }
+\seealso{
+Other connection functions: 
+\code{\link{conn_db}()},
+\code{\link{connect_ff}()},
+\code{\link{connect}()},
+\code{\link{dc0}()},
+\code{\link{quietly.conn_db}()}
+}
+\concept{connection functions}

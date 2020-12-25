@@ -93,6 +93,7 @@ Other staging table functions:
 Other table functions: 
 \code{\link{appendTable}()},
 \code{\link{append_table}()},
+\code{\link{create_table_from_df}()},
 \code{\link{create_table}()},
 \code{\link{drop_table}()},
 \code{\link{read_table}()},
@@ -102,6 +103,9 @@ Other table functions:
 \code{\link{write_table}()}
 
 Other drop functions: 
+\code{\link{drop_cascade}()},
+\code{\link{drop_if_exists}()},
+\code{\link{drop_schema}()},
 \code{\link{drop_table}()}
 }
 \concept{drop functions}

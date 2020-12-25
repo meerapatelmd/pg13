@@ -9,3 +9,15 @@
 \description{
 Methods: PG13 environment
 }
+\seealso{
+Other pg13 environment functions: 
+\code{\link{close_conn}()},
+\code{\link{open_conn}()},
+\code{\link{pg_env-class}},
+\code{\link{see_conn}()}
+
+Other pg13 class functions: 
+\code{\link{pg_env-class}}
+}
+\concept{pg13 class functions}
+\concept{pg13 environment functions}

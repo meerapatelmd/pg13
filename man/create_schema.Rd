@@ -61,3 +61,17 @@ drop_schema(conn = conn,
 
 dc(conn = conn)
 }
+\seealso{
+Other schema functions: 
+\code{\link{drop_cascade}()},
+\code{\link{drop_if_exists}()},
+\code{\link{drop_schema}()}
+
+Other create functions: 
+\code{\link{create_table_from_df}()},
+\code{\link{create_table}()},
+\code{\link{draft_create_table_from_df}()},
+\code{\link{draft_create_table}()}
+}
+\concept{create functions}
+\concept{schema functions}

@@ -9,4 +9,13 @@ quietly.conn_db(...)
 \description{
 Connect without Console Messages
 }
+\seealso{
+Other connection functions: 
+\code{\link{conn_db}()},
+\code{\link{connect_ff}()},
+\code{\link{connect}()},
+\code{\link{dc0}()},
+\code{\link{dc}()}
+}
+\concept{connection functions}
 \keyword{internal}

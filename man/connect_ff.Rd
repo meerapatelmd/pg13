@@ -18,3 +18,12 @@ connect_ff(user, password, port, server)
 \description{
 Customize a connection function.
 }
+\seealso{
+Other connection functions: 
+\code{\link{conn_db}()},
+\code{\link{connect}()},
+\code{\link{dc0}()},
+\code{\link{dc}()},
+\code{\link{quietly.conn_db}()}
+}
+\concept{connection functions}

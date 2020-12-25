@@ -1,21 +1,3 @@
-#' @noRd
-
-typewrite_alert_danger <-
-        function(text) {
-                cat(sprintf("[%s]", as.character(Sys.time())), "\t")
-                cli::cli_alert_danger(text = text)
-        }
-
-
-#' @noRd
-
-typewrite_alert_success <-
-        function(text) {
-                cat(sprintf("[%s]", as.character(Sys.time())), "\t")
-                cli::cli_alert_success(text = text)
-        }
-
-
 #' @title
 #' Check Connection Status
 #' @keywords internal

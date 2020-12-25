@@ -17,7 +17,17 @@ drop_table(
 )
 }
 \arguments{
+\item{conn}{Connection object}
+
+\item{schema}{The target schema for the operation.}
+
+\item{table}{Target table for the operation.}
+
 \item{if_exists}{If TRUE, the table will be dropped only if it exists.}
+
+\item{verbose}{If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.}
+
+\item{render_sql}{If TRUE, the SQL statement for the operation is returned in the console.}
 
 \item{...}{Additional arguments passed to \code{DatabaseConnector::dbSendStatement()}}
 }
@@ -141,6 +151,7 @@ dc(conn = conn)
 Other table functions: 
 \code{\link{appendTable}()},
 \code{\link{append_table}()},
+\code{\link{create_table_from_df}()},
 \code{\link{create_table}()},
 \code{\link{drop_all_staging_tables}()},
 \code{\link{read_table}()},
@@ -150,7 +161,10 @@ Other table functions:
 \code{\link{write_table}()}
 
 Other drop functions: 
-\code{\link{drop_all_staging_tables}()}
+\code{\link{drop_all_staging_tables}()},
+\code{\link{drop_cascade}()},
+\code{\link{drop_if_exists}()},
+\code{\link{drop_schema}()}
 }
 \concept{drop functions}
 \concept{table functions}

@@ -9,3 +9,22 @@ paste_wheres(...)
 \description{
 Paste All Drafted Where Statements
 }
+\seealso{
+Other draft functions: 
+\code{\link{draft_base}()},
+\code{\link{draft_create_table_from_df}()},
+\code{\link{draft_create_table}()},
+\code{\link{draft_in}()},
+\code{\link{draft_join}()},
+\code{\link{draft_limit}()},
+\code{\link{draft_random}()},
+\code{\link{draft_table_path}()},
+\code{\link{draft_where_in}()},
+\code{\link{draft_where_like}()},
+\code{\link{draft_where_lower_in}()},
+\code{\link{draft_where_lower_like}()},
+\code{\link{draft_where_lower_not_in}()},
+\code{\link{draft_where_not_in}()},
+\code{\link{table.path}()}
+}
+\concept{draft functions}

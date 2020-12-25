@@ -4,7 +4,8 @@
 #' @export
 #' @example inst/example/schema.R
 #' @rdname drop_schema
-
+#' @family schema functions
+#' @family drop functions
 drop_schema <-
     function(conn,
              conn_fun,
@@ -64,7 +65,8 @@ drop_schema <-
 #' @export
 #' @example inst/example/schema.R
 #' @rdname drop_cascade
-
+#' @family schema functions
+#' @family drop functions
 drop_cascade <-
         function(conn,
                  conn_fun,
@@ -97,6 +99,8 @@ drop_cascade <-
 #' @export
 #' @example inst/example/schema.R
 #' @rdname drop_if_exists
+#' @family schema functions
+#' @family drop functions
 
 drop_if_exists <-
         function(conn,
@@ -128,6 +132,8 @@ drop_if_exists <-
 #' @export
 #' @rdname create_schema
 #' @example inst/example/schema.R
+#' @family schema functions
+#' @family create functions
 
 create_schema <-
         function(conn,

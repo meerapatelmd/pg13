@@ -11,4 +11,16 @@ See the connection objects in the \code{pg13_connection_env} along with their op
 }
 \seealso{
 \code{\link[rlang]{list2}}
+
+Other pg13 environment functions: 
+\code{\link{[[<-,pg_env,character,missing,ANY-method}},
+\code{\link{close_conn}()},
+\code{\link{open_conn}()},
+\code{\link{pg_env-class}}
+
+Other pg13 class connection functions: 
+\code{\link{close_conn}()},
+\code{\link{open_conn}()}
 }
+\concept{pg13 class connection functions}
+\concept{pg13 environment functions}

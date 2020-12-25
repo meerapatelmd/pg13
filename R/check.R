@@ -2,6 +2,8 @@
 #' Check a Connection Object
 #' @export
 #' @rdname check_conn
+#' @family check functions
+#' @family check connection functions
 
 check_conn <-
         function(conn) {
@@ -14,6 +16,9 @@ check_conn <-
 #' Check Outgoing Data
 #' @export
 #' @rdname check_outflow
+#' @family check functions
+#' @family check data functions
+
 
 check_outflow <-
         function(data,
@@ -36,6 +41,8 @@ check_outflow <-
 #' Check Incoming Data
 #' @export
 #' @rdname check_inflow
+#' @family check functions
+#' @family check data functions
 
 check_inflow <-
         function(data) {
