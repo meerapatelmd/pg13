@@ -24,7 +24,10 @@ Like the writeTable function, this function is a wrapper around a DatabaseConnec
 \seealso{
 Other table functions: 
 \code{\link{append_table}()},
+\code{\link{drop_table}()},
+\code{\link{read_table}()},
 \code{\link{searchTable}()},
-\code{\link{search_table}()}
+\code{\link{search_table}()},
+\code{\link{write_table}()}
 }
 \concept{table functions}
