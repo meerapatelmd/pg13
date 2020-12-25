@@ -9,4 +9,3 @@ check_conn(conn)
 \description{
 Check a Connection Object
 }
-\keyword{internal}

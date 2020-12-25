@@ -21,24 +21,7 @@ read_table <-
                  render_only = FALSE,
                  ...) {
 
-                if (!missing(conn_fun)) {
-                        conn <- eval(rlang::parse_expr(conn_fun))
-                        on.exit(dc(conn = conn,
-                                   verbose = verbose),
-                                add = TRUE,
-                                after = TRUE)
-                }
-
-                check_conn(conn = conn)
-
-
                 sql_statement <- sprintf("SELECT * FROM %s.%s;", schema, table)
-
-                if (render_sql) {
-
-                        typewrite_sql(sql_statement = sql_statement)
-                }
-
 
 
                 if (verbose) {
@@ -49,6 +32,7 @@ read_table <-
 
                 resultset <-
                         query(conn = conn,
+                              conn_fun = conn_fun,
                               sql_statement = sql_statement,
                               verbose = verbose,
                               render_sql = render_sql,
@@ -63,7 +47,8 @@ read_table <-
                 }
 
 
-                check_inflow(data = resultset)
+                # <---! Already checked in the query function --->
+                # check_inflow(data = resultset)
                 resultset
 
         }

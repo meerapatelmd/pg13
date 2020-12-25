@@ -9,4 +9,3 @@ check_outflow(data, table_name)
 \description{
 Check Outgoing Data
 }
-\keyword{internal}

@@ -22,17 +22,6 @@ drop_table <-
                  render_only = FALSE,
                  ...) {
 
-                if (!missing(conn_fun)) {
-                        conn <- eval(rlang::parse_expr(conn_fun))
-                        on.exit(dc(conn = conn,
-                                   verbose = verbose),
-                                add = TRUE,
-                                after = TRUE)
-                }
-
-                check_conn(conn = conn)
-
-
                 if (if_exists) {
 
                         sql_statement <- sprintf("DROP TABLE IF EXISTS %s.%s;", schema, table)
@@ -43,11 +32,6 @@ drop_table <-
 
                 }
 
-                if (render_sql) {
-
-                        typewrite_sql(sql_statement = sql_statement)
-
-                }
 
                 if (verbose) {
 

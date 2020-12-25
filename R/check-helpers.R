@@ -85,12 +85,12 @@ check_output_rows <-
 
                 if (nrow(data) == 0) {
 
-                        typewrite_alert_danger(text = "data has 0 rows")
+                        typewrite_alert_danger(text = sprintf("Data '%s' has 0 rows", deparse(substitute(data))))
 
                 } else {
 
 
-                        typewrite_alert_success(text = "data has more than 0 rows")
+                        typewrite_alert_success(text = sprintf("Data '%s' has more than 0 rows", deparse(substitute(data))))
                 }
         }
 
@@ -102,18 +102,17 @@ check_output_rows <-
 check_input_rows <-
         function(data) {
 
-                cat("\t\t\t")
-
                 if (nrow(data) == 0) {
 
-                        typewrite_alert_danger(text = "data has 0 rows")
+                        typewrite_alert_danger(text = "Returned data has 0 rows")
 
                 } else {
 
 
-                        typewrite_alert_success(text = "data has more than 0 rows")
+                        typewrite_alert_success(text = "Returned data has more than 0 rows")
                 }
         }
+
 
 #' @title
 #' Check a field name
@@ -130,12 +129,11 @@ check_field_name <-
 
                 if (name %in% reserved_words()) {
 
-                        typewrite_alert_danger(text = sprintf("Field: '%s' is a reserved word",
-                                                              tolower(name[name %in% reserved_words()])))
+                        typewrite_alert_danger(text = sprintf("Field name '%s' is a reserved word", tolower(name)))
 
                 } else {
 
-                        typewrite_alert_success(text = name)
+                        typewrite_alert_success(text = sprintf("Field name '%s' is not a reserved word", tolower(name)))
 
                 }
 
@@ -157,12 +155,11 @@ check_table_name <-
 
                 if (name %in% reserved_words()) {
 
-                        typewrite_alert_danger(text = sprintf("Table: '%s' is a reserved word",
-                                                              toupper(name[name %in% reserved_words()])))
+                        typewrite_alert_danger(text = sprintf("Table name '%s' is a reserved word", table_name))
 
                 } else {
 
-                        typewrite_alert_success(text = name)
+                        typewrite_alert_success(text = sprintf("Table name '%s' is not a reserved word", table_name))
 
                 }
 

@@ -2,10 +2,11 @@ DBMS:
 postgresql
 
 Error:
-org.postgresql.util.PSQLException: ERROR: relation "test_table" already exists
+org.postgresql.util.PSQLException: ERROR: schema "test_schema" does not exist
+  Position: 14
 
 SQL:
-CREATE TABLE test_schema.test_table (A INTEGER,B VARCHAR(255))
+CREATE TABLE test_schema.test_table3 (A INTEGER,B VARCHAR(255))
 
 R version:
 R version 3.6.2 (2019-12-12)

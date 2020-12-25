@@ -13,7 +13,7 @@ query <-
              sql_statement,
              verbose = TRUE,
              render_sql = TRUE,
-             warn_no_rows = TRUE,
+             warn_no_rows = "deprecated",
              render_only = FALSE,
              ...) {
 
@@ -29,7 +29,10 @@ query <-
             if (!missing(conn_fun)) {
 
                     conn <- eval(rlang::parse_expr(conn_fun))
-                    on.exit(dc(conn = conn))
+                    on.exit(dc(conn = conn,
+                               verbose = verbose),
+                            add = TRUE,
+                            after = TRUE)
 
             }
 
@@ -47,14 +50,6 @@ query <-
             }
 
 
-                if (warn_no_rows) {
-
-                        on.exit(flag_no_rows(data = resultset),
-                                add = TRUE,
-                                after = TRUE)
-
-                }
-
             if (verbose) {
 
                     typewrite_activity("Querying...")
@@ -71,6 +66,8 @@ query <-
                     typewrite_activity("Querying...complete")
 
             }
+
+            check_inflow(data = resultset)
 
             resultset
 
@@ -195,7 +192,10 @@ send <-
                 if (!missing(conn_fun)) {
 
                         conn <- eval(rlang::parse_expr(conn_fun))
-                        on.exit(dc(conn = conn))
+                        on.exit(dc(conn = conn,
+                                   verbose = verbose),
+                                add = TRUE,
+                                after = TRUE)
 
                 }
                 # +++

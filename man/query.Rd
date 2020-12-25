@@ -10,7 +10,7 @@ query(
   sql_statement,
   verbose = TRUE,
   render_sql = TRUE,
-  warn_no_rows = TRUE,
+  warn_no_rows = "deprecated",
   render_only = FALSE,
   ...
 )

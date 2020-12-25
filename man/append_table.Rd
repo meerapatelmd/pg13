@@ -29,8 +29,6 @@ create_test_schema <-
                 if (!schema_exists(conn = conn,
                                    schema = "test_schema")) {
 
-                        cli::cli_rule("Create 'test_schema' Schema")
-
                         create_schema(conn = conn,
                                       schema = "test_schema")
 
@@ -55,22 +53,53 @@ write_table(conn = conn,
             data = data.frame(A = 1:3, B = letters[1:3]))
 
 
+# Include the name of the dataframe object in the messages
+test_data <-
+        data.frame(A = 1:3, B = letters[1:3])
+write_table(conn = conn,
+            schema = "test_schema",
+            table_name = "test_table3",
+            drop_existing = TRUE,
+            data = test_data)
 
-
+# Append a table
 append_table(conn = conn,
              schema = "test_schema",
              table = "test_table",
              data = data.frame(A = 1:3, B = letters[1:3]))
 
+# Warning is returned if NAs are in the input data
 append_table(conn = conn,
              schema = "test_schema",
              table = "test_table",
              data = data.frame(A = 1:3, B = rep(NA_character_, 3)))
 
+# Alert is returned if the input data contains 0 rows
+test_data2 <-
+        data.frame(A = 1,
+                   B = 2)
+test_data2 <- test_data2[-1,]
+append_table(conn = conn,
+             schema = "test_schema",
+             table = "test_table",
+             data = test_data2)
+
+# Message is returned if incoming data contains more than 0 rows
 test_data <- read_table(conn = conn,
                            schema = "test_schema",
                            table = "test_table")
 
+test_data
+
+# Alert is returned if incoming data contains 0 rows
+write_table(conn = conn,
+            schema = "test_schema",
+            table_name = "test_table4",
+            drop_existing = TRUE,
+            data = test_data2)
+test_data <- read_table(conn = conn,
+                        schema = "test_schema",
+                        table = "test_table4")
 test_data
 
 search_table(conn = conn,
@@ -92,14 +121,12 @@ search_table(conn = conn,
 drop_table(conn = conn,
            schema = "test_schema",
            table = "test_table",
-           if_exists = FALSE,
-           data = data.frame(A = 1:3, B = rep(NA_character_, 3)))
+           if_exists = FALSE)
 
 drop_table(conn = conn,
            schema = "test_schema",
            table = "test_table2",
-           if_exists = FALSE,
-           data = data.frame(A = 1:3, B = rep(NA_character_, 3)))
+           if_exists = FALSE)
 
 drop_schema(conn = conn,
             schema = "test_schema",

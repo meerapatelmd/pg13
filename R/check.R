@@ -1,6 +1,6 @@
 #' @title
 #' Check a Connection Object
-#' @keywords internal
+#' @export
 #' @rdname check_conn
 
 check_conn <-
@@ -12,7 +12,7 @@ check_conn <-
 
 #' @title
 #' Check Outgoing Data
-#' @keywords internal
+#' @export
 #' @rdname check_outflow
 
 check_outflow <-
@@ -34,7 +34,7 @@ check_outflow <-
 
 #' @title
 #' Check Incoming Data
-#' @keywords internal
+#' @export
 #' @rdname check_inflow
 
 check_inflow <-
