@@ -1,0 +1,34 @@
+DBMS:
+postgresql
+
+Error:
+org.postgresql.util.PSQLException: ERROR: relation "test_table" already exists
+
+SQL:
+CREATE TABLE public.test_table (Person VARCHAR(255),Attribute VARCHAR(255),Value VARCHAR(255))
+
+R version:
+R version 3.6.2 (2019-12-12)
+
+Platform:
+x86_64-apple-darwin15.6.0
+
+Attached base packages:
+- stats
+- graphics
+- grDevices
+- utils
+- datasets
+- methods
+- base
+
+Other attached packages:
+- forcats (0.5.0)
+- stringr (1.4.0)
+- dplyr (1.0.2)
+- purrr (0.3.4)
+- readr (1.4.0)
+- tidyr (1.1.2)
+- tibble (3.0.4)
+- ggplot2 (3.3.2.9000)
+- tidyverse (1.3.0)
