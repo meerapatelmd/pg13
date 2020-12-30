@@ -4,7 +4,7 @@
 \alias{ls_fields}
 \title{List Fields}
 \usage{
-ls_fields(conn, schema, table, verbose = TRUE, render_sql = TRUE)
+ls_fields(conn, conn_fun, schema, table, verbose = TRUE, render_sql = TRUE)
 }
 \description{
 Fields for the given table are returned in lowercase.

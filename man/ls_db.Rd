@@ -4,7 +4,7 @@
 \alias{ls_db}
 \title{List Databases}
 \usage{
-ls_db(conn, verbose = TRUE, render_sql = TRUE, render_only = FALSE)
+ls_db(conn, conn_fun, verbose = TRUE, render_sql = TRUE, render_only = FALSE)
 }
 \description{
 List all the databases in a connection

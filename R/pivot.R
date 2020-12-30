@@ -1,7 +1,7 @@
 #' @title
 #' Pivot a Table
 #'
-#' @rdname pivot_label
+#' @rdname pivot_table
 #' @example inst/example/pivot.R
 #' @export
 

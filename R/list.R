@@ -13,10 +13,18 @@
 
 ls_fields <-
     function(conn,
+             conn_fun,
              schema,
              table,
              verbose = TRUE,
              render_sql = TRUE) {
+
+            if (!missing(conn_fun)) {
+
+                    conn <- eval(rlang::parse_expr(conn_fun))
+                    on.exit(dc(conn = conn))
+
+            }
 
             if (render_sql) {
 
@@ -59,11 +67,13 @@ ls_fields <-
 
 ls_schema <-
         function(conn,
+                 conn_fun,
                  verbose = TRUE,
                  render_sql = TRUE,
                  render_only = FALSE) {
 
                 query(conn = conn,
+                      conn_fun = conn_fun,
                       sql_statement = "SELECT nspname FROM pg_catalog.pg_namespace;",
                       verbose = verbose,
                       render_sql = render_sql,
@@ -87,11 +97,13 @@ ls_schema <-
 
 ls_db <-
     function(conn,
+             conn_fun,
              verbose = TRUE,
              render_sql = TRUE,
              render_only = FALSE) {
 
         query(conn = conn,
+              conn_fun = conn_fun,
               sql_statement = "SELECT datname FROM pg_database WHERE datistemplate = false;",
               verbose = verbose,
               render_sql = render_sql,

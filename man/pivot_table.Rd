@@ -79,6 +79,11 @@ pivot_table(conn = conn,
             names_from_column = "measurement",
             values_from_column = "results")
 
+
+pg13::drop_table(conn = conn,
+                 schema = "public",
+                 table = "test_table")
+
 pg13::dc(conn = conn)
 
 }
