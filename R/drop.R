@@ -59,7 +59,7 @@ drop_table <-
 
 
 #' @title
-#' Drop a Batch of Tables
+#' Drop a Batch of Tables using Regex
 #'
 #' @inheritParams base_args
 #' @inheritParams base::grep

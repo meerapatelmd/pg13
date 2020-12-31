@@ -2,7 +2,7 @@
 % Please edit documentation in R/drop.R
 \name{drop_table_batch}
 \alias{drop_table_batch}
-\title{Drop a Batch of Tables}
+\title{Drop a Batch of Tables using Regex}
 \usage{
 drop_table_batch(
   conn,
@@ -51,7 +51,7 @@ drop_table_batch(
 \item{...}{Additional arguments passed to \code{DatabaseConnector::dbSendStatement()}}
 }
 \description{
-Drop a Batch of Tables
+Drop a Batch of Tables using Regex
 }
 \examples{
 library(pg13)
