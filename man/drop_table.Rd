@@ -144,6 +144,7 @@ Other table functions:
 \code{\link{create_table_from_df}()},
 \code{\link{create_table}()},
 \code{\link{drop_all_staging_tables}()},
+\code{\link{drop_table_batch}()},
 \code{\link{read_table}()},
 \code{\link{searchTable}()},
 \code{\link{search_table}()},
@@ -154,7 +155,8 @@ Other drop functions:
 \code{\link{drop_all_staging_tables}()},
 \code{\link{drop_cascade}()},
 \code{\link{drop_if_exists}()},
-\code{\link{drop_schema}()}
+\code{\link{drop_schema}()},
+\code{\link{drop_table_batch}()}
 }
 \concept{drop functions}
 \concept{table functions}

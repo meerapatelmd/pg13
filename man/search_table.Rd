@@ -146,6 +146,7 @@ Other table functions:
 \code{\link{create_table_from_df}()},
 \code{\link{create_table}()},
 \code{\link{drop_all_staging_tables}()},
+\code{\link{drop_table_batch}()},
 \code{\link{drop_table}()},
 \code{\link{read_table}()},
 \code{\link{searchTable}()},

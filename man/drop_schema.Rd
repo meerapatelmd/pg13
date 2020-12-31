@@ -76,6 +76,7 @@ Other drop functions:
 \code{\link{drop_all_staging_tables}()},
 \code{\link{drop_cascade}()},
 \code{\link{drop_if_exists}()},
+\code{\link{drop_table_batch}()},
 \code{\link{drop_table}()}
 }
 \concept{drop functions}
