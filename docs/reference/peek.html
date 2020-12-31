@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List Databases — ls_db • pg13</title>
+<title>Peek — peek • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="List Databases — ls_db" />
-<meta property="og:description" content="List all the databases in a connection" />
+<meta property="og:title" content="Peek — peek" />
+<meta property="og:description" content="Get a quick glance of a handful of rows in a table." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,28 +119,58 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List Databases</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/list.R'><code>R/list.R</code></a></small>
-    <div class="hidden name"><code>ls_db.Rd</code></div>
+    <h1>Peek</h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/peek.R'><code>R/peek.R</code></a></small>
+    <div class="hidden name"><code>peek.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>List all the databases in a connection</p>
+    <p>Get a quick glance of a handful of rows in a table.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ls_db</span><span class='op'>(</span><span class='va'>conn</span>, <span class='va'>conn_fun</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, render_sql <span class='op'>=</span> <span class='cn'>TRUE</span>, render_only <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>peek</span><span class='op'>(</span>
+  <span class='va'>conn</span>,
+  <span class='va'>conn_fun</span>,
+  <span class='va'>schema</span>,
+  <span class='va'>table</span>,
+  limit <span class='op'>=</span> <span class='fl'>5</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  render_sql <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  render_only <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>conn</th>
+      <td><p>Connection object</p></td>
+    </tr>
+    <tr>
+      <th>schema</th>
+      <td><p>The target schema for the operation.</p></td>
+    </tr>
+    <tr>
+      <th>table</th>
+      <td><p>Target table for the operation.</p></td>
+    </tr>
+    <tr>
+      <th>limit</th>
+      <td><p>Number of rows to randomly return. Default: 5.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.</p></td>
+    </tr>
+    <tr>
+      <th>render_sql</th>
+      <td><p>If TRUE, the SQL statement for the operation is returned in the console.</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other list functions: 
-<code><a href='lsFields.html'>lsFields</a>()</code>,
-<code><a href='lsSchema.html'>lsSchema</a>()</code>,
-<code><a href='lsTables.html'>lsTables</a>()</code>,
-<code><a href='ls_fields.html'>ls_fields</a>()</code>,
-<code><a href='ls_schema.html'>ls_schema</a>()</code>,
-<code><a href='ls_tables.html'>ls_tables</a>()</code>,
-<code><a href='ls_users.html'>ls_users</a>()</code></p></div>
+    <div class='dont-index'><p><code><a href='https://ohdsi.github.io/SqlRender/reference/render.html'>render</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
