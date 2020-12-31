@@ -4,7 +4,7 @@
 \alias{read_view}
 \title{Read View}
 \usage{
-read_view(conn, conn_fun, schema, viewName, verbose = TRUE, render_sql = TRUE)
+read_view(conn, conn_fun, schema, view, verbose = TRUE, render_sql = TRUE)
 }
 \description{
 Read View
