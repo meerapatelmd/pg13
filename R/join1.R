@@ -393,10 +393,19 @@ join1 <-
                  render_sql = TRUE,
                  render_only = FALSE) {
 
+                if (!missing(conn_fun)) {
+
+                        conn <- eval(rlang::parse_expr(conn_fun))
+                        on.exit(dc(conn = conn,
+                                   verbose = verbose),
+                                add = TRUE,
+                                after = TRUE)
+
+                }
+
 
                 staging_table <-
                 write_staging_table(conn = conn,
-                                    conn_fun = conn_fun,
                                     schema = write_schema,
                                     data = data,
                                     drop_existing = TRUE,
@@ -431,7 +440,6 @@ join1 <-
 
 
                 query(conn = conn,
-                      conn_fun = conn_fun,
                       sql_statement = sql_statement,
                       verbose = verbose,
                       render_sql = render_sql,

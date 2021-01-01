@@ -6,6 +6,7 @@
 \usage{
 create_table(
   conn,
+  conn_fun,
   schema,
   table_name,
   if_not_exists = TRUE,
