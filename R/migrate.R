@@ -62,7 +62,7 @@ migrate <-
 
                         x <- read_table(conn = conn_1,
                                        schema = schema_1,
-                                       tableName = target_tables[i],
+                                       table = target_tables[i],
                                        verbose = verbose,
                                        render_sql = render_sql)
 
