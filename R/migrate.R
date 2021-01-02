@@ -24,11 +24,11 @@ migrate <-
                  ...,
                  conn_2,
                  schema_2,
-                 drop_existing,
+                 drop_existing = TRUE,
                  verbose = TRUE,
                  render_sql = TRUE) {
 
-                Tables <- lsTables(conn = conn_1,
+                Tables <- ls_tables(conn = conn_1,
                                    schema = schema_1,
                                    verbose = verbose,
                                    render_sql = render_sql)
@@ -60,15 +60,15 @@ migrate <-
 
                         secretary::typewrite(secretary::enbold("Table:"), target_tables[i])
 
-                        x <- readTable(conn = conn_1,
+                        x <- read_table(conn = conn_1,
                                        schema = schema_1,
                                        tableName = target_tables[i],
                                        verbose = verbose,
                                        render_sql = render_sql)
 
-                        writeTable(conn = conn_2,
+                        write_table(conn = conn_2,
                                    schema = schema_2,
-                                   tableName = target_tables[i],
+                                   table_name = target_tables[i],
                                    data = x,
                                    drop_existing = drop_existing)
 

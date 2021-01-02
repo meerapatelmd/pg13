@@ -10,7 +10,7 @@ migrate(
   ...,
   conn_2,
   schema_2,
-  drop_existing,
+  drop_existing = TRUE,
   verbose = TRUE,
   render_sql = TRUE
 )
