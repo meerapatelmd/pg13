@@ -41,6 +41,7 @@ drop_table <-
 
 
                 send(conn = conn,
+                     conn_fun = conn_fun,
                      sql_statement = sql_statement,
                      verbose = verbose,
                      render_sql = render_sql,

@@ -52,7 +52,7 @@ check_data_rows <-
                 } else {
 
 
-                        typewrite_alert_success(text = "data has more than 0 rows")
+                        typewrite_alert_success(text = "data has {nrow(data)} rows")
                 }
         }
 
