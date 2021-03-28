@@ -31,7 +31,12 @@ conn_db <-
                                                                            user = user,
                                                                            password = password,
                                                                            port = port,
-                                                                           server = server)
+                                                                           server = server,
+                                                                           pathToDriver =
+                                                                                   system.file(
+                                                                                           package = "pg13",
+                                                                                           "driver"
+                                                                                   ))
 
                 DatabaseConnector::connect(conn_details)
         }

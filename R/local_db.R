@@ -42,7 +42,9 @@ make_local_conn_details <-
 
                 DatabaseConnector::createConnectionDetails(dbms  = dbms,
                                                            server   = server,
-                                                           port     = port)
+                                                           port     = port,
+                                                           pathToDriver = system.file(package = "pg13",
+                                                                                      "driver"))
     }
 
 

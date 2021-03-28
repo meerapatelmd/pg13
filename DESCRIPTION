@@ -22,7 +22,7 @@ BugReports: https://github.com/meerapatelmd/pg13/issues/
 Imports: 
     centipede,
     cli,
-    DatabaseConnector (<= 3.0.0),
+    DatabaseConnector,
     dplyr,
     forcats,
     lubridate,
