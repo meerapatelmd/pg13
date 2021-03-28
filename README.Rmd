@@ -40,7 +40,7 @@ pg13 provides functions that simplifies queries such as joins from the R console
 
 First, a connection is made to Postgres. Here, I am connecting to my test database `pg13_test`. 
 
-```{r,results='hide'}
+```{r,results='hide',message=FALSE}
 library(pg13)
 conn <- local_connect(dbname = "pg13_test")
 ```
