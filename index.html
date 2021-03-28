@@ -105,12 +105,6 @@
 <p>First, a connection is made to Postgres. Here, I am connecting to my test database <code>pg13_test</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://meerapatelmd.github.io/pg13/">pg13</a></span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: DatabaseConnector</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'pg13'</span>
-<span class="co">#&gt; The following object is masked from 'package:DatabaseConnector':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     connect</span>
 <span class="va">conn</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/local_connect.html">local_connect</a></span><span class="op">(</span>dbname <span class="op">=</span> <span class="st">"pg13_test"</span><span class="op">)</span></code></pre></div>
 <p>I write a target table in the test database with sample data:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -130,25 +124,25 @@
             table_name <span class="op">=</span> <span class="st">"test_table2"</span>,
             drop_existing <span class="op">=</span> <span class="cn">TRUE</span>,
             data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>A <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">25</span>, B <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping test_schema.test_table2...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Dropping test_schema.test_table2...</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ Open connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ JDBC connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS test_schema.test_table2;</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping test_schema.test_table2...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    SQL: DROP TABLE IF EXISTS test_schema.test_table2;</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Sending...</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Sending...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Dropping test_schema.test_table2...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ Data 'data' has more than 0 rows</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ Table name 'test_table2' is not a reserved word</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ Field name 'a' is not a reserved word</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ Field name 'b' is not a reserved word</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Writing test_schema.test_table2...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Writing test_schema.test_table2...complete</span></code></pre></div>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Writing test_schema.test_table2...</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Writing test_schema.test_table2...complete</span></code></pre></div>
 <p>I create another dataframe in the R environment to serve as left-side table for this demonstration.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">test_data</span> <span class="op">&lt;-</span>
@@ -171,43 +165,43 @@
       join_on_schema <span class="op">=</span> <span class="st">"test_schema"</span>,
       join_on_table <span class="op">=</span> <span class="st">"test_table2"</span>,
       join_on_column <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping public.V20201225174449...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Dropping public.V20210328171726...</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ Open connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ JDBC connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS public.V20201225174449;</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping public.V20201225174449...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    SQL: DROP TABLE IF EXISTS public.V20210328171726;</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Sending...</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Sending...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Dropping public.V20210328171726...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ Data 'data' has more than 0 rows</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
-<span class="co">#&gt; ✓ Table name 'V20201225174449' is not a reserved word</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
+<span class="co">#&gt; ✓ Table name 'V20210328171726' is not a reserved word</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ Field name 'a' is not a reserved word</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ Field name 'b' is not a reserved word</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Writing public.V20201225174449...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Writing public.V20201225174449...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Writing public.V20210328171726...</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Writing public.V20210328171726...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ Open connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ JDBC connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    SQL: SELECT a.*, b.* FROM public.V20201225174449 a INNER JOIN test_schema.test_table2 b ON a.A = b.A</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Querying...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    SQL: SELECT a.*, b.* FROM public.V20210328171726 a INNER JOIN test_schema.test_table2 b ON a.A = b.A</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Querying...</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Querying...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ Returned data has more than 0 rows</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping public.V20201225174449...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Dropping public.V20210328171726...</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ Open connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ JDBC connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS public.V20201225174449;</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping public.V20201225174449...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    SQL: DROP TABLE IF EXISTS public.V20210328171726;</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Sending...</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Sending...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Dropping public.V20210328171726...complete</span>
 <span class="co">#&gt;     a b  a b</span>
 <span class="co">#&gt; 1   1 a  1 a</span>
 <span class="co">#&gt; 2   2 b  2 b</span>
@@ -244,43 +238,43 @@
       join_on_schema <span class="op">=</span> <span class="st">"test_schema"</span>,
       join_on_table <span class="op">=</span> <span class="st">"test_table2"</span>,
       join_on_column <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping public.V20201225174449...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Dropping public.V20210328171726...</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ Open connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ JDBC connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS public.V20201225174449;</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping public.V20201225174449...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    SQL: DROP TABLE IF EXISTS public.V20210328171726;</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Sending...</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Sending...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Dropping public.V20210328171726...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ Data 'data' has more than 0 rows</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
-<span class="co">#&gt; ✓ Table name 'V20201225174449' is not a reserved word</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
+<span class="co">#&gt; ✓ Table name 'V20210328171726' is not a reserved word</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ Field name 'a' is not a reserved word</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    </span>
 <span class="co">#&gt; ✓ Field name 'b' is not a reserved word</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Writing public.V20201225174449...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Writing public.V20201225174449...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Writing public.V20210328171726...</span>
+<span class="co">#&gt; [2021-03-28 17:17:26]    Writing public.V20210328171726...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ Open connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ JDBC connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    SQL: SELECT a.*, b.* FROM public.V20201225174449 a RIGHT JOIN test_schema.test_table2 b ON a.A = b.A</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Querying...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    SQL: SELECT a.*, b.* FROM public.V20210328171726 a RIGHT JOIN test_schema.test_table2 b ON a.A = b.A</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Querying...</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Querying...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ Returned data has more than 0 rows</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping public.V20201225174449...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Dropping public.V20210328171726...</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ Open connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ JDBC connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS public.V20201225174449;</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping public.V20201225174449...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    SQL: DROP TABLE IF EXISTS public.V20210328171726;</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Sending...</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Sending...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Dropping public.V20210328171726...complete</span>
 <span class="co">#&gt;     a b  a b</span>
 <span class="co">#&gt; 1   1 a  1 a</span>
 <span class="co">#&gt; 2   2 b  2 b</span>
@@ -317,43 +311,43 @@
       join_on_schema <span class="op">=</span> <span class="st">"test_schema"</span>,
       join_on_table <span class="op">=</span> <span class="st">"test_table2"</span>,
       join_on_column <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping public.V20201225174449...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Dropping public.V20210328171727...</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ Open connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ JDBC connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS public.V20201225174449;</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping public.V20201225174449...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    SQL: DROP TABLE IF EXISTS public.V20210328171727;</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Sending...</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Sending...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Dropping public.V20210328171727...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ Data 'data' has more than 0 rows</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
-<span class="co">#&gt; ✓ Table name 'V20201225174449' is not a reserved word</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
+<span class="co">#&gt; ✓ Table name 'V20210328171727' is not a reserved word</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ Field name 'a' is not a reserved word</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ Field name 'b' is not a reserved word</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Writing public.V20201225174449...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Writing public.V20201225174449...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Writing public.V20210328171727...</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Writing public.V20210328171727...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ Open connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ JDBC connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    SQL: SELECT a.*, b.* FROM public.V20201225174449 a LEFT JOIN test_schema.test_table2 b ON a.A = b.A</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Querying...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    SQL: SELECT a.*, b.* FROM public.V20210328171727 a LEFT JOIN test_schema.test_table2 b ON a.A = b.A</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Querying...</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Querying...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ Returned data has more than 0 rows</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping public.V20201225174449...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Dropping public.V20210328171727...</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ Open connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ JDBC connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS public.V20201225174449;</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping public.V20201225174449...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    SQL: DROP TABLE IF EXISTS public.V20210328171727;</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Sending...</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Sending...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Dropping public.V20210328171727...complete</span>
 <span class="co">#&gt;       a    b  a    b</span>
 <span class="co">#&gt; 1     1    a  1    a</span>
 <span class="co">#&gt; 2     2    b  2    b</span>
@@ -465,43 +459,43 @@
       join_on_schema <span class="op">=</span> <span class="st">"test_schema"</span>,
       join_on_table <span class="op">=</span> <span class="st">"test_table2"</span>,
       join_on_column <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping public.V20201225174449...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Dropping public.V20210328171727...</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ Open connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ JDBC connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS public.V20201225174449;</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping public.V20201225174449...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    SQL: DROP TABLE IF EXISTS public.V20210328171727;</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Sending...</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Sending...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Dropping public.V20210328171727...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ Data 'data' has more than 0 rows</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
-<span class="co">#&gt; ✓ Table name 'V20201225174449' is not a reserved word</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
+<span class="co">#&gt; ✓ Table name 'V20210328171727' is not a reserved word</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ Field name 'a' is not a reserved word</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ Field name 'b' is not a reserved word</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Writing public.V20201225174449...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Writing public.V20201225174449...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Writing public.V20210328171727...</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Writing public.V20210328171727...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ Open connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ JDBC connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    SQL: SELECT a.*, b.* FROM public.V20201225174449 a FULL JOIN test_schema.test_table2 b ON a.A = b.A</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Querying...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Querying...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    SQL: SELECT a.*, b.* FROM public.V20210328171727 a FULL JOIN test_schema.test_table2 b ON a.A = b.A</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Querying...</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Querying...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ Returned data has more than 0 rows</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping public.V20201225174449...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Dropping public.V20210328171727...</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ Open connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    </span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    </span>
 <span class="co">#&gt; ✓ JDBC connection</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    SQL: DROP TABLE IF EXISTS public.V20201225174449;</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Sending...complete</span>
-<span class="co">#&gt; [2020-12-25 17:44:49]    Dropping public.V20201225174449...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    SQL: DROP TABLE IF EXISTS public.V20210328171727;</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Sending...</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Sending...complete</span>
+<span class="co">#&gt; [2021-03-28 17:17:27]    Dropping public.V20210328171727...complete</span>
 <span class="co">#&gt;       a    b  a    b</span>
 <span class="co">#&gt; 1     1    a  1    a</span>
 <span class="co">#&gt; 2     2    b  2    b</span>
