@@ -6,6 +6,9 @@
 \usage{
 db_exists(conn, db_name)
 }
+\arguments{
+\item{conn}{Connection object}
+}
 \description{
 Does a database exist?
 }

@@ -9,8 +9,6 @@ log_start_ff(datetime_field = "log_datetime", schema, log_table)
 \arguments{
 \item{datetime_field}{Name of the datetime field. Defaults to \code{log_datetime}.}
 
-\item{schema}{The target schema for the operation.}
-
 \item{log_table}{Log table name}
 }
 \value{

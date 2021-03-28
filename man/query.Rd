@@ -15,17 +15,6 @@ query(
   ...
 )
 }
-\arguments{
-\item{conn}{Connection object}
-
-\item{sql_statement}{A SQL Statement.}
-
-\item{verbose}{If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.}
-
-\item{render_sql}{If TRUE, the SQL statement for the operation is returned in the console.}
-
-\item{warn_no_rows}{If TRUE, a warning is given that query has returned 0 rows.}
-}
 \description{
 Query
 }

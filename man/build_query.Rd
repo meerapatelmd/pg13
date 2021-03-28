@@ -20,25 +20,6 @@ build_query(
   random
 )
 }
-\arguments{
-\item{fields}{Fields selected for. Defaults to "*".}
-
-\item{distinct}{If TRUE, the distinct row count will be returned.}
-
-\item{schema}{The target schema for the operation.}
-
-\item{table}{Target table for the operation.}
-
-\item{where_in_field}{Paired with \code{where_in_vector}, adds a "WHERE {field} IN ({vector})" clause to the query corresponding to the field-value pair.}
-
-\item{where_not_in_field}{Paired with \code{where_not_in_vector}, adds a "WHERE {field} NOT IN ({vector})" clause to the query corresponding to the field-value pair.}
-
-\item{case_insensitive}{If TRUE, both sides of the query are converted to lowercase.}
-
-\item{limit}{(Optional) Integer of the row limit. Takes precedence over \code{random} if both arguments are provided.}
-
-\item{random}{(Optional) Integer of the random number of rows to return. Is preceded by \code{limit} if both \code{limit} and \code{random} are provided.}
-}
 \description{
 Build a Simple SQL Query
 }

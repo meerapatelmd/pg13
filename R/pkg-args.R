@@ -60,7 +60,7 @@
 #' @param limit (Optional) Integer of the row limit. Takes precedence over `random` if both arguments are provided.
 #' @param random (Optional) Integer of the random number of rows to return. Is preceded by `limit` if both `limit` and `random` are provided.
 #'
-#' @name args
+#' @name base_args
 #' @keywords internal
 #' @export
 NULL

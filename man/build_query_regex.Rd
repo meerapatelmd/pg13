@@ -17,21 +17,6 @@ build_query_regex(
   random
 )
 }
-\arguments{
-\item{fields}{Fields selected for. Defaults to "*".}
-
-\item{distinct}{If TRUE, the distinct row count will be returned.}
-
-\item{schema}{The target schema for the operation.}
-
-\item{table}{Target table for the operation.}
-
-\item{case_insensitive}{If TRUE, both sides of the query are converted to lowercase.}
-
-\item{limit}{(Optional) Integer of the row limit. Takes precedence over \code{random} if both arguments are provided.}
-
-\item{random}{(Optional) Integer of the random number of rows to return. Is preceded by \code{limit} if both \code{limit} and \code{random} are provided.}
-}
 \description{
 Build a query that searches for a regular expression.
 }

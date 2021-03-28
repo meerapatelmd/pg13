@@ -23,6 +23,12 @@ drop_table_batch(
 )
 }
 \arguments{
+\item{conn}{Connection object}
+
+\item{schema}{The target schema for the operation.}
+
+\item{table}{Target table for the operation.}
+
 \item{if_exists}{If TRUE, the table will be dropped only if it exists.}
 
 \item{pattern}{character string containing a \link[base]{regular expression}
@@ -47,6 +53,10 @@ drop_table_batch(
 
 \item{invert}{logical.  If \code{TRUE} return indices or values for
     elements that do \emph{not} match.}
+
+\item{verbose}{If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.}
+
+\item{render_sql}{If TRUE, the SQL statement for the operation is returned in the console.}
 
 \item{...}{Additional arguments passed to \code{DatabaseConnector::dbSendStatement()}}
 }

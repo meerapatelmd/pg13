@@ -7,8 +7,6 @@
 dc(conn, verbose = TRUE, remove = FALSE)
 }
 \arguments{
-\item{conn}{Connection object}
-
 \item{verbose}{If TRUE, returns a console message when the connection has been closed.}
 
 \item{remove}{If TRUE, the Connection object argument is removed from the parent environment.}
