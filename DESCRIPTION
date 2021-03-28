@@ -19,11 +19,10 @@ License: Apache License 2.0
 URL: https://meerapatelmd.github.io/pg13/,
     https://github.com/meerapatelmd/pg13/
 BugReports: https://github.com/meerapatelmd/pg13/issues/
-Depends: 
-    DatabaseConnector
 Imports: 
     centipede,
     cli,
+    DatabaseConnector (<= 3.0.0),
     dplyr,
     forcats,
     lubridate,
