@@ -63,7 +63,6 @@
 #' @rdname base_args
 #' @name base_args
 #' @keywords internal
-#' @export
 NULL
 
 #' @title
@@ -131,5 +130,4 @@ NULL
 #' @rdname args
 #' @name args
 #' @keywords internal
-#' @export
 NULL
