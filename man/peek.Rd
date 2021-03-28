@@ -16,7 +16,17 @@ peek(
 )
 }
 \arguments{
+\item{conn}{Connection object}
+
+\item{schema}{The target schema for the operation.}
+
+\item{table}{Target table for the operation.}
+
 \item{limit}{Number of rows to randomly return. Default: 5.}
+
+\item{verbose}{If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.}
+
+\item{render_sql}{If TRUE, the SQL statement for the operation is returned in the console.}
 }
 \description{
 Get a quick glance of a handful of rows in a table.

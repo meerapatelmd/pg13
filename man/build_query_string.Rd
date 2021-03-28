@@ -16,6 +16,17 @@ build_query_string(
   limit_n = NULL
 )
 }
+\arguments{
+\item{fields}{Fields selected for. Defaults to "*".}
+
+\item{distinct}{If TRUE, the distinct row count will be returned.}
+
+\item{schema}{The target schema for the operation.}
+
+\item{table}{Target table for the operation.}
+
+\item{case_insensitive}{If TRUE, both sides of the query are converted to lowercase.}
+}
 \description{
 Write a SQL Query that loops over the words in a string.
 }

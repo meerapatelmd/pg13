@@ -30,6 +30,33 @@ draft_join1(
   case_insensitive
 )
 }
+\arguments{
+\item{select_table_fields}{The fields to select for in the first table}
+
+\item{select_join_on_fields}{The fields to select for in the table being join to the first table}
+
+\item{distinct}{If TRUE, the distinct row count will be returned.}
+
+\item{schema}{The target schema for the operation.}
+
+\item{table}{Target table for the operation.}
+
+\item{column}{Column to join on.}
+
+\item{join_on_schema}{Schema of the table that is being joined to the first table.}
+
+\item{join_on_table}{Table that is being joined to the first table.}
+
+\item{join_on_column}{Column in the \code{join_on_table} that is joined onto the \code{column} of the first table.}
+
+\item{kind}{Type of join. Defaults to left, and options include "LEFT", "RIGHT", "INNER", or "FULL"}
+
+\item{where_in_field}{Paired with \code{where_in_vector}, adds a "WHERE {field} IN ({vector})" clause to the query corresponding to the field-value pair.}
+
+\item{where_not_in_field}{Paired with \code{where_not_in_vector}, adds a "WHERE {field} NOT IN ({vector})" clause to the query corresponding to the field-value pair.}
+
+\item{case_insensitive}{If TRUE, both sides of the query are converted to lowercase.}
+}
 \description{
 A \verb{First Degree Join} is one where the \verb{JOIN ON} clause occurs on one column on the left and one column on the right.
 }

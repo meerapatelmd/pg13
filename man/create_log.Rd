@@ -18,7 +18,15 @@ create_log(
 \arguments{
 \item{datetime_field}{Name of the datetime field. Defaults to \code{log_datetime}.}
 
+\item{conn}{Connection object}
+
+\item{schema}{The target schema for the operation.}
+
 \item{log_table}{Log table name}
+
+\item{verbose}{If TRUE, details on the activity are returned in the console, such as when the querying starting and was completed.}
+
+\item{render_sql}{If TRUE, the SQL statement for the operation is returned in the console.}
 }
 \description{
 Create a \verb{Log Table} if it does not already exist. A log table consists of a user-defined timestamp field, followed by \code{activity} and \code{status} fields.

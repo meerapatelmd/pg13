@@ -15,6 +15,17 @@ build_query_like(
   limit_n = NULL
 )
 }
+\arguments{
+\item{fields}{Fields selected for. Defaults to "*".}
+
+\item{distinct}{If TRUE, the distinct row count will be returned.}
+
+\item{schema}{The target schema for the operation.}
+
+\item{table}{Target table for the operation.}
+
+\item{case_insensitive}{If TRUE, both sides of the query are converted to lowercase.}
+}
 \description{
 A \verb{Like Query} is one where a search for a value is performed with flanking wildcards.
 }
