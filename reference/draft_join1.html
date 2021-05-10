@@ -47,7 +47,9 @@
 
 
 <meta property="og:title" content="Draft a First Degree Join — draft_join1" />
-<meta property="og:description" content="A First Degree Join is one where the JOIN ON clause occurs on one column on the left and one column on the right." />
+<meta property="og:description" content="A First Degree Join is one where the
+JOIN ON clause occurs on one column on the left and
+one column on the right." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -125,7 +127,9 @@
     </div>
 
     <div class="ref-description">
-    <p>A <code>First Degree Join</code> is one where the <code>JOIN ON</code> clause occurs on one column on the left and one column on the right.</p>
+    <p>A <code>First Degree Join</code> is one where the
+<code>JOIN ON</code> clause occurs on one column on the left and
+one column on the right.</p>
     </div>
 
     <pre class="usage"><span class='fu'>draft_join1</span><span class='op'>(</span>
@@ -239,7 +243,7 @@
             table_name <span class='op'>=</span> <span class='st'>"test_table2"</span>,
             drop_existing <span class='op'>=</span> <span class='cn'>TRUE</span>,
             data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>A <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>25</span>, B <span class='op'>=</span> <span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>25</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-03-28 22:31:14]	<span style='color: #BBBB00;'>Dropping test_schema.test_table2...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2021-05-10 17:27:59]	<span style='color: #BBBB00;'>Dropping test_schema.test_table2...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
 <span class='co'># Joining Test Data</span>
 <span class='va'>test_data</span> <span class='op'>&lt;-</span>
         <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>A <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span>, B <span class='op'>=</span> <span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span><span class='op'>]</span><span class='op'>)</span>
@@ -353,7 +357,7 @@
       join_on_schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
       join_on_table <span class='op'>=</span> <span class='st'>"test_table2"</span>,
       join_on_column <span class='op'>=</span> <span class='st'>"A"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-03-28 22:31:14]	</span><span style='color: #BBBB00;'>Dropping public.V20210328223114...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2021-05-10 17:27:59]	</span><span style='color: #BBBB00;'>Dropping public.V20210510172759...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
 <span class='fu'><a href='join1.html'>join1</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
       write_schema <span class='op'>=</span> <span class='st'>"public"</span>,
       data <span class='op'>=</span> <span class='va'>test_data</span>,
@@ -362,7 +366,7 @@
       join_on_schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
       join_on_table <span class='op'>=</span> <span class='st'>"test_table2"</span>,
       join_on_column <span class='op'>=</span> <span class='st'>"A"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-03-28 22:31:14]	</span><span style='color: #BBBB00;'>Dropping public.V20210328223114...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2021-05-10 17:27:59]	</span><span style='color: #BBBB00;'>Dropping public.V20210510172759...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
 <span class='fu'><a href='join1.html'>join1</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
       write_schema <span class='op'>=</span> <span class='st'>"public"</span>,
       data <span class='op'>=</span> <span class='va'>test_data</span>,
@@ -371,7 +375,7 @@
       join_on_schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
       join_on_table <span class='op'>=</span> <span class='st'>"test_table2"</span>,
       join_on_column <span class='op'>=</span> <span class='st'>"A"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-03-28 22:31:14]	</span><span style='color: #BBBB00;'>Dropping public.V20210328223114...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2021-05-10 17:27:59]	</span><span style='color: #BBBB00;'>Dropping public.V20210510172759...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
 <span class='fu'><a href='join1.html'>join1</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
       write_schema <span class='op'>=</span> <span class='st'>"public"</span>,
       data <span class='op'>=</span> <span class='va'>test_data</span>,
@@ -380,14 +384,14 @@
       join_on_schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
       join_on_table <span class='op'>=</span> <span class='st'>"test_table2"</span>,
       join_on_column <span class='op'>=</span> <span class='st'>"A"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-03-28 22:31:14]	</span><span style='color: #BBBB00;'>Dropping public.V20210328223114...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2021-05-10 17:27:59]	</span><span style='color: #BBBB00;'>Dropping public.V20210510172759...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
 
 <span class='fu'><a href='drop_schema.html'>drop_schema</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
             schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
             cascade <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
 <span class='fu'><a href='dc.html'>dc</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-03-28 22:31:14]	Postgres connection was already closed</div></span></pre>
+</div><div class='output co'>#&gt; [2021-05-10 17:27:59]	Postgres connection was already closed</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

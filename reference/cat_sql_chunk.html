@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Typewrite SQL — typewrite_sql • pg13</title>
+<title>Cat SQL Chunk — cat_sql_chunk • pg13</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="Typewrite SQL — typewrite_sql" />
-<meta property="og:description" content="Wrapper around cat function in R that returns a
-timestamped SQL: heading followed by the SQL statement." />
+<meta property="og:title" content="Cat SQL Chunk — cat_sql_chunk" />
+<meta property="og:description" content="Return a given SQL around ticks for R Markdown." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -120,19 +119,16 @@ timestamped SQL: heading followed by the SQL statement." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Typewrite SQL</h1>
-    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a>, <a href='https://github.com/meerapatelmd/pg13/blob/master/R/utils-typewrite.R'><code>R/utils-typewrite.R</code></a></small>
-    <div class="hidden name"><code>typewrite_sql.Rd</code></div>
+    <h1>Cat SQL Chunk</h1>
+    <small class="dont-index">Source: <a href='https://github.com/meerapatelmd/pg13/blob/master/R/utils-typewrite.R'><code>R/utils-typewrite.R</code></a></small>
+    <div class="hidden name"><code>cat_sql_chunk.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Wrapper around <code>cat</code> function in R that returns a
-timestamped <code>SQL:</code> heading followed by the SQL statement.</p>
+    <p>Return a given SQL around ticks for R Markdown.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>typewrite_sql</span><span class='op'>(</span><span class='va'>sql_statement</span>, style <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"inline"</span>, <span class='st'>"chunk"</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='fu'>typewrite_sql</span><span class='op'>(</span><span class='va'>sql_statement</span>, style <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"inline"</span>, <span class='st'>"chunk"</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>cat_sql_chunk</span><span class='op'>(</span><span class='va'>sql_statement</span>, tab_count <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,18 +138,12 @@ timestamped <code>SQL:</code> heading followed by the SQL statement.</p>
       <td><p>SQL statement.</p></td>
     </tr>
     <tr>
-      <th>style</th>
-      <td><p>The <em>inline</em> style where the statement is flattened
-into a single line or a <em>chunk</em> style where the statement is
-taken in its native format and returned within a set of
-ticks for R Markdown, Default: "inline".</p></td>
+      <th>tab_count</th>
+      <td><p>Number of tabs the chunk will be indented when printed in
+the console, Default: 0.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='https://stringr.tidyverse.org/reference/str_replace.html'>str_replace</a></code>
-<code><a href='https://rdrr.io/r/base/c.html'>c("typewrite", "enbold", "blueTxt")</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
