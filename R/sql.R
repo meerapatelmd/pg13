@@ -44,7 +44,9 @@ query <-
             # Checks
             # +++
 
+            if (verbose) {
             check_conn(conn = conn)
+            }
 
 
             if (render_sql) {
@@ -73,8 +75,11 @@ query <-
 
             }
 
+            if (verbose) {
+
             check_inflow(data = resultset)
 
+            }
             resultset
 
         }
