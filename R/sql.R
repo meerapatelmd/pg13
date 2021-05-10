@@ -259,12 +259,14 @@ send <-
                  verbose = TRUE,
                  render_sql = TRUE,
                  render_only = FALSE,
+                 sql_style = c("inline", "chunk"),
                  ...) {
 
 
                 if (render_only) {
 
-                        typewrite_sql(sql_statement = sql_statement)
+                        typewrite_sql(sql_statement = sql_statement,
+                                      style = sql_style)
                         invisible(sql_statement)
 
                 } else {
@@ -283,11 +285,14 @@ send <-
                 # +++
 
 
+                if (verbose) {
                 check_conn(conn = conn)
+                }
 
                 if (render_sql) {
 
-                        typewrite_sql(sql_statement = sql_statement)
+                        typewrite_sql(sql_statement = sql_statement,
+                                      style = sql_style)
 
                 }
 
