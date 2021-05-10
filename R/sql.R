@@ -15,14 +15,16 @@ query <-
              sql_statement,
              verbose = TRUE,
              render_sql = TRUE,
-             warn_no_rows = "deprecated",
              render_only = FALSE,
+             sql_style = c("inline", "chunk"),
+             warn_no_rows = "deprecated",
              ...) {
 
 
             if (render_only) {
 
-                    typewrite_sql(sql_statement = sql_statement)
+                    typewrite_sql(sql_statement = sql_statement,
+                                  style = sql_style)
                     invisible(sql_statement)
 
             } else {
@@ -47,7 +49,9 @@ query <-
 
             if (render_sql) {
 
-                    typewrite_sql(sql_statement = sql_statement)
+                    typewrite_sql(sql_statement = sql_statement,
+                                  style = sql_style)
+
 
             }
 
