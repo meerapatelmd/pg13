@@ -1,3 +1,11 @@
+# pg13 1.1.0.9000  
+
+* Export `typewrite_*` functions   
+* Remove cli package dependency  
+* Add chunk style option to `typewrite_sql()`  
+
+
+
 # pg13 1.1.0
 
 * Added join1 function

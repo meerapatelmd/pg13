@@ -2,7 +2,9 @@
 #' Draft a First Degree Join
 #'
 #' @description
-#' A `First Degree Join` is one where the `JOIN ON` clause occurs on one column on the left and one column on the right.
+#' A `First Degree Join` is one where the
+#' `JOIN ON` clause occurs on one column on the left and
+#' one column on the right.
 #'
 #' @inheritParams args
 #' @seealso

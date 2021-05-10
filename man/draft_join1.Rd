@@ -58,7 +58,9 @@ draft_join1(
 \item{case_insensitive}{If TRUE, both sides of the query are converted to lowercase.}
 }
 \description{
-A \verb{First Degree Join} is one where the \verb{JOIN ON} clause occurs on one column on the left and one column on the right.
+A \verb{First Degree Join} is one where the
+\verb{JOIN ON} clause occurs on one column on the left and
+one column on the right.
 }
 \examples{
 library(pg13)
