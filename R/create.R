@@ -6,26 +6,27 @@
 #' @family create functions
 
 create_schema <-
-        function(conn,
-                 conn_fun,
-                 schema,
-                 verbose = TRUE,
-                 render_sql = TRUE,
-                 render_only = FALSE,
-                 ...) {
-
-                send(conn = conn,
-                     conn_fun = conn_fun,
-                     verbose = verbose,
-                     render_sql = render_sql,
-                     render_only = render_only,
-                     sql_statement =
-                             SqlRender::render(
-                                     "CREATE SCHEMA @schema;",
-                                     schema = schema
-                             ),
-                     ...)
-        }
+  function(conn,
+           conn_fun,
+           schema,
+           verbose = TRUE,
+           render_sql = TRUE,
+           render_only = FALSE,
+           ...) {
+    send(
+      conn = conn,
+      conn_fun = conn_fun,
+      verbose = verbose,
+      render_sql = render_sql,
+      render_only = render_only,
+      sql_statement =
+        SqlRender::render(
+          "CREATE SCHEMA @schema;",
+          schema = schema
+        ),
+      ...
+    )
+  }
 
 
 
@@ -47,57 +48,48 @@ create_schema <-
 #' @example inst/example/create_table.R
 
 draft_create_table <-
-        function(schema,
-                 table_name,
-                 if_not_exists = TRUE,
-                 ...) {
+  function(schema,
+           table_name,
+           if_not_exists = TRUE,
+           ...) {
+    ddl <- rlang::list2(...)
+    fields <- names(ddl)
 
+    if (any(isReserved(table_name, fields))) {
+      stop("Cannot use reserved sql words.")
+    }
 
-                ddl <- rlang::list2(...)
-                fields <- names(ddl)
+    ddl <- mapply(paste, fields, ddl, collapse = " ")
+    ddl <- paste(ddl, collapse = ",\n")
 
-                if (any(isReserved(table_name, fields))) {
-
-                        stop("Cannot use reserved sql words.")
-
-                }
-
-                ddl <- mapply(paste, fields, ddl, collapse = " ")
-                ddl <- paste(ddl, collapse = ",\n")
-
-                if (if_not_exists) {
-
-                        sql_statement <-
-                                SqlRender::render(
-                                        "
+    if (if_not_exists) {
+      sql_statement <-
+        SqlRender::render(
+          "
                                         CREATE TABLE IF NOT EXISTS @schema.@table_name (
                                                 @ddl
                                         );
                                         ",
-                                        schema = schema,
-                                        table_name = table_name,
-                                        ddl = ddl
-                                )
-
-                } else {
-
-                        sql_statement <-
-                                SqlRender::render(
-                                        "
+          schema = schema,
+          table_name = table_name,
+          ddl = ddl
+        )
+    } else {
+      sql_statement <-
+        SqlRender::render(
+          "
                                         CREATE TABLE @schema.@table_name (
                                                 @ddl
                                         );
                                         ",
-                                        schema = schema,
-                                        table_name = table_name,
-                                        ddl = ddl
-                                )
+          schema = schema,
+          table_name = table_name,
+          ddl = ddl
+        )
+    }
 
-
-                }
-
-                sql_statement
-        }
+    sql_statement
+  }
 
 #' @title
 #' Create a Table
@@ -115,34 +107,31 @@ draft_create_table <-
 #' @example inst/example/create_table.R
 
 create_table <-
-        function(conn,
-                 conn_fun,
-                 schema,
-                 table_name,
-                 if_not_exists = TRUE,
-                 ...,
-                 verbose = TRUE,
-                 render_sql = TRUE) {
+  function(conn,
+           conn_fun,
+           schema,
+           table_name,
+           if_not_exists = TRUE,
+           ...,
+           verbose = TRUE,
+           render_sql = TRUE) {
+    sql_statement <-
+      draft_create_table(
+        schema = schema,
+        table_name = table_name,
+        if_not_exists = if_not_exists,
+        ...
+      )
 
 
-                sql_statement <-
-                draft_create_table(
-                        schema = schema,
-                        table_name = table_name,
-                        if_not_exists = if_not_exists,
-                        ...
-                )
-
-
-                send(
-                        conn = conn,
-                        conn_fun = conn_fun,
-                        sql_statement = sql_statement,
-                        verbose = verbose,
-                        render_sql = render_sql
-                )
-
-        }
+    send(
+      conn = conn,
+      conn_fun = conn_fun,
+      sql_statement = sql_statement,
+      verbose = verbose,
+      render_sql = render_sql
+    )
+  }
 
 #' @title
 #' Draft the SQL to Create Table
@@ -160,81 +149,71 @@ create_table <-
 #' @example inst/example/create_table.R
 
 draft_create_table_from_df <-
-        function(schema,
-                 table_name,
-                 data,
-                 if_not_exists = TRUE) {
+  function(schema,
+           table_name,
+           data,
+           if_not_exists = TRUE) {
+    make_ddl <-
+      function(data) {
+        r_types <- lapply(data, class)
+        r_types <- sapply(r_types, paste, collapse = ", ") # necessary because there are 2 classes for some data types, such as sys.time()'s posixct, posixt
 
-                make_ddl <-
-                        function(data) {
+        field_names <- names(r_types)
 
-                                r_types <- lapply(data, class)
-                                r_types <- sapply(r_types, paste, collapse = ", ") # necessary because there are 2 classes for some data types, such as sys.time()'s posixct, posixt
+        ddl <- factor(r_types)
+        ddl <-
+          forcats::fct_collapse(
+            .f = ddl,
+            bigint = "integer",
+            `timestamp without time zone` = "POSIXct, POSIXt",
+            date = "Date",
+            float = c("double", "numeric"),
+            other_level = "text"
+          ) %>%
+          as.character()
 
-                                field_names <- names(r_types)
+        names(ddl) <- field_names
+        ddl
+      }
 
-                                ddl <- factor(r_types)
-                                ddl <-
-                                        forcats::fct_collapse(
-                                                .f = ddl,
-                                                bigint = "integer",
-                                                `timestamp without time zone` = "POSIXct, POSIXt",
-                                                date = "Date",
-                                                float  = c("double", "numeric"),
-                                                other_level = "text"
-                                        ) %>%
-                                        as.character()
+    ddl <- make_ddl(data = data)
+    fields <- names(ddl)
 
-                                names(ddl) <- field_names
-                                ddl
-                        }
+    if (any(isReserved(table_name, fields))) {
+      stop("Cannot use reserved sql words.")
+    }
 
-                ddl <- make_ddl(data = data)
-                fields <- names(ddl)
+    ddl <- mapply(paste, fields, ddl, collapse = " ")
+    ddl <- paste(ddl, collapse = ",\n")
 
-                if (any(isReserved(table_name, fields))) {
-
-                        stop("Cannot use reserved sql words.")
-
-                }
-
-                ddl <- mapply(paste, fields, ddl, collapse = " ")
-                ddl <- paste(ddl, collapse = ",\n")
-
-                if (if_not_exists) {
-
-                        sql_statement <-
-                                SqlRender::render(
-                                        "
+    if (if_not_exists) {
+      sql_statement <-
+        SqlRender::render(
+          "
                                         CREATE TABLE IF NOT EXISTS @schema.@table_name (
                                                 @ddl
                                         );
                                         ",
-                                        schema = schema,
-                                        table_name = table_name,
-                                        ddl = ddl
-                                )
-
-                } else {
-
-                        sql_statement <-
-                                SqlRender::render(
-                                        "
+          schema = schema,
+          table_name = table_name,
+          ddl = ddl
+        )
+    } else {
+      sql_statement <-
+        SqlRender::render(
+          "
                                         CREATE TABLE @schema.@table_name (
                                                 @ddl
                                         );
                                         ",
-                                        schema = schema,
-                                        table_name = table_name,
-                                        ddl = ddl
-                                )
+          schema = schema,
+          table_name = table_name,
+          ddl = ddl
+        )
+    }
 
-
-                }
-
-                sql_statement
-
-        }
+    sql_statement
+  }
 
 #' @title
 #' Create a Table with a Dataframe
@@ -249,27 +228,27 @@ draft_create_table_from_df <-
 #' @example inst/example/create_table.R
 
 create_table_from_df <-
-        function(conn,
-                 conn_fun,
-                 schema,
-                 table_name,
-                 if_not_exists = TRUE,
-                 data,
-                 verbose = TRUE,
-                 render_sql = TRUE) {
+  function(conn,
+           conn_fun,
+           schema,
+           table_name,
+           if_not_exists = TRUE,
+           data,
+           verbose = TRUE,
+           render_sql = TRUE) {
+    sql_statement <- draft_create_table_from_df(
+      schema = schema,
+      table_name = table_name,
+      data = data,
+      if_not_exists = if_not_exists
+    )
 
-                sql_statement <- draft_create_table_from_df(schema = schema,
-                                                    table_name = table_name,
-                                                    data = data,
-                                                    if_not_exists = if_not_exists)
 
-
-                send(
-                        conn = conn,
-                        conn_fun = conn_fun,
-                        sql_statement = sql_statement,
-                        verbose = verbose,
-                        render_sql = render_sql
-                )
-
-        }
+    send(
+      conn = conn,
+      conn_fun = conn_fun,
+      sql_statement = sql_statement,
+      verbose = verbose,
+      render_sql = render_sql
+    )
+  }

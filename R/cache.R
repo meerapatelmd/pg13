@@ -18,16 +18,17 @@
 #' @export
 
 cache <-
-        function(object,
-                 sql_statement,
-                 dirs) {
-
-                key <- list(sql_statement)
-                x <- r.cache::saveCache(object = object,
-                                        key = key,
-                                        dirs = dirs)
-                invisible(x)
-        }
+  function(object,
+           sql_statement,
+           dirs) {
+    key <- list(sql_statement)
+    x <- r.cache::saveCache(
+      object = object,
+      key = key,
+      dirs = dirs
+    )
+    invisible(x)
+  }
 
 
 #' @title
@@ -51,40 +52,39 @@ cache <-
 #' @export
 
 load_cache <-
-        function(sql_statement,
-                 hrs_expired = 8,
-                 dirs) {
+  function(sql_statement,
+           hrs_expired = 8,
+           dirs) {
+    key <- list(sql_statement)
+    # Get path to cache file if it exists
 
-                key <- list(sql_statement)
-                # Get path to cache file if it exists
+    cache_file_path <-
+      R.cache::findCache(
+        key = key,
+        dirs = dirs
+      )
 
-                cache_file_path <-
-                        R.cache::findCache(key = key,
-                                           dirs = dirs)
 
+    if (!is.null(cache_file_path)) {
+      is_expired <-
+        difftime(
+          time1 = Sys.time(),
+          time2 = file.info(cache_file_path)$mtime,
+          units = "hours"
+        ) > hrs_expired
 
-                if (!is.null(cache_file_path)) {
-
-                        is_expired <-
-                                difftime(time1 = Sys.time(),
-                                         time2 = file.info(cache_file_path)$mtime,
-                                         units = "hours") > hrs_expired
-
-                        if (is_expired) {
-
-                                NULL
-
-                        } else {
-
-                                R.cache::loadCache(key = key,
-                                                   dirs = dirs)
-
-                        }
-
-                } else {
-
-                        R.cache::loadCache(key = key,
-                                           dirs = dirs)
-                }
-
-        }
+      if (is_expired) {
+        NULL
+      } else {
+        R.cache::loadCache(
+          key = key,
+          dirs = dirs
+        )
+      }
+    } else {
+      R.cache::loadCache(
+        key = key,
+        dirs = dirs
+      )
+    }
+  }

@@ -34,18 +34,21 @@ NULL
 #' @importFrom DatabaseConnector createConnectionDetails
 
 make_local_conn_details <-
-    function(dbname = "athena",
-             port = 5432) {
+  function(dbname = "athena",
+           port = 5432) {
+    dbms <- "postgresql"
+    server <- paste0("localhost/", dbname)
 
-                dbms     <- "postgresql"
-                server   <- paste0("localhost/", dbname)
-
-                DatabaseConnector::createConnectionDetails(dbms  = dbms,
-                                                           server   = server,
-                                                           port     = port,
-                                                           pathToDriver = system.file(package = "pg13",
-                                                                                      "driver"))
-    }
+    DatabaseConnector::createConnectionDetails(
+      dbms = dbms,
+      server = server,
+      port = port,
+      pathToDriver = system.file(
+        package = "pg13",
+        "driver"
+      )
+    )
+  }
 
 
 #' @title
@@ -64,8 +67,7 @@ make_local_conn_details <-
 #' @importFrom DatabaseConnector connect
 
 local_connect <-
-        function(dbname = "athena",
-                 port = 5432) {
-
-                "dummy"
-        }
+  function(dbname = "athena",
+           port = 5432) {
+    "dummy"
+  }

@@ -20,10 +20,10 @@ NULL
 #' @export
 
 s_quo <-
-        function(vector) {
-                vector <- as.character(vector)
-                paste0("'", vector, "'")
-        }
+  function(vector) {
+    vector <- as.character(vector)
+    paste0("'", vector, "'")
+  }
 
 
 #' @title
@@ -37,6 +37,6 @@ s_quo <-
 #' @export
 
 affix_date <-
-        function(string) {
-                paste0(name, "_", stringr::str_replace_all(as.character(Sys.Date()), "[-]{1}", "_"))
-        }
+  function(string) {
+    paste0(name, "_", stringr::str_replace_all(as.character(Sys.Date()), "[-]{1}", "_"))
+  }

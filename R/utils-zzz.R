@@ -2,17 +2,17 @@
 #' @noRd
 
 safely.print <-
-        function() {
-                "dummy"
-        }
+  function() {
+    "dummy"
+  }
 
 #' Print an Object with \code\link{[purrr]{safely}} Wrapper and a superimposed \code\link{[purrr]{quietly}} wrapper
 #' @noRd
 
 quietly.safely.print <-
-        function() {
-                "dummy"
-        }
+  function() {
+    "dummy"
+  }
 
 
 #' @title
@@ -26,6 +26,6 @@ quietly.safely.print <-
 #' @export
 
 is_conn_open <-
-        function(conn) {
-                "dummy"
-        }
+  function(conn) {
+    "dummy"
+  }

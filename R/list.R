@@ -12,46 +12,38 @@
 
 
 ls_fields <-
-    function(conn,
-             conn_fun,
-             schema,
-             table,
-             verbose = TRUE,
-             render_sql = TRUE) {
-
-            if (!missing(conn_fun)) {
-
-                    conn <- eval(rlang::parse_expr(conn_fun))
-                    on.exit(dc(conn = conn))
-
-            }
-
-            if (render_sql) {
-
-                typewrite_sql("N/A")
-
-            }
-
-
-            if (verbose) {
-
-                typewrite_activity("Listing Fields...")
-
-            }
-
-            resultset <- DatabaseConnector::dbListFields(conn = conn,
-                                                        name = table,
-                                                        schema = schema)
-
-            if (verbose) {
-
-                typewrite_activity("Listing Fields...complete")
-
-            }
-
-            tolower(resultset)
-
+  function(conn,
+           conn_fun,
+           schema,
+           table,
+           verbose = TRUE,
+           render_sql = TRUE) {
+    if (!missing(conn_fun)) {
+      conn <- eval(rlang::parse_expr(conn_fun))
+      on.exit(dc(conn = conn))
     }
+
+    if (render_sql) {
+      typewrite_sql("N/A")
+    }
+
+
+    if (verbose) {
+      typewrite_activity("Listing Fields...")
+    }
+
+    resultset <- DatabaseConnector::dbListFields(
+      conn = conn,
+      name = table,
+      schema = schema
+    )
+
+    if (verbose) {
+      typewrite_activity("Listing Fields...complete")
+    }
+
+    tolower(resultset)
+  }
 
 
 
@@ -66,23 +58,23 @@ ls_fields <-
 #' @rdname ls_schema
 
 ls_schema <-
-        function(conn,
-                 conn_fun,
-                 verbose = TRUE,
-                 render_sql = TRUE,
-                 render_only = FALSE) {
-
-                query(conn = conn,
-                      conn_fun = conn_fun,
-                      sql_statement = "SELECT nspname FROM pg_catalog.pg_namespace;",
-                      verbose = verbose,
-                      render_sql = render_sql,
-                      render_only = render_only) %>%
-                unlist() %>%
-                unname() %>%
-                tolower()
-
-        }
+  function(conn,
+           conn_fun,
+           verbose = TRUE,
+           render_sql = TRUE,
+           render_only = FALSE) {
+    query(
+      conn = conn,
+      conn_fun = conn_fun,
+      sql_statement = "SELECT nspname FROM pg_catalog.pg_namespace;",
+      verbose = verbose,
+      render_sql = render_sql,
+      render_only = render_only
+    ) %>%
+      unlist() %>%
+      unname() %>%
+      tolower()
+  }
 
 
 #' @title
@@ -96,23 +88,23 @@ ls_schema <-
 #' @rdname ls_db
 
 ls_db <-
-    function(conn,
-             conn_fun,
-             verbose = TRUE,
-             render_sql = TRUE,
-             render_only = FALSE) {
-
-        query(conn = conn,
-              conn_fun = conn_fun,
-              sql_statement = "SELECT datname FROM pg_database WHERE datistemplate = false;",
-              verbose = verbose,
-              render_sql = render_sql,
-              render_only = render_only) %>%
-            unlist() %>%
-            unname() %>%
-            tolower()
-
-    }
+  function(conn,
+           conn_fun,
+           verbose = TRUE,
+           render_sql = TRUE,
+           render_only = FALSE) {
+    query(
+      conn = conn,
+      conn_fun = conn_fun,
+      sql_statement = "SELECT datname FROM pg_database WHERE datistemplate = false;",
+      verbose = verbose,
+      render_sql = render_sql,
+      render_only = render_only
+    ) %>%
+      unlist() %>%
+      unname() %>%
+      tolower()
+  }
 
 #' @title
 #' List Tables
@@ -127,48 +119,38 @@ ls_db <-
 #' @family list functions
 
 ls_tables <-
-    function(conn,
-             conn_fun,
-             schema,
-             verbose = TRUE,
-             render_sql = TRUE) {
-
-
-            if (!missing(conn_fun)) {
-
-                conn <- eval(rlang::parse_expr(conn_fun))
-                on.exit(dc(conn = conn))
-
-            }
-
-
-            if (render_sql) {
-
-                typewrite_sql("N/A")
-
-            }
-
-
-            if (verbose) {
-
-                typewrite_activity("Listing Tables...")
-
-            }
-
-
-            resultset <- DatabaseConnector::dbListTables(conn = conn,
-                                                        schema = schema)
-
-            if (verbose) {
-
-                typewrite_activity("Listing Tables...completed")
-
-            }
-
-            toupper(resultset)
-
-
+  function(conn,
+           conn_fun,
+           schema,
+           verbose = TRUE,
+           render_sql = TRUE) {
+    if (!missing(conn_fun)) {
+      conn <- eval(rlang::parse_expr(conn_fun))
+      on.exit(dc(conn = conn))
     }
+
+
+    if (render_sql) {
+      typewrite_sql("N/A")
+    }
+
+
+    if (verbose) {
+      typewrite_activity("Listing Tables...")
+    }
+
+
+    resultset <- DatabaseConnector::dbListTables(
+      conn = conn,
+      schema = schema
+    )
+
+    if (verbose) {
+      typewrite_activity("Listing Tables...completed")
+    }
+
+    toupper(resultset)
+  }
 
 #' @title
 #' List Users
@@ -177,15 +159,14 @@ ls_tables <-
 #' @family list functions
 
 ls_users <-
-    function(conn,
-             conn_fun,
-             verbose = TRUE,
-             render_sql = TRUE,
-             render_only = FALSE,
-             ...) {
-
-        sql_statement <-
-            "SELECT usename AS role_name,
+  function(conn,
+           conn_fun,
+           verbose = TRUE,
+           render_sql = TRUE,
+           render_only = FALSE,
+           ...) {
+    sql_statement <-
+      "SELECT usename AS role_name,
   CASE
      WHEN usesuper AND usecreatedb THEN
 	   CAST('superuser, create database' AS pg_catalog.text)
@@ -199,14 +180,13 @@ ls_users <-
 FROM pg_catalog.pg_user
 ORDER BY role_name desc;"
 
-        query(conn = conn,
-              conn_fun = conn_fun,
-              sql_statement = sql_statement,
-              verbose = verbose,
-              render_sql = render_sql,
-              render_only = render_only,
-              ...)
-
-
-    }
-
+    query(
+      conn = conn,
+      conn_fun = conn_fun,
+      sql_statement = sql_statement,
+      verbose = verbose,
+      render_sql = render_sql,
+      render_only = render_only,
+      ...
+    )
+  }

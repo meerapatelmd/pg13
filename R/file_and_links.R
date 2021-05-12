@@ -8,17 +8,17 @@
 #' @export
 
 file_query <-
-    function(conn,
-             file,
-             ...) {
+  function(conn,
+           file,
+           ...) {
+    sql_statement <- sqlRender::readSql(source_file = file)
 
-        sql_statement <- sqlRender::readSql(source_file = file)
-
-        query(conn = conn,
-              sql_statement = sql_statement,
-              ...)
-
-    }
+    query(
+      conn = conn,
+      sql_statement = sql_statement,
+      ...
+    )
+  }
 
 
 
@@ -34,17 +34,17 @@ file_query <-
 #' @export
 
 file_send <-
-    function(conn,
-             file,
-             ...) {
+  function(conn,
+           file,
+           ...) {
+    sql_statement <- SqlRender::readSql(source_file = file)
 
-        sql_statement <- SqlRender::readSql(source_file = file)
-
-        send(conn = conn,
-              sql_statement = sql_statement,
-              ...)
-
-    }
+    send(
+      conn = conn,
+      sql_statement = sql_statement,
+      ...
+    )
+  }
 
 
 
@@ -61,23 +61,24 @@ file_send <-
 #' @export
 
 link_query <-
-    function(conn,
-             link) {
+  function(conn,
+           link) {
+    tmp_sql <- tempfile(fileext = ".txt")
 
-                tmp_sql <- tempfile(fileext = ".txt")
-
-                download.file(link,
-                              destfile = tmp_sql)
-
-
-
-                query(conn = conn,
-                      statement = SqlRender::readSql(tmp_sql))
+    download.file(link,
+      destfile = tmp_sql
+    )
 
 
-                unlink(tmp_sql)
 
-    }
+    query(
+      conn = conn,
+      statement = SqlRender::readSql(tmp_sql)
+    )
+
+
+    unlink(tmp_sql)
+  }
 
 
 
@@ -89,30 +90,21 @@ link_query <-
 #' @export
 
 link_send <-
-    function(conn,
-             link) {
+  function(conn,
+           link) {
+    tmp_sql <- tempfile(fileext = ".txt")
 
-                tmp_sql <- tempfile(fileext = ".txt")
-
-                download.file(link,
-                              destfile = tmp_sql)
-
-
-
-                send(conn = conn,
-                      statement = SqlRender::readSql(tmp_sql))
-
-
-                unlink(tmp_sql)
-
-    }
+    download.file(link,
+      destfile = tmp_sql
+    )
 
 
 
+    send(
+      conn = conn,
+      statement = SqlRender::readSql(tmp_sql)
+    )
 
 
-
-
-
-
-
+    unlink(tmp_sql)
+  }

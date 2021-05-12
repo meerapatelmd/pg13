@@ -21,33 +21,35 @@
 #' @importFrom secretary typewrite enbold blueTxt
 
 typewrite_sql <-
-        function (sql_statement,
-                  style = c("inline", "chunk"))
-        {
+  function(sql_statement,
+           style = c("inline", "chunk")) {
+    style <-
+      match.arg(style,
+        choices = c("inline", "chunk"),
+        several.ok = FALSE
+      )
 
-                style <-
-                match.arg(style,
-                          choices = c("inline", "chunk"),
-                          several.ok = FALSE)
+    if (style %in% "inline") {
 
-                if (style %in% "inline") {
+      # Flatten SQL Statement
+      sql_statement <- stringr::str_replace_all(
+        sql_statement,
+        "[\r\n\t]{1,}|\\s{2,}", " "
+      )
+      sql_statement <- trimws(sql_statement)
 
-                        # Flatten SQL Statement
-                        sql_statement <- stringr::str_replace_all(sql_statement,
-                                                                  "[\r\n\t]{1,}|\\s{2,}", " ")
-                        sql_statement <- trimws(sql_statement)
-
-                        secretary::typewrite(secretary::enbold(secretary::blueTxt("SQL:")),
-                                             sql_statement)
-
-                } else {
-
-                secretary::typewrite(secretary::enbold(secretary::blueTxt("SQL:")))
-                cat_sql_chunk(sql_statement = sql_statement,
-                              tab_count = 4)
-
-                }
-        }
+      secretary::typewrite(
+        secretary::enbold(secretary::blueTxt("SQL:")),
+        sql_statement
+      )
+    } else {
+      secretary::typewrite(secretary::enbold(secretary::blueTxt("SQL:")))
+      cat_sql_chunk(
+        sql_statement = sql_statement,
+        tab_count = 4
+      )
+    }
+  }
 
 
 
@@ -61,20 +63,20 @@ typewrite_sql <-
 #' @rdname cat_sql_chunk
 #' @export
 cat_sql_chunk <-
-        function (sql_statement,
-                  tab_count = 0) {
-                tabs <- rep("\t", tab_count)
-                tabs <- paste(tabs, collapse = "")
+  function(sql_statement,
+           tab_count = 0) {
+    tabs <- rep("\t", tab_count)
+    tabs <- paste(tabs, collapse = "")
 
-                output <-
-                  c(
-                        sprintf("%s```sql", tabs),
-                        sprintf("%s%s", tabs, sql_statement),
-                        sprintf("%s```", tabs)
-                  )
+    output <-
+      c(
+        sprintf("%s```sql", tabs),
+        sprintf("%s%s", tabs, sql_statement),
+        sprintf("%s```", tabs)
+      )
 
-                cat(output, sep = "\n")
-        }
+    cat(output, sep = "\n")
+  }
 
 
 #' @title
@@ -93,10 +95,9 @@ cat_sql_chunk <-
 #' @importFrom secretary typewrite yellowTxt
 
 typewrite_activity <-
-        function (activity)
-        {
-                secretary::typewrite(secretary::yellowTxt(activity))
-        }
+  function(activity) {
+    secretary::typewrite(secretary::yellowTxt(activity))
+  }
 
 
 #' @title
@@ -116,11 +117,11 @@ typewrite_activity <-
 #' @importFrom secretary typewrite redTxt enbold
 
 typewrite_alert_danger <-
-        function(text) {
-                text <-
-                        sprintf("! %s", text)
-                secretary::typewrite(secretary::redTxt(secretary::enbold(text)))
-        }
+  function(text) {
+    text <-
+      sprintf("! %s", text)
+    secretary::typewrite(secretary::redTxt(secretary::enbold(text)))
+  }
 
 
 
@@ -137,9 +138,9 @@ typewrite_alert_danger <-
 #' @export
 #' @importFrom secretary typewrite greenTxt enbold
 typewrite_alert_success <-
-        function(text) {
-                text <-
-                        sprintf("\u2713 %s", text)
+  function(text) {
+    text <-
+      sprintf("\u2713 %s", text)
 
-                secretary::typewrite(secretary::greenTxt(secretary::enbold(text)))
-        }
+    secretary::typewrite(secretary::greenTxt(secretary::enbold(text)))
+  }

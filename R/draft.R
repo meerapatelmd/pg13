@@ -7,29 +7,24 @@
 #' @family draft functions
 
 draft_base <-
-    function(fields = "*",
-             distinct = FALSE,
-             schema,
-             table_name) {
-
-            if (distinct) {
-
-                    SqlRender::render("SELECT DISTINCT @fields FROM @schema.@table_name",
-                                      fields = fields,
-                                      schema = schema,
-                                      table_name = table_name)
-
-
-            } else {
-
-                    SqlRender::render("SELECT @fields FROM @schema.@table_name",
-                                              fields = fields,
-                                              schema = schema,
-                                              table_name = table_name)
-
-            }
-
+  function(fields = "*",
+           distinct = FALSE,
+           schema,
+           table_name) {
+    if (distinct) {
+      SqlRender::render("SELECT DISTINCT @fields FROM @schema.@table_name",
+        fields = fields,
+        schema = schema,
+        table_name = table_name
+      )
+    } else {
+      SqlRender::render("SELECT @fields FROM @schema.@table_name",
+        fields = fields,
+        schema = schema,
+        table_name = table_name
+      )
     }
+  }
 
 
 
@@ -43,12 +38,11 @@ draft_base <-
 #' @family draft functions
 
 draft_in <-
-    function(vector) {
-
-        SqlRender::render("(@vector)",
-                          vector = vector)
-
-    }
+  function(vector) {
+    SqlRender::render("(@vector)",
+      vector = vector
+    )
+  }
 
 
 
@@ -62,24 +56,23 @@ draft_in <-
 #' @rdname draft_join
 #' @family draft functions
 draft_join <-
-    function(schema,
-             tableName,
-             column,
-             joinType = "LEFT",
-             joinOnSchema,
-             joinOnTableName,
-             joinOnColumn) {
-
-            SqlRender::render("@joinType JOIN @schema2.@tableName2 ON @schema2.@tableName2.@column2 = @schema1.@tableName1.@column1",
-                              schema1 = schema,
-                              tableName1 = tableName,
-                              column1 = column,
-                              joinType = joinType,
-                              schema2 = joinOnSchema,
-                              tableName2 = joinOnTableName,
-                              column2 = joinOnColumn)
-
-    }
+  function(schema,
+           tableName,
+           column,
+           joinType = "LEFT",
+           joinOnSchema,
+           joinOnTableName,
+           joinOnColumn) {
+    SqlRender::render("@joinType JOIN @schema2.@tableName2 ON @schema2.@tableName2.@column2 = @schema1.@tableName1.@column1",
+      schema1 = schema,
+      tableName1 = tableName,
+      column1 = column,
+      joinType = joinType,
+      schema2 = joinOnSchema,
+      tableName2 = joinOnTableName,
+      column2 = joinOnColumn
+    )
+  }
 
 
 
@@ -93,13 +86,11 @@ draft_join <-
 #' @family draft functions
 
 draft_limit <-
-    function(n) {
-
-
-        SqlRender::render("LIMIT @n",
-                          n = n)
-
-    }
+  function(n) {
+    SqlRender::render("LIMIT @n",
+      n = n
+    )
+  }
 
 
 #' Construct ORDER BY RANDOM()
@@ -109,29 +100,26 @@ draft_limit <-
 #' @family draft functions
 
 draft_random <-
-    function(n) {
-
-
-        SqlRender::render("ORDER BY RANDOM() LIMIT @n",
-                          n = n)
-
-    }
+  function(n) {
+    SqlRender::render("ORDER BY RANDOM() LIMIT @n",
+      n = n
+    )
+  }
 
 #' Construct schemaTableName
 #' @description construct schemaTableName from the schema and tableName
 #' @export
 #' @family draft functions
 draft_table_path <-
-        function(schema,
-                 tableName) {
+  function(schema,
+           tableName) {
+    .Deprecated("table.path")
 
-            .Deprecated("table.path")
-
-            SqlRender::render("@schema.@tableName",
-                              schema = schema,
-                              tableName = tableName)
-
-        }
+    SqlRender::render("@schema.@tableName",
+      schema = schema,
+      tableName = tableName
+    )
+  }
 
 
 #' Construct schemaTableName
@@ -139,14 +127,13 @@ draft_table_path <-
 #' @export
 #' @family draft functions
 table.path <-
-    function(schema,
-             table_name) {
-
-        SqlRender::render("@schema.@table_name",
-                          schema = schema,
-                          table_name = table_name)
-
-    }
+  function(schema,
+           table_name) {
+    SqlRender::render("@schema.@table_name",
+      schema = schema,
+      table_name = table_name
+    )
+  }
 
 
 
@@ -160,19 +147,17 @@ table.path <-
 #' @family draft functions
 
 draft_where_in <-
-    function(field,
-             vector) {
-
-        if (is.character(vector)) {
-
-            vector <- s_quo(vector)
-
-        }
-
-        SqlRender::render("@field IN (@vector)",
-                          field = field,
-                          vector = vector)
+  function(field,
+           vector) {
+    if (is.character(vector)) {
+      vector <- s_quo(vector)
     }
+
+    SqlRender::render("@field IN (@vector)",
+      field = field,
+      vector = vector
+    )
+  }
 
 
 #' Render "WHERE x LIKE y"
@@ -184,13 +169,13 @@ draft_where_in <-
 #' @family draft functions
 
 draft_where_like <-
-    function(field,
-             term) {
-
-        SqlRender::render("@field LIKE '%@term%'",
-                          field = field,
-                          term = term)
-    }
+  function(field,
+           term) {
+    SqlRender::render("@field LIKE '%@term%'",
+      field = field,
+      term = term
+    )
+  }
 
 
 
@@ -204,19 +189,17 @@ draft_where_like <-
 #' @family draft functions
 
 draft_where_lower_in <-
-    function(field,
-             vector) {
-
-        if (is.character(vector)) {
-
-                vector <- s_quo(vector)
-
-        }
-
-        SqlRender::render("LOWER(@field) IN (@vector)",
-                          field = field,
-                          vector = vector)
+  function(field,
+           vector) {
+    if (is.character(vector)) {
+      vector <- s_quo(vector)
     }
+
+    SqlRender::render("LOWER(@field) IN (@vector)",
+      field = field,
+      vector = vector
+    )
+  }
 
 
 #' Render WHERE lowercase x LIKE y
@@ -227,14 +210,13 @@ draft_where_lower_in <-
 #' @family draft functions
 
 draft_where_lower_like <-
-    function(field,
-             term) {
-
-        SqlRender::render("LOWER(@field) LIKE '%@term%'",
-                          field = field,
-                          term = tolower(term))
-
-    }
+  function(field,
+           term) {
+    SqlRender::render("LOWER(@field) LIKE '%@term%'",
+      field = field,
+      term = tolower(term)
+    )
+  }
 
 
 
@@ -249,19 +231,17 @@ draft_where_lower_like <-
 #' @family draft functions
 
 draft_where_lower_not_in <-
-    function(field,
-             vector) {
-
-        if (is.character(vector)) {
-
-            vector <- s_quo(vector)
-
-        }
-
-        SqlRender::render("LOWER(@field) NOT IN (@vector)",
-                          field = field,
-                          vector = vector)
+  function(field,
+           vector) {
+    if (is.character(vector)) {
+      vector <- s_quo(vector)
     }
+
+    SqlRender::render("LOWER(@field) NOT IN (@vector)",
+      field = field,
+      vector = vector
+    )
+  }
 
 
 #' Render "WHERE x NOT IN y"
@@ -273,19 +253,17 @@ draft_where_lower_not_in <-
 #' @family draft functions
 
 draft_where_not_in <-
-    function(field,
-             vector) {
-
-        if (is.character(vector)) {
-
-            vector <- s_quo(vector)
-
-        }
-
-        SqlRender::render("@field NOT IN (@vector)",
-                          field = field,
-                          vector = vector)
+  function(field,
+           vector) {
+    if (is.character(vector)) {
+      vector <- s_quo(vector)
     }
+
+    SqlRender::render("@field NOT IN (@vector)",
+      field = field,
+      vector = vector
+    )
+  }
 
 
 #' @title
@@ -297,16 +275,12 @@ draft_where_not_in <-
 #' @export
 #' @family draft functions
 paste_wheres <-
-    function(...) {
+  function(...) {
+    args <- rlang::list2(...)
 
-        args <- rlang::list2(...)
-
-        paste0("WHERE ",
-                unlist(Args) %>%
-                    paste(collapse = " AND ")
-        )
-
-    }
-
-
-
+    paste0(
+      "WHERE ",
+      unlist(Args) %>%
+        paste(collapse = " AND ")
+    )
+  }

@@ -22,52 +22,58 @@
 
 
 write_staging_table <-
-        function(conn,
-                 conn_fun,
-                 schema,
-                 data,
-                 drop_existing = FALSE,
-                 drop_on_exit = FALSE,
-                 verbose = TRUE,
-                 render_sql = TRUE,
-                 ...) {
+  function(conn,
+           conn_fun,
+           schema,
+           data,
+           drop_existing = FALSE,
+           drop_on_exit = FALSE,
+           verbose = TRUE,
+           render_sql = TRUE,
+           ...) {
+    table_name <-
+      sprintf(
+        "V%s",
+        stringr::str_remove_all(as.character(Sys.time()),
+          pattern = "[^0-9]"
+        )
+      )
 
-                table_name <-
-                sprintf("V%s",
-                        stringr::str_remove_all(as.character(Sys.time()),
-                                        pattern = "[^0-9]"))
 
 
+    write_table(
+      conn = conn,
+      conn_fun = conn_fun,
+      schema = schema,
+      table_name = table_name,
+      data = data,
+      drop_existing = drop_existing,
+      verbose = verbose,
+      render_sql = render_sql,
+      ... = ...
+    )
 
-                write_table(conn = conn,
-                           conn_fun = conn_fun,
-                           schema = schema,
-                           table_name = table_name,
-                           data = data,
-                           drop_existing = drop_existing,
-                           verbose = verbose,
-                           render_sql = render_sql,
-                           ... = ...)
+    if (drop_on_exit) {
+      do.call(
+        what = on.exit,
+        args = list(
+          expr = substitute(drop_table(
+            conn = conn,
+            schema = schema,
+            table = table_name,
+            if_exists = TRUE,
+            verbose = verbose,
+            render_sql = render_sql
+          )),
+          add = TRUE,
+          after = FALSE
+        ),
+        envir = parent.frame() # the key is this envir
+      )
+    }
 
-                if (drop_on_exit) {
-
-                        do.call(
-                                what = on.exit,
-                                args = list(expr = substitute(drop_table(conn = conn,
-                                                                  schema = schema,
-                                                                  table = table_name,
-                                                                  if_exists = TRUE,
-                                                                  verbose = verbose,
-                                                                  render_sql = render_sql)),
-                                            add = TRUE,
-                                            after = FALSE),
-                                envir = parent.frame()  # the key is this envir
-                        )
-
-                }
-
-                table_name
-        }
+    table_name
+  }
 
 
 #' @title
@@ -108,51 +114,51 @@ write_staging_table <-
 #' @family drop functions
 
 drop_all_staging_tables <-
-        function(conn,
-                 conn_fun,
-                 schema,
-                 time_diff_hours = 0,
-                 verbose = TRUE,
-                 render_sql = TRUE) {
+  function(conn,
+           conn_fun,
+           schema,
+           time_diff_hours = 0,
+           verbose = TRUE,
+           render_sql = TRUE) {
+    all_tables <- ls_tables(
+      conn = conn,
+      conn_fun = conn_fun,
+      schema = schema,
+      verbose = verbose,
+      render_sql = render_sql
+    )
 
-                all_tables <- ls_tables(conn = conn,
-                                        conn_fun = conn_fun,
-                                        schema = schema,
-                                        verbose = verbose,
-                                        render_sql = render_sql)
+    staging_tables <- grep("^V[0-9]{14}$",
+      all_tables,
+      ignore.case = TRUE,
+      value = TRUE
+    )
 
-                staging_tables <- grep("^V[0-9]{14}$",
-                                       all_tables,
-                                       ignore.case = TRUE,
-                                       value = TRUE)
+    staging_datetime <- stringr::str_remove_all(staging_tables, "^V{1}")
+    datetimes <- lubridate::ymd_hms(staging_datetime)
 
-                staging_datetime <- stringr::str_remove_all(staging_tables, "^V{1}")
-                datetimes <- lubridate::ymd_hms(staging_datetime)
+    if (verbose) {
+      secretary::typewrite(
+        length(datetimes),
+        "tables in",
+        schema
+      )
+    }
 
-                if (verbose) {
+    while (length(datetimes) > 0) {
+      if (difftime(Sys.time(), datetimes[1], "hours") > time_diff_hours) {
+        dropTable(
+          conn = conn,
+          conn_fun = conn_fun,
+          schema = schema,
+          tableName = staging_tables[1],
+          if_exists = TRUE,
+          verbose = verbose,
+          render_sql = render_sql
+        )
+      }
 
-                        secretary::typewrite(length(datetimes),
-                                             "tables in",
-                                             schema)
-
-                }
-
-                while (length(datetimes) > 0) {
-
-                        if (difftime(Sys.time(), datetimes[1], "hours") > time_diff_hours) {
-
-                                dropTable(conn = conn,
-                                          conn_fun = conn_fun,
-                                          schema = schema,
-                                          tableName = staging_tables[1],
-                                          if_exists = TRUE,
-                                          verbose = verbose,
-                                          render_sql = render_sql)
-                        }
-
-                        datetimes <- datetimes[-1]
-                        staging_tables <- staging_tables[-1]
-                }
-
-        }
-
+      datetimes <- datetimes[-1]
+      staging_tables <- staging_tables[-1]
+    }
+  }

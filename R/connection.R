@@ -22,29 +22,29 @@ NULL
 
 
 conn_db <-
-        function(user = NULL,
-                 password = NULL,
-                 server = NULL,
-                 port = NULL,
-                 extraSettings = NULL,
-                 oracleDriver = "thin",
-                 connectionString = NULL,
-                 pathToDriver =system.file(package = "pg13","driver")) {
+  function(user = NULL,
+           password = NULL,
+           server = NULL,
+           port = NULL,
+           extraSettings = NULL,
+           oracleDriver = "thin",
+           connectionString = NULL,
+           pathToDriver = system.file(package = "pg13", "driver")) {
+    conn_details <-
+      DatabaseConnector::createConnectionDetails(
+        dbms = "postgresql",
+        user = user,
+        password = password,
+        server = server,
+        port = port,
+        extraSettings = extraSettings,
+        oracleDriver = oracleDriver,
+        connectionString = connectionString,
+        pathToDriver = system.file(package = "pg13", "driver")
+      )
 
-                conn_details <-
-                        DatabaseConnector::createConnectionDetails(
-                                dbms = "postgresql",
-                                user = user,
-                                password = password,
-                                server = server,
-                                port = port,
-                                extraSettings = extraSettings,
-                                oracleDriver = oracleDriver,
-                                connectionString = connectionString,
-                                pathToDriver = system.file(package = "pg13","driver"))
-
-                DatabaseConnector::connect(conn_details)
-        }
+    DatabaseConnector::connect(conn_details)
+  }
 
 
 #' @title
@@ -60,9 +60,9 @@ conn_db <-
 #' @family connection functions
 
 connect <-
-        function() {
-                "dummy"
-        }
+  function() {
+    "dummy"
+  }
 
 
 #' @title
@@ -78,9 +78,9 @@ connect <-
 #' @family connection functions
 
 connect_ff <-
-        function() {
-                "dummy"
-        }
+  function() {
+    "dummy"
+  }
 
 
 #' Connect without Console Messages
@@ -89,9 +89,9 @@ connect_ff <-
 #' @family connection functions
 
 quietly.conn_db <-
-        function() {
-                "dummy"
-        }
+  function() {
+    "dummy"
+  }
 
 #' @title
 #' Disconnect a Connection
@@ -112,24 +112,23 @@ quietly.conn_db <-
 #' @family connection functions
 
 dc0 <-
-        function(conn,
-                 ...,
-                 verbose = TRUE,
-                 remove = FALSE) {
+  function(conn,
+           ...,
+           verbose = TRUE,
+           remove = FALSE) {
+    DatabaseConnector::dbDisconnect(
+      conn = conn,
+      ...
+    )
 
-                DatabaseConnector::dbDisconnect(conn = conn,
-                                                ...)
+    if (verbose) {
+      secretary::typewrite("Postgres connection closed")
+    }
 
-                if (verbose) {
-                        secretary::typewrite("Postgres connection closed")
-                }
-
-                if (remove) {
-
-                        rm(list = deparse(substitute(conn)), envir = parent.frame())
-
-                }
-        }
+    if (remove) {
+      rm(list = deparse(substitute(conn)), envir = parent.frame())
+    }
+  }
 
 
 
@@ -152,36 +151,32 @@ dc0 <-
 #' @family connection functions
 
 dc <-
-        function(conn,
-                 verbose = TRUE,
-                 remove = FALSE) {
+  function(conn,
+           verbose = TRUE,
+           remove = FALSE) {
+    db_name <-
+      tryCatch(
+        get_conn_db(conn = conn),
+        error = function(e) "Error"
+      )
 
 
-                db_name <-
-                        tryCatch(
-                          get_conn_db(conn = conn),
-                          error = function(e) "Error"
-                                )
+    if (identical(
+      x = db_name,
+      y = "Error"
+    )) {
+      if (verbose) {
+        secretary::typewrite("Postgres connection was already closed")
+      }
+    } else {
+      DatabaseConnector::dbDisconnect(conn = conn)
 
+      if (verbose) {
+        secretary::typewrite(sprintf("Postgres connection to '%s' closed", db_name))
+      }
+    }
 
-                if (identical(x = db_name,
-                              y = "Error")) {
-
-                        if (verbose) {secretary::typewrite("Postgres connection was already closed")}
-
-                } else {
-
-                        DatabaseConnector::dbDisconnect(conn = conn)
-
-                        if (verbose) {
-                                secretary::typewrite(sprintf("Postgres connection to '%s' closed", db_name))
-                        }
-
-                }
-
-                if (remove) {
-
-                        rm(list = deparse(substitute(conn)), envir = parent.frame())
-
-                }
-        }
+    if (remove) {
+      rm(list = deparse(substitute(conn)), envir = parent.frame())
+    }
+  }

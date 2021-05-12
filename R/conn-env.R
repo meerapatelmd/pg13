@@ -11,8 +11,9 @@
 
 
 pg13_env <- setClass("pg_env",
-                   contains = c("environment"),
-                   slots = c(update_datetime = "POSIXct"))
+  contains = c("environment"),
+  slots = c(update_datetime = "POSIXct")
+)
 
 
 #' @title
@@ -22,13 +23,16 @@ pg13_env <- setClass("pg_env",
 #' @family pg13 environment functions
 #' @family pg13 class functions
 
-setMethod(f = "[[<-",
-          signature = c("pg_env", "character", "missing"),
-          function(x, i, value) {
-                  ev <- as(x, "environment")
-                  ev[[i]] <- value  #update the object in the environment
-                  x@update_datetime <- Sys.time() # and the update time
-                  x})
+setMethod(
+  f = "[[<-",
+  signature = c("pg_env", "character", "missing"),
+  function(x, i, value) {
+    ev <- as(x, "environment")
+    ev[[i]] <- value # update the object in the environment
+    x@update_datetime <- Sys.time() # and the update time
+    x
+  }
+)
 
 
 #' @title
@@ -49,54 +53,38 @@ setMethod(f = "[[<-",
 #' @family pg13 class connection functions
 
 open_conn <-
-        function(conn_fun,
-                 conn_name,
-                 verbose = TRUE) {
+  function(conn_fun,
+           conn_name,
+           verbose = TRUE) {
+    if (!("pg13_connection_env" %in% ls(envir = globalenv()))) {
+      pg13_connection_env <<-
+        pg13_env(update_datetime = Sys.time())
+    }
 
 
-                if (!("pg13_connection_env" %in% ls(envir = globalenv()))) {
-
-                        pg13_connection_env <<-
-                                pg13_env(update_datetime = Sys.time())
-
-                }
-
-
-                if (conn_name %in% ls(envir = pg13_connection_env)) {
-
-                       if (is_conn_open(pg13_connection_env[[conn_name]])) {
-
-                               typewrite_alert_danger(sprintf("Open connection '%s' already exists.", conn_name))
+    if (conn_name %in% ls(envir = pg13_connection_env)) {
+      if (is_conn_open(pg13_connection_env[[conn_name]])) {
+        typewrite_alert_danger(sprintf("Open connection '%s' already exists.", conn_name))
+      } else {
+        typewrite_alert_danger("Closed connection '%s' already exists.")
+        secretary::typewrite(secretary::italicize("Reconnecting..."))
+        on.exit(secretary::typewrite(secretary::italicize("Reconnecting...complete")))
 
 
-                       } else {
-
-
-                               typewrite_alert_danger("Closed connection '%s' already exists.")
-                               secretary::typewrite(secretary::italicize("Reconnecting..."))
-                               on.exit(secretary::typewrite(secretary::italicize("Reconnecting...complete")))
-
-
-                               assign(x = conn_name,
-                                      value = eval(rlang::parse_expr(conn_fun)),
-                                      envir = pg13_connection_env)
-
-                       }
-
-
-
-                } else {
-
-
-                        assign(x = conn_name,
-                               value = eval(rlang::parse_expr(conn_fun)),
-                               envir = pg13_connection_env)
-
-
-                }
-
-
-        }
+        assign(
+          x = conn_name,
+          value = eval(rlang::parse_expr(conn_fun)),
+          envir = pg13_connection_env
+        )
+      }
+    } else {
+      assign(
+        x = conn_name,
+        value = eval(rlang::parse_expr(conn_fun)),
+        envir = pg13_connection_env
+      )
+    }
+  }
 
 
 #' @title
@@ -114,29 +102,22 @@ open_conn <-
 #' @family pg13 class connection functions
 
 close_conn <-
-        function(...,
-                 all = FALSE,
-                 verbose = TRUE) {
+  function(...,
+           all = FALSE,
+           verbose = TRUE) {
+    if (all) {
+      conns <- ls(envir = pg13_connection_env)
+    } else {
+      conns <- rlang::list2(...)
+    }
 
-                if (all) {
-
-                        conns <- ls(envir = pg13_connection_env)
-
-                } else {
-
-                        conns <- rlang::list2(...)
-
-                }
-
-                for (i in seq_along(conns)) {
-
-                        dc(pg13_connection_env[[conns[[i]]]],
-                           verbose = verbose,
-                           remove = FALSE)
-
-                }
-
-        }
+    for (i in seq_along(conns)) {
+      dc(pg13_connection_env[[conns[[i]]]],
+        verbose = verbose,
+        remove = FALSE
+      )
+    }
+  }
 
 
 #' @title
@@ -152,17 +133,16 @@ close_conn <-
 #' @family pg13 class connection functions
 
 see_conn <-
-        function() {
-                output <- list()
-                conn_names <- names(pg13_connection_env)
+  function() {
+    output <- list()
+    conn_names <- names(pg13_connection_env)
 
-                for (i in seq_along(conn_names)) {
-
-                        output[[i]] <-
-                                structure(
-                                        conn_names[i],
-                                        is_open = is_conn_open(pg13_connection_env[[conn_names[i]]])
-                                )
-                }
-                output
-        }
+    for (i in seq_along(conn_names)) {
+      output[[i]] <-
+        structure(
+          conn_names[i],
+          is_open = is_conn_open(pg13_connection_env[[conn_names[i]]])
+        )
+    }
+    output
+  }

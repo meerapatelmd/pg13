@@ -1,5 +1,6 @@
 # pg13 1.1.0.9000  
 
+* Styled project according to the tidyverse style guide  
 * Export `typewrite_*` functions   
 * Remove cli package dependency  
 * Add chunk style option to `typewrite_sql()`  

@@ -4,10 +4,10 @@
 #' @export
 
 append_date <-
-        function(name) {
-                .Deprecated(new = "affix_date")
-                paste0(name, "_", stringr::str_replace_all(as.character(Sys.Date()), "[-]{1}", "_"))
-        }
+  function(name) {
+    .Deprecated(new = "affix_date")
+    paste0(name, "_", stringr::str_replace_all(as.character(Sys.Date()), "[-]{1}", "_"))
+  }
 
 #' Construct a base SQL query
 #' @description Construct the SELECT {fields} FROM {schema}.{table} base query. The SQL Statement is not terminated for the addition of other parameters generated using "construct" functions.
@@ -16,32 +16,27 @@ append_date <-
 #' @export
 
 construct_base <-
-        function(fields = "*",
-                 distinct = FALSE,
-                 schema = "public",
-                 tableName) {
+  function(fields = "*",
+           distinct = FALSE,
+           schema = "public",
+           tableName) {
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
-
-                if (distinct) {
-
-                        SqlRender::render(SqlRender::readSql(paste0(path, "/distinctBase.sql")),
-                                          fields = fields,
-                                          schema = schema,
-                                          tableName = tableName)
-
-
-                } else {
-
-                        SqlRender::render(SqlRender::readSql(paste0(path, "/base.sql")),
-                                          fields = fields,
-                                          schema = schema,
-                                          tableName = tableName)
-
-                }
-
-        }
+    if (distinct) {
+      SqlRender::render(SqlRender::readSql(paste0(path, "/distinctBase.sql")),
+        fields = fields,
+        schema = schema,
+        tableName = tableName
+      )
+    } else {
+      SqlRender::render(SqlRender::readSql(paste0(path, "/base.sql")),
+        fields = fields,
+        schema = schema,
+        tableName = tableName
+      )
+    }
+  }
 
 
 
@@ -55,14 +50,15 @@ construct_base <-
 
 
 construct_in <-
-        function(vector) {
-                .Deprecated()
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
+  function(vector) {
+    .Deprecated()
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
-                SqlRender::render(SqlRender::readSql(paste0(path, "/in.sql")),
-                                  vector = vector)
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/in.sql")),
+      vector = vector
+    )
+  }
 
 
 
@@ -76,15 +72,16 @@ construct_in <-
 
 
 construct_limit <-
-        function(n) {
-                .Deprecated()
+  function(n) {
+    .Deprecated()
 
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
-                SqlRender::render(SqlRender::readSql(paste0(path, "/limit.sql")),
-                                  n = n)
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/limit.sql")),
+      n = n
+    )
+  }
 
 
 
@@ -97,16 +94,16 @@ construct_limit <-
 
 
 construct_random <-
-        function(n) {
-                .Deprecated()
+  function(n) {
+    .Deprecated()
 
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
-                SqlRender::render(SqlRender::readSql(paste0(path, "/orderByRandom.sql")),
-                                  n = n)
-
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/orderByRandom.sql")),
+      n = n
+    )
+  }
 
 
 
@@ -117,26 +114,26 @@ construct_random <-
 #' @export
 
 construct_schema_table_name <-
-        function(schema,
-                 tableName) {
-                .Deprecated()
+  function(schema,
+           tableName) {
+    .Deprecated()
 
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
 
-                SqlRender::render(SqlRender::readSql(paste0(path, "/schemaTableName.sql")),
-                                  schema = schema,
-                                  tableName = tableName)
-
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/schemaTableName.sql")),
+      schema = schema,
+      tableName = tableName
+    )
+  }
 
 
 
 
 
 #' Render x in "WHERE x IN y"
-#'@description (Deprecated)  This is a non-terminal render, meaning that the SQL component will not be terminated with a semicolon in order to construct complex SQL queries.
+#' @description (Deprecated)  This is a non-terminal render, meaning that the SQL component will not be terminated with a semicolon in order to construct complex SQL queries.
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
@@ -144,23 +141,22 @@ construct_schema_table_name <-
 
 
 construct_where_in <-
-        function(field,
-                 vector) {
-                .Deprecated()
+  function(field,
+           vector) {
+    .Deprecated()
 
-                if (is.character(vector)) {
+    if (is.character(vector)) {
+      vector <- paste0("'", vector, "'")
+    }
 
-                        vector <- paste0("'", vector, "'")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
-                }
-
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
-
-                SqlRender::render(SqlRender::readSql(paste0(path, "/whereIn.sql")),
-                                  field = field,
-                                  vector = vector)
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/whereIn.sql")),
+      field = field,
+      vector = vector
+    )
+  }
 
 
 
@@ -175,18 +171,19 @@ construct_where_in <-
 
 
 construct_where_like <-
-        function(field,
-                 term) {
-                .Deprecated()
+  function(field,
+           term) {
+    .Deprecated()
 
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
 
-                SqlRender::render(SqlRender::readSql(paste0(path, "/whereLike.sql")),
-                                  field = field,
-                                  term = term)
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/whereLike.sql")),
+      field = field,
+      term = term
+    )
+  }
 
 
 
@@ -201,23 +198,22 @@ construct_where_like <-
 
 
 construct_where_lower_in <-
-        function(field,
-                 vector) {
-                .Deprecated()
+  function(field,
+           vector) {
+    .Deprecated()
 
-                if (is.character(vector)) {
+    if (is.character(vector)) {
+      vector <- paste0("'", vector, "'")
+    }
 
-                        vector <- paste0("'", vector, "'")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
-                }
-
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
-
-                SqlRender::render(SqlRender::readSql(paste0(path, "/whereLowerIn.sql")),
-                                  field = field,
-                                  vector = vector)
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/whereLowerIn.sql")),
+      field = field,
+      vector = vector
+    )
+  }
 
 
 
@@ -231,19 +227,19 @@ construct_where_lower_in <-
 
 
 construct_where_lower_like <-
-        function(field,
-                 term) {
-                .Deprecated()
+  function(field,
+           term) {
+    .Deprecated()
 
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
 
-                SqlRender::render(SqlRender::readSql(paste0(path, "/whereLowerLike.sql")),
-                                  field = field,
-                                  term = tolower(term))
-
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/whereLowerLike.sql")),
+      field = field,
+      term = tolower(term)
+    )
+  }
 
 
 
@@ -258,23 +254,22 @@ construct_where_lower_like <-
 
 
 construct_where_lower_not_in <-
-        function(field,
-                 vector) {
-                .Deprecated()
+  function(field,
+           vector) {
+    .Deprecated()
 
-                if (is.character(vector)) {
+    if (is.character(vector)) {
+      vector <- paste0("'", vector, "'")
+    }
 
-                        vector <- paste0("'", vector, "'")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
-                }
-
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
-
-                SqlRender::render(SqlRender::readSql(paste0(path, "/whereLowerNotIn.sql")),
-                                  field = field,
-                                  vector = vector)
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/whereLowerNotIn.sql")),
+      field = field,
+      vector = vector
+    )
+  }
 
 
 
@@ -289,23 +284,22 @@ construct_where_lower_not_in <-
 
 
 construct_where_not_in <-
-        function(field,
-                 vector) {
-                .Deprecated()
+  function(field,
+           vector) {
+    .Deprecated()
 
-                if (is.character(vector)) {
+    if (is.character(vector)) {
+      vector <- paste0("'", vector, "'")
+    }
 
-                        vector <- paste0("'", vector, "'")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
-                }
-
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
-
-                SqlRender::render(SqlRender::readSql(paste0(path, "/whereNotIn.sql")),
-                                  field = field,
-                                  vector = vector)
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/whereNotIn.sql")),
+      field = field,
+      vector = vector
+    )
+  }
 
 
 #' Concatenate 2 WHERE constructs
@@ -315,62 +309,64 @@ construct_where_not_in <-
 #' @export
 
 concat_where_constructs <-
-    function(sql_construct,
-             where_sql_construct_2,
-             ...,
-             AND = TRUE) {
+  function(sql_construct,
+           where_sql_construct_2,
+           ...,
+           AND = TRUE) {
+    .Deprecated()
 
+    if (missing(...)) {
+      if (AND) {
+        c(
+          sql_construct,
+          stringr::str_replace(
+            where_sql_construct_2,
+            "WHERE",
+            "AND"
+          )
+        ) %>%
+          paste(collapse = " ")
+      } else {
+        c(
+          sql_construct,
+          stringr::str_replace(
+            where_sql_construct_2,
+            "WHERE",
+            "OR"
+          )
+        ) %>%
+          paste(collapse = " ")
+      }
+    } else {
+      args <- list(
+        where_sql_construct_2,
+        ...
+      ) %>%
+        unlist()
 
-            .Deprecated()
-
-            if (missing(...)) {
-
-                            if (AND) {
-
-                                    c(sql_construct,
-                                      stringr::str_replace(where_sql_construct_2,
-                                                           "WHERE",
-                                                           "AND")) %>%
-                                                paste(collapse = " ")
-                            } else {
-
-                                    c(sql_construct,
-                                      stringr::str_replace(where_sql_construct_2,
-                                                           "WHERE",
-                                                           "OR")) %>%
-                                            paste(collapse = " ")
-
-                            }
-            } else {
-
-                    args <- list(where_sql_construct_2,
-                                 ...) %>%
-                                unlist()
-
-                    if (AND) {
-
-                            c(sql_construct,
-                            stringr::str_replace_all(Args,
-                                                     "WHERE",
-                                                     "AND")) %>%
-                                    paste(collapse = " ")
-
-
-                    } else {
-
-                            c(sql_construct,
-                              stringr::str_replace_all(Args,
-                                                       "WHERE",
-                                                       "OR")) %>%
-                                    paste(collapse = " ")
-
-
-
-                    }
-
-            }
-
+      if (AND) {
+        c(
+          sql_construct,
+          stringr::str_replace_all(
+            Args,
+            "WHERE",
+            "AND"
+          )
+        ) %>%
+          paste(collapse = " ")
+      } else {
+        c(
+          sql_construct,
+          stringr::str_replace_all(
+            Args,
+            "WHERE",
+            "OR"
+          )
+        ) %>%
+          paste(collapse = " ")
+      }
     }
+  }
 
 
 #' Append to am Existing Table
@@ -384,28 +380,29 @@ concat_where_constructs <-
 
 
 append_table2 <-
-    function(conn = conn,
-             schema,
-             tableName,
-             .data,
-             ...) {
+  function(conn = conn,
+           schema,
+           tableName,
+           .data,
+           ...) {
+    .Deprecated(new = "append")
 
-        .Deprecated(new = "append")
+    schema_table_name <- construct_schema_table_name(
+      schema = schema,
+      tableName = tableName
+    )
 
-        schema_table_name <- construct_schema_table_name(schema = schema,
-                                                    tableName = tableName)
 
-
-        if (nrow(.data)) {
-
-            DatabaseConnector::dbAppendTable(conn = conn,
-                                             name = schemaTableName,
-                                             value = .data %>%
-                                                 as.data.frame(),
-                                             ...)
-        }
-
+    if (nrow(.data)) {
+      DatabaseConnector::dbAppendTable(
+        conn = conn,
+        name = schemaTableName,
+        value = .data %>%
+          as.data.frame(),
+        ...
+      )
     }
+  }
 
 #' Write a Table
 #' @import DatabaseConnector
@@ -415,40 +412,45 @@ append_table2 <-
 
 
 write_table2 <-
-    function(conn = conn,
-             schema,
-             tableName,
-             .data,
-             ...) {
+  function(conn = conn,
+           schema,
+           tableName,
+           .data,
+           ...) {
+    .Deprecated(new = "write")
 
-        .Deprecated(new = "write")
+    schema_table_name <- construct_schema_table_name(
+      schema = schema,
+      tableName = tableName
+    )
 
-        schema_table_name <- construct_schema_table_name(schema = schema,
-                                                    tableName = tableName)
-
-        DatabaseConnector::dbWriteTable(conn = conn,
-                                        name = schemaTableName,
-                                        value = .data %>%
-                                            as.data.frame(),
-                                        ...)
-
-    }
+    DatabaseConnector::dbWriteTable(
+      conn = conn,
+      name = schemaTableName,
+      value = .data %>%
+        as.data.frame(),
+      ...
+    )
+  }
 
 #' Get Full Table
 #' @export
 
 
 get_table <-
-    function(conn,
-             schema,
-             tableName) {
+  function(conn,
+           schema,
+           tableName) {
+    .Deprecated(new = "readTable")
 
-        .Deprecated(new = "readTable")
-
-        query(conn = conn,
-              buildQuery(schema = schema,
-                         tableName = tableName))
-    }
+    query(
+      conn = conn,
+      buildQuery(
+        schema = schema,
+        tableName = tableName
+      )
+    )
+  }
 
 
 #' Refresh Table with New Data
@@ -460,58 +462,62 @@ get_table <-
 
 
 refresh_table <-
-    function(conn,
-             schema,
-             tableName,
-             .data) {
+  function(conn,
+           schema,
+           tableName,
+           .data) {
+    .Deprecated()
 
-        .Deprecated()
-
-        table_name_hist <- append_date(name = toupper(table_name))
-
-
-        today_tables <-
-            grep(tableNameHist,
-                 lsTables(conn = conn,
-                          schema = schema),
-                 value = TRUE)
-
-        n <- length(today_tables)
+    table_name_hist <- append_date(name = toupper(table_name))
 
 
-        # If this table has not been written yet today
-        if (n == 0) {
-            secretary::typewrite_bold("No Off-Loaded Tables Today")
-            secretary::typewrite_bold("Next Table Name:", tableNameHist)
-            # If more than 1 table has been written today, the new table name would be the length of the list of today's table + 1
-        } else {
-            secretary::typewrite_bold("Off-Loaded Tables Today:")
-            todayTables %>%
-                purrr::map(function(x) secretary::typewrite(x, tabs = 1))
+    today_tables <-
+      grep(tableNameHist,
+        lsTables(
+          conn = conn,
+          schema = schema
+        ),
+        value = TRUE
+      )
 
-            table_name_hist <- paste0(table_name_hist, "_", (1+n))
-            secretary::typewrite_bold("Next Table Name:", tableNameHist)
+    n <- length(today_tables)
 
-        }
 
-        secretary::press_enter()
+    # If this table has not been written yet today
+    if (n == 0) {
+      secretary::typewrite_bold("No Off-Loaded Tables Today")
+      secretary::typewrite_bold("Next Table Name:", tableNameHist)
+      # If more than 1 table has been written today, the new table name would be the length of the list of today's table + 1
+    } else {
+      secretary::typewrite_bold("Off-Loaded Tables Today:")
+      todayTables %>%
+        purrr::map(function(x) secretary::typewrite(x, tabs = 1))
 
-        renameTable(conn = conn,
-                    schema = schema,
-                    tableName = tableName,
-                    newTableName = tableNameHist)
-
-        secretary::typewrite_bold(tableName, "renamed to", tableNameHist)
-
-        writeTable(conn = conn,
-                   tableName = tableName,
-                   schema = schema,
-                   .data = .data %>%
-                       as.data.frame())
-
-        secretary::typewrite_bold("New", tableName, "written.")
-
+      table_name_hist <- paste0(table_name_hist, "_", (1 + n))
+      secretary::typewrite_bold("Next Table Name:", tableNameHist)
     }
+
+    secretary::press_enter()
+
+    renameTable(
+      conn = conn,
+      schema = schema,
+      tableName = tableName,
+      newTableName = tableNameHist
+    )
+
+    secretary::typewrite_bold(tableName, "renamed to", tableNameHist)
+
+    writeTable(
+      conn = conn,
+      tableName = tableName,
+      schema = schema,
+      .data = .data %>%
+        as.data.frame()
+    )
+
+    secretary::typewrite_bold("New", tableName, "written.")
+  }
 
 
 
@@ -523,22 +529,23 @@ refresh_table <-
 #' @export
 
 rename_table <-
-    function(conn,
-             schema,
-             tableName,
-             newTableName,
-             ...) {
+  function(conn,
+           schema,
+           tableName,
+           newTableName,
+           ...) {
+    sql_statement <- render_rename_table(
+      schema = schema,
+      tableName = tableName,
+      newTableName = newTableName
+    )
 
-
-        sql_statement <- render_rename_table(schema = schema,
-                                           tableName = tableName,
-                                           newTableName = newTableName)
-
-        send(conn = conn,
-             sql_statement = sql_statement,
-             ...)
-
-    }
+    send(
+      conn = conn,
+      sql_statement = sql_statement,
+      ...
+    )
+  }
 
 
 
@@ -557,19 +564,19 @@ rename_table <-
 #' @export
 
 is_closed <-
-    function(conn) {
+  function(conn) {
+    .Deprecated(new = "is_conn_open")
 
-        .Deprecated(new = "is_conn_open")
+    results <- try_catch(print(conn),
+      error = function(e) NULL
+    )
 
-        results <- try_catch(print(conn),
-                            error = function(e) NULL)
-
-        if (is.null(results)) {
-            TRUE
-        } else {
-            invisible(FALSE)
-        }
+    if (is.null(results)) {
+      TRUE
+    } else {
+      invisible(FALSE)
     }
+  }
 
 
 #' @title
@@ -584,19 +591,15 @@ is_closed <-
 #' @export
 
 rm_if_closed <-
-    function(conn) {
+  function(conn) {
+    .Deprecated(new = "rm_if_closed")
 
-        .Deprecated(new = "rm_if_closed")
+    results <- is_closed(conn = conn)
 
-        results <- is_closed(conn = conn)
-
-        if (results == TRUE) {
-
-            rm(list = deparse(substitute(conn)), envir = globalenv())
-
-        }
-
+    if (results == TRUE) {
+      rm(list = deparse(substitute(conn)), envir = globalenv())
     }
+  }
 
 
 
@@ -604,11 +607,9 @@ rm_if_closed <-
 #' @export
 
 terminate_build <-
-    function(sql_statement) {
-
-        paste0(sql_statement, ";")
-
-    }
+  function(sql_statement) {
+    paste0(sql_statement, ";")
+  }
 
 
 #' Query local Postgess from a file
@@ -616,22 +617,27 @@ terminate_build <-
 #' @export
 
 local_file_query <-
-    function (file,
-              dbname = "athena",
-              port = 5432) {
+  function(file,
+           dbname = "athena",
+           port = 5432) {
+    .Deprecated()
+    conn <- local_connect(
+      dbname = dbname,
+      port = port
+    )
 
-        .Deprecated()
-        conn <- local_connect(dbname = dbname,
-                             port = port)
+    data <- file_query(
+      conn = conn,
+      file = file
+    )
 
-        data <- file_query(conn = conn,
-                          file = file)
+    dc(
+      conn = conn,
+      remove = FALSE
+    )
 
-        dc(conn = conn,
-           remove = FALSE)
-
-        return(data)
-    }
+    return(data)
+  }
 
 
 
@@ -642,23 +648,28 @@ local_file_query <-
 #' @export
 
 local_file_send <-
-    function (file,
-              dbname = "athena",
-              port = 5432) {
+  function(file,
+           dbname = "athena",
+           port = 5432) {
+    .Deprecated()
 
-        .Deprecated()
+    conn <- local_connect(
+      dbname = dbname,
+      port = port
+    )
 
-        conn <- local_connect(dbname = dbname,
-                             port = port)
+    data <- file_send(
+      conn = conn,
+      file = file
+    )
 
-        data <- file_send(conn = conn,
-                          file = file)
+    dc(
+      conn = conn,
+      remove = FALSE
+    )
 
-        dc(conn = conn,
-           remove = FALSE)
-
-        return(data)
-    }
+    return(data)
+  }
 
 
 
@@ -670,24 +681,28 @@ local_file_send <-
 #' @export
 
 local_query <-
-    function (sql_statement,
-              dbname = "athena",
-              port = 5432) {
+  function(sql_statement,
+           dbname = "athena",
+           port = 5432) {
+    .Deprecated()
 
+    conn <- local_connect(
+      dbname = dbname,
+      port = port
+    )
 
-        .Deprecated()
+    data <- query(
+      conn = conn,
+      sql_statement = sql_statement
+    )
 
-            conn <- local_connect(dbname = dbname,
-                                 port = port)
+    dc(
+      conn = conn,
+      remove = FALSE
+    )
 
-            data <- query(conn = conn,
-                          sql_statement = sql_statement)
-
-            dc(conn = conn,
-               remove = FALSE)
-
-            return(data)
-    }
+    return(data)
+  }
 
 
 
@@ -698,21 +713,26 @@ local_query <-
 
 
 local_send <-
-    function(sql_statement,
-             dbname = "athena",
-             port = 5432) {
+  function(sql_statement,
+           dbname = "athena",
+           port = 5432) {
+    .Deprecated()
 
-                .Deprecated()
+    conn <- local_connect(
+      dbname = dbname,
+      port = port
+    )
 
-                conn <- local_connect(dbname = dbname,
-                                    port = port)
+    send(
+      conn = conn,
+      sql_statement = sql_statement
+    )
 
-                send(conn = conn,
-                     sql_statement = sql_statement)
-
-                dc(conn = conn,
-                   remove = FALSE)
-    }
+    dc(
+      conn = conn,
+      remove = FALSE
+    )
+  }
 
 
 
@@ -737,15 +757,14 @@ local_send <-
 #' @export
 
 parse_sql <-
-        function(sql_statement) {
-
-                .Deprecated(new = "execute_n")
-                centipede::strsplit(sql_statement, split = "[\\;]{1}", type = "after") %>%
-                        unlist() %>%
-                        trimws() %>%
-                        centipede::no_blank() %>%
-                        as.list()
-        }
+  function(sql_statement) {
+    .Deprecated(new = "execute_n")
+    centipede::strsplit(sql_statement, split = "[\\;]{1}", type = "after") %>%
+      unlist() %>%
+      trimws() %>%
+      centipede::no_blank() %>%
+      as.list()
+  }
 
 
 
@@ -757,237 +776,215 @@ parse_sql <-
 #' @export
 
 buildJoinQuery <-
-    function(fields = "*",
-             distinct = FALSE,
-             schema,
-             tableName,
-             column,
-             joinOnSchema,
-             joinOnTableName,
-             joinOnColumn,
-             joinType = "LEFT",
-             whereInField = NULL,
-             whereInVector = NULL,
-             whereNotInField = NULL,
-             whereNotInVector = NULL,
-             caseInsensitive = TRUE,
-             n = NULL,
-             n_type = c("limit", "random")) {
-
-                    ######
-                    # QA to make sure all whereIn and n  arguments have been supplied in pairs
-                    #####
-                    whereIns <- list(whereInField, whereInVector) %>%
-                                        purrr::set_names(c("field", "vector")) %>%
-                                        purrr::keep(~!is.null(.))
-                    whereNotIns <- list(whereNotInField, whereNotInVector) %>%
-                                        purrr::set_names(c("field", "vector")) %>%
-                                        purrr::keep(~!is.null(.))
-
-
-                    list(whereIns, whereNotIns) %>%
-                        purrr::map2(list("whereIn", "whereNotIn"),
-                                   function(x,y) if (!(length(x) %in% c(0,2))) {stop('both "', y, '" arguments must be supplied')})
-
-                    ######
-                    # QA to make sure all n arugments have been supplied
-                    #####
-
-                    if (length(n) == 1 & length(n_type) != 1) {
-
-                            n_type <- "limit"
-
-                            warning('"n_type" set to "limit"')
-
-                    }
-
-                    #####
-                    # Start
-                    #####
-                    sql_construct  <- constructBase(fields = fields,
-                                                    distinct = distinct,
-                                                    schema = schema,
-                                                    tableName = tableName)
-
-                    # Add join
-                    sql_construct <-
-                            c(sql_construct,
-                              constructJoin(schema = schema,
-                                            tableName = tableName,
-                                            column = column,
-                                            joinType = joinType,
-                                            joinOnSchema = joinOnSchema,
-                                            joinOnTableName = joinOnTableName,
-                                            joinOnColumn = joinOnColumn)) %>%
-                            paste(collapse = " ")
-
-
-
-                    if (caseInsensitive) {
-
-
-                        # If WhereIn arguments are not null include it in build
-                        if (length(whereIns) == 2) {
-
-                            sql_construct <-
-                                paste(sql_construct,
-                                      constructWhereLowerIn(field = whereIns$field,
-                                                       vector = tolower(whereIns$vector)),
-                                      collapse = " ")
-
-                            # If WhereNotIn arguments are supplied on top of the WhereIn, add them to the query by modifying the constructWhereNotIn output by replacing the second "WHERE" with "AND"
-                            if (length(whereNotIns) == 2) {
-
-
-                                sql_construct <-
-                                    paste(sql_construct,
-                                          "AND",
-                                          constructWhereLowerNotIn(field = whereNotIns$field,
-                                                              vector = tolower(whereNotIns$vector)) %>%
-                                              stringr::str_remove_all("WHERE") %>%
-                                              trimws(),
-                                          collapse = " ")
-
-
-                            }
-
-                        } else {
-
-                            # Building a query if only whereNotIn arguments were supplied
-                            if (length(whereNotIns) == 2) {
-
-
-                                sql_construct <-
-                                    paste(sql_construct,
-                                          constructWhereLowerNotIn(field = whereNotIns$field,
-                                                              vector = tolower(whereNotIns$vector)),
-                                          collapse = " ")
-
-
-                            }
-
-
-
-                        }
-
-                        # If n arguments are not null include it in build, as either a limit or random sample of size n
-                        if (!is.null(n)) {
-
-                            if (n_type == "limit") {
-
-                                sql_construct <-
-                                    paste(sql_construct,
-                                          constructLimit(n = n),
-                                          collapse = " ")
-
-                            } else if (n_type == "random") {
-
-                                sql_construct <-
-                                    paste(sql_construct,
-                                          constructRandom(n = n),
-                                          collapse = " ")
-
-                            } else {
-
-                                warning('"n_type" not recognized and "n" removed from build')
-
-
-                            }
-
-                        }
-
-
-
-
-
-
-
-
-
-                    } else {
-
-
-
-                                    # If WhereIn arguments are not null include it in build
-                                    if (length(whereIns) == 2) {
-
-                                            sql_construct <-
-                                                    paste(sql_construct,
-                                                          constructWhereIn(field = whereIns$field,
-                                                                            vector = whereIns$vector),
-                                                          collapse = " ")
-
-                                            # If WhereNotIn arguments are supplied on top of the WhereIn, add them to the query by modifying the constructWhereNotIn output by replacing the second "WHERE" with "AND"
-                                            if (length(whereNotIns) == 2) {
-
-
-                                                            sql_construct <-
-                                                                paste(sql_construct,
-                                                                      "AND",
-                                                                      constructWhereNotIn(field = whereNotIns$field,
-                                                                                       vector = whereNotIns$vector) %>%
-                                                                          stringr::str_remove_all("WHERE") %>%
-                                                                          trimws(),
-                                                                      collapse = " ")
-
-
-                                            }
-
-                                    } else {
-
-                                                # Building a query if only whereNotIn arguments were supplied
-                                                if (length(whereNotIns) == 2) {
-
-
-                                                    sql_construct <-
-                                                        paste(sql_construct,
-                                                              constructWhereNotIn(field = whereNotIns$field,
-                                                                                  vector = whereNotIns$vector),
-                                                              collapse = " ")
-
-
-                                                }
-
-
-
-                                    }
-
-                                    # If n arguments are not null include it in build, as either a limit or random sample of size n
-                                    if (!is.null(n)) {
-
-                                                if (n_type == "limit") {
-
-                                                    sql_construct <-
-                                                                paste(sql_construct,
-                                                                      constructLimit(n = n),
-                                                                      collapse = " ")
-
-                                                } else if (n_type == "random") {
-
-                                                    sql_construct <-
-                                                        paste(sql_construct,
-                                                              constructRandom(n = n),
-                                                              collapse = " ")
-
-                                                } else {
-
-                                                    warning('"n_type" not recognized and "n" removed from build')
-
-
-                                                }
-
-                                    }
-
-                    }
-
-                    #Add a semicolon to finish the query
-                    sql_construct %>%
-                            stringr::str_replace_all(pattern = "[\n]{2,}",
-                                                     replacement = "\n") %>%
-                            terminateBuild()
-
-
+  function(fields = "*",
+           distinct = FALSE,
+           schema,
+           tableName,
+           column,
+           joinOnSchema,
+           joinOnTableName,
+           joinOnColumn,
+           joinType = "LEFT",
+           whereInField = NULL,
+           whereInVector = NULL,
+           whereNotInField = NULL,
+           whereNotInVector = NULL,
+           caseInsensitive = TRUE,
+           n = NULL,
+           n_type = c("limit", "random")) {
+
+    ######
+    # QA to make sure all whereIn and n  arguments have been supplied in pairs
+    #####
+    whereIns <- list(whereInField, whereInVector) %>%
+      purrr::set_names(c("field", "vector")) %>%
+      purrr::keep(~ !is.null(.))
+    whereNotIns <- list(whereNotInField, whereNotInVector) %>%
+      purrr::set_names(c("field", "vector")) %>%
+      purrr::keep(~ !is.null(.))
+
+
+    list(whereIns, whereNotIns) %>%
+      purrr::map2(
+        list("whereIn", "whereNotIn"),
+        function(x, y) {
+          if (!(length(x) %in% c(0, 2))) {
+            stop('both "', y, '" arguments must be supplied')
+          }
+        }
+      )
+
+    ######
+    # QA to make sure all n arugments have been supplied
+    #####
+
+    if (length(n) == 1 & length(n_type) != 1) {
+      n_type <- "limit"
+
+      warning('"n_type" set to "limit"')
     }
+
+    #####
+    # Start
+    #####
+    sql_construct <- constructBase(
+      fields = fields,
+      distinct = distinct,
+      schema = schema,
+      tableName = tableName
+    )
+
+    # Add join
+    sql_construct <-
+      c(
+        sql_construct,
+        constructJoin(
+          schema = schema,
+          tableName = tableName,
+          column = column,
+          joinType = joinType,
+          joinOnSchema = joinOnSchema,
+          joinOnTableName = joinOnTableName,
+          joinOnColumn = joinOnColumn
+        )
+      ) %>%
+      paste(collapse = " ")
+
+
+
+    if (caseInsensitive) {
+
+
+      # If WhereIn arguments are not null include it in build
+      if (length(whereIns) == 2) {
+        sql_construct <-
+          paste(sql_construct,
+            constructWhereLowerIn(
+              field = whereIns$field,
+              vector = tolower(whereIns$vector)
+            ),
+            collapse = " "
+          )
+
+        # If WhereNotIn arguments are supplied on top of the WhereIn, add them to the query by modifying the constructWhereNotIn output by replacing the second "WHERE" with "AND"
+        if (length(whereNotIns) == 2) {
+          sql_construct <-
+            paste(sql_construct,
+              "AND",
+              constructWhereLowerNotIn(
+                field = whereNotIns$field,
+                vector = tolower(whereNotIns$vector)
+              ) %>%
+                stringr::str_remove_all("WHERE") %>%
+                trimws(),
+              collapse = " "
+            )
+        }
+      } else {
+
+        # Building a query if only whereNotIn arguments were supplied
+        if (length(whereNotIns) == 2) {
+          sql_construct <-
+            paste(sql_construct,
+              constructWhereLowerNotIn(
+                field = whereNotIns$field,
+                vector = tolower(whereNotIns$vector)
+              ),
+              collapse = " "
+            )
+        }
+      }
+
+      # If n arguments are not null include it in build, as either a limit or random sample of size n
+      if (!is.null(n)) {
+        if (n_type == "limit") {
+          sql_construct <-
+            paste(sql_construct,
+              constructLimit(n = n),
+              collapse = " "
+            )
+        } else if (n_type == "random") {
+          sql_construct <-
+            paste(sql_construct,
+              constructRandom(n = n),
+              collapse = " "
+            )
+        } else {
+          warning('"n_type" not recognized and "n" removed from build')
+        }
+      }
+    } else {
+
+
+
+      # If WhereIn arguments are not null include it in build
+      if (length(whereIns) == 2) {
+        sql_construct <-
+          paste(sql_construct,
+            constructWhereIn(
+              field = whereIns$field,
+              vector = whereIns$vector
+            ),
+            collapse = " "
+          )
+
+        # If WhereNotIn arguments are supplied on top of the WhereIn, add them to the query by modifying the constructWhereNotIn output by replacing the second "WHERE" with "AND"
+        if (length(whereNotIns) == 2) {
+          sql_construct <-
+            paste(sql_construct,
+              "AND",
+              constructWhereNotIn(
+                field = whereNotIns$field,
+                vector = whereNotIns$vector
+              ) %>%
+                stringr::str_remove_all("WHERE") %>%
+                trimws(),
+              collapse = " "
+            )
+        }
+      } else {
+
+        # Building a query if only whereNotIn arguments were supplied
+        if (length(whereNotIns) == 2) {
+          sql_construct <-
+            paste(sql_construct,
+              constructWhereNotIn(
+                field = whereNotIns$field,
+                vector = whereNotIns$vector
+              ),
+              collapse = " "
+            )
+        }
+      }
+
+      # If n arguments are not null include it in build, as either a limit or random sample of size n
+      if (!is.null(n)) {
+        if (n_type == "limit") {
+          sql_construct <-
+            paste(sql_construct,
+              constructLimit(n = n),
+              collapse = " "
+            )
+        } else if (n_type == "random") {
+          sql_construct <-
+            paste(sql_construct,
+              constructRandom(n = n),
+              collapse = " "
+            )
+        } else {
+          warning('"n_type" not recognized and "n" removed from build')
+        }
+      }
+    }
+
+    # Add a semicolon to finish the query
+    sql_construct %>%
+      stringr::str_replace_all(
+        pattern = "[\n]{2,}",
+        replacement = "\n"
+      ) %>%
+      terminateBuild()
+  }
 
 
 
@@ -1002,219 +999,193 @@ buildJoinQuery <-
 #' @export
 
 buildQuery <-
-    function(fields = "*",
-             distinct = FALSE,
-             schema,
-             tableName,
-             whereInField = NULL,
-             whereInVector = NULL,
-             whereNotInField = NULL,
-             whereNotInVector = NULL,
-             caseInsensitive = TRUE,
-             n = NULL,
-             n_type = c("limit", "random")) {
-
-                    ######
-                    # QA to make sure all whereIn and n  arguments have been supplied in pairs
-                    #####
-                    whereIns <- list(whereInField, whereInVector) %>%
-                                        purrr::set_names(c("field", "vector")) %>%
-                                        purrr::keep(~!is.null(.))
-                    whereNotIns <- list(whereNotInField, whereNotInVector) %>%
-                                        purrr::set_names(c("field", "vector")) %>%
-                                        purrr::keep(~!is.null(.))
-
-
-                    list(whereIns, whereNotIns) %>%
-                        purrr::map2(list("whereIn", "whereNotIn"),
-                                   function(x,y) if (!(length(x) %in% c(0,2))) {stop('both "', y, '" arguments must be supplied')})
-
-                    ######
-                    # QA to make sure all n arugments have been supplied
-                    #####
-
-                    if (length(n) == 1 & length(n_type) != 1) {
-
-                            n_type <- "limit"
-
-                            warning('"n_type" set to "limit"')
-
-                    }
-
-                    #####
-                    # Start
-                    #####
-                    sql_construct  <- constructBase(fields = fields,
-                                                    distinct = distinct,
-                                                    schema = schema,
-                                                    tableName = tableName)
-
-
-                    if (caseInsensitive) {
-
-
-                        # If WhereIn arguments are not null include it in build
-                        if (length(whereIns) == 2) {
-
-                            sql_construct <-
-                                paste(sql_construct,
-                                      constructWhereLowerIn(field = whereIns$field,
-                                                       vector = tolower(whereIns$vector)),
-                                      collapse = " ")
-
-                            # If WhereNotIn arguments are supplied on top of the WhereIn, add them to the query by modifying the constructWhereNotIn output by replacing the second "WHERE" with "AND"
-                            if (length(whereNotIns) == 2) {
-
-
-                                sql_construct <-
-                                    paste(sql_construct,
-                                          "AND",
-                                          constructWhereLowerNotIn(field = whereNotIns$field,
-                                                              vector = tolower(whereNotIns$vector)) %>%
-                                              stringr::str_remove_all("WHERE") %>%
-                                              trimws(),
-                                          collapse = " ")
-
-
-                            }
-
-                        } else {
-
-                            # Building a query if only whereNotIn arguments were supplied
-                            if (length(whereNotIns) == 2) {
-
-
-                                sql_construct <-
-                                    paste(sql_construct,
-                                          constructWhereLowerNotIn(field = whereNotIns$field,
-                                                              vector = tolower(whereNotIns$vector)),
-                                          collapse = " ")
-
-
-                            }
-
-
-
-                        }
-
-                        # If n arguments are not null include it in build, as either a limit or random sample of size n
-                        if (!is.null(n)) {
-
-                            if (n_type == "limit") {
-
-                                sql_construct <-
-                                    paste(sql_construct,
-                                          constructLimit(n = n),
-                                          collapse = " ")
-
-                            } else if (n_type == "random") {
-
-                                sql_construct <-
-                                    paste(sql_construct,
-                                          constructRandom(n = n),
-                                          collapse = " ")
-
-                            } else {
-
-                                warning('"n_type" not recognized and "n" removed from build')
-
-
-                            }
-
-                        }
-
-
-
-
-
-
-
-
-
-                    } else {
-
-
-
-                                    # If WhereIn arguments are not null include it in build
-                                    if (length(whereIns) == 2) {
-
-                                            sql_construct <-
-                                                    paste(sql_construct,
-                                                          constructWhereIn(field = whereIns$field,
-                                                                            vector = whereIns$vector),
-                                                          collapse = " ")
-
-                                            # If WhereNotIn arguments are supplied on top of the WhereIn, add them to the query by modifying the constructWhereNotIn output by replacing the second "WHERE" with "AND"
-                                            if (length(whereNotIns) == 2) {
-
-
-                                                            sql_construct <-
-                                                                paste(sql_construct,
-                                                                      "AND",
-                                                                      constructWhereNotIn(field = whereNotIns$field,
-                                                                                       vector = whereNotIns$vector) %>%
-                                                                          stringr::str_remove_all("WHERE") %>%
-                                                                          trimws(),
-                                                                      collapse = " ")
-
-
-                                            }
-
-                                    } else {
-
-                                                # Building a query if only whereNotIn arguments were supplied
-                                                if (length(whereNotIns) == 2) {
-
-
-                                                    sql_construct <-
-                                                        paste(sql_construct,
-                                                              constructWhereNotIn(field = whereNotIns$field,
-                                                                                  vector = whereNotIns$vector),
-                                                              collapse = " ")
-
-
-                                                }
-
-
-
-                                    }
-
-                                    # If n arguments are not null include it in build, as either a limit or random sample of size n
-                                    if (!is.null(n)) {
-
-                                                if (n_type == "limit") {
-
-                                                    sql_construct <-
-                                                                paste(sql_construct,
-                                                                      constructLimit(n = n),
-                                                                      collapse = " ")
-
-                                                } else if (n_type == "random") {
-
-                                                    sql_construct <-
-                                                        paste(sql_construct,
-                                                              constructRandom(n = n),
-                                                              collapse = " ")
-
-                                                } else {
-
-                                                    warning('"n_type" not recognized and "n" removed from build')
-
-
-                                                }
-
-                                    }
-
-                    }
-
-                    #Add a semicolon to finish the query
-                    sql_construct %>%
-                            stringr::str_replace_all(pattern = "[\n]{2,}",
-                                                     replacement = "\n") %>%
-                            terminateBuild()
-
-
+  function(fields = "*",
+           distinct = FALSE,
+           schema,
+           tableName,
+           whereInField = NULL,
+           whereInVector = NULL,
+           whereNotInField = NULL,
+           whereNotInVector = NULL,
+           caseInsensitive = TRUE,
+           n = NULL,
+           n_type = c("limit", "random")) {
+
+    ######
+    # QA to make sure all whereIn and n  arguments have been supplied in pairs
+    #####
+    whereIns <- list(whereInField, whereInVector) %>%
+      purrr::set_names(c("field", "vector")) %>%
+      purrr::keep(~ !is.null(.))
+    whereNotIns <- list(whereNotInField, whereNotInVector) %>%
+      purrr::set_names(c("field", "vector")) %>%
+      purrr::keep(~ !is.null(.))
+
+
+    list(whereIns, whereNotIns) %>%
+      purrr::map2(
+        list("whereIn", "whereNotIn"),
+        function(x, y) {
+          if (!(length(x) %in% c(0, 2))) {
+            stop('both "', y, '" arguments must be supplied')
+          }
+        }
+      )
+
+    ######
+    # QA to make sure all n arugments have been supplied
+    #####
+
+    if (length(n) == 1 & length(n_type) != 1) {
+      n_type <- "limit"
+
+      warning('"n_type" set to "limit"')
     }
+
+    #####
+    # Start
+    #####
+    sql_construct <- constructBase(
+      fields = fields,
+      distinct = distinct,
+      schema = schema,
+      tableName = tableName
+    )
+
+
+    if (caseInsensitive) {
+
+
+      # If WhereIn arguments are not null include it in build
+      if (length(whereIns) == 2) {
+        sql_construct <-
+          paste(sql_construct,
+            constructWhereLowerIn(
+              field = whereIns$field,
+              vector = tolower(whereIns$vector)
+            ),
+            collapse = " "
+          )
+
+        # If WhereNotIn arguments are supplied on top of the WhereIn, add them to the query by modifying the constructWhereNotIn output by replacing the second "WHERE" with "AND"
+        if (length(whereNotIns) == 2) {
+          sql_construct <-
+            paste(sql_construct,
+              "AND",
+              constructWhereLowerNotIn(
+                field = whereNotIns$field,
+                vector = tolower(whereNotIns$vector)
+              ) %>%
+                stringr::str_remove_all("WHERE") %>%
+                trimws(),
+              collapse = " "
+            )
+        }
+      } else {
+
+        # Building a query if only whereNotIn arguments were supplied
+        if (length(whereNotIns) == 2) {
+          sql_construct <-
+            paste(sql_construct,
+              constructWhereLowerNotIn(
+                field = whereNotIns$field,
+                vector = tolower(whereNotIns$vector)
+              ),
+              collapse = " "
+            )
+        }
+      }
+
+      # If n arguments are not null include it in build, as either a limit or random sample of size n
+      if (!is.null(n)) {
+        if (n_type == "limit") {
+          sql_construct <-
+            paste(sql_construct,
+              constructLimit(n = n),
+              collapse = " "
+            )
+        } else if (n_type == "random") {
+          sql_construct <-
+            paste(sql_construct,
+              constructRandom(n = n),
+              collapse = " "
+            )
+        } else {
+          warning('"n_type" not recognized and "n" removed from build')
+        }
+      }
+    } else {
+
+
+
+      # If WhereIn arguments are not null include it in build
+      if (length(whereIns) == 2) {
+        sql_construct <-
+          paste(sql_construct,
+            constructWhereIn(
+              field = whereIns$field,
+              vector = whereIns$vector
+            ),
+            collapse = " "
+          )
+
+        # If WhereNotIn arguments are supplied on top of the WhereIn, add them to the query by modifying the constructWhereNotIn output by replacing the second "WHERE" with "AND"
+        if (length(whereNotIns) == 2) {
+          sql_construct <-
+            paste(sql_construct,
+              "AND",
+              constructWhereNotIn(
+                field = whereNotIns$field,
+                vector = whereNotIns$vector
+              ) %>%
+                stringr::str_remove_all("WHERE") %>%
+                trimws(),
+              collapse = " "
+            )
+        }
+      } else {
+
+        # Building a query if only whereNotIn arguments were supplied
+        if (length(whereNotIns) == 2) {
+          sql_construct <-
+            paste(sql_construct,
+              constructWhereNotIn(
+                field = whereNotIns$field,
+                vector = whereNotIns$vector
+              ),
+              collapse = " "
+            )
+        }
+      }
+
+      # If n arguments are not null include it in build, as either a limit or random sample of size n
+      if (!is.null(n)) {
+        if (n_type == "limit") {
+          sql_construct <-
+            paste(sql_construct,
+              constructLimit(n = n),
+              collapse = " "
+            )
+        } else if (n_type == "random") {
+          sql_construct <-
+            paste(sql_construct,
+              constructRandom(n = n),
+              collapse = " "
+            )
+        } else {
+          warning('"n_type" not recognized and "n" removed from build')
+        }
+      }
+    }
+
+    # Add a semicolon to finish the query
+    sql_construct %>%
+      stringr::str_replace_all(
+        pattern = "[\n]{2,}",
+        replacement = "\n"
+      ) %>%
+      terminateBuild()
+  }
 
 
 
@@ -1226,45 +1197,50 @@ buildQuery <-
 #' @export
 
 buildQueryLike <-
-        function(fields = "*",
-                 distinct = FALSE,
-                 schema,
-                 tableName,
-                 whereLikeField,
-                 whereLikeValue,
-                 caseInsensitive = TRUE,
-                 limit_n = NULL) {
+  function(fields = "*",
+           distinct = FALSE,
+           schema,
+           tableName,
+           whereLikeField,
+           whereLikeValue,
+           caseInsensitive = TRUE,
+           limit_n = NULL) {
+    sql_construct <-
+      constructBase(
+        fields = fields,
+        distinct = distinct,
+        schema = schema,
+        tableName = tableName
+      )
 
-
-                sql_construct <-
-                constructBase(fields = fields,
-                              distinct = distinct,
-                              schema = schema,
-                              tableName = tableName)
-
-                if (caseInsensitive) {
-                        sql_construct <-
-                                c(sql_construct,
-                                  constructWhereLowerLike(field = whereLikeField,
-                                                          term = tolower(whereLikeValue))
-                                ) %>%
-                                paste(collapse = " ")
-                } else {
-                        sql_construct <-
-                                c(sql_construct,
-                                  constructWhereLike(field = whereLikeField,
-                                                          term = whereLikeValue)
-                                ) %>%
-                                paste(collapse = " ")
-
-                }
-                sql_construct %>%
-                        stringr::str_replace_all(pattern = "[\n]{2,}",
-                                                 replacement = "\n") %>%
-                    terminateBuild()
-
-
-        }
+    if (caseInsensitive) {
+      sql_construct <-
+        c(
+          sql_construct,
+          constructWhereLowerLike(
+            field = whereLikeField,
+            term = tolower(whereLikeValue)
+          )
+        ) %>%
+        paste(collapse = " ")
+    } else {
+      sql_construct <-
+        c(
+          sql_construct,
+          constructWhereLike(
+            field = whereLikeField,
+            term = whereLikeValue
+          )
+        ) %>%
+        paste(collapse = " ")
+    }
+    sql_construct %>%
+      stringr::str_replace_all(
+        pattern = "[\n]{2,}",
+        replacement = "\n"
+      ) %>%
+      terminateBuild()
+  }
 
 
 
@@ -1277,92 +1253,85 @@ buildQueryLike <-
 #' @export
 
 buildQueryString <-
-        function(fields = "*",
-                 distinct = FALSE,
-                 schema,
-                 tableName,
-                 whereLikeField,
-                 string,
-                 split,
-                 caseInsensitive = TRUE,
-                 limit_n = NULL) {
+  function(fields = "*",
+           distinct = FALSE,
+           schema,
+           tableName,
+           whereLikeField,
+           string,
+           split,
+           caseInsensitive = TRUE,
+           limit_n = NULL) {
+    sql_construct <-
+      constructBase(
+        fields = fields,
+        distinct = distinct,
+        schema = schema,
+        tableName = tableName
+      )
+
+    Args <- strsplit(string, split = split) %>%
+      unlist()
 
 
-                sql_construct <-
-                constructBase(fields = fields,
-                              distinct = distinct,
-                              schema = schema,
-                              tableName = tableName)
+    if (caseInsensitive) {
+      Args <- tolower(Args)
 
-                Args <- strsplit(string, split = split) %>%
-                                        unlist()
-
-
-                if (caseInsensitive) {
-
-                            Args <- tolower(Args)
-
-                            for (i in 1:length(Args)) {
-
-                                        if (i == 1) {
-                                                    sql_construct <-
-                                                        c(sql_construct,
-                                                          constructWhereLowerLike(field = whereLikeField,
-                                                                                  term = Args[1])
-                                                        ) %>%
-                                                        paste(collapse = " ")
-                                        } else {
-
-
-                                                sql_construct <-
-                                                    concatWhereConstructs(sql_construct,
-                                                                               where_sql_construct_2 = constructWhereLowerLike(field = whereLikeField, term = Args[i]))
-
-
-                                        }
-                            }
-
-                } else {
-
-
-                    for (i in 1:length(Args)) {
-
-                                if (i == 1) {
-                                            sql_construct <-
-                                                c(sql_construct,
-                                                  constructWhereLike(field = whereLikeField,
-                                                                          term = Args[1])
-                                                ) %>%
-                                                paste(collapse = " ")
-                                } else {
-
-
-                                            sql_construct <-
-                                                concatWhereConstructs(sql_construct,
-                                                                      where_sql_construct_2 = constructWhereLike(field = whereLikeField, term = Args[i]))
-
-
-                                }
-                    }
-                }
-
-                if (!is.null(limit_n)) {
-
-                            sql_construct <-
-                                    c(sql_construct,
-                                      constructLimit(n = limit_n)) %>%
-                                        paste(collapse = " ")
-
-
-                }
-
-                sql_construct %>%
-                        stringr::str_replace_all(pattern = "[\n]{2,}",
-                                                 replacement = "\n") %>%
-                        terminateBuild()
-
-
+      for (i in 1:length(Args)) {
+        if (i == 1) {
+          sql_construct <-
+            c(
+              sql_construct,
+              constructWhereLowerLike(
+                field = whereLikeField,
+                term = Args[1]
+              )
+            ) %>%
+            paste(collapse = " ")
+        } else {
+          sql_construct <-
+            concatWhereConstructs(sql_construct,
+              where_sql_construct_2 = constructWhereLowerLike(field = whereLikeField, term = Args[i])
+            )
         }
+      }
+    } else {
+      for (i in 1:length(Args)) {
+        if (i == 1) {
+          sql_construct <-
+            c(
+              sql_construct,
+              constructWhereLike(
+                field = whereLikeField,
+                term = Args[1]
+              )
+            ) %>%
+            paste(collapse = " ")
+        } else {
+          sql_construct <-
+            concatWhereConstructs(sql_construct,
+              where_sql_construct_2 = constructWhereLike(field = whereLikeField, term = Args[i])
+            )
+        }
+      }
+    }
+
+    if (!is.null(limit_n)) {
+      sql_construct <-
+        c(
+          sql_construct,
+          constructLimit(n = limit_n)
+        ) %>%
+        paste(collapse = " ")
+    }
+
+    sql_construct %>%
+      stringr::str_replace_all(
+        pattern = "[\n]{2,}",
+        replacement = "\n"
+      ) %>%
+      terminateBuild()
+  }
 
 
 
@@ -1378,11 +1347,9 @@ buildQueryString <-
 #' @export
 
 terminateBuild <-
-    function(sql_statement) {
-
-                paste0(sql_statement, ";")
-
-    }
+  function(sql_statement) {
+    paste0(sql_statement, ";")
+  }
 
 
 
@@ -1403,15 +1370,16 @@ terminateBuild <-
 #' @export
 
 cacheJoin <-
-        function(.data,
-                 ...,
-                 db,
-                 schema) {
-
-                R.cache::saveCache(object = .data,
-                                   key = list(...),
-                                   dirs = paste0(db, "/", schema))
-        }
+  function(.data,
+           ...,
+           db,
+           schema) {
+    R.cache::saveCache(
+      object = .data,
+      key = list(...),
+      dirs = paste0(db, "/", schema)
+    )
+  }
 
 
 
@@ -1427,14 +1395,15 @@ cacheJoin <-
 #' @export
 
 cacheQuery <-
-        function(.data,
-                 sqlQuery,
-                 db) {
-
-                R.cache::saveCache(object = .data,
-                                   key = list(sqlQuery),
-                                   dirs = db)
-        }
+  function(.data,
+           sqlQuery,
+           db) {
+    R.cache::saveCache(
+      object = .data,
+      key = list(sqlQuery),
+      dirs = db
+    )
+  }
 
 
 
@@ -1450,12 +1419,9 @@ cacheQuery <-
 #' @export
 
 clearCache <-
-        function(db) {
-
-                R.cache::clearCache(path = getCachePath(db))
-
-
-        }
+  function(db) {
+    R.cache::clearCache(path = getCachePath(db))
+  }
 
 
 
@@ -1470,13 +1436,14 @@ clearCache <-
 #' @export
 
 loadCachedJoin <-
-        function(...,
-                 db,
-                 schema) {
-
-                R.cache::loadCache(key = list(...),
-                                   dirs = paste0(db, "/", schema))
-        }
+  function(...,
+           db,
+           schema) {
+    R.cache::loadCache(
+      key = list(...),
+      dirs = paste0(db, "/", schema)
+    )
+  }
 
 
 
@@ -1491,12 +1458,13 @@ loadCachedJoin <-
 #' @export
 
 loadCachedQuery <-
-        function(sqlQuery,
-                 db) {
-
-                R.cache::loadCache(key = list(sqlQuery),
-                                   dirs = db)
-        }
+  function(sqlQuery,
+           db) {
+    R.cache::loadCache(
+      key = list(sqlQuery),
+      dirs = db
+    )
+  }
 
 
 
@@ -1527,16 +1495,17 @@ loadCachedQuery <-
 #' @export
 
 cache <-
-        function(object,
-                 sql_statement,
-                 dirs) {
-
-                key <- list(sql_statement)
-                x <- R.cache::saveCache(object = object,
-                                        key = key,
-                                        dirs = dirs)
-                invisible(x)
-        }
+  function(object,
+           sql_statement,
+           dirs) {
+    key <- list(sql_statement)
+    x <- R.cache::saveCache(
+      object = object,
+      key = key,
+      dirs = dirs
+    )
+    invisible(x)
+  }
 
 
 #' @title
@@ -1560,43 +1529,42 @@ cache <-
 #' @export
 
 loadCache <-
-        function(sql_statement,
-                 hrs_expired = 8,
-                 dirs) {
+  function(sql_statement,
+           hrs_expired = 8,
+           dirs) {
+    key <- list(sql_statement)
+    # Get path to cache file if it exists
 
-                key <- list(sql_statement)
-                # Get path to cache file if it exists
+    cache_file_path <-
+      R.cache::findCache(
+        key = key,
+        dirs = dirs
+      )
 
-                cache_file_path <-
-                        R.cache::findCache(key = key,
-                                           dirs = dirs)
 
+    if (!is.null(cache_file_path)) {
+      is_expired <-
+        difftime(
+          time1 = Sys.time(),
+          time2 = file.info(cache_file_path)$mtime,
+          units = "hours"
+        ) > hrs_expired
 
-                if (!is.null(cache_file_path)) {
-
-                        is_expired <-
-                                difftime(time1 = Sys.time(),
-                                         time2 = file.info(cache_file_path)$mtime,
-                                         units = "hours") > hrs_expired
-
-                        if (is_expired) {
-
-                                NULL
-
-                        } else {
-
-                                R.cache::loadCache(key = key,
-                                                   dirs = dirs)
-
-                        }
-
-                } else {
-
-                        R.cache::loadCache(key = key,
-                                           dirs = dirs)
-                }
-
-        }
+      if (is_expired) {
+        NULL
+      } else {
+        R.cache::loadCache(
+          key = key,
+          dirs = dirs
+        )
+      }
+    } else {
+      R.cache::loadCache(
+        key = key,
+        dirs = dirs
+      )
+    }
+  }
 
 
 
@@ -1625,28 +1593,29 @@ NULL
 
 
 connDB <-
-        function(user,
-                 password,
-                 port,
-                 server) {
+  function(user,
+           password,
+           port,
+           server) {
+    conn_details <- DatabaseConnector::createConnectionDetails(
+      dbms = "postgresql",
+      user = user,
+      password = password,
+      port = port,
+      server = server
+    )
 
-                conn_details <- DatabaseConnector::createConnectionDetails(dbms = "postgresql",
-                                                                           user = user,
-                                                                           password = password,
-                                                                           port = port,
-                                                                           server = server)
-
-                DatabaseConnector::connect(conn_details)
-        }
+    DatabaseConnector::connect(conn_details)
+  }
 
 #' Connect without Console Messages
 #' @export
 #' @export
 
 quietly.connDB <-
-        function() {
-                "dummy"
-        }
+  function() {
+    "dummy"
+  }
 
 
 
@@ -1665,57 +1634,48 @@ quietly.connDB <-
 #' @importFrom SqlRender render
 
 draftCreateTable <-
-        function(schema,
-                 tableName,
-                 if_not_exists = TRUE,
-                 ...) {
+  function(schema,
+           tableName,
+           if_not_exists = TRUE,
+           ...) {
+    ddl <- rlang::list2(...)
+    fields <- names(ddl)
 
+    if (any(isReserved(tableName, fields))) {
+      stop("Cannot use reserved sql words.")
+    }
 
-                ddl <- rlang::list2(...)
-                fields <- names(ddl)
+    ddl <- mapply(paste, fields, ddl, collapse = " ")
+    ddl <- paste(ddl, collapse = ",\n")
 
-                if (any(isReserved(tableName, fields))) {
-
-                        stop("Cannot use reserved sql words.")
-
-                }
-
-                ddl <- mapply(paste, fields, ddl, collapse = " ")
-                ddl <- paste(ddl, collapse = ",\n")
-
-                if (if_not_exists) {
-
-                        sql_statement <-
-                                SqlRender::render(
-                                        "
+    if (if_not_exists) {
+      sql_statement <-
+        SqlRender::render(
+          "
                                         CREATE TABLE IF NOT EXISTS @schema.@tableName (
                                                 @ddl
                                         );
                                         ",
-                                        schema = schema,
-                                        tableName = tableName,
-                                        ddl = ddl
-                                )
-
-                } else {
-
-                        sql_statement <-
-                                SqlRender::render(
-                                        "
+          schema = schema,
+          tableName = tableName,
+          ddl = ddl
+        )
+    } else {
+      sql_statement <-
+        SqlRender::render(
+          "
                                         CREATE TABLE @schema.@tableName (
                                                 @ddl
                                         );
                                         ",
-                                        schema = schema,
-                                        tableName = tableName,
-                                        ddl = ddl
-                                )
+          schema = schema,
+          tableName = tableName,
+          ddl = ddl
+        )
+    }
 
-
-                }
-
-                sql_statement
-        }
+    sql_statement
+  }
 
 #' @title
 #' Create a Table
@@ -1730,32 +1690,29 @@ draftCreateTable <-
 #' @importFrom SqlRender render
 
 createTable <-
-        function(conn,
-                 schema,
-                 tableName,
-                 if_not_exists = TRUE,
-                 ...,
-                 verbose = TRUE,
-                 render_sql = TRUE) {
+  function(conn,
+           schema,
+           tableName,
+           if_not_exists = TRUE,
+           ...,
+           verbose = TRUE,
+           render_sql = TRUE) {
+    sql_statement <-
+      draftCreateTable(
+        schema = schema,
+        tableName = tableName,
+        if_not_exists = if_not_exists,
+        ...
+      )
 
 
-                sql_statement <-
-                draftCreateTable(
-                        schema = schema,
-                        tableName = tableName,
-                        if_not_exists = if_not_exists,
-                        ...
-                )
-
-
-                send(
-                        conn = conn,
-                        sql_statement = sql_statement,
-                        verbose = verbose,
-                        render_sql = render_sql
-                )
-
-        }
+    send(
+      conn = conn,
+      sql_statement = sql_statement,
+      verbose = verbose,
+      render_sql = render_sql
+    )
+  }
 
 #' @title
 #' Draft the SQL to Create Table
@@ -1770,81 +1727,71 @@ createTable <-
 #' @importFrom forcats fct_collapse
 
 draftCreateTableFromDF <-
-        function(schema,
-                 tableName,
-                 data,
-                 if_not_exists = TRUE) {
+  function(schema,
+           tableName,
+           data,
+           if_not_exists = TRUE) {
+    makeDDL <-
+      function(data) {
+        r_types <- lapply(data, class)
+        r_types <- sapply(r_types, paste, collapse = ", ") # Necessary because there are 2 classes for some data types, such as Sys.time()'s POSIXct, POSIXt
 
-                makeDDL <-
-                        function(data) {
+        field_names <- names(r_types)
 
-                                r_types <- lapply(data, class)
-                                r_types <- sapply(r_types, paste, collapse = ", ") # Necessary because there are 2 classes for some data types, such as Sys.time()'s POSIXct, POSIXt
+        ddl <- factor(r_types)
+        ddl <-
+          forcats::fct_collapse(
+            .f = ddl,
+            bigint = "integer",
+            `timestamp without time zone` = "POSIXct, POSIXt",
+            date = "Date",
+            float = c("double", "numeric"),
+            other_level = "text"
+          ) %>%
+          as.character()
 
-                                field_names <- names(r_types)
+        names(ddl) <- field_names
+        ddl
+      }
 
-                                ddl <- factor(r_types)
-                                ddl <-
-                                        forcats::fct_collapse(
-                                                .f = ddl,
-                                                bigint = "integer",
-                                                `timestamp without time zone` = "POSIXct, POSIXt",
-                                                date = "Date",
-                                                float  = c("double", "numeric"),
-                                                other_level = "text"
-                                        ) %>%
-                                        as.character()
+    ddl <- makeDDL(data = data)
+    fields <- names(ddl)
 
-                                names(ddl) <- field_names
-                                ddl
-                        }
+    if (any(isReserved(tableName, fields))) {
+      stop("Cannot use reserved sql words.")
+    }
 
-                ddl <- makeDDL(data = data)
-                fields <- names(ddl)
+    ddl <- mapply(paste, fields, ddl, collapse = " ")
+    ddl <- paste(ddl, collapse = ",\n")
 
-                if (any(isReserved(tableName, fields))) {
-
-                        stop("Cannot use reserved sql words.")
-
-                }
-
-                ddl <- mapply(paste, fields, ddl, collapse = " ")
-                ddl <- paste(ddl, collapse = ",\n")
-
-                if (if_not_exists) {
-
-                        sql_statement <-
-                                SqlRender::render(
-                                        "
+    if (if_not_exists) {
+      sql_statement <-
+        SqlRender::render(
+          "
                                         CREATE TABLE IF NOT EXISTS @schema.@tableName (
                                                 @ddl
                                         );
                                         ",
-                                        schema = schema,
-                                        tableName = tableName,
-                                        ddl = ddl
-                                )
-
-                } else {
-
-                        sql_statement <-
-                                SqlRender::render(
-                                        "
+          schema = schema,
+          tableName = tableName,
+          ddl = ddl
+        )
+    } else {
+      sql_statement <-
+        SqlRender::render(
+          "
                                         CREATE TABLE @schema.@tableName (
                                                 @ddl
                                         );
                                         ",
-                                        schema = schema,
-                                        tableName = tableName,
-                                        ddl = ddl
-                                )
+          schema = schema,
+          tableName = tableName,
+          ddl = ddl
+        )
+    }
 
-
-                }
-
-                sql_statement
-
-        }
+    sql_statement
+  }
 
 #' @title
 #' Create a Table with a Dataframe
@@ -1856,29 +1803,29 @@ draftCreateTableFromDF <-
 #' @export
 
 createTableFromDF <-
-        function(conn,
-                 conn_fun,
-                 schema,
-                 tableName,
-                 if_not_exists = TRUE,
-                 data,
-                 verbose = TRUE,
-                 render_sql = TRUE) {
+  function(conn,
+           conn_fun,
+           schema,
+           tableName,
+           if_not_exists = TRUE,
+           data,
+           verbose = TRUE,
+           render_sql = TRUE) {
+    sql_statement <- draftCreateTableFromDF(
+      schema = schema,
+      tableName = tableName,
+      data = data,
+      if_not_exists = if_not_exists
+    )
 
-                sql_statement <- draftCreateTableFromDF(schema = schema,
-                                                    tableName = tableName,
-                                                    data = data,
-                                                    if_not_exists = if_not_exists)
 
-
-                send(
-                        conn = conn,
-                        sql_statement = sql_statement,
-                        verbose = verbose,
-                        render_sql = render_sql
-                )
-
-        }
+    send(
+      conn = conn,
+      sql_statement = sql_statement,
+      verbose = verbose,
+      render_sql = render_sql
+    )
+  }
 
 
 
@@ -1893,18 +1840,17 @@ createTableFromDF <-
 #' @export
 
 createDB <-
-    function(conn,
-             dbname,
-             ...) {
+  function(conn,
+           dbname,
+           ...) {
+    sql_statement <- sprintf("CREATE DATABASE %s;", dbname)
 
-
-            sql_statement <- sprintf("CREATE DATABASE %s;", dbname)
-
-            send(conn = conn,
-                   sql_statement = sql_statement,
-                   ...)
-
-    }
+    send(
+      conn = conn,
+      sql_statement = sql_statement,
+      ...
+    )
+  }
 
 
 
@@ -1917,21 +1863,22 @@ createDB <-
 #' @export
 
 renameDB <-
-    function(conn,
-             db,
-             newDB,
-             ...) {
+  function(conn,
+           db,
+           newDB,
+           ...) {
+    sql_statement <- renderRenameDB(
+      schema = schema,
+      db = db,
+      newDB = newDB
+    )
 
-
-            sql_statement <- renderRenameDB(schema = schema,
-                                               db = db,
-                                               newDB = newDB)
-
-            send(conn = conn,
-                   sql_statement = sql_statement,
-                   ...)
-
-    }
+    send(
+      conn = conn,
+      sql_statement = sql_statement,
+      ...
+    )
+  }
 
 
 
@@ -1949,10 +1896,10 @@ renameDB <-
 #' @export
 
 appendDate <-
-        function(name) {
-                .Deprecated(new = "affix_date")
-                paste0(name, "_", stringr::str_replace_all(as.character(Sys.Date()), "[-]{1}", "_"))
-        }
+  function(name) {
+    .Deprecated(new = "affix_date")
+    paste0(name, "_", stringr::str_replace_all(as.character(Sys.Date()), "[-]{1}", "_"))
+  }
 
 #' Construct a base SQL query
 #' @description Construct the SELECT {fields} FROM {schema}.{table} base query. The SQL Statement is not terminated for the addition of other parameters generated using "construct" functions.
@@ -1961,32 +1908,27 @@ appendDate <-
 #' @export
 
 constructBase <-
-        function(fields = "*",
-                 distinct = FALSE,
-                 schema = "public",
-                 tableName) {
+  function(fields = "*",
+           distinct = FALSE,
+           schema = "public",
+           tableName) {
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
-
-                if (distinct) {
-
-                        SqlRender::render(SqlRender::readSql(paste0(path, "/distinctBase.sql")),
-                                          fields = fields,
-                                          schema = schema,
-                                          tableName = tableName)
-
-
-                } else {
-
-                        SqlRender::render(SqlRender::readSql(paste0(path, "/base.sql")),
-                                          fields = fields,
-                                          schema = schema,
-                                          tableName = tableName)
-
-                }
-
-        }
+    if (distinct) {
+      SqlRender::render(SqlRender::readSql(paste0(path, "/distinctBase.sql")),
+        fields = fields,
+        schema = schema,
+        tableName = tableName
+      )
+    } else {
+      SqlRender::render(SqlRender::readSql(paste0(path, "/base.sql")),
+        fields = fields,
+        schema = schema,
+        tableName = tableName
+      )
+    }
+  }
 
 
 
@@ -2000,14 +1942,15 @@ constructBase <-
 
 
 constructIn <-
-        function(vector) {
-                .Deprecated()
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
+  function(vector) {
+    .Deprecated()
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
-                SqlRender::render(SqlRender::readSql(paste0(path, "/in.sql")),
-                                  vector = vector)
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/in.sql")),
+      vector = vector
+    )
+  }
 
 
 
@@ -2019,28 +1962,26 @@ constructIn <-
 #' @export
 
 constructJoin <-
-        function(schema,
-                 tableName,
-                 column,
-                 joinType = "LEFT",
-                 joinOnSchema,
-                 joinOnTableName,
-                 joinOnColumn) {
+  function(schema,
+           tableName,
+           column,
+           joinType = "LEFT",
+           joinOnSchema,
+           joinOnTableName,
+           joinOnColumn) {
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
-
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
-
-                SqlRender::render(SqlRender::readSql(paste0(path, "/join.sql")),
-                                  schema1 = schema,
-                                  tableName1 = tableName,
-                                  column1 = column,
-                                  joinType = joinType,
-                                  schema2 = joinOnSchema,
-                                  tableName2 = joinOnTableName,
-                                  column2 = joinOnColumn)
-
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/join.sql")),
+      schema1 = schema,
+      tableName1 = tableName,
+      column1 = column,
+      joinType = joinType,
+      schema2 = joinOnSchema,
+      tableName2 = joinOnTableName,
+      column2 = joinOnColumn
+    )
+  }
 
 
 
@@ -2054,15 +1995,16 @@ constructJoin <-
 
 
 constructLimit <-
-        function(n) {
-                .Deprecated()
+  function(n) {
+    .Deprecated()
 
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
-                SqlRender::render(SqlRender::readSql(paste0(path, "/limit.sql")),
-                                  n = n)
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/limit.sql")),
+      n = n
+    )
+  }
 
 
 
@@ -2075,16 +2017,16 @@ constructLimit <-
 
 
 constructRandom <-
-        function(n) {
-                .Deprecated()
+  function(n) {
+    .Deprecated()
 
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
-                SqlRender::render(SqlRender::readSql(paste0(path, "/orderByRandom.sql")),
-                                  n = n)
-
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/orderByRandom.sql")),
+      n = n
+    )
+  }
 
 
 
@@ -2095,26 +2037,26 @@ constructRandom <-
 #' @export
 
 constructSchemaTableName <-
-        function(schema,
-                 tableName) {
-                .Deprecated()
+  function(schema,
+           tableName) {
+    .Deprecated()
 
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
 
-                SqlRender::render(SqlRender::readSql(paste0(path, "/schemaTableName.sql")),
-                                  schema = schema,
-                                  tableName = tableName)
-
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/schemaTableName.sql")),
+      schema = schema,
+      tableName = tableName
+    )
+  }
 
 
 
 
 
 #' Render x in "WHERE x IN y"
-#'@description (Deprecated)  This is a non-terminal render, meaning that the SQL component will not be terminated with a semicolon in order to construct complex SQL queries.
+#' @description (Deprecated)  This is a non-terminal render, meaning that the SQL component will not be terminated with a semicolon in order to construct complex SQL queries.
 #' @import SqlRender
 #' @param field Single field to be filtered for
 #' @param vector vector of values that the SQL query is filtering for
@@ -2122,23 +2064,22 @@ constructSchemaTableName <-
 
 
 constructWhereIn <-
-        function(field,
-                 vector) {
-                .Deprecated()
+  function(field,
+           vector) {
+    .Deprecated()
 
-                if (is.character(vector)) {
+    if (is.character(vector)) {
+      vector <- paste0("'", vector, "'")
+    }
 
-                        vector <- paste0("'", vector, "'")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
-                }
-
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
-
-                SqlRender::render(SqlRender::readSql(paste0(path, "/whereIn.sql")),
-                                  field = field,
-                                  vector = vector)
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/whereIn.sql")),
+      field = field,
+      vector = vector
+    )
+  }
 
 
 
@@ -2153,18 +2094,19 @@ constructWhereIn <-
 
 
 constructWhereLike <-
-        function(field,
-                 term) {
-                .Deprecated()
+  function(field,
+           term) {
+    .Deprecated()
 
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
 
-                SqlRender::render(SqlRender::readSql(paste0(path, "/whereLike.sql")),
-                                  field = field,
-                                  term = term)
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/whereLike.sql")),
+      field = field,
+      term = term
+    )
+  }
 
 
 
@@ -2179,23 +2121,22 @@ constructWhereLike <-
 
 
 constructWhereLowerIn <-
-        function(field,
-                 vector) {
-                .Deprecated()
+  function(field,
+           vector) {
+    .Deprecated()
 
-                if (is.character(vector)) {
+    if (is.character(vector)) {
+      vector <- paste0("'", vector, "'")
+    }
 
-                        vector <- paste0("'", vector, "'")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
-                }
-
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
-
-                SqlRender::render(SqlRender::readSql(paste0(path, "/whereLowerIn.sql")),
-                                  field = field,
-                                  vector = vector)
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/whereLowerIn.sql")),
+      field = field,
+      vector = vector
+    )
+  }
 
 
 
@@ -2209,19 +2150,19 @@ constructWhereLowerIn <-
 
 
 constructWhereLowerLike <-
-        function(field,
-                 term) {
-                .Deprecated()
+  function(field,
+           term) {
+    .Deprecated()
 
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
 
-                SqlRender::render(SqlRender::readSql(paste0(path, "/whereLowerLike.sql")),
-                                  field = field,
-                                  term = tolower(term))
-
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/whereLowerLike.sql")),
+      field = field,
+      term = tolower(term)
+    )
+  }
 
 
 
@@ -2236,23 +2177,22 @@ constructWhereLowerLike <-
 
 
 constructWhereLowerNotIn <-
-        function(field,
-                 vector) {
-                .Deprecated()
+  function(field,
+           vector) {
+    .Deprecated()
 
-                if (is.character(vector)) {
+    if (is.character(vector)) {
+      vector <- paste0("'", vector, "'")
+    }
 
-                        vector <- paste0("'", vector, "'")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
-                }
-
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
-
-                SqlRender::render(SqlRender::readSql(paste0(path, "/whereLowerNotIn.sql")),
-                                  field = field,
-                                  vector = vector)
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/whereLowerNotIn.sql")),
+      field = field,
+      vector = vector
+    )
+  }
 
 
 
@@ -2267,23 +2207,22 @@ constructWhereLowerNotIn <-
 
 
 constructWhereNotIn <-
-        function(field,
-                 vector) {
-                .Deprecated()
+  function(field,
+           vector) {
+    .Deprecated()
 
-                if (is.character(vector)) {
+    if (is.character(vector)) {
+      vector <- paste0("'", vector, "'")
+    }
 
-                        vector <- paste0("'", vector, "'")
+    base <- system.file(package = "pg13")
+    path <- paste0(base, "/sql_constr")
 
-                }
-
-                base <- system.file(package='pg13')
-                path <- paste0(base, "/sql_constr")
-
-                SqlRender::render(SqlRender::readSql(paste0(path, "/whereNotIn.sql")),
-                                  field = field,
-                                  vector = vector)
-        }
+    SqlRender::render(SqlRender::readSql(paste0(path, "/whereNotIn.sql")),
+      field = field,
+      vector = vector
+    )
+  }
 
 
 
@@ -2295,19 +2234,19 @@ constructWhereNotIn <-
 #' @export
 
 saveSQL <-
-        function(sql_statement,
-                 file,
-                 append = TRUE,
-                 ...) {
+  function(sql_statement,
+           file,
+           append = TRUE,
+           ...) {
+    .Deprecated("write_sql_file")
 
-                .Deprecated("write_sql_file")
-
-                readr::write_lines(x = sql_statement,
-                                   path = file,
-                                   append = append,
-                                   ...
-                )
-        }
+    readr::write_lines(
+      x = sql_statement,
+      path = file,
+      append = append,
+      ...
+    )
+  }
 
 #' Drop a Postgres schema
 #' @description Drop a schema if it exists.
@@ -2315,25 +2254,26 @@ saveSQL <-
 #' @export
 
 dropSchema <-
-        function(conn,
-                 schema,
-                 cascade = FALSE,
-                 if_exists = TRUE,
-                 ...) {
+  function(conn,
+           schema,
+           cascade = FALSE,
+           if_exists = TRUE,
+           ...) {
+    .Deprecated("dropCascade")
 
 
-                .Deprecated("dropCascade")
+    sql_statement <- renderDropSchema(
+      schema = schema,
+      cascade = cascade,
+      if_exists = if_exists
+    )
 
-
-                sql_statement <- renderDropSchema(schema = schema,
-                                                  cascade = cascade,
-                                                  if_exists = if_exists)
-
-                send(conn = conn,
-                     sql_statement = sql_statement,
-                     ...)
-
-        }
+    send(
+      conn = conn,
+      sql_statement = sql_statement,
+      ...
+    )
+  }
 
 
 
@@ -2346,62 +2286,64 @@ dropSchema <-
 #' @export
 
 concatWhereConstructs <-
-    function(sql_construct,
-             where_sql_construct_2,
-             ...,
-             AND = TRUE) {
+  function(sql_construct,
+           where_sql_construct_2,
+           ...,
+           AND = TRUE) {
+    .Deprecated()
 
+    if (missing(...)) {
+      if (AND) {
+        c(
+          sql_construct,
+          stringr::str_replace(
+            where_sql_construct_2,
+            "WHERE",
+            "AND"
+          )
+        ) %>%
+          paste(collapse = " ")
+      } else {
+        c(
+          sql_construct,
+          stringr::str_replace(
+            where_sql_construct_2,
+            "WHERE",
+            "OR"
+          )
+        ) %>%
+          paste(collapse = " ")
+      }
+    } else {
+      Args <- list(
+        where_sql_construct_2,
+        ...
+      ) %>%
+        unlist()
 
-            .Deprecated()
-
-            if (missing(...)) {
-
-                            if (AND) {
-
-                                    c(sql_construct,
-                                      stringr::str_replace(where_sql_construct_2,
-                                                           "WHERE",
-                                                           "AND")) %>%
-                                                paste(collapse = " ")
-                            } else {
-
-                                    c(sql_construct,
-                                      stringr::str_replace(where_sql_construct_2,
-                                                           "WHERE",
-                                                           "OR")) %>%
-                                            paste(collapse = " ")
-
-                            }
-            } else {
-
-                    Args <- list(where_sql_construct_2,
-                                 ...) %>%
-                                unlist()
-
-                    if (AND) {
-
-                            c(sql_construct,
-                            stringr::str_replace_all(Args,
-                                                     "WHERE",
-                                                     "AND")) %>%
-                                    paste(collapse = " ")
-
-
-                    } else {
-
-                            c(sql_construct,
-                              stringr::str_replace_all(Args,
-                                                       "WHERE",
-                                                       "OR")) %>%
-                                    paste(collapse = " ")
-
-
-
-                    }
-
-            }
-
+      if (AND) {
+        c(
+          sql_construct,
+          stringr::str_replace_all(
+            Args,
+            "WHERE",
+            "AND"
+          )
+        ) %>%
+          paste(collapse = " ")
+      } else {
+        c(
+          sql_construct,
+          stringr::str_replace_all(
+            Args,
+            "WHERE",
+            "OR"
+          )
+        ) %>%
+          paste(collapse = " ")
+      }
     }
+  }
 
 
 #' Append to am Existing Table
@@ -2415,28 +2357,29 @@ concatWhereConstructs <-
 
 
 appendTable2 <-
-    function(conn = conn,
-             schema,
-             tableName,
-             .data,
-             ...) {
+  function(conn = conn,
+           schema,
+           tableName,
+           .data,
+           ...) {
+    .Deprecated(new = "append")
 
-        .Deprecated(new = "append")
+    schemaTableName <- constructSchemaTableName(
+      schema = schema,
+      tableName = tableName
+    )
 
-        schemaTableName <- constructSchemaTableName(schema = schema,
-                                                    tableName = tableName)
 
-
-        if (nrow(.data)) {
-
-            DatabaseConnector::dbAppendTable(conn = conn,
-                                             name = schemaTableName,
-                                             value = .data %>%
-                                                 as.data.frame(),
-                                             ...)
-        }
-
+    if (nrow(.data)) {
+      DatabaseConnector::dbAppendTable(
+        conn = conn,
+        name = schemaTableName,
+        value = .data %>%
+          as.data.frame(),
+        ...
+      )
     }
+  }
 
 #' Write a Table
 #' @import DatabaseConnector
@@ -2446,40 +2389,45 @@ appendTable2 <-
 
 
 writeTable2 <-
-    function(conn = conn,
-             schema,
-             tableName,
-             .data,
-             ...) {
+  function(conn = conn,
+           schema,
+           tableName,
+           .data,
+           ...) {
+    .Deprecated(new = "write")
 
-        .Deprecated(new = "write")
+    schemaTableName <- constructSchemaTableName(
+      schema = schema,
+      tableName = tableName
+    )
 
-        schemaTableName <- constructSchemaTableName(schema = schema,
-                                                    tableName = tableName)
-
-        DatabaseConnector::dbWriteTable(conn = conn,
-                                        name = schemaTableName,
-                                        value = .data %>%
-                                            as.data.frame(),
-                                        ...)
-
-    }
+    DatabaseConnector::dbWriteTable(
+      conn = conn,
+      name = schemaTableName,
+      value = .data %>%
+        as.data.frame(),
+      ...
+    )
+  }
 
 #' Get Full Table
 #' @export
 
 
 getTable <-
-    function(conn,
-             schema,
-             tableName) {
+  function(conn,
+           schema,
+           tableName) {
+    .Deprecated(new = "readTable")
 
-        .Deprecated(new = "readTable")
-
-        query(conn = conn,
-              buildQuery(schema = schema,
-                         tableName = tableName))
-    }
+    query(
+      conn = conn,
+      buildQuery(
+        schema = schema,
+        tableName = tableName
+      )
+    )
+  }
 
 
 #' Refresh Table with New Data
@@ -2491,58 +2439,62 @@ getTable <-
 
 
 refreshTable <-
-    function(conn,
-             schema,
-             tableName,
-             .data) {
+  function(conn,
+           schema,
+           tableName,
+           .data) {
+    .Deprecated()
 
-        .Deprecated()
-
-        tableNameHist <- appendDate(name = toupper(tableName))
-
-
-        todayTables <-
-            grep(tableNameHist,
-                 lsTables(conn = conn,
-                          schema = schema),
-                 value = TRUE)
-
-        n <- length(todayTables)
+    tableNameHist <- appendDate(name = toupper(tableName))
 
 
-        # If this table has not been written yet today
-        if (n == 0) {
-            secretary::typewrite_bold("No Off-Loaded Tables Today")
-            secretary::typewrite_bold("Next Table Name:", tableNameHist)
-            # If more than 1 table has been written today, the new table name would be the length of the list of today's table + 1
-        } else {
-            secretary::typewrite_bold("Off-Loaded Tables Today:")
-            todayTables %>%
-                purrr::map(function(x) secretary::typewrite(x, tabs = 1))
+    todayTables <-
+      grep(tableNameHist,
+        lsTables(
+          conn = conn,
+          schema = schema
+        ),
+        value = TRUE
+      )
 
-            tableNameHist <- paste0(tableNameHist, "_", (1+n))
-            secretary::typewrite_bold("Next Table Name:", tableNameHist)
+    n <- length(todayTables)
 
-        }
 
-        secretary::press_enter()
+    # If this table has not been written yet today
+    if (n == 0) {
+      secretary::typewrite_bold("No Off-Loaded Tables Today")
+      secretary::typewrite_bold("Next Table Name:", tableNameHist)
+      # If more than 1 table has been written today, the new table name would be the length of the list of today's table + 1
+    } else {
+      secretary::typewrite_bold("Off-Loaded Tables Today:")
+      todayTables %>%
+        purrr::map(function(x) secretary::typewrite(x, tabs = 1))
 
-        renameTable(conn = conn,
-                    schema = schema,
-                    tableName = tableName,
-                    newTableName = tableNameHist)
-
-        secretary::typewrite_bold(tableName, "renamed to", tableNameHist)
-
-        writeTable(conn = conn,
-                   tableName = tableName,
-                   schema = schema,
-                   .data = .data %>%
-                       as.data.frame())
-
-        secretary::typewrite_bold("New", tableName, "written.")
-
+      tableNameHist <- paste0(tableNameHist, "_", (1 + n))
+      secretary::typewrite_bold("Next Table Name:", tableNameHist)
     }
+
+    secretary::press_enter()
+
+    renameTable(
+      conn = conn,
+      schema = schema,
+      tableName = tableName,
+      newTableName = tableNameHist
+    )
+
+    secretary::typewrite_bold(tableName, "renamed to", tableNameHist)
+
+    writeTable(
+      conn = conn,
+      tableName = tableName,
+      schema = schema,
+      .data = .data %>%
+        as.data.frame()
+    )
+
+    secretary::typewrite_bold("New", tableName, "written.")
+  }
 
 
 
@@ -2554,22 +2506,23 @@ refreshTable <-
 #' @export
 
 renameTable <-
-    function(conn,
-             schema,
-             tableName,
-             newTableName,
-             ...) {
+  function(conn,
+           schema,
+           tableName,
+           newTableName,
+           ...) {
+    sql_statement <- renderRenameTable(
+      schema = schema,
+      tableName = tableName,
+      newTableName = newTableName
+    )
 
-
-        sql_statement <- renderRenameTable(schema = schema,
-                                           tableName = tableName,
-                                           newTableName = newTableName)
-
-        send(conn = conn,
-             sql_statement = sql_statement,
-             ...)
-
-    }
+    send(
+      conn = conn,
+      sql_statement = sql_statement,
+      ...
+    )
+  }
 
 
 
@@ -2588,19 +2541,19 @@ renameTable <-
 #' @export
 
 isClosed <-
-    function(conn) {
+  function(conn) {
+    .Deprecated(new = "is_conn_open")
 
-        .Deprecated(new = "is_conn_open")
+    results <- tryCatch(print(conn),
+      error = function(e) NULL
+    )
 
-        results <- tryCatch(print(conn),
-                            error = function(e) NULL)
-
-        if (is.null(results)) {
-            TRUE
-        } else {
-            invisible(FALSE)
-        }
+    if (is.null(results)) {
+      TRUE
+    } else {
+      invisible(FALSE)
     }
+  }
 
 
 #' @title
@@ -2615,19 +2568,15 @@ isClosed <-
 #' @export
 
 rmIfClosed <-
-    function(conn) {
+  function(conn) {
+    .Deprecated(new = "rm_if_closed")
 
-        .Deprecated(new = "rm_if_closed")
+    results <- isClosed(conn = conn)
 
-        results <- isClosed(conn = conn)
-
-        if (results == TRUE) {
-
-            rm(list = deparse(substitute(conn)), envir = globalenv())
-
-        }
-
+    if (results == TRUE) {
+      rm(list = deparse(substitute(conn)), envir = globalenv())
     }
+  }
 
 
 #' Get SourceFile Path
@@ -2639,23 +2588,20 @@ rmIfClosed <-
 
 
 sourceFilePath <-
-    function(instSubdir,
-             FileName,
-             package) {
-
-        .Deprecated()
-        paste0(system.file(package = package), "/", instSubdir, "/", FileName)
-    }
+  function(instSubdir,
+           FileName,
+           package) {
+    .Deprecated()
+    paste0(system.file(package = package), "/", instSubdir, "/", FileName)
+  }
 
 #' Terminate a SQL Statement with a semicolon
 #' @export
 
 terminateBuild <-
-    function(sql_statement) {
-
-        paste0(sql_statement, ";")
-
-    }
+  function(sql_statement) {
+    paste0(sql_statement, ";")
+  }
 
 
 
@@ -2667,21 +2613,22 @@ terminateBuild <-
 #' @export
 
 execute <-
-        function(conn,
-                 sql_statement,
-                 profile = FALSE,
-                 progressBar = TRUE,
-                 reportOverallTime = TRUE,
-                 ...) {
-
-                .Deprecated(new = "queries")
-                DatabaseConnector::executeSql(connection = conn,
-                                              sql = sql_statement,
-                                              profile = profile,
-                                              progressBar = progressBar,
-                                              reportOverallTime = reportOverallTime,
-                                              ...)
-        }
+  function(conn,
+           sql_statement,
+           profile = FALSE,
+           progressBar = TRUE,
+           reportOverallTime = TRUE,
+           ...) {
+    .Deprecated(new = "queries")
+    DatabaseConnector::executeSql(
+      connection = conn,
+      sql = sql_statement,
+      profile = profile,
+      progressBar = progressBar,
+      reportOverallTime = reportOverallTime,
+      ...
+    )
+  }
 
 
 
@@ -2697,22 +2644,27 @@ execute <-
 #' @export
 
 localFileQuery <-
-    function (file,
-              dbname = "athena",
-              port = 5432) {
+  function(file,
+           dbname = "athena",
+           port = 5432) {
+    .Deprecated()
+    conn <- localConnect(
+      dbname = dbname,
+      port = port
+    )
 
-        .Deprecated()
-        conn <- localConnect(dbname = dbname,
-                             port = port)
+    data <- fileQuery(
+      conn = conn,
+      file = file
+    )
 
-        data <- fileQuery(conn = conn,
-                          file = file)
+    dc(
+      conn = conn,
+      remove = FALSE
+    )
 
-        dc(conn = conn,
-           remove = FALSE)
-
-        return(data)
-    }
+    return(data)
+  }
 
 
 
@@ -2723,23 +2675,28 @@ localFileQuery <-
 #' @export
 
 localFileSend <-
-    function (file,
-              dbname = "athena",
-              port = 5432) {
+  function(file,
+           dbname = "athena",
+           port = 5432) {
+    .Deprecated()
 
-        .Deprecated()
+    conn <- localConnect(
+      dbname = dbname,
+      port = port
+    )
 
-        conn <- localConnect(dbname = dbname,
-                             port = port)
+    data <- fileSend(
+      conn = conn,
+      file = file
+    )
 
-        data <- fileSend(conn = conn,
-                          file = file)
+    dc(
+      conn = conn,
+      remove = FALSE
+    )
 
-        dc(conn = conn,
-           remove = FALSE)
-
-        return(data)
-    }
+    return(data)
+  }
 
 
 
@@ -2751,24 +2708,28 @@ localFileSend <-
 #' @export
 
 localQuery <-
-    function (sql_statement,
-              dbname = "athena",
-              port = 5432) {
+  function(sql_statement,
+           dbname = "athena",
+           port = 5432) {
+    .Deprecated()
 
+    conn <- localConnect(
+      dbname = dbname,
+      port = port
+    )
 
-        .Deprecated()
+    data <- query(
+      conn = conn,
+      sql_statement = sql_statement
+    )
 
-            conn <- localConnect(dbname = dbname,
-                                 port = port)
+    dc(
+      conn = conn,
+      remove = FALSE
+    )
 
-            data <- query(conn = conn,
-                          sql_statement = sql_statement)
-
-            dc(conn = conn,
-               remove = FALSE)
-
-            return(data)
-    }
+    return(data)
+  }
 
 
 
@@ -2779,21 +2740,26 @@ localQuery <-
 
 
 localSend <-
-    function(sql_statement,
-             dbname = "athena",
-             port = 5432) {
+  function(sql_statement,
+           dbname = "athena",
+           port = 5432) {
+    .Deprecated()
 
-                .Deprecated()
+    conn <- localConnect(
+      dbname = dbname,
+      port = port
+    )
 
-                conn <- localConnect(dbname = dbname,
-                                    port = port)
+    send(
+      conn = conn,
+      sql_statement = sql_statement
+    )
 
-                send(conn = conn,
-                     sql_statement = sql_statement)
-
-                dc(conn = conn,
-                   remove = FALSE)
-    }
+    dc(
+      conn = conn,
+      remove = FALSE
+    )
+  }
 
 
 
@@ -2818,15 +2784,14 @@ localSend <-
 #' @export
 
 parseSQL <-
-        function(sql_statement) {
-
-                .Deprecated(new = "execute_n")
-                centipede::strsplit(sql_statement, split = "[\\;]{1}", type = "after") %>%
-                        unlist() %>%
-                        trimws() %>%
-                        centipede::no_blank() %>%
-                        as.list()
-        }
+  function(sql_statement) {
+    .Deprecated(new = "execute_n")
+    centipede::strsplit(sql_statement, split = "[\\;]{1}", type = "after") %>%
+      unlist() %>%
+      trimws() %>%
+      centipede::no_blank() %>%
+      as.list()
+  }
 
 
 
@@ -2840,19 +2805,19 @@ parseSQL <-
 #' @export
 
 saveSQL <-
-        function(sql_statement,
-                 file,
-                 append = TRUE,
-                 ...) {
+  function(sql_statement,
+           file,
+           append = TRUE,
+           ...) {
+    .Deprecated("write_sql_file")
 
-                .Deprecated("write_sql_file")
-
-                readr::write_lines(x = sql_statement,
-                                   path = file,
-                                   append = append,
-                                   ...
-                                   )
-        }
+    readr::write_lines(
+      x = sql_statement,
+      path = file,
+      append = append,
+      ...
+    )
+  }
 
 
 
@@ -2875,29 +2840,24 @@ saveSQL <-
 #' @export
 
 draftBase <-
-    function(fields = "*",
-             distinct = FALSE,
-             schema,
-             tableName) {
-
-            if (distinct) {
-
-                    SqlRender::render("SELECT DISTINCT @fields FROM @schema.@tableName",
-                                      fields = fields,
-                                      schema = schema,
-                                      tableName = tableName)
-
-
-            } else {
-
-                    SqlRender::render("SELECT @fields FROM @schema.@tableName",
-                                              fields = fields,
-                                              schema = schema,
-                                              tableName = tableName)
-
-            }
-
+  function(fields = "*",
+           distinct = FALSE,
+           schema,
+           tableName) {
+    if (distinct) {
+      SqlRender::render("SELECT DISTINCT @fields FROM @schema.@tableName",
+        fields = fields,
+        schema = schema,
+        tableName = tableName
+      )
+    } else {
+      SqlRender::render("SELECT @fields FROM @schema.@tableName",
+        fields = fields,
+        schema = schema,
+        tableName = tableName
+      )
     }
+  }
 
 
 
@@ -2910,12 +2870,11 @@ draftBase <-
 
 
 draftIn <-
-    function(vector) {
-
-        SqlRender::render("(@vector)",
-                          vector = vector)
-
-    }
+  function(vector) {
+    SqlRender::render("(@vector)",
+      vector = vector
+    )
+  }
 
 
 
@@ -2928,24 +2887,23 @@ draftIn <-
 #' @export
 
 draftJoin <-
-    function(schema,
-             tableName,
-             column,
-             joinType = "LEFT",
-             joinOnSchema,
-             joinOnTableName,
-             joinOnColumn) {
-
-            SqlRender::render("@joinType JOIN @schema2.@tableName2 ON @schema2.@tableName2.@column2 = @schema1.@tableName1.@column1",
-                              schema1 = schema,
-                              tableName1 = tableName,
-                              column1 = column,
-                              joinType = joinType,
-                              schema2 = joinOnSchema,
-                              tableName2 = joinOnTableName,
-                              column2 = joinOnColumn)
-
-    }
+  function(schema,
+           tableName,
+           column,
+           joinType = "LEFT",
+           joinOnSchema,
+           joinOnTableName,
+           joinOnColumn) {
+    SqlRender::render("@joinType JOIN @schema2.@tableName2 ON @schema2.@tableName2.@column2 = @schema1.@tableName1.@column1",
+      schema1 = schema,
+      tableName1 = tableName,
+      column1 = column,
+      joinType = joinType,
+      schema2 = joinOnSchema,
+      tableName2 = joinOnTableName,
+      column2 = joinOnColumn
+    )
+  }
 
 
 
@@ -2958,13 +2916,11 @@ draftJoin <-
 
 
 draftLimit <-
-    function(n) {
-
-
-        SqlRender::render("LIMIT @n",
-                          n = n)
-
-    }
+  function(n) {
+    SqlRender::render("LIMIT @n",
+      n = n
+    )
+  }
 
 
 #' Construct ORDER BY RANDOM()
@@ -2974,29 +2930,26 @@ draftLimit <-
 
 
 draftRandom <-
-    function(n) {
-
-
-        SqlRender::render("ORDER BY RANDOM() LIMIT @n",
-                          n = n)
-
-    }
+  function(n) {
+    SqlRender::render("ORDER BY RANDOM() LIMIT @n",
+      n = n
+    )
+  }
 
 #' Construct schemaTableName
 #' @description construct schemaTableName from the schema and tableName
 #' @export
 
 draftTablePath <-
-        function(schema,
-                 tableName) {
+  function(schema,
+           tableName) {
+    .Deprecated("table.path")
 
-            .Deprecated("table.path")
-
-            SqlRender::render("@schema.@tableName",
-                              schema = schema,
-                              tableName = tableName)
-
-        }
+    SqlRender::render("@schema.@tableName",
+      schema = schema,
+      tableName = tableName
+    )
+  }
 
 
 #' Construct schemaTableName
@@ -3004,14 +2957,13 @@ draftTablePath <-
 #' @export
 
 table.path <-
-    function(schema,
-             tableName) {
-
-        SqlRender::render("@schema.@tableName",
-                          schema = schema,
-                          tableName = tableName)
-
-    }
+  function(schema,
+           tableName) {
+    SqlRender::render("@schema.@tableName",
+      schema = schema,
+      tableName = tableName
+    )
+  }
 
 
 
@@ -3025,19 +2977,17 @@ table.path <-
 
 
 draftWhereIn <-
-    function(field,
-             vector) {
-
-        if (is.character(vector)) {
-
-            vector <- sQuo(vector)
-
-        }
-
-        SqlRender::render("@field IN (@vector)",
-                          field = field,
-                          vector = vector)
+  function(field,
+           vector) {
+    if (is.character(vector)) {
+      vector <- sQuo(vector)
     }
+
+    SqlRender::render("@field IN (@vector)",
+      field = field,
+      vector = vector
+    )
+  }
 
 
 #' Render "WHERE x LIKE y"
@@ -3049,13 +2999,13 @@ draftWhereIn <-
 
 
 draftWhereLike <-
-    function(field,
-             term) {
-
-        SqlRender::render("@field LIKE '%@term%'",
-                          field = field,
-                          term = term)
-    }
+  function(field,
+           term) {
+    SqlRender::render("@field LIKE '%@term%'",
+      field = field,
+      term = term
+    )
+  }
 
 
 
@@ -3069,19 +3019,17 @@ draftWhereLike <-
 
 
 draftWhereLowerIn <-
-    function(field,
-             vector) {
-
-        if (is.character(vector)) {
-
-                vector <- sQuo(vector)
-
-        }
-
-        SqlRender::render("LOWER(@field) IN (@vector)",
-                          field = field,
-                          vector = vector)
+  function(field,
+           vector) {
+    if (is.character(vector)) {
+      vector <- sQuo(vector)
     }
+
+    SqlRender::render("LOWER(@field) IN (@vector)",
+      field = field,
+      vector = vector
+    )
+  }
 
 
 #' Render WHERE lowercase x LIKE y
@@ -3092,14 +3040,13 @@ draftWhereLowerIn <-
 
 
 draftWhereLowerLike <-
-    function(field,
-             term) {
-
-        SqlRender::render("LOWER(@field) LIKE '%@term%'",
-                          field = field,
-                          term = tolower(term))
-
-    }
+  function(field,
+           term) {
+    SqlRender::render("LOWER(@field) LIKE '%@term%'",
+      field = field,
+      term = tolower(term)
+    )
+  }
 
 
 
@@ -3114,19 +3061,17 @@ draftWhereLowerLike <-
 
 
 draftWhereLowerNotIn <-
-    function(field,
-             vector) {
-
-        if (is.character(vector)) {
-
-            vector <- sQuo(vector)
-
-        }
-
-        SqlRender::render("LOWER(@field) NOT IN (@vector)",
-                          field = field,
-                          vector = vector)
+  function(field,
+           vector) {
+    if (is.character(vector)) {
+      vector <- sQuo(vector)
     }
+
+    SqlRender::render("LOWER(@field) NOT IN (@vector)",
+      field = field,
+      vector = vector
+    )
+  }
 
 
 #' Render "WHERE x NOT IN y"
@@ -3138,19 +3083,17 @@ draftWhereLowerNotIn <-
 
 
 draftWhereNotIn <-
-    function(field,
-             vector) {
-
-        if (is.character(vector)) {
-
-            vector <- sQuo(vector)
-
-        }
-
-        SqlRender::render("@field NOT IN (@vector)",
-                          field = field,
-                          vector = vector)
+  function(field,
+           vector) {
+    if (is.character(vector)) {
+      vector <- sQuo(vector)
     }
+
+    SqlRender::render("@field NOT IN (@vector)",
+      field = field,
+      vector = vector
+    )
+  }
 
 
 #' @title
@@ -3162,16 +3105,15 @@ draftWhereNotIn <-
 #' @export
 
 pasteWheres <-
-    function(...) {
+  function(...) {
+    Args <- rlang::list2(...)
 
-        Args <- rlang::list2(...)
-
-        paste0("WHERE ",
-                unlist(Args) %>%
-                    paste(collapse = " AND ")
-        )
-
-    }
+    paste0(
+      "WHERE ",
+      unlist(Args) %>%
+        paste(collapse = " AND ")
+    )
+  }
 
 
 
@@ -3190,10 +3132,9 @@ pasteWheres <-
 #' @rdname getConnDB
 
 getConnDB <-
-        function(conn) {
-                conn@jConnection$getCatalog()
-
-        }
+  function(conn) {
+    conn@jConnection$getCatalog()
+  }
 
 
 
@@ -3213,38 +3154,32 @@ getConnDB <-
 
 
 lsFields <-
-    function(conn,
-             schema,
-             tableName,
-             verbose = TRUE,
-             render_sql = TRUE) {
-
-            if (render_sql) {
-
-                typewrite_sql("N/A")
-
-            }
-
-
-            if (verbose) {
-
-                typewrite_activity("Listing Fields...")
-
-            }
-
-            resultset <- DatabaseConnector::dbListFields(conn = conn,
-                                                        name = tableName,
-                                                        schema = schema)
-
-            if (verbose) {
-
-                typewrite_activity("Listing Fields...complete")
-
-            }
-
-            tolower(resultset)
-
+  function(conn,
+           schema,
+           tableName,
+           verbose = TRUE,
+           render_sql = TRUE) {
+    if (render_sql) {
+      typewrite_sql("N/A")
     }
+
+
+    if (verbose) {
+      typewrite_activity("Listing Fields...")
+    }
+
+    resultset <- DatabaseConnector::dbListFields(
+      conn = conn,
+      name = tableName,
+      schema = schema
+    )
+
+    if (verbose) {
+      typewrite_activity("Listing Fields...complete")
+    }
+
+    tolower(resultset)
+  }
 
 
 #' @title
@@ -3257,19 +3192,19 @@ lsFields <-
 #' @family list functions
 
 lsSchema <-
-        function(conn,
-                 verbose = TRUE,
-                 render_sql = TRUE) {
-
-                query(conn = conn,
-                      sql_statement = "SELECT nspname FROM pg_catalog.pg_namespace;",
-                      verbose = verbose,
-                      render_sql = render_sql) %>%
-                unlist() %>%
-                unname() %>%
-                tolower()
-
-        }
+  function(conn,
+           verbose = TRUE,
+           render_sql = TRUE) {
+    query(
+      conn = conn,
+      sql_statement = "SELECT nspname FROM pg_catalog.pg_namespace;",
+      verbose = verbose,
+      render_sql = render_sql
+    ) %>%
+      unlist() %>%
+      unname() %>%
+      tolower()
+  }
 
 #' @title
 #' List Tables
@@ -3284,39 +3219,31 @@ lsSchema <-
 #' @family list functions
 
 lsTables <-
-    function(conn,
-             schema,
-             verbose = TRUE,
-             render_sql = TRUE) {
-
-
-            if (render_sql) {
-
-                typewrite_sql("N/A")
-
-            }
-
-
-            if (verbose) {
-
-                typewrite_activity("Listing Tables...")
-
-            }
-
-
-            resultset <- DatabaseConnector::dbListTables(conn = conn,
-                                                        schema = schema)
-
-            if (verbose) {
-
-                typewrite_activity("Listing Tables...completed")
-
-            }
-
-            toupper(resultset)
-
-
+  function(conn,
+           schema,
+           verbose = TRUE,
+           render_sql = TRUE) {
+    if (render_sql) {
+      typewrite_sql("N/A")
     }
+
+
+    if (verbose) {
+      typewrite_activity("Listing Tables...")
+    }
+
+
+    resultset <- DatabaseConnector::dbListTables(
+      conn = conn,
+      schema = schema
+    )
+
+    if (verbose) {
+      typewrite_activity("Listing Tables...completed")
+    }
+
+    toupper(resultset)
+  }
 
 
 
@@ -3356,16 +3283,17 @@ NULL
 #' @importFrom DatabaseConnector createConnectionDetails
 
 makeLocalConnDetails <-
-    function(dbname = "athena",
-             port = 5432) {
+  function(dbname = "athena",
+           port = 5432) {
+    dbms <- "postgresql"
+    server <- paste0("localhost/", dbname)
 
-                dbms     <- "postgresql"
-                server   <- paste0("localhost/", dbname)
-
-                DatabaseConnector::createConnectionDetails(dbms  = dbms,
-                                                           server   = server,
-                                                           port     = port)
-    }
+    DatabaseConnector::createConnectionDetails(
+      dbms = dbms,
+      server = server,
+      port = port
+    )
+  }
 
 
 #' @title
@@ -3384,13 +3312,14 @@ makeLocalConnDetails <-
 #' @importFrom DatabaseConnector connect
 
 localConnect <-
-        function(dbname = "athena",
-                 port = 5432) {
-
-                conn_details <- makeLocalConnDetails(dbname = dbname,
-                                                     port = port)
-                DatabaseConnector::connect(conn_details)
-        }
+  function(dbname = "athena",
+           port = 5432) {
+    conn_details <- makeLocalConnDetails(
+      dbname = dbname,
+      port = port
+    )
+    DatabaseConnector::connect(conn_details)
+  }
 
 
 
@@ -3406,17 +3335,17 @@ localConnect <-
 #' @export
 
 fileQuery <-
-    function(conn,
-             file,
-             ...) {
+  function(conn,
+           file,
+           ...) {
+    sql_statement <- SqlRender::readSql(sourceFile = file)
 
-        sql_statement <- SqlRender::readSql(sourceFile = file)
-
-        query(conn = conn,
-              sql_statement = sql_statement,
-              ...)
-
-    }
+    query(
+      conn = conn,
+      sql_statement = sql_statement,
+      ...
+    )
+  }
 
 
 
@@ -3432,17 +3361,17 @@ fileQuery <-
 #' @export
 
 fileSend <-
-    function(conn,
-             file,
-             ...) {
+  function(conn,
+           file,
+           ...) {
+    sql_statement <- SqlRender::readSql(sourceFile = file)
 
-        sql_statement <- SqlRender::readSql(sourceFile = file)
-
-        send(conn = conn,
-              sql_statement = sql_statement,
-              ...)
-
-    }
+    send(
+      conn = conn,
+      sql_statement = sql_statement,
+      ...
+    )
+  }
 
 
 
@@ -3459,23 +3388,24 @@ fileSend <-
 #' @export
 
 linkQuery <-
-    function(conn,
-             link) {
+  function(conn,
+           link) {
+    tmp_sql <- tempfile(fileext = ".txt")
 
-                tmp_sql <- tempfile(fileext = ".txt")
-
-                download.file(link,
-                              destfile = tmp_sql)
-
-
-
-                query(conn = conn,
-                      statement = SqlRender::readSql(tmp_sql))
+    download.file(link,
+      destfile = tmp_sql
+    )
 
 
-                unlink(tmp_sql)
 
-    }
+    query(
+      conn = conn,
+      statement = SqlRender::readSql(tmp_sql)
+    )
+
+
+    unlink(tmp_sql)
+  }
 
 
 
@@ -3487,23 +3417,24 @@ linkQuery <-
 #' @export
 
 linkSend <-
-    function(conn,
-             link) {
+  function(conn,
+           link) {
+    tmp_sql <- tempfile(fileext = ".txt")
 
-                tmp_sql <- tempfile(fileext = ".txt")
-
-                download.file(link,
-                              destfile = tmp_sql)
-
-
-
-                send(conn = conn,
-                      statement = SqlRender::readSql(tmp_sql))
+    download.file(link,
+      destfile = tmp_sql
+    )
 
 
-                unlink(tmp_sql)
 
-    }
+    send(
+      conn = conn,
+      statement = SqlRender::readSql(tmp_sql)
+    )
+
+
+    unlink(tmp_sql)
+  }
 
 
 
@@ -3524,17 +3455,15 @@ linkSend <-
 #' @export
 
 renderCopy <-
-    function(schema,
-             tableName,
-             csvFilePath) {
-
-
-        SqlRender::render("COPY @schema.@tableName FROM '@csvFilePath' WITH DELIMITER E'\\t' CSV HEADER QUOTE E'\\b';",
-                          schema = schema,
-                          tableName = tableName,
-                          csvFilePath = csvFilePath)
-
-    }
+  function(schema,
+           tableName,
+           csvFilePath) {
+    SqlRender::render("COPY @schema.@tableName FROM '@csvFilePath' WITH DELIMITER E'\\t' CSV HEADER QUOTE E'\\b';",
+      schema = schema,
+      tableName = tableName,
+      csvFilePath = csvFilePath
+    )
+  }
 
 
 
@@ -3545,17 +3474,15 @@ renderCopy <-
 #' @export
 
 renderCreateDB <-
-    function(schema,
-             db,
-             newDB) {
-
-
-        SqlRender::render("
+  function(schema,
+           db,
+           newDB) {
+    SqlRender::render("
                           CREATE DATABASE @newDB;
                           ",
-                          newDB = newDB)
-
-    }
+      newDB = newDB
+    )
+  }
 
 
 
@@ -3568,15 +3495,13 @@ renderCreateDB <-
 #' @export
 
 renderCreateSchema <-
-    function(schema) {
-
-
-        SqlRender::render("
+  function(schema) {
+    SqlRender::render("
                           CREATE SCHEMA @schema;
                           ",
-                          schema = schema)
-
-    }
+      schema = schema
+    )
+  }
 
 
 
@@ -3589,36 +3514,31 @@ renderCreateSchema <-
 #' @export
 
 renderDropSchema <-
-    function(schema,
-             cascade = FALSE,
-             if_exists = TRUE) {
-
-
-        if (cascade) {
-
-            SqlRender::render("
+  function(schema,
+           cascade = FALSE,
+           if_exists = TRUE) {
+    if (cascade) {
+      SqlRender::render("
                               DROP SCHEMA @schema CASCADE
                               ;",
-                              schema = schema)
+        schema = schema
+      )
+    }
 
-        }
-
-        if (if_exists) {
-
-                SqlRender::render("
+    if (if_exists) {
+      SqlRender::render("
                                   DROP SCHEMA IF EXISTS @schema
                                   ;",
-                                  schema = schema)
-
-        } else {
-
-                SqlRender::render("
+        schema = schema
+      )
+    } else {
+      SqlRender::render("
                                   DROP SCHEMA @schema
                                   ;",
-                                  schema = schema)
-        }
-
+        schema = schema
+      )
     }
+  }
 
 
 
@@ -3631,30 +3551,25 @@ renderDropSchema <-
 #' @export
 
 renderDropTable <-
-    function(schema,
-             tableName,
-             if_exists = TRUE) {
-
-
-
-        if (if_exists) {
-
-            SqlRender::render("
+  function(schema,
+           tableName,
+           if_exists = TRUE) {
+    if (if_exists) {
+      SqlRender::render("
                               DROP TABLE IF EXISTS @schema.@tableName;
                               ",
-                              schema = schema,
-                              tableName = tableName)
-
-        } else {
-
-            SqlRender::render("
+        schema = schema,
+        tableName = tableName
+      )
+    } else {
+      SqlRender::render("
                           DROP TABLE @schema.@tableName;
                           ",
-                              schema = schema,
-                              tableName = tableName)
-        }
-
+        schema = schema,
+        tableName = tableName
+      )
     }
+  }
 
 
 
@@ -3674,32 +3589,28 @@ renderDropTable <-
 #' @importFrom SqlRender render readSql
 
 renderGrantSchema <-
-        function(schema,
-                 group = NULL,
-                 user = NULL) {
+  function(schema,
+           group = NULL,
+           user = NULL) {
+    if (is.null(group) && is.null(user)) {
+      stop("group or user is required")
+    }
 
-                if (is.null(group) && is.null(user)) {
-                        stop("group or user is required")
-                }
 
-
-                if (!is.null(group)) {
-
-                        SqlRender::render("
+    if (!is.null(group)) {
+      SqlRender::render("
                                           GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA @schema to group @gp
                                           ",
-                                          schema = schema,
-                                          gp = group)
-
-                } else {
-
-                        SqlRender::render("GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA @schema to @user;",
-                                          schema = schema,
-                                          user = user)
-
-                }
-
-        }
+        schema = schema,
+        gp = group
+      )
+    } else {
+      SqlRender::render("GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA @schema to @user;",
+        schema = schema,
+        user = user
+      )
+    }
+  }
 
 
 
@@ -3713,9 +3624,9 @@ renderGrantSchema <-
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
+#' if (interactive()) {
+#'   # EXAMPLE1
+#' }
 #' }
 #' @seealso
 #'  \code{\link[SqlRender]{render}}
@@ -3726,17 +3637,17 @@ renderGrantSchema <-
 
 
 renderInfoSchemaCols <-
-        function(schema) {
-
-                SqlRender::render(
-                                  "
+  function(schema) {
+    SqlRender::render(
+      "
                                   SELECT *
                                   FROM information_schema.columns
                                   WHERE table_schema = '@schema'
                                   ;
                                   ",
-                                  schema = schema)
-        }
+      schema = schema
+    )
+  }
 
 
 
@@ -3749,16 +3660,13 @@ renderInfoSchemaCols <-
 #' @export
 
 renderLsSchema <-
-    function() {
-
-
-        SqlRender::render("
+  function() {
+    SqlRender::render("
                           SELECT nspname
                           FROM pg_catalog.pg_namespace
                           ;
                           ")
-
-    }
+  }
 
 
 
@@ -3770,17 +3678,15 @@ renderLsSchema <-
 #' @export
 
 renderRenameDB <-
-    function(schema,
-             db,
-             newDB) {
-
-
-        SqlRender::render("ALTER DATABASE @db RENAME TO @newDB;",
-                          schema = schema,
-                          db = db,
-                          newDB = newDB)
-
-    }
+  function(schema,
+           db,
+           newDB) {
+    SqlRender::render("ALTER DATABASE @db RENAME TO @newDB;",
+      schema = schema,
+      db = db,
+      newDB = newDB
+    )
+  }
 
 
 
@@ -3792,17 +3698,15 @@ renderRenameDB <-
 #' @export
 
 renderRenameTable <-
-    function(schema,
-             tableName,
-             newTableName) {
-
-
-        SqlRender::render("ALTER TABLE @schema.@tableName RENAME TO @newTableName;",
-                          schema = schema,
-                          tableName = tableName,
-                          newTableName = newTableName)
-
-    }
+  function(schema,
+           tableName,
+           newTableName) {
+    SqlRender::render("ALTER TABLE @schema.@tableName RENAME TO @newTableName;",
+      schema = schema,
+      tableName = tableName,
+      newTableName = newTableName
+    )
+  }
 
 
 
@@ -3816,39 +3720,34 @@ renderRenameTable <-
 #' @export
 
 renderRowCount <-
-    function(fields = "*",
-             distinct = FALSE,
-             schema,
-             tableName) {
-
-
-        if (distinct) {
-
-                SqlRender::render(
-                                    "
+  function(fields = "*",
+           distinct = FALSE,
+           schema,
+           tableName) {
+    if (distinct) {
+      SqlRender::render(
+        "
                                     SELECT DISTINCT COUNT(@fields)
                                     FROM @schema.@tableName
                                     ;
                                     ",
-                    schema = schema,
-                    fields = fields,
-                    tableName = tableName)
-
-        } else {
-
-                SqlRender::render(
-                                "
+        schema = schema,
+        fields = fields,
+        tableName = tableName
+      )
+    } else {
+      SqlRender::render(
+        "
                                 SELECT COUNT(@fields)
                                 FROM @schema.@tableName
                                 ;
                                 ",
-                                  schema = schema,
-                                  fields = fields,
-                                  tableName = tableName)
-
-        }
-
+        schema = schema,
+        fields = fields,
+        tableName = tableName
+      )
     }
+  }
 
 
 
@@ -3861,47 +3760,53 @@ renderRowCount <-
 
 
 .writeErrorReport <-
-        function(message,
-                 sql,
-                 errorFile,
-                 halt = FALSE) {
+  function(message,
+           sql,
+           errorFile,
+           halt = FALSE) {
+    .systemInfo <- function() {
+      si <- sessionInfo()
+      lines <- c()
+      lines <- c(lines, "R version:")
+      lines <- c(lines, si$R.version$version.string)
+      lines <- c(lines, "")
+      lines <- c(lines, "Platform:")
+      lines <- c(lines, si$R.version$platform)
+      lines <- c(lines, "")
+      lines <- c(lines, "Attached base packages:")
+      lines <- c(lines, paste("-", si$basePkgs))
+      lines <- c(lines, "")
+      lines <- c(lines, "Other attached packages:")
+      for (pkg in si$otherPkgs) {
+        lines <- c(
+          lines,
+          paste("- ", pkg$Package, " (", pkg$Version, ")", sep = "")
+        )
+      }
+      return(paste(lines, collapse = "\n"))
+    }
 
-                .systemInfo <- function() {
-                        si <- sessionInfo()
-                        lines <- c()
-                        lines <- c(lines, "R version:")
-                        lines <- c(lines, si$R.version$version.string)
-                        lines <- c(lines, "")
-                        lines <- c(lines, "Platform:")
-                        lines <- c(lines, si$R.version$platform)
-                        lines <- c(lines, "")
-                        lines <- c(lines, "Attached base packages:")
-                        lines <- c(lines, paste("-", si$basePkgs))
-                        lines <- c(lines, "")
-                        lines <- c(lines, "Other attached packages:")
-                        for (pkg in si$otherPkgs) lines <- c(lines,
-                                                             paste("- ", pkg$Package, " (", pkg$Version, ")", sep = ""))
-                        return(paste(lines, collapse = "\n"))
-                }
+    report <- c("Timestamp:\n", as.character(Sys.time()), "\n\nError:\n", message, "\n\nSQL:\n", sql, "\n\n", .systemInfo())
 
-                report <- c("Timestamp:\n", as.character(Sys.time()), "\n\nError:\n", message, "\n\nSQL:\n", sql, "\n\n", .systemInfo())
+    readr::write_lines(report,
+      path = errorFile,
+      append = TRUE
+    )
 
-                readr::write_lines(report,
-                                   path = errorFile,
-                                   append = TRUE)
-
-                if (halt) {
-                        stop(paste("Error executing SQL:",
-                                   message,
-                                   paste("\nError is documented in ", errorFile),
-                                   sep = "\n"), call. = FALSE)
-                } else {
-                        warning(paste("\nError executing SQL:",
-                                   message,
-                                   paste("Error is documented in ", errorFile),
-                                   sep = "\n"), call. = FALSE)
-                }
-        }
+    if (halt) {
+      stop(paste("Error executing SQL:",
+        message,
+        paste("\nError is documented in ", errorFile),
+        sep = "\n"
+      ), call. = FALSE)
+    } else {
+      warning(paste("\nError executing SQL:",
+        message,
+        paste("Error is documented in ", errorFile),
+        sep = "\n"
+      ), call. = FALSE)
+    }
+  }
 
 
 
@@ -3910,9 +3815,9 @@ renderRowCount <-
 #' @export
 
 reservedWords <-
-        function() {
-                c("ADD", "ALL", "ALTER", "AND", "ANY", "AS", "ASC", "AUTHORIZATION", "BACKUP", "BEGIN", "BETWEEN", "BREAK", "BROWSE", "BULK", "BY", "CASCADE", "CASE", "CHECK", "CHECKPOINT", "CLOSE", "CLUSTERED", "COALESCE", "COLLATE", "COLUMN", "COMMIT", "COMPUTE", "CONSTRAINT", "CONTAINS", "CONTAINSTABLE", "CONTINUE", "CONVERT", "CREATE", "CROSS", "CURRENT", "CURRENT_DATE", "CURRENT_TIME", "CURRENT_TIMESTAMP", "CURRENT_USER", "CURSOR", "DATABASE", "DBCC", "DEALLOCATE", "DECLARE", "DEFAULT", "DELETE", "DENY", "DESC", "DISK", "DISTINCT", "DISTRIBUTED", "DOUBLE", "DROP", "DUMP", "ELSE", "END", "ERRLVL", "ESCAPE", "EXCEPT", "EXEC", "EXECUTE", "EXISTS", "EXIT", "ABSOLUTE", "ACTION", "ADA", "ALLOCATE", "ARE", "ASSERTION", "AT", "AVG", "BIT", "BIT_LENGTH", "BOTH", "CASCADED", "CAST", "CATALOG", "CHAR", "CHAR_LENGTH", "CHARACTER", "CHARACTER_LENGTH", "COLLATION", "CONNECT", "CONNECTION", "CONSTRAINTS", "CORRESPONDING", "COUNT", "DATE", "DAY", "DEC", "DECIMAL", "DEFERRABLE", "DEFERRED", "DESCRIBE", "DESCRIPTOR", "DIAGNOSTICS", "DISCONNECT", "DOMAIN", "END-EXEC", "EXCEPTION", "ADMIN", "AFTER", "AGGREGATE", "ALIAS", "ARRAY", "ASENSITIVE", "ASYMMETRIC", "ATOMIC", "BEFORE", "BINARY", "BLOB", "BOOLEAN", "BREADTH", "CALL", "CALLED", "CARDINALITY", "CLASS", "CLOB", "COLLECT", "COMPLETION", "CONDITION", "CONSTRUCTOR", "CORR", "COVAR_POP", "COVAR_SAMP", "CUBE", "CUME_DIST", "CURRENT_CATALOG", "CURRENT_DEFAULT_TRANSFORM_GROUP", "CURRENT_PATH", "CURRENT_ROLE", "CURRENT_SCHEMA", "CURRENT_TRANSFORM_GROUP_FOR_TYPE", "CYCLE", "DATA", "DEPTH", "DEREF", "DESTROY", "DESTRUCTOR", "DETERMINISTIC", "DICTIONARY", "DYNAMIC", "EACH", "ELEMENT", "EQUALS", "EVERY", "FALSE", "FILTER", "FIRST", "FLOAT", "FOUND", "FREE", "FULLTEXTTABLE", "FUSION", "GENERAL", "GET", "GLOBAL", "GO", "GROUPING", "HOLD", "EXTERNAL", "FETCH", "FILE", "FILLFACTOR", "FOR", "FOREIGN", "FREETEXT", "FREETEXTTABLE", "FROM", "FULL", "FUNCTION", "GOTO", "GRANT", "GROUP", "HAVING", "HOLDLOCK", "IDENTITY", "IDENTITY_INSERT", "IDENTITYCOL", "IF", "IN", "INDEX", "INNER", "INSERT", "INTERSECT", "INTO", "IS", "JOIN", "KEY", "KILL", "LEFT", "LIKE", "LINENO", "LOAD", "MERGE", "NATIONAL", "NOCHECK", "NONCLUSTERED", "NOT", "NULL", "NULLIF", "OF", "OFF", "OFFSETS", "ON", "OPEN", "OPENDATASOURCE", "OPENQUERY", "OPENROWSET", "OPENXML", "OPTION", "OR", "ORDER", "OUTER", "OVER", "PERCENT", "PIVOT", "PLAN", "PRECISION", "PRIMARY", "PRINT", "PROC", "EXTRACT", "FORTRAN", "HOUR", "IMMEDIATE", "INCLUDE", "INDICATOR", "INITIALLY", "INPUT", "INSENSITIVE", "INT", "INTEGER", "INTERVAL", "ISOLATION", "LANGUAGE", "LAST", "LEADING", "LEVEL", "LOCAL", "LOWER", "MATCH", "MAX", "MIN", "MINUTE", "MODULE", "MONTH", "NAMES", "NATURAL", "NCHAR", "NEXT", "NO", "NONE", "NUMERIC", "OCTET_LENGTH", "ONLY", "OUTPUT", "HOST", "IGNORE", "INITIALIZE", "INOUT", "INTERSECTION", "ITERATE", "LARGE", "LATERAL", "LESS", "LIKE_REGEX", "LIMIT", "LN", "LOCALTIME", "LOCALTIMESTAMP", "LOCATOR", "MAP", "MEMBER", "METHOD", "MOD", "MODIFIES", "MODIFY", "MULTISET", "NCLOB", "NEW", "NORMALIZE", "OBJECT", "OCCURRENCES_REGEX", "OLD", "OPERATION", "ORDINALITY", "OUT", "OVERLAY", "PAD", "PARAMETER", "PARAMETERS", "PARTIAL", "PARTITION", "PATH", "POSTFIX", "PREFIX", "PREORDER", "PREPARE", "PERCENT_RANK", "PERCENTILE_CONT", "PERCENTILE_DISC", "POSITION_REGEX", "PRESERVE", "PRIOR", "PRIVILEGES", "RANGE", "READS", "REAL", "RECURSIVE", "REF", "REFERENCING", "REGR_AVGX", "REGR_AVGY", "REGR_COUNT", "REGR_INTERCEPT", "REGR_R2", "REGR_SLOPE", "REGR_SXX", "REGR_SXY", "REGR_SYY", "PROCEDURE", "PUBLIC", "RAISERROR", "READ", "READTEXT", "RECONFIGURE", "REFERENCES", "REPLICATION", "RESTORE", "RESTRICT", "RETURN", "REVERT", "REVOKE", "RIGHT", "ROLLBACK", "ROWCOUNT", "ROWGUIDCOL", "RULE", "SAVE", "SCHEMA", "SECURITYAUDIT", "SELECT", "SEMANTICKEYPHRASETABLE", "SEMANTICSIMILARITYDETAILSTABLE", "SEMANTICSIMILARITYTABLE", "SESSION_USER", "SET", "SETUSER", "SHUTDOWN", "SOME", "STATISTICS", "SYSTEM_USER", "TABLE", "TABLESAMPLE", "TEXTSIZE", "THEN", "TO", "TOP", "TRAN", "TRANSACTION", "TRIGGER", "TRUNCATE", "TRY_CONVERT", "TSEQUAL", "UNION", "UNIQUE", "UNPIVOT", "UPDATE", "UPDATETEXT", "USE", "USER", "VALUES", "VARYING", "VIEW", "WAITFOR", "WHEN", "WHERE", "WHILE", "WITH", "WITHIN GROUP", "WRITETEXT", "OVERLAPS", "PASCAL", "POSITION", "RELATIVE", "ROWS", "SCROLL", "SECOND", "SECTION", "SESSION", "SIZE", "SMALLINT", "SPACE", "SQL", "SQLCA", "SQLCODE", "SQLERROR", "SQLSTATE", "SQLWARNING", "SUBSTRING", "SUM", "TEMPORARY", "TIME", "TIMESTAMP", "TIMEZONE_HOUR", "TIMEZONE_MINUTE", "TRAILING", "TRANSLATE", "TRANSLATION", "TRIM", "TRUE", "UNKNOWN", "UPPER", "USAGE", "USING", "VALUE", "VARCHAR", "WHENEVER", "WORK", "WRITE", "YEAR", "ZONE", "RELEASE", "RESULT", "RETURNS", "ROLE", "ROLLUP", "ROUTINE", "ROW", "SAVEPOINT", "SCOPE", "SEARCH", "SENSITIVE", "SEQUENCE", "SETS", "SIMILAR", "SPECIFIC", "SPECIFICTYPE", "SQLEXCEPTION", "START", "STATE", "STATEMENT", "STATIC", "STDDEV_POP", "STDDEV_SAMP", "STRUCTURE", "SUBMULTISET", "SUBSTRING_REGEX", "SYMMETRIC", "SYSTEM", "TERMINATE", "THAN", "TRANSLATE_REGEX", "TREAT", "UESCAPE", "UNDER", "UNNEST", "VAR_POP", "VAR_SAMP", "VARIABLE", "WIDTH_BUCKET", "WITHOUT", "WINDOW", "WITHIN", "XMLAGG", "XMLATTRIBUTES", "XMLBINARY", "XMLCAST", "XMLCOMMENT", "XMLCONCAT", "XMLDOCUMENT", "XMLELEMENT", "XMLEXISTS", "XMLFOREST", "XMLITERATE", "XMLNAMESPACES", "XMLPARSE", "XMLPI", "XMLQUERY", "XMLSERIALIZE", "XMLTABLE", "XMLTEXT", "XMLVALIDATE")
-        }
+  function() {
+    c("ADD", "ALL", "ALTER", "AND", "ANY", "AS", "ASC", "AUTHORIZATION", "BACKUP", "BEGIN", "BETWEEN", "BREAK", "BROWSE", "BULK", "BY", "CASCADE", "CASE", "CHECK", "CHECKPOINT", "CLOSE", "CLUSTERED", "COALESCE", "COLLATE", "COLUMN", "COMMIT", "COMPUTE", "CONSTRAINT", "CONTAINS", "CONTAINSTABLE", "CONTINUE", "CONVERT", "CREATE", "CROSS", "CURRENT", "CURRENT_DATE", "CURRENT_TIME", "CURRENT_TIMESTAMP", "CURRENT_USER", "CURSOR", "DATABASE", "DBCC", "DEALLOCATE", "DECLARE", "DEFAULT", "DELETE", "DENY", "DESC", "DISK", "DISTINCT", "DISTRIBUTED", "DOUBLE", "DROP", "DUMP", "ELSE", "END", "ERRLVL", "ESCAPE", "EXCEPT", "EXEC", "EXECUTE", "EXISTS", "EXIT", "ABSOLUTE", "ACTION", "ADA", "ALLOCATE", "ARE", "ASSERTION", "AT", "AVG", "BIT", "BIT_LENGTH", "BOTH", "CASCADED", "CAST", "CATALOG", "CHAR", "CHAR_LENGTH", "CHARACTER", "CHARACTER_LENGTH", "COLLATION", "CONNECT", "CONNECTION", "CONSTRAINTS", "CORRESPONDING", "COUNT", "DATE", "DAY", "DEC", "DECIMAL", "DEFERRABLE", "DEFERRED", "DESCRIBE", "DESCRIPTOR", "DIAGNOSTICS", "DISCONNECT", "DOMAIN", "END-EXEC", "EXCEPTION", "ADMIN", "AFTER", "AGGREGATE", "ALIAS", "ARRAY", "ASENSITIVE", "ASYMMETRIC", "ATOMIC", "BEFORE", "BINARY", "BLOB", "BOOLEAN", "BREADTH", "CALL", "CALLED", "CARDINALITY", "CLASS", "CLOB", "COLLECT", "COMPLETION", "CONDITION", "CONSTRUCTOR", "CORR", "COVAR_POP", "COVAR_SAMP", "CUBE", "CUME_DIST", "CURRENT_CATALOG", "CURRENT_DEFAULT_TRANSFORM_GROUP", "CURRENT_PATH", "CURRENT_ROLE", "CURRENT_SCHEMA", "CURRENT_TRANSFORM_GROUP_FOR_TYPE", "CYCLE", "DATA", "DEPTH", "DEREF", "DESTROY", "DESTRUCTOR", "DETERMINISTIC", "DICTIONARY", "DYNAMIC", "EACH", "ELEMENT", "EQUALS", "EVERY", "FALSE", "FILTER", "FIRST", "FLOAT", "FOUND", "FREE", "FULLTEXTTABLE", "FUSION", "GENERAL", "GET", "GLOBAL", "GO", "GROUPING", "HOLD", "EXTERNAL", "FETCH", "FILE", "FILLFACTOR", "FOR", "FOREIGN", "FREETEXT", "FREETEXTTABLE", "FROM", "FULL", "FUNCTION", "GOTO", "GRANT", "GROUP", "HAVING", "HOLDLOCK", "IDENTITY", "IDENTITY_INSERT", "IDENTITYCOL", "IF", "IN", "INDEX", "INNER", "INSERT", "INTERSECT", "INTO", "IS", "JOIN", "KEY", "KILL", "LEFT", "LIKE", "LINENO", "LOAD", "MERGE", "NATIONAL", "NOCHECK", "NONCLUSTERED", "NOT", "NULL", "NULLIF", "OF", "OFF", "OFFSETS", "ON", "OPEN", "OPENDATASOURCE", "OPENQUERY", "OPENROWSET", "OPENXML", "OPTION", "OR", "ORDER", "OUTER", "OVER", "PERCENT", "PIVOT", "PLAN", "PRECISION", "PRIMARY", "PRINT", "PROC", "EXTRACT", "FORTRAN", "HOUR", "IMMEDIATE", "INCLUDE", "INDICATOR", "INITIALLY", "INPUT", "INSENSITIVE", "INT", "INTEGER", "INTERVAL", "ISOLATION", "LANGUAGE", "LAST", "LEADING", "LEVEL", "LOCAL", "LOWER", "MATCH", "MAX", "MIN", "MINUTE", "MODULE", "MONTH", "NAMES", "NATURAL", "NCHAR", "NEXT", "NO", "NONE", "NUMERIC", "OCTET_LENGTH", "ONLY", "OUTPUT", "HOST", "IGNORE", "INITIALIZE", "INOUT", "INTERSECTION", "ITERATE", "LARGE", "LATERAL", "LESS", "LIKE_REGEX", "LIMIT", "LN", "LOCALTIME", "LOCALTIMESTAMP", "LOCATOR", "MAP", "MEMBER", "METHOD", "MOD", "MODIFIES", "MODIFY", "MULTISET", "NCLOB", "NEW", "NORMALIZE", "OBJECT", "OCCURRENCES_REGEX", "OLD", "OPERATION", "ORDINALITY", "OUT", "OVERLAY", "PAD", "PARAMETER", "PARAMETERS", "PARTIAL", "PARTITION", "PATH", "POSTFIX", "PREFIX", "PREORDER", "PREPARE", "PERCENT_RANK", "PERCENTILE_CONT", "PERCENTILE_DISC", "POSITION_REGEX", "PRESERVE", "PRIOR", "PRIVILEGES", "RANGE", "READS", "REAL", "RECURSIVE", "REF", "REFERENCING", "REGR_AVGX", "REGR_AVGY", "REGR_COUNT", "REGR_INTERCEPT", "REGR_R2", "REGR_SLOPE", "REGR_SXX", "REGR_SXY", "REGR_SYY", "PROCEDURE", "PUBLIC", "RAISERROR", "READ", "READTEXT", "RECONFIGURE", "REFERENCES", "REPLICATION", "RESTORE", "RESTRICT", "RETURN", "REVERT", "REVOKE", "RIGHT", "ROLLBACK", "ROWCOUNT", "ROWGUIDCOL", "RULE", "SAVE", "SCHEMA", "SECURITYAUDIT", "SELECT", "SEMANTICKEYPHRASETABLE", "SEMANTICSIMILARITYDETAILSTABLE", "SEMANTICSIMILARITYTABLE", "SESSION_USER", "SET", "SETUSER", "SHUTDOWN", "SOME", "STATISTICS", "SYSTEM_USER", "TABLE", "TABLESAMPLE", "TEXTSIZE", "THEN", "TO", "TOP", "TRAN", "TRANSACTION", "TRIGGER", "TRUNCATE", "TRY_CONVERT", "TSEQUAL", "UNION", "UNIQUE", "UNPIVOT", "UPDATE", "UPDATETEXT", "USE", "USER", "VALUES", "VARYING", "VIEW", "WAITFOR", "WHEN", "WHERE", "WHILE", "WITH", "WITHIN GROUP", "WRITETEXT", "OVERLAPS", "PASCAL", "POSITION", "RELATIVE", "ROWS", "SCROLL", "SECOND", "SECTION", "SESSION", "SIZE", "SMALLINT", "SPACE", "SQL", "SQLCA", "SQLCODE", "SQLERROR", "SQLSTATE", "SQLWARNING", "SUBSTRING", "SUM", "TEMPORARY", "TIME", "TIMESTAMP", "TIMEZONE_HOUR", "TIMEZONE_MINUTE", "TRAILING", "TRANSLATE", "TRANSLATION", "TRIM", "TRUE", "UNKNOWN", "UPPER", "USAGE", "USING", "VALUE", "VARCHAR", "WHENEVER", "WORK", "WRITE", "YEAR", "ZONE", "RELEASE", "RESULT", "RETURNS", "ROLE", "ROLLUP", "ROUTINE", "ROW", "SAVEPOINT", "SCOPE", "SEARCH", "SENSITIVE", "SEQUENCE", "SETS", "SIMILAR", "SPECIFIC", "SPECIFICTYPE", "SQLEXCEPTION", "START", "STATE", "STATEMENT", "STATIC", "STDDEV_POP", "STDDEV_SAMP", "STRUCTURE", "SUBMULTISET", "SUBSTRING_REGEX", "SYMMETRIC", "SYSTEM", "TERMINATE", "THAN", "TRANSLATE_REGEX", "TREAT", "UESCAPE", "UNDER", "UNNEST", "VAR_POP", "VAR_SAMP", "VARIABLE", "WIDTH_BUCKET", "WITHOUT", "WINDOW", "WITHIN", "XMLAGG", "XMLATTRIBUTES", "XMLBINARY", "XMLCAST", "XMLCOMMENT", "XMLCONCAT", "XMLDOCUMENT", "XMLELEMENT", "XMLEXISTS", "XMLFOREST", "XMLITERATE", "XMLNAMESPACES", "XMLPARSE", "XMLPI", "XMLQUERY", "XMLSERIALIZE", "XMLTABLE", "XMLTEXT", "XMLVALIDATE")
+  }
 
 #' @title
 #' Is a string a reserve word?
@@ -3920,15 +3825,13 @@ reservedWords <-
 #' @export
 
 isReserved <-
-        function(...) {
+  function(...) {
+    Args <- list(...)
+    Args <- unlist(Args)
+    Args <- toupper(Args)
 
-                Args <- list(...)
-                Args <- unlist(Args)
-                Args <- toupper(Args)
-
-                sapply(Args, function(x) x %in% reservedWords())
-
-        }
+    sapply(Args, function(x) x %in% reservedWords())
+  }
 
 
 
@@ -3940,25 +3843,26 @@ isReserved <-
 #' @export
 
 dropSchema <-
-    function(conn,
-             schema,
-             cascade = FALSE,
-             if_exists = TRUE,
-             ...) {
+  function(conn,
+           schema,
+           cascade = FALSE,
+           if_exists = TRUE,
+           ...) {
+    .Deprecated("dropCascade")
 
 
-            .Deprecated("dropCascade")
+    sql_statement <- renderDropSchema(
+      schema = schema,
+      cascade = cascade,
+      if_exists = if_exists
+    )
 
-
-            sql_statement <- renderDropSchema(schema = schema,
-                                               cascade = cascade,
-                                              if_exists = if_exists)
-
-            send(conn = conn,
-                   sql_statement = sql_statement,
-                   ...)
-
-    }
+    send(
+      conn = conn,
+      sql_statement = sql_statement,
+      ...
+    )
+  }
 
 
 #' Drop a Postgres schema
@@ -3967,18 +3871,17 @@ dropSchema <-
 #' @export
 
 dropCascade <-
-        function(conn,
-                 schema,
-                 ...) {
+  function(conn,
+           schema,
+           ...) {
+    sql_statement <- SqlRender::render("DROP SCHEMA @schema CASCADE;", schema = schema)
 
-
-                sql_statement <- SqlRender::render("DROP SCHEMA @schema CASCADE;", schema = schema)
-
-                send(conn = conn,
-                     sql_statement = sql_statement,
-                     ...)
-
-        }
+    send(
+      conn = conn,
+      sql_statement = sql_statement,
+      ...
+    )
+  }
 
 
 
@@ -3998,21 +3901,23 @@ dropCascade <-
 #' @export
 
 grantSchema <-
-        function(conn,
-                 schema,
-                 user = NULL,
-                 group = NULL) {
+  function(conn,
+           schema,
+           user = NULL,
+           group = NULL) {
+    sql_statement <-
+      renderGrantSchema(
+        schema = schema,
+        group = group,
+        user = user
+      )
 
-                sql_statement <-
-                        renderGrantSchema(schema = schema,
-                                          group = group,
-                                          user = user)
 
-
-                send(conn = conn,
-                     sql_statement = sql_statement)
-
-        }
+    send(
+      conn = conn,
+      sql_statement = sql_statement
+    )
+  }
 
 
 
@@ -4025,30 +3930,28 @@ grantSchema <-
 
 
 dataTypeInfo <-
-        function(conn,
-                 schema,
-                 tableName,
-                 render_sql = TRUE) {
-
-
-                sql_statement <-
-                        SqlRender::render(
-                                "
+  function(conn,
+           schema,
+           tableName,
+           render_sql = TRUE) {
+    sql_statement <-
+      SqlRender::render(
+        "
                                 SELECT
                                         column_name as field,
                                         udt_name as data_type
                                 FROM information_schema.columns
                                 WHERE table_name = '@tableName'
                                 ",
-                                tableName = tableName
-                        )
+        tableName = tableName
+      )
 
-                query(
-                        conn = conn,
-                        sql_statement = sql_statement,
-                        render_sql = render_sql)
-
-        }
+    query(
+      conn = conn,
+      sql_statement = sql_statement,
+      render_sql = render_sql
+    )
+  }
 
 
 
@@ -4060,18 +3963,17 @@ dataTypeInfo <-
 #' @export
 
 dropCascade <-
-        function(conn,
-                 schema,
-                 ...) {
+  function(conn,
+           schema,
+           ...) {
+    sql_statement <- SqlRender::render("DROP SCHEMA @schema CASCADE;", schema = schema)
 
-
-                sql_statement <- SqlRender::render("DROP SCHEMA @schema CASCADE;", schema = schema)
-
-                send(conn = conn,
-                     sql_statement = sql_statement,
-                     ...)
-
-        }
+    send(
+      conn = conn,
+      sql_statement = sql_statement,
+      ...
+    )
+  }
 
 
 #' Drop a Postgres schema
@@ -4080,33 +3982,33 @@ dropCascade <-
 #' @export
 
 dropIfExists <-
-        function(conn,
-                 schema,
-                 ...) {
+  function(conn,
+           schema,
+           ...) {
+    sql_statement <- SqlRender::render("DROP SCHEMA IF EXISTS @schema;", schema = schema)
 
-
-                sql_statement <- SqlRender::render("DROP SCHEMA IF EXISTS @schema;", schema = schema)
-
-                send(conn = conn,
-                     sql_statement = sql_statement,
-                     ...)
-
-        }
+    send(
+      conn = conn,
+      sql_statement = sql_statement,
+      ...
+    )
+  }
 
 
 #' Create a Schema
 #' @export
 
 createSchema <-
-        function(conn,
-                 schema) {
-
-                send(conn = conn,
-                     SqlRender::render(
-                             "CREATE SCHEMA @schema;",
-                             schema = schema
-                     ))
-        }
+  function(conn,
+           schema) {
+    send(
+      conn = conn,
+      SqlRender::render(
+        "CREATE SCHEMA @schema;",
+        schema = schema
+      )
+    )
+  }
 
 
 
@@ -4138,109 +4040,122 @@ createSchema <-
 #' @importFrom dplyr bind_rows mutate
 
 summarizeSchema <-
-        function(conn,
-                 schema,
-                 resultTableName) {
+  function(conn,
+           schema,
+           resultTableName) {
+    Tables <- lsTables(
+      conn = conn,
+      schema = schema
+    )
 
-                        Tables <- lsTables(conn = conn,
-                                                      schema = schema)
+    output <- list()
+    for (i in (length(output) + 1):length(Tables)) {
+      Table <- Tables[i]
 
-        output <- list()
-        for (i in (length(output)+1):length(Tables)) {
+      tableCols <-
+        query(
+          conn = conn,
+          sql_statement = buildQuery(
+            schema = schema,
+            tableName = Table,
+            n = 1,
+            n_type = "limit"
+          )
+        ) %>%
+        colnames()
 
-                Table <- Tables[i]
+      total_rows <-
+        query(
+          conn = conn,
+          sql_statement = renderRowCount(
+            schema = schema,
+            tableName = Table
+          )
+        ) %>%
+        unlist()
 
-                tableCols <-
-                        query(conn = conn,
-                                    sql_statement = buildQuery(schema = schema,
-                                                                     tableName = Table,
-                                                                     n = 1,
-                                                                     n_type = "limit")) %>%
-                        colnames()
+      output_j <- list()
+      for (j in 1:length(tableCols)) {
+        tableCol <- tableCols[j]
 
-                total_rows <-
-                        query(conn = conn,
-                                    sql_statement = renderRowCount(
-                                            schema = schema,
-                                            tableName = Table)) %>%
-                        unlist()
+        output_j[[j]] <-
+          query(
+            conn = conn,
+            sql_statement = buildQuery(
+              fields = tableCol,
+              distinct = TRUE,
+              schema = schema,
+              tableName = Table
+            )
+          ) %>%
+          nrow()
 
-                output_j <- list()
-                for (j in 1:length(tableCols)) {
-                        tableCol <- tableCols[j]
+        names(output_j)[j] <- tableCol
 
-                        output_j[[j]] <-
-                                query(conn = conn,
-                                            sql_statement = buildQuery(fields = tableCol,
-                                                                             distinct = TRUE,
-                                                                             schema = schema,
-                                                                             tableName = Table)) %>%
-                                nrow()
+        Sys.sleep(1)
+      }
 
-                        names(output_j)[j] <- tableCol
+      output[[i]] <-
+        output_j %>%
+        purrr::map(tibble::as_tibble_col, "DISTINCT_COUNT") %>%
+        dplyr::bind_rows(.id = "FIELD") %>%
+        dplyr::mutate(total_rows = total_rows)
 
-                        Sys.sleep(1)
+      names(output)[i] <- Table
+    }
 
-                }
-
-                output[[i]] <-
-                        output_j  %>%
-                        purrr::map(tibble::as_tibble_col, "DISTINCT_COUNT") %>%
-                        dplyr::bind_rows(.id = "FIELD") %>%
-                        dplyr::mutate(total_rows = total_rows)
-
-                names(output)[i] <- Table
-
-        }
-
-        final_output <- dplyr::bind_rows(output,
-                                         .id = "TABLE")
+    final_output <- dplyr::bind_rows(output,
+      .id = "TABLE"
+    )
 
 
-        dropTable(conn = conn,
-                        schema = schema,
-                        tableName = resultTableName)
+    dropTable(
+      conn = conn,
+      schema = schema,
+      tableName = resultTableName
+    )
 
-        writeTable(conn = conn,
-                         schema = schema,
-                         tableName = resultTableName,
-                         final_output)
-}
+    writeTable(
+      conn = conn,
+      schema = schema,
+      tableName = resultTableName,
+      final_output
+    )
+  }
 
 #' Send Function Factor
 #' @export
 
 send_ff <-
-    function(
-        user,
-        password,
-        port,
-        server) {
+  function(user,
+           password,
+           port,
+           server) {
+    function(sql_statement,
+             verbose = TRUE,
+             render_sql = TRUE) {
+      conn <- connect(
+        user = user,
+        password = password,
+        port = port,
+        server = server,
+        verbose = verbose
+      )
 
-        function(sql_statement,
-                 verbose = TRUE,
-                 render_sql = TRUE) {
-
-            conn <- connect(user = user,
-                            password = password,
-                            port = port,
-                            server = server,
-                            verbose = verbose)
-
-            on.exit(expr = dc(conn = conn,
-                              verbose = verbose))
-
-
-            send(conn = conn,
-                 sql_statement = sql_statement,
-                 verbose = verbose,
-                 render_sql = render_sql)
+      on.exit(expr = dc(
+        conn = conn,
+        verbose = verbose
+      ))
 
 
-        }
-
-
+      send(
+        conn = conn,
+        sql_statement = sql_statement,
+        verbose = verbose,
+        render_sql = render_sql
+      )
     }
+  }
 
 
 
@@ -4258,68 +4173,66 @@ send_ff <-
 #' @export
 
 sendList <-
-    function(conn,
-             sqlList,
-             verbose = TRUE,
-             progressBar = TRUE,
-             skipErrors = TRUE,
-             errorFile = NULL,
-             ...) {
-
-            if (!is.list(sqlList)) {
-
-                    stop("'sqlList' must be a list")
-
-            }
-
-            if (progressBar) {
-
-                    pb <- progress::progress_bar$new(total = length(sqlList),
-                                                     format = "[:bar] :elapsedfull :current/:total (:percent)",
-                                                     clear = FALSE)
-                    pb$tick(0)
-                    Sys.sleep(.2)
-
-            }
-
-            for (i in 1:length(sqlList)) {
-
-                    sql <- sqlList[[i]]
-
-                    if (verbose) {
-                            secretary::typewrite("\n", sql)
-                    }
-
-                    if (progressBar) {
-                            pb$tick()
-                            Sys.sleep(.2)
-                    }
-
-
-                    if (skipErrors) {
-
-                            tryCatch(send(conn = conn,
-                                        sql_statement = sql,
-                                        ...),
-                                     error = function(err) {
-                                             secretary::typewrite_error("\n", sql)
-                                             if (!is.null(errorFile)) {
-                                                     .writeErrorReport(message = err$message,
-                                                                       sql = sql,
-                                                                       errorFile = errorFile)
-                                             }
-                                     })
-
-
-                    } else {
-
-                            send(conn = conn,
-                                 sql_statement = sql,
-                                 ...)
-                    }
-
-            }
+  function(conn,
+           sqlList,
+           verbose = TRUE,
+           progressBar = TRUE,
+           skipErrors = TRUE,
+           errorFile = NULL,
+           ...) {
+    if (!is.list(sqlList)) {
+      stop("'sqlList' must be a list")
     }
+
+    if (progressBar) {
+      pb <- progress::progress_bar$new(
+        total = length(sqlList),
+        format = "[:bar] :elapsedfull :current/:total (:percent)",
+        clear = FALSE
+      )
+      pb$tick(0)
+      Sys.sleep(.2)
+    }
+
+    for (i in 1:length(sqlList)) {
+      sql <- sqlList[[i]]
+
+      if (verbose) {
+        secretary::typewrite("\n", sql)
+      }
+
+      if (progressBar) {
+        pb$tick()
+        Sys.sleep(.2)
+      }
+
+
+      if (skipErrors) {
+        tryCatch(send(
+          conn = conn,
+          sql_statement = sql,
+          ...
+        ),
+        error = function(err) {
+          secretary::typewrite_error("\n", sql)
+          if (!is.null(errorFile)) {
+            .writeErrorReport(
+              message = err$message,
+              sql = sql,
+              errorFile = errorFile
+            )
+          }
+        }
+        )
+      } else {
+        send(
+          conn = conn,
+          sql_statement = sql,
+          ...
+        )
+      }
+    }
+  }
 
 
 
@@ -4340,9 +4253,9 @@ sendList <-
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
+#' if (interactive()) {
+#'   # EXAMPLE1
+#' }
 #' }
 #' @seealso
 #'  \code{\link[purrr]{map}}
@@ -4359,107 +4272,118 @@ sendList <-
 #' @importFrom secretary typewrite_bold
 
 summarizeDB <-
-        function(conn,
-                 output.var,
-                 verbose = TRUE,
-                 progressBar = TRUE) {
+  function(conn,
+           output.var,
+           verbose = TRUE,
+           progressBar = TRUE) {
+    schemas <- lsSchema(conn = conn)
+    schemas <-
+      grep("^pg|information_schema", schemas, value = TRUE, invert = TRUE)
 
-                schemas <- lsSchema(conn = conn)
-                schemas <-
-                        grep("^pg|information_schema", schemas, value = TRUE, invert = TRUE)
-
-                sqlList <-
-                        schemas %>%
-                                purrr::map(renderInfoSchemaCols)
-
-
-                schemaInfo <-
-                        queryList(conn = conn,
-                                  sqlList = sqlList,
-                                  verbose = verbose,
-                                  progressBar = FALSE)
-
-                schemaInfo <- dplyr::bind_rows(schemaInfo)
+    sqlList <-
+      schemas %>%
+      purrr::map(renderInfoSchemaCols)
 
 
+    schemaInfo <-
+      queryList(
+        conn = conn,
+        sqlList = sqlList,
+        verbose = verbose,
+        progressBar = FALSE
+      )
 
-                schemaInfo <-
-                        schemaInfo %>%
-                        dplyr::select(table_schema,
-                                      table_name,
-                                      column_name) %>%
-                        dplyr::distinct()
-
-
-                if (progressBar) {
-
-
-                        pb <- progress::progress_bar$new(format = "[:bar] :elapsed :current/:total :percent",
-                                                         total = nrow(schemaInfo))
+    schemaInfo <- dplyr::bind_rows(schemaInfo)
 
 
-                        pb$tick(0)
-                        Sys.sleep(0.2)
 
-                }
-
-
-                output <- list()
-                for (i in 1:nrow(schemaInfo)) {
-
-                        schema <- schemaInfo$table_schema[i]
-                        tableName <- schemaInfo$table_name[i]
-                        fieldName <- schemaInfo$column_name[i]
+    schemaInfo <-
+      schemaInfo %>%
+      dplyr::select(
+        table_schema,
+        table_name,
+        column_name
+      ) %>%
+      dplyr::distinct()
 
 
-                        if (progressBar) {
-
-                                pb$tick()
-                                Sys.sleep(0.2)
-
-                        }
-
-
-                        output[[i]] <-
-                                list(Total_Rows =
-                                        renderRowCount(schema = schema,
-                                                       distinct = TRUE,
-                                                       tableName = tableName),
-                                     Distinct_Field_Value =
-                                         renderRowCount(fields = fieldName,
-                                                        distinct = TRUE,
-                                                        schema = schema,
-                                                        tableName = tableName)) %>%
-                                        purrr::map(~query(conn = conn,
-                                                          sql_statement = .)) %>%
-                                        dplyr::bind_rows(.id = "Variable") %>%
-                                        dplyr::mutate(Schema = schema,
-                                                         Table = tableName,
-                                                         Field = fieldName) %>%
-                                        dplyr::select(Schema,
-                                                      Table,
-                                                      Field,
-                                                      Variable,
-                                                         dplyr::everything())
+    if (progressBar) {
+      pb <- progress::progress_bar$new(
+        format = "[:bar] :elapsed :current/:total :percent",
+        total = nrow(schemaInfo)
+      )
 
 
-                        assign(output.var, output, envir = parent.frame())
+      pb$tick(0)
+      Sys.sleep(0.2)
+    }
 
-                }
 
-                output <-
-                        output %>%
-                        dplyr::bind_rows() %>%
-                        tidyr::pivot_wider(names_from = Variable,
-                                           values_from = count)
+    output <- list()
+    for (i in 1:nrow(schemaInfo)) {
+      schema <- schemaInfo$table_schema[i]
+      tableName <- schemaInfo$table_name[i]
+      fieldName <- schemaInfo$column_name[i]
 
-                assign(output.var, output, envir = parent.frame())
 
-                if (verbose) {
-                        secretary::typewrite_bold("Complete.")
-                }
+      if (progressBar) {
+        pb$tick()
+        Sys.sleep(0.2)
+      }
 
-        }
+
+      output[[i]] <-
+        list(
+          Total_Rows =
+            renderRowCount(
+              schema = schema,
+              distinct = TRUE,
+              tableName = tableName
+            ),
+          Distinct_Field_Value =
+            renderRowCount(
+              fields = fieldName,
+              distinct = TRUE,
+              schema = schema,
+              tableName = tableName
+            )
+        ) %>%
+        purrr::map(~ query(
+          conn = conn,
+          sql_statement = .
+        )) %>%
+        dplyr::bind_rows(.id = "Variable") %>%
+        dplyr::mutate(
+          Schema = schema,
+          Table = tableName,
+          Field = fieldName
+        ) %>%
+        dplyr::select(
+          Schema,
+          Table,
+          Field,
+          Variable,
+          dplyr::everything()
+        )
+
+
+      assign(output.var, output, envir = parent.frame())
+    }
+
+    output <-
+      output %>%
+      dplyr::bind_rows() %>%
+      tidyr::pivot_wider(
+        names_from = Variable,
+        values_from = count
+      )
+
+    assign(output.var, output, envir = parent.frame())
+
+    if (verbose) {
+      secretary::typewrite_bold("Complete.")
+    }
+  }
 
 
 
@@ -4490,53 +4414,50 @@ summarizeDB <-
 
 
 appendTable <-
-        function(conn,
-                 conn_fun,
-                 schema,
-                 tableName,
-                 data,
-                 verbose = TRUE,
-                 render_sql = TRUE,
-                 ...) {
+  function(conn,
+           conn_fun,
+           schema,
+           tableName,
+           data,
+           verbose = TRUE,
+           render_sql = TRUE,
+           ...) {
+    if (!missing(conn_fun)) {
+      conn <- eval(rlang::parse_expr(conn_fun))
+      on.exit(dc(
+        conn = conn,
+        verbose = verbose
+      ),
+      add = TRUE,
+      after = TRUE
+      )
+    }
 
-                if (!missing(conn_fun)) {
-                    conn <- eval(rlang::parse_expr(conn_fun))
-                    on.exit(dc(conn = conn,
-                               verbose = verbose),
-                            add = TRUE,
-                            after = TRUE)
-                }
+    brake_closed_conn(conn = conn)
+    flag_no_rows(data = data)
 
-                brake_closed_conn(conn = conn)
-                flag_no_rows(data = data)
-
-                schemaTableName <- sprintf("%s.%s", schema, tableName)
+    schemaTableName <- sprintf("%s.%s", schema, tableName)
 
 
-                if (render_sql) {
+    if (render_sql) {
+      typewrite_sql(sql_statement = "N/A")
+    }
 
-                    typewrite_sql(sql_statement = "N/A")
+    if (verbose) {
+      typewrite_activity("Appending...")
+    }
 
-                }
+    DatabaseConnector::dbAppendTable(
+      conn = conn,
+      name = schemaTableName,
+      value = as.data.frame(data),
+      ...
+    )
 
-                if (verbose) {
-
-                    typewrite_activity("Appending...")
-
-                }
-
-                DatabaseConnector::dbAppendTable(conn = conn,
-                                                 name = schemaTableName,
-                                                 value = as.data.frame(data),
-                                                 ...)
-
-                if (verbose) {
-
-                    typewrite_activity("Appending...complete")
-
-                }
-
-        }
+    if (verbose) {
+      typewrite_activity("Appending...complete")
+    }
+  }
 
 
 #' @title
@@ -4556,62 +4477,60 @@ appendTable <-
 
 
 writeTable <-
-        function(conn,
-                 conn_fun,
-                 schema,
-                 tableName,
-                 data,
-                 drop_existing = FALSE,
-                 verbose = TRUE,
-                 render_sql = TRUE,
-                 ...) {
+  function(conn,
+           conn_fun,
+           schema,
+           tableName,
+           data,
+           drop_existing = FALSE,
+           verbose = TRUE,
+           render_sql = TRUE,
+           ...) {
+    if (!missing(conn_fun)) {
+      conn <- eval(rlang::parse_expr(conn_fun))
+      on.exit(dc(
+        conn = conn,
+        verbose = verbose
+      ),
+      add = TRUE,
+      after = TRUE
+      )
+    }
 
-                if (!missing(conn_fun)) {
-                    conn <- eval(rlang::parse_expr(conn_fun))
-                    on.exit(dc(conn = conn,
-                               verbose = verbose),
-                            add = TRUE,
-                            after = TRUE)
-                }
+    brake_closed_conn(conn = conn)
+    flag_no_rows(data = data)
 
-                brake_closed_conn(conn = conn)
-                flag_no_rows(data = data)
+    if (drop_existing) {
+      dropTable(
+        conn = conn,
+        schema = schema,
+        tableName = tableName,
+        if_exists = TRUE
+      )
+    }
 
-                if (drop_existing) {
-
-                    dropTable(conn = conn,
-                              schema = schema,
-                              tableName = tableName,
-                              if_exists = TRUE)
-                }
-
-                schemaTableName <- sprintf("%s.%s", schema, tableName)
+    schemaTableName <- sprintf("%s.%s", schema, tableName)
 
 
-                if (render_sql) {
+    if (render_sql) {
+      typewrite_sql(sql_statement = "N/A")
+    }
 
-                    typewrite_sql(sql_statement = "N/A")
+    if (verbose) {
+      typewrite_activity("Writing...")
+    }
 
-                }
+    DatabaseConnector::dbWriteTable(
+      conn = conn,
+      name = schemaTableName,
+      value = as.data.frame(data),
+      ...
+    )
 
-                if (verbose) {
-
-                    typewrite_activity("Writing...")
-
-                }
-
-                DatabaseConnector::dbWriteTable(conn = conn,
-                                                name = schemaTableName,
-                                                value = as.data.frame(data),
-                                                ...)
-
-                if (verbose) {
-
-                    typewrite_activity("Writing...complete")
-
-                }
-
-        }
+    if (verbose) {
+      typewrite_activity("Writing...complete")
+    }
+  }
 
 #' @title
 #' Drop a Table
@@ -4624,62 +4543,55 @@ writeTable <-
 #' @export
 
 dropTable <-
-    function(conn,
-             conn_fun,
-             schema,
-             tableName,
-             if_exists = TRUE,
-             verbose = TRUE,
-             render_sql = TRUE,
-             ...) {
-
-            if (!missing(conn_fun)) {
-                    conn <- eval(rlang::parse_expr(conn_fun))
-                    on.exit(dc(conn = conn,
-                               verbose = verbose),
-                            add = TRUE,
-                            after = TRUE)
-            }
-
-            brake_closed_conn(conn = conn)
-
-            if (if_exists) {
-
-                sql_statement <- sprintf("DROP TABLE IF EXISTS %s.%s;", schema, tableName)
-
-            } else {
-
-                sql_statement <- sprintf("DROP TABLE %s.%s;", schema, tableName)
-
-            }
-
-            if (render_sql) {
-
-                typewrite_sql(sql_statement = sql_statement)
-
-            }
-
-            if (verbose) {
-
-                typewrite_activity("Dropping...")
-
-            }
-
-
-            send(conn = conn,
-                 sql_statement = sql_statement,
-                 verbose = FALSE,
-                 render_sql = FALSE,
-                 ...)
-
-
-            if (verbose) {
-
-                typewrite_activity("Dropping...complete")
-
-            }
-
+  function(conn,
+           conn_fun,
+           schema,
+           tableName,
+           if_exists = TRUE,
+           verbose = TRUE,
+           render_sql = TRUE,
+           ...) {
+    if (!missing(conn_fun)) {
+      conn <- eval(rlang::parse_expr(conn_fun))
+      on.exit(dc(
+        conn = conn,
+        verbose = verbose
+      ),
+      add = TRUE,
+      after = TRUE
+      )
     }
+
+    brake_closed_conn(conn = conn)
+
+    if (if_exists) {
+      sql_statement <- sprintf("DROP TABLE IF EXISTS %s.%s;", schema, tableName)
+    } else {
+      sql_statement <- sprintf("DROP TABLE %s.%s;", schema, tableName)
+    }
+
+    if (render_sql) {
+      typewrite_sql(sql_statement = sql_statement)
+    }
+
+    if (verbose) {
+      typewrite_activity("Dropping...")
+    }
+
+
+    send(
+      conn = conn,
+      sql_statement = sql_statement,
+      verbose = FALSE,
+      render_sql = FALSE,
+      ...
+    )
+
+
+    if (verbose) {
+      typewrite_activity("Dropping...complete")
+    }
+  }
 
 #' @title
 #' Write a Table that is Dropped On Exit
@@ -4691,42 +4603,45 @@ dropTable <-
 #' @rdname writeStagingTable
 
 writeStagingTable <-
-    function(conn,
-             conn_fun,
-             schema,
-             tableName,
-             data,
-             drop_existing = FALSE,
-             verbose = TRUE,
-             render_sql = TRUE,
-             ...) {
-
-            writeTable(conn = conn,
-                       conn_fun = conn_fun,
-                       schema = schema,
-                       tableName = tableName,
-                       data = data,
-                       drop_existing = drop_existing,
-                       verbose = verbose,
-                       render_sql = render_sql,
-                       ... = ...)
-
-
-            do.call(what = on.exit,
-                    args = list(substitute(dropTable(conn = conn,
-                                         conn_fun = conn_fun,
-                                         schema = schema,
-                                         tableName = tableName,
-                                         if_exists = TRUE,
-                                         verbose = verbose,
-                                         render_sql = render_sql)),
-                                add = TRUE,
-                                after = FALSE),
-                    envir = parent.frame())
+  function(conn,
+           conn_fun,
+           schema,
+           tableName,
+           data,
+           drop_existing = FALSE,
+           verbose = TRUE,
+           render_sql = TRUE,
+           ...) {
+    writeTable(
+      conn = conn,
+      conn_fun = conn_fun,
+      schema = schema,
+      tableName = tableName,
+      data = data,
+      drop_existing = drop_existing,
+      verbose = verbose,
+      render_sql = render_sql,
+      ... = ...
+    )
 
 
-
-    }
+    do.call(
+      what = on.exit,
+      args = list(substitute(dropTable(
+        conn = conn,
+        conn_fun = conn_fun,
+        schema = schema,
+        tableName = tableName,
+        if_exists = TRUE,
+        verbose = verbose,
+        render_sql = render_sql
+      )),
+      add = TRUE,
+      after = FALSE
+      ),
+      envir = parent.frame()
+    )
+  }
 
 #' @title
 #' Read an Entire Table
@@ -4740,43 +4655,37 @@ writeStagingTable <-
 
 
 readTable <-
-        function(conn,
-                 schema,
-                 tableName,
-                 verbose = TRUE,
-                 render_sql = TRUE) {
+  function(conn,
+           schema,
+           tableName,
+           verbose = TRUE,
+           render_sql = TRUE) {
+    sql_statement <- sprintf("SELECT * FROM %s.%s;", schema, tableName)
 
-
-            sql_statement <- sprintf("SELECT * FROM %s.%s;", schema, tableName)
-
-            if (render_sql) {
-
-                typewrite_sql(sql_statement = sql_statement)
-            }
+    if (render_sql) {
+      typewrite_sql(sql_statement = sql_statement)
+    }
 
 
 
-            if (verbose) {
+    if (verbose) {
+      typewrite_activity("Reading...")
+    }
 
-                typewrite_activity("Reading...")
+    resultset <-
+      query(
+        conn = conn,
+        sql_statement = sql_statement,
+        verbose = FALSE,
+        render_sql = FALSE
+      )
 
-            }
+    if (verbose) {
+      typewrite_activity("Reading...complete")
+    }
 
-            resultset <-
-            query(conn = conn,
-                  sql_statement = sql_statement,
-                  verbose = FALSE,
-                  render_sql = FALSE)
-
-            if (verbose) {
-
-                typewrite_activity("Reading...complete")
-
-            }
-
-            resultset
-
-        }
+    resultset
+  }
 
 
 
@@ -4802,113 +4711,103 @@ readTable <-
 
 
 searchTable <-
-        function(conn,
-                 schema,
-                 tableName,
-                 ...,
-                 values,
-                 case_insensitive = TRUE,
-                 verbose = TRUE,
-                 render_sql = TRUE) {
+  function(conn,
+           schema,
+           tableName,
+           ...,
+           values,
+           case_insensitive = TRUE,
+           verbose = TRUE,
+           render_sql = TRUE) {
+    brake_closed_conn(conn = conn)
 
-                brake_closed_conn(conn = conn)
+    # Format Values for SQL
+    values <- as.character(values)
 
-                # Format Values for SQL
-                values <- as.character(values)
-
-                if (case_insensitive) {
-                        values <- tolower(values)
-                }
-                values <- sQuo(values)
-
+    if (case_insensitive) {
+      values <- tolower(values)
+    }
+    values <- sQuo(values)
 
 
-                # Get Fields vector to loop over for each SQL query
-                if (missing(...)) {
 
-                        Fields <- lsFields(conn = conn,
-                                           schema = schema,
-                                           tableName = tableName,
-                                           verbose = verbose,
-                                           render_sql = FALSE)
-
-                } else {
-
-                        Fields <- unlist(rlang::list2(...))
-
-                }
-
-
-                sql_statements <- list()
-                for (Field in Fields) {
-
-                    i <- 1+length(sql_statements)
-
-                    if (case_insensitive) {
+    # Get Fields vector to loop over for each SQL query
+    if (missing(...)) {
+      Fields <- lsFields(
+        conn = conn,
+        schema = schema,
+        tableName = tableName,
+        verbose = verbose,
+        render_sql = FALSE
+      )
+    } else {
+      Fields <- unlist(rlang::list2(...))
+    }
 
 
-                                sql_statements[[i]] <-
-                                SqlRender::render(
-                                                    "
+    sql_statements <- list()
+    for (Field in Fields) {
+      i <- 1 + length(sql_statements)
+
+      if (case_insensitive) {
+        sql_statements[[i]] <-
+          SqlRender::render(
+            "
                                                     SELECT *
                                                     FROM @schema.@tableName t
                                                     WHERE LOWER(t.@Field::varchar) IN (@values)
                                                     ;
                                                     ",
-                                    schema = schema,
-                                    tableName = tableName,
-                                    Field = Field,
-                                    values = values
-                                )
-
-                    } else {
-
-                        sql_statements[[i]] <-
-                            SqlRender::render(
-                                                "
+            schema = schema,
+            tableName = tableName,
+            Field = Field,
+            values = values
+          )
+      } else {
+        sql_statements[[i]] <-
+          SqlRender::render(
+            "
                                                 SELECT *
                                                 FROM @schema.@tableName t
                                                 WHERE t.@Field::varchar IN (@values)
                                                 ;
                                                 ",
-                                schema = schema,
-                                tableName = tableName,
-                                Field = Field,
-                                values = values
-                            )
+            schema = schema,
+            tableName = tableName,
+            Field = Field,
+            values = values
+          )
+      }
+    }
 
 
+    resultsets <- list()
+    for (i in seq_along(sql_statements)) {
+      resultsets[[i]] <-
+        suppressWarnings(
+          query(
+            conn = conn,
+            sql_statement = sql_statements[[i]],
+            verbose = verbose,
+            render_sql = render_sql
+          )
+        )
+    }
 
-                    }
+    names(resultsets) <- Fields
 
-                }
-
-
-                resultsets <- list()
-                for (i in seq_along(sql_statements)) {
-
-                        resultsets[[i]] <-
-                            suppressWarnings(
-                            query(conn = conn,
-                                  sql_statement = sql_statements[[i]],
-                                  verbose = verbose,
-                                  render_sql = render_sql))
-
-                }
-
-                names(resultsets) <- Fields
-
-                metrics <-
-                    resultsets %>%
-                    purrr::map(~ tibble::as_tibble_col(x = nrow(.), column_name = "Rows")) %>%
-                    dplyr::bind_rows(.id = "Field")
+    metrics <-
+      resultsets %>%
+      purrr::map(~ tibble::as_tibble_col(x = nrow(.), column_name = "Rows")) %>%
+      dplyr::bind_rows(.id = "Field")
 
 
-                list(ROWS = metrics,
-                     RESULTSETS = resultsets %>%
-                                        purrr::keep(~ nrow(.) > 0))
-
-        }
+    list(
+      ROWS = metrics,
+      RESULTSETS = resultsets %>%
+        purrr::keep(~ nrow(.) > 0)
+    )
+  }
 
 
 
@@ -4938,10 +4837,10 @@ NULL
 #' @export
 
 sQuo <-
-        function(vector) {
-                vector <- as.character(vector)
-                paste0("'", vector, "'")
-        }
+  function(vector) {
+    vector <- as.character(vector)
+    paste0("'", vector, "'")
+  }
 
 
 #' Typewrite SQL
@@ -4950,13 +4849,14 @@ sQuo <-
 #' @export
 
 typewrite_sql <-
-        function (sql_statement)
-        {
-                sql_statement <- stringr::str_replace_all(sql_statement,
-                                                          "[\r\n\t]{1,}|\\s{2,}", " ")
-                sql_statement <- trimws(sql_statement)
-                secretary::typewrite(secretary::greenTxt("SQL:"), sql_statement)
-        }
+  function(sql_statement) {
+    sql_statement <- stringr::str_replace_all(
+      sql_statement,
+      "[\r\n\t]{1,}|\\s{2,}", " "
+    )
+    sql_statement <- trimws(sql_statement)
+    secretary::typewrite(secretary::greenTxt("SQL:"), sql_statement)
+  }
 
 #' Typewrite Activity
 #' @importFrom secretary typewrite greenTxt
@@ -4964,45 +4864,43 @@ typewrite_sql <-
 #' @export
 
 typewrite_activity <-
-        function (activity)
-        {
-                secretary::typewrite(secretary::yellowTxt(activity))
-        }
+  function(activity) {
+    secretary::typewrite(secretary::yellowTxt(activity))
+  }
 
 
 
 #' @export
 
 readView <-
-        function(conn,
-                 schema,
-                 viewName,
-                 verbose = TRUE,
-                 render_sql = TRUE) {
-
-                query(conn = conn,
-                      sql_statement = SqlRender::render('SELECT * FROM @schema."@viewName";', schema = schema, viewName = viewName),
-                      verbose = verbose,
-                      render_sql = render_sql)
-
-        }
+  function(conn,
+           schema,
+           viewName,
+           verbose = TRUE,
+           render_sql = TRUE) {
+    query(
+      conn = conn,
+      sql_statement = SqlRender::render('SELECT * FROM @schema."@viewName";', schema = schema, viewName = viewName),
+      verbose = verbose,
+      render_sql = render_sql
+    )
+  }
 
 #' @export
 
 refreshMatView <-
-        function(conn,
-                 schema,
-                 matViewName,
-                 verbose = TRUE,
-                 render_sql = TRUE) {
-
-
-                send(conn = conn,
-                     sql_statement = SqlRender::render('REFRESH MATERIALIZED VIEW @schema."@matViewName"', schema = schema, matViewName = matViewName),
-                     verbose = verbose,
-                     render_sql = render_sql)
-
-        }
+  function(conn,
+           schema,
+           matViewName,
+           verbose = TRUE,
+           render_sql = TRUE) {
+    send(
+      conn = conn,
+      sql_statement = SqlRender::render('REFRESH MATERIALIZED VIEW @schema."@matViewName"', schema = schema, matViewName = matViewName),
+      verbose = verbose,
+      render_sql = render_sql
+    )
+  }
 
 
 
@@ -5020,78 +4918,74 @@ refreshMatView <-
 #' @export
 
 send_list <-
-    function(conn,
-             sqlList,
-             verbose = TRUE,
-             progressBar = TRUE,
-             skipErrors = TRUE,
-             errorFile = NULL,
-             ...) {
-
-        if (!is.list(sqlList)) {
-
-            stop("'sqlList' must be a list")
-
-        }
-
-        if (progressBar) {
-
-            pb <- progress::progress_bar$new(total = length(sql_list),
-                                             format = "[:bar] :elapsedfull :current/:total (:percent)",
-                                             clear = FALSE)
-            pb$tick(0)
-            Sys.sleep(.2)
-
-        }
-
-        for (i in 1:length(sqlList)) {
-
-            sql <- sql_list[[i]]
-
-            if (verbose) {
-                secretary::typewrite("\n", sql)
-            }
-
-            if (progressBar) {
-                pb$tick()
-                Sys.sleep(.2)
-            }
-
-
-            if (skipErrors) {
-
-                tryCatch(send(conn = conn,
-                              sql_statement = sql,
-                              ...),
-                         error = function(err) {
-                             secretary::typewrite_error("\n", sql)
-                             if (!is.null(errorFile)) {
-                                 .writeErrorReport(message = err$message,
-                                                   sql = sql,
-                                                   errorFile = errorFile)
-                             }
-                         })
-
-
-            } else {
-
-                send(conn = conn,
-                     sql_statement = sql,
-                     ...)
-            }
-
-        }
+  function(conn,
+           sqlList,
+           verbose = TRUE,
+           progressBar = TRUE,
+           skipErrors = TRUE,
+           errorFile = NULL,
+           ...) {
+    if (!is.list(sqlList)) {
+      stop("'sqlList' must be a list")
     }
+
+    if (progressBar) {
+      pb <- progress::progress_bar$new(
+        total = length(sql_list),
+        format = "[:bar] :elapsedfull :current/:total (:percent)",
+        clear = FALSE
+      )
+      pb$tick(0)
+      Sys.sleep(.2)
+    }
+
+    for (i in 1:length(sqlList)) {
+      sql <- sql_list[[i]]
+
+      if (verbose) {
+        secretary::typewrite("\n", sql)
+      }
+
+      if (progressBar) {
+        pb$tick()
+        Sys.sleep(.2)
+      }
+
+
+      if (skipErrors) {
+        tryCatch(send(
+          conn = conn,
+          sql_statement = sql,
+          ...
+        ),
+        error = function(err) {
+          secretary::typewrite_error("\n", sql)
+          if (!is.null(errorFile)) {
+            .writeErrorReport(
+              message = err$message,
+              sql = sql,
+              errorFile = errorFile
+            )
+          }
+        }
+        )
+      } else {
+        send(
+          conn = conn,
+          sql_statement = sql,
+          ...
+        )
+      }
+    }
+  }
 
 #' Terminate a SQL Statement with a semicolon
 #' @export
 
 terminate_build <-
-    function(sql_statement) {
-
-        paste0(sql_statement, ";")
-
-    }
+  function(sql_statement) {
+    paste0(sql_statement, ";")
+  }
 
 #' Cache a Resultset from a Join
 #' @description This function will cache the resultset from a SQL query created by buildJoinQuery to a subdirectory of the cache root directory, the path of which will be {db/schema}.
@@ -5103,15 +4997,16 @@ terminate_build <-
 #' @export
 
 cache_join <-
-    function(.data,
-             ...,
-             db,
-             schema) {
-
-        R.cache::saveCache(object = .data,
-                           key = list(...),
-                           dirs = paste0(db, "/", schema))
-    }
+  function(.data,
+           ...,
+           db,
+           schema) {
+    R.cache::saveCache(
+      object = .data,
+      key = list(...),
+      dirs = paste0(db, "/", schema)
+    )
+  }
 
 
 
@@ -5127,14 +5022,15 @@ cache_join <-
 #' @export
 
 cache_query <-
-    function(.data,
-             sqlQuery,
-             db) {
-
-        R.cache::saveCache(object = .data,
-                           key = list(sqlQuery),
-                           dirs = db)
-    }
+  function(.data,
+           sqlQuery,
+           db) {
+    R.cache::saveCache(
+      object = .data,
+      key = list(sqlQuery),
+      dirs = db
+    )
+  }
 
 
 
@@ -5150,12 +5046,9 @@ cache_query <-
 #' @export
 
 clear_cache <-
-    function(db) {
-
-        R.cache::clearCache(path = getCachePath(db))
-
-
-    }
+  function(db) {
+    R.cache::clearCache(path = getCachePath(db))
+  }
 
 
 
@@ -5170,13 +5063,14 @@ clear_cache <-
 #' @export
 
 load_cached_join <-
-    function(...,
-             db,
-             schema) {
-
-        R.cache::loadCache(key = list(...),
-                           dirs = paste0(db, "/", schema))
-    }
+  function(...,
+           db,
+           schema) {
+    R.cache::loadCache(
+      key = list(...),
+      dirs = paste0(db, "/", schema)
+    )
+  }
 
 
 
@@ -5191,12 +5085,13 @@ load_cached_join <-
 #' @export
 
 load_cached_query <-
-    function(sqlQuery,
-             db) {
-
-        R.cache::loadCache(key = list(sqlQuery),
-                           dirs = db)
-    }
+  function(sqlQuery,
+           db) {
+    R.cache::loadCache(
+      key = list(sqlQuery),
+      dirs = db
+    )
+  }
 
 
 
@@ -5227,39 +5122,31 @@ load_cached_query <-
 #' @importFrom purrr map set_names
 
 brake_ff <-
-    function(predicate,
-             stop_message,
-             arguments) {
+  function(predicate,
+           stop_message,
+           arguments) {
+    .Deprecated("`check_*` functions")
 
 
-        .Deprecated("`check_*` functions")
-
-
-        x <-
-            function() {
-
-                if (eval(rlang::parse_expr(predicate))) {
-
-                    stop(stop_message)
-
-                }
-
-            }
-
-
-        if (!missing(arguments)) {
-
-            output <-
-                arguments %>%
-                purrr::map(~ rlang::missing_arg()) %>%
-                purrr::set_names(arguments)
-
-            formals(x) <- output
-
+    x <-
+      function() {
+        if (eval(rlang::parse_expr(predicate))) {
+          stop(stop_message)
         }
+      }
 
-        x
+
+    if (!missing(arguments)) {
+      output <-
+        arguments %>%
+        purrr::map(~ rlang::missing_arg()) %>%
+        purrr::set_names(arguments)
+
+      formals(x) <- output
     }
+
+    x
+  }
 
 
 #' @title
@@ -5283,11 +5170,11 @@ brake_ff <-
 
 
 brake_closed_conn <-
-    brake_ff(
-        predicate = "!is_conn_open(conn)",
-        stop_message = "connection is not open",
-        arguments = "conn"
-    )
+  brake_ff(
+    predicate = "!is_conn_open(conn)",
+    stop_message = "connection is not open",
+    arguments = "conn"
+  )
 
 
 #' Get SourceFile Path
@@ -5299,11 +5186,11 @@ brake_closed_conn <-
 
 
 source_file_path <-
-    function(instSubdir,
-             FileName,
-             package) {
-        paste0(system.file(package = package), "/", instSubdir, "/", FileName)
-    }
+  function(instSubdir,
+           FileName,
+           package) {
+    paste0(system.file(package = package), "/", instSubdir, "/", FileName)
+  }
 
 
 #' @title
@@ -5334,38 +5221,32 @@ source_file_path <-
 #' @importFrom purrr map set_names
 
 flag_ff <-
-    function(predicate,
-             warn_message,
-             arguments,
-             ...) {
-
-
-        x <-
-            function() {
-
-                if (eval(rlang::parse_expr(predicate))) {
-
-                    warning(warn_message,
-                            ...)
-
-                }
-
-            }
-
-
-        if (!missing(arguments)) {
-
-            output <-
-                arguments %>%
-                purrr::map(~ rlang::missing_arg()) %>%
-                purrr::set_names(arguments)
-
-            formals(x) <- output
-
+  function(predicate,
+           warn_message,
+           arguments,
+           ...) {
+    x <-
+      function() {
+        if (eval(rlang::parse_expr(predicate))) {
+          warning(
+            warn_message,
+            ...
+          )
         }
+      }
 
-        x
+
+    if (!missing(arguments)) {
+      output <-
+        arguments %>%
+        purrr::map(~ rlang::missing_arg()) %>%
+        purrr::set_names(arguments)
+
+      formals(x) <- output
     }
+
+    x
+  }
 
 
 #' @title
@@ -5379,11 +5260,11 @@ flag_ff <-
 
 
 flag_no_rows <-
-    flag_ff(
-        predicate = "nrow(data)==0",
-        warn_message = "data has 0 rows",
-        arguments = "data"
-    )
+  flag_ff(
+    predicate = "nrow(data)==0",
+    warn_message = "data has 0 rows",
+    arguments = "data"
+  )
 
 #' Export a sql statement to a file
 #' @param sql_statement sql statement R object
@@ -5393,15 +5274,14 @@ flag_no_rows <-
 #' @export
 
 write_sql_file <-
-    function(sql_statement,
-             file,
-             append = TRUE,
-             ...) {
-
-        readr::write_lines(x = sql_statement,
-                           path = file,
-                           append = append,
-                           ...
-        )
-    }
-
+  function(sql_statement,
+           file,
+           append = TRUE,
+           ...) {
+    readr::write_lines(
+      x = sql_statement,
+      path = file,
+      append = append,
+      ...
+    )
+  }

@@ -3,17 +3,15 @@
 #' @export
 
 render_copy <-
-    function(schema,
-             tableName,
-             csvFilePath) {
-
-
-        SqlRender::render("COPY @schema.@tableName FROM '@csvFilePath' WITH DELIMITER E'\\t' CSV HEADER QUOTE E'\\b';",
-                          schema = schema,
-                          tableName = tableName,
-                          csvFilePath = csvFilePath)
-
-    }
+  function(schema,
+           tableName,
+           csvFilePath) {
+    SqlRender::render("COPY @schema.@tableName FROM '@csvFilePath' WITH DELIMITER E'\\t' CSV HEADER QUOTE E'\\b';",
+      schema = schema,
+      tableName = tableName,
+      csvFilePath = csvFilePath
+    )
+  }
 
 
 
@@ -24,17 +22,15 @@ render_copy <-
 #' @export
 
 render_create_db <-
-    function(schema,
-             db,
-             newDB) {
-
-
-        SqlRender::render("
+  function(schema,
+           db,
+           newDB) {
+    SqlRender::render("
                           CREATE DATABASE @newDB;
                           ",
-                          newDB = newDB)
-
-    }
+      newDB = newDB
+    )
+  }
 
 
 
@@ -47,15 +43,13 @@ render_create_db <-
 #' @export
 
 render_create_schema <-
-    function(schema) {
-
-
-        SqlRender::render("
+  function(schema) {
+    SqlRender::render("
                           CREATE SCHEMA @schema;
                           ",
-                          schema = schema)
-
-    }
+      schema = schema
+    )
+  }
 
 
 
@@ -68,36 +62,31 @@ render_create_schema <-
 #' @export
 
 render_drop_schema <-
-    function(schema,
-             cascade = FALSE,
-             if_exists = TRUE) {
-
-
-        if (cascade) {
-
-            SqlRender::render("
+  function(schema,
+           cascade = FALSE,
+           if_exists = TRUE) {
+    if (cascade) {
+      SqlRender::render("
                               DROP SCHEMA @schema CASCADE
                               ;",
-                              schema = schema)
+        schema = schema
+      )
+    }
 
-        }
-
-        if (if_exists) {
-
-                SqlRender::render("
+    if (if_exists) {
+      SqlRender::render("
                                   DROP SCHEMA IF EXISTS @schema
                                   ;",
-                                  schema = schema)
-
-        } else {
-
-                SqlRender::render("
+        schema = schema
+      )
+    } else {
+      SqlRender::render("
                                   DROP SCHEMA @schema
                                   ;",
-                                  schema = schema)
-        }
-
+        schema = schema
+      )
     }
+  }
 
 
 
@@ -110,30 +99,25 @@ render_drop_schema <-
 #' @export
 
 render_drop_table <-
-    function(schema,
-             tableName,
-             if_exists = TRUE) {
-
-
-
-        if (if_exists) {
-
-            SqlRender::render("
+  function(schema,
+           tableName,
+           if_exists = TRUE) {
+    if (if_exists) {
+      SqlRender::render("
                               DROP TABLE IF EXISTS @schema.@tableName;
                               ",
-                              schema = schema,
-                              tableName = tableName)
-
-        } else {
-
-            SqlRender::render("
+        schema = schema,
+        tableName = tableName
+      )
+    } else {
+      SqlRender::render("
                           DROP TABLE @schema.@tableName;
                           ",
-                              schema = schema,
-                              tableName = tableName)
-        }
-
+        schema = schema,
+        tableName = tableName
+      )
     }
+  }
 
 
 
@@ -153,32 +137,28 @@ render_drop_table <-
 #' @importFrom SqlRender render readSql
 
 render_grant_schema <-
-        function(schema,
-                 group = NULL,
-                 user = NULL) {
+  function(schema,
+           group = NULL,
+           user = NULL) {
+    if (is.null(group) && is.null(user)) {
+      stop("group or user is required")
+    }
 
-                if (is.null(group) && is.null(user)) {
-                        stop("group or user is required")
-                }
 
-
-                if (!is.null(group)) {
-
-                        SqlRender::render("
+    if (!is.null(group)) {
+      SqlRender::render("
                                           GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA @schema to group @gp
                                           ",
-                                          schema = schema,
-                                          gp = group)
-
-                } else {
-
-                        SqlRender::render("GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA @schema to @user;",
-                                          schema = schema,
-                                          user = user)
-
-                }
-
-        }
+        schema = schema,
+        gp = group
+      )
+    } else {
+      SqlRender::render("GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA @schema to @user;",
+        schema = schema,
+        user = user
+      )
+    }
+  }
 
 
 
@@ -192,9 +172,9 @@ render_grant_schema <-
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
+#' if (interactive()) {
+#'   # EXAMPLE1
+#' }
 #' }
 #' @seealso
 #'  \code{\link[SqlRender]{render}}
@@ -205,17 +185,17 @@ render_grant_schema <-
 
 
 render_info_schema_cols <-
-        function(schema) {
-
-                SqlRender::render(
-                                  "
+  function(schema) {
+    SqlRender::render(
+      "
                                   SELECT *
                                   FROM information_schema.columns
                                   WHERE table_schema = '@schema'
                                   ;
                                   ",
-                                  schema = schema)
-        }
+      schema = schema
+    )
+  }
 
 
 
@@ -228,16 +208,13 @@ render_info_schema_cols <-
 #' @export
 
 render_ls_schema <-
-    function() {
-
-
-        SqlRender::render("
+  function() {
+    SqlRender::render("
                           SELECT nspname
                           FROM pg_catalog.pg_namespace
                           ;
                           ")
-
-    }
+  }
 
 
 
@@ -249,17 +226,15 @@ render_ls_schema <-
 #' @export
 
 render_rename_db <-
-    function(schema,
-             db,
-             newDB) {
-
-
-        SqlRender::render("ALTER DATABASE @db RENAME TO @newDB;",
-                          schema = schema,
-                          db = db,
-                          newDB = newDB)
-
-    }
+  function(schema,
+           db,
+           newDB) {
+    SqlRender::render("ALTER DATABASE @db RENAME TO @newDB;",
+      schema = schema,
+      db = db,
+      newDB = newDB
+    )
+  }
 
 
 
@@ -271,17 +246,15 @@ render_rename_db <-
 #' @export
 
 render_rename_table <-
-    function(schema,
-             tableName,
-             newTableName) {
-
-
-        SqlRender::render("ALTER TABLE @schema.@tableName RENAME TO @newTableName;",
-                          schema = schema,
-                          tableName = tableName,
-                          newTableName = newTableName)
-
-    }
+  function(schema,
+           tableName,
+           newTableName) {
+    SqlRender::render("ALTER TABLE @schema.@tableName RENAME TO @newTableName;",
+      schema = schema,
+      tableName = tableName,
+      newTableName = newTableName
+    )
+  }
 
 
 
@@ -295,41 +268,31 @@ render_rename_table <-
 #' @export
 
 render_row_count <-
-    function(fields = "*",
-             distinct = FALSE,
-             schema,
-             tableName) {
-
-
-        if (distinct) {
-
-                SqlRender::render(
-                                    "
+  function(fields = "*",
+           distinct = FALSE,
+           schema,
+           tableName) {
+    if (distinct) {
+      SqlRender::render(
+        "
                                     SELECT DISTINCT COUNT(@fields)
                                     FROM @schema.@tableName
                                     ;
                                     ",
-                    schema = schema,
-                    fields = fields,
-                    tableName = tableName)
-
-        } else {
-
-                SqlRender::render(
-                                "
+        schema = schema,
+        fields = fields,
+        tableName = tableName
+      )
+    } else {
+      SqlRender::render(
+        "
                                 SELECT COUNT(@fields)
                                 FROM @schema.@tableName
                                 ;
                                 ",
-                                  schema = schema,
-                                  fields = fields,
-                                  tableName = tableName)
-
-        }
-
+        schema = schema,
+        fields = fields,
+        tableName = tableName
+      )
     }
-
-
-
-
-
+  }
