@@ -81,7 +81,7 @@
 
                                 if (verbose) {
 
-                                        dbname <- conn@jConnection$getCatalog()
+                                        dbname <- conn$result@jConnection$getCatalog()
 
                                         secretary::typewrite(sprintf("%s to %s", conn$output, dbname))
 
