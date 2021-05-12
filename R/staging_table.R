@@ -31,6 +31,8 @@ write_staging_table <-
            verbose = TRUE,
            render_sql = TRUE,
            ...) {
+
+
     table_name <-
       sprintf(
         "V%s",

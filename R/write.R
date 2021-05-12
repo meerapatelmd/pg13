@@ -42,8 +42,10 @@ append_table <-
       )
     }
 
-    check_conn(conn = conn)
-    check_outflow(data = data)
+    if (verbose) {
+      check_conn(conn = conn)
+      check_outflow(data = data)
+    }
 
     schema_table <- sprintf("%s.%s", schema, table)
 
@@ -104,6 +106,7 @@ write_table <-
            render_sql = TRUE,
            render_only = FALSE,
            ...) {
+
     if (!missing(conn_fun)) {
       conn <- eval(rlang::parse_expr(conn_fun))
       on.exit(dc(
@@ -119,6 +122,7 @@ write_table <-
     # <---! Performs any checks on the connection already so it is skipped --->
 
     if (drop_existing) {
+
       drop_table(
         conn = conn,
         conn_fun = conn_fun,
@@ -129,15 +133,25 @@ write_table <-
         render_sql = render_sql,
         render_only = render_only
       )
+
     } else {
-      check_conn(conn = conn)
+
+      if (verbose) {
+
+        check_conn(conn = conn)
+
+      }
     }
 
 
-    check_outflow(
-      data = data,
-      table_name = table_name
-    )
+    if (verbose) {
+
+      check_outflow(
+        data = data,
+        table_name = table_name
+      )
+
+    }
 
     schema_table_name <- sprintf("%s.%s", schema, table_name)
 
@@ -155,9 +169,16 @@ write_table <-
       )
 
       if (verbose) {
+
         typewrite_activity(sprintf("Writing %s...complete", schema_table_name))
       }
+
     } else {
-      typewrite_activity(sprintf("No SQL to render for write_table()"))
+
+      if (verbose) {
+
+        typewrite_activity(sprintf("No SQL to render for write_table()"))
+
+      }
     }
   }
