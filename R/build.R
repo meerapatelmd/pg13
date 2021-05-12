@@ -6,11 +6,9 @@
 #'
 #' @inheritParams args
 #' @seealso
-#'  \code{\link[cli]{cli_alert}}
 #'  \code{\link[SqlRender]{render}}
 #' @rdname build_join_query
 #' @export
-#' @importFrom cli cli_alert_warning
 #' @importFrom SqlRender render
 
 build_join_query <-
@@ -47,7 +45,7 @@ build_join_query <-
 
                     if (!missing(random) && distinct) {
 
-                        cli::cli_alert_warning("Cannot return DISTINCT and RANDOM. Overriding to DISTINCT == FALSE.")
+                        typewrite_alert_danger("Cannot return DISTINCT and RANDOM. Overriding to DISTINCT == FALSE.")
 
                         distinct <- FALSE
                     }
@@ -103,7 +101,7 @@ build_join_query <-
                     if (!missing(where_in_field) && missing(where_in_vector)|
                         missing(where_in_field) && !missing(where_in_vector)) {
 
-                            cli::cli_alert_warning("both `where_in_field` & `where_in_vector` required. Ignoring filter...", wrap = TRUE)
+                            typewrite_alert_danger("both `where_in_field` & `where_in_vector` required. Ignoring filter...", wrap = TRUE)
                     } else if (!missing(where_in_field) && !missing(where_in_vector)) {
 
                             if (is.character(where_in_vector)) {
@@ -124,7 +122,7 @@ build_join_query <-
                     if (!missing(where_in_join_on_field) && missing(where_in_join_on_vector)|
                         missing(where_in_join_on_field) && !missing(where_in_join_on_vector)) {
 
-                        cli::cli_alert_warning("both `where_in_join_on_field` & `where_in_join_on_vector` required. Ignoring filter...", wrap = TRUE)
+                        typewrite_alert_danger("both `where_in_join_on_field` & `where_in_join_on_vector` required. Ignoring filter...", wrap = TRUE)
                     } else if (!missing(where_in_join_on_field) && !missing(where_in_join_on_vector)) {
 
                         if (is.character(where_in_join_on_vector)) {
@@ -145,7 +143,7 @@ build_join_query <-
                 if (!missing(where_not_in_field) && missing(where_not_in_vector)|
                     missing(where_not_in_field) && !missing(where_not_in_vector)) {
 
-                    cli::cli_alert_warning("both `where_not_in_field` & `where_not_in_vector` required. Ignoring filter...", wrap = TRUE)
+                    typewrite_alert_danger("both `where_not_in_field` & `where_not_in_vector` required. Ignoring filter...", wrap = TRUE)
                 } else if (!missing(where_not_in_field) && !missing(where_not_in_vector)) {
 
                     if (is.character(where_not_in_vector)) {
@@ -166,7 +164,7 @@ build_join_query <-
             if (!missing(where_not_in_join_on_field) && missing(where_not_in_join_on_vector)|
                 missing(where_not_in_join_on_field) && !missing(where_not_in_join_on_vector)) {
 
-                cli::cli_alert_warning("both `where_not_in_join_on_field` & `where_not_in_join_on_vector` required. Ignoring filter...", wrap = TRUE)
+                typewrite_alert_danger("both `where_not_in_join_on_field` & `where_not_in_join_on_vector` required. Ignoring filter...", wrap = TRUE)
             } else if (!missing(where_not_in_join_on_field) && !missing(where_not_in_join_on_vector)) {
 
 
@@ -394,11 +392,9 @@ build_join_query <-
 #' @inheritParams args
 #' @example inst/example/build_query.R
 #' @seealso
-#'  \code{\link[cli]{cli_alert}}
 #'  \code{\link[SqlRender]{render}}
 #' @rdname build_query
 #' @export
-#' @importFrom cli cli_alert_warning
 #' @importFrom SqlRender render
 
 build_query <-
@@ -420,7 +416,7 @@ build_query <-
 
         if (!missing(random) && distinct) {
 
-            cli::cli_alert_warning("Cannot return DISTINCT and RANDOM. Overriding to DISTINCT == FALSE.")
+            typewrite_alert_danger("Cannot return DISTINCT and RANDOM. Overriding to DISTINCT == FALSE.")
 
             distinct <- FALSE
         }
@@ -460,7 +456,7 @@ build_query <-
         if (!missing(where_in_field) && missing(where_in_vector)|
             missing(where_in_field) && !missing(where_in_vector)) {
 
-            cli::cli_alert_warning("both `where_in_field` & `where_in_vector` required. Ignoring filter...", wrap = TRUE)
+            typewrite_alert_danger("both `where_in_field` & `where_in_vector` required. Ignoring filter...", wrap = TRUE)
         } else if (!missing(where_in_field) && !missing(where_in_vector)) {
 
             if (is.character(where_in_vector)) {
@@ -482,7 +478,7 @@ build_query <-
         if (!missing(where_not_in_field) && missing(where_not_in_vector)|
             missing(where_not_in_field) && !missing(where_not_in_vector)) {
 
-            cli::cli_alert_warning("both `where_not_in_field` & `where_not_in_vector` required. Ignoring filter...", wrap = TRUE)
+           typewrite_alert_danger("both `where_not_in_field` & `where_not_in_vector` required. Ignoring filter...", wrap = TRUE)
         } else if (!missing(where_not_in_field) && !missing(where_not_in_vector)) {
 
             if (is.character(where_not_in_vector)) {
@@ -632,11 +628,9 @@ build_query <-
 #'
 #' @inheritParams args
 #' @seealso
-#'  \code{\link[cli]{cli_alert}}
 #'  \code{\link[SqlRender]{render}}
 #' @rdname build_query_regex
 #' @export
-#' @importFrom cli cli_alert_warning
 #' @importFrom SqlRender render
 
 
@@ -674,7 +668,7 @@ build_query_regex <-
 
         if (!missing(random) && distinct) {
 
-            cli::cli_alert_warning("Cannot return DISTINCT and RANDOM. Overriding to DISTINCT == FALSE.")
+            typewrite_alert_warning("Cannot return DISTINCT and RANDOM. Overriding to DISTINCT == FALSE.")
 
             distinct <- FALSE
         }

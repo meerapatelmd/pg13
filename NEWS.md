@@ -3,7 +3,10 @@
 * Export `typewrite_*` functions   
 * Remove cli package dependency  
 * Add chunk style option to `typewrite_sql()`  
-
+* Change `checks_*` to only return danger alerts so that 
+console messages are less lengthy.  
+* Add styling option and return `checks_*` in console as 
+condition of `verbose` in `query()` and `send()`.  
 
 
 # pg13 1.1.0

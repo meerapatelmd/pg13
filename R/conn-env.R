@@ -40,12 +40,10 @@ setMethod(f = "[[<-",
 #' @param conn_fun Function call for the connection as a character string such as "local_connect()".
 #' @seealso
 #'  \code{\link[secretary]{c("typewrite", "typewrite")}},\code{\link[secretary]{italicize}}
-#'  \code{\link[cli]{cli_alert}}
 #'  \code{\link[rlang]{parse_expr}}
 #' @rdname open_conn
 #' @export
 #' @importFrom secretary typewrite italicize
-#' @importFrom cli cli_alert_danger cli_alert_info
 #' @importFrom rlang parse_expr
 #' @family pg13 environment functions
 #' @family pg13 class connection functions
@@ -68,13 +66,13 @@ open_conn <-
 
                        if (is_conn_open(pg13_connection_env[[conn_name]])) {
 
-                               cli::cli_alert_danger(sprintf("Open connection '%s' already exists.", conn_name))
+                               typewrite_alert_danger(sprintf("Open connection '%s' already exists.", conn_name))
 
 
                        } else {
 
 
-                               secretary::typewrite(cli::cli_alert_info("Closed connection '%s' already exists."))
+                               typewrite_alert_danger("Closed connection '%s' already exists."))
                                secretary::typewrite(secretary::italicize("Reconnecting..."))
                                on.exit(secretary::typewrite(secretary::italicize("Reconnecting...complete")))
 

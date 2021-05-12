@@ -8,11 +8,9 @@
 #'
 #' @inheritParams args
 #' @seealso
-#'  \code{\link[cli]{cli_alert}}
 #'  \code{\link[SqlRender]{render}}
 #' @rdname draft_join1
 #' @export
-#' @importFrom cli cli_alert_warning
 #' @importFrom SqlRender render
 #' @example inst/example/join_first_degree.R
 
@@ -93,7 +91,7 @@ draft_join1 <-
                 if (!missing(where_in_field) && missing(where_in_vector)|
                     missing(where_in_field) && !missing(where_in_vector)) {
 
-                        cli::cli_alert_warning("both `where_in_field` & `where_in_vector` required. Ignoring filter...", wrap = TRUE)
+                       typewrite_alert_warning("both `where_in_field` & `where_in_vector` required. Ignoring filter...", wrap = TRUE)
                 } else if (!missing(where_in_field) && !missing(where_in_vector)) {
 
                         if (is.character(where_in_vector)) {
@@ -114,7 +112,7 @@ draft_join1 <-
                 if (!missing(where_in_join_on_field) && missing(where_in_join_on_vector)|
                     missing(where_in_join_on_field) && !missing(where_in_join_on_vector)) {
 
-                        cli::cli_alert_warning("both `where_in_join_on_field` & `where_in_join_on_vector` required. Ignoring filter...", wrap = TRUE)
+                       typewrite_alert_warning("both `where_in_join_on_field` & `where_in_join_on_vector` required. Ignoring filter...", wrap = TRUE)
                 } else if (!missing(where_in_join_on_field) && !missing(where_in_join_on_vector)) {
 
                         if (is.character(where_in_join_on_vector)) {
@@ -135,7 +133,7 @@ draft_join1 <-
                 if (!missing(where_not_in_field) && missing(where_not_in_vector)|
                     missing(where_not_in_field) && !missing(where_not_in_vector)) {
 
-                        cli::cli_alert_warning("both `where_not_in_field` & `where_not_in_vector` required. Ignoring filter...", wrap = TRUE)
+                       typewrite_alert_warning("both `where_not_in_field` & `where_not_in_vector` required. Ignoring filter...", wrap = TRUE)
                 } else if (!missing(where_not_in_field) && !missing(where_not_in_vector)) {
 
                         if (is.character(where_not_in_vector)) {
@@ -156,7 +154,7 @@ draft_join1 <-
                 if (!missing(where_not_in_join_on_field) && missing(where_not_in_join_on_vector)|
                     missing(where_not_in_join_on_field) && !missing(where_not_in_join_on_vector)) {
 
-                        cli::cli_alert_warning("both `where_not_in_join_on_field` & `where_not_in_join_on_vector` required. Ignoring filter...", wrap = TRUE)
+                       typewrite_alert_warning("both `where_not_in_join_on_field` & `where_not_in_join_on_vector` required. Ignoring filter...", wrap = TRUE)
                 } else if (!missing(where_not_in_join_on_field) && !missing(where_not_in_join_on_vector)) {
 
 

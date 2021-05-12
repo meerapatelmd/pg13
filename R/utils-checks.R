@@ -52,7 +52,7 @@ check_data_rows <-
                 } else {
 
 
-                        typewrite_alert_success(text = "data has {nrow(data)} rows")
+                        typewrite_alert_success(text = sprintf("data has %s rows", nrow(data)))
                 }
         }
 
@@ -113,10 +113,6 @@ check_field_name <-
 
                         typewrite_alert_danger(text = sprintf("Field name '%s' is a reserved word", tolower(name)))
 
-                } else {
-
-                        typewrite_alert_success(text = sprintf("Field name '%s' is not a reserved word", tolower(name)))
-
                 }
 
         }
@@ -138,10 +134,6 @@ check_table_name <-
                 if (name %in% reserved_words()) {
 
                         typewrite_alert_danger(text = sprintf("Table name '%s' is a reserved word", table_name))
-
-                } else {
-
-                        typewrite_alert_success(text = sprintf("Table name '%s' is not a reserved word", table_name))
 
                 }
 
