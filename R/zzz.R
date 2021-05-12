@@ -65,7 +65,7 @@
                                  oracleDriver = "thin",
                                  connectionString = NULL,
                                  pathToDriver = system.file(package = "pg13", "driver"),
-                                 verbose = TRUE) {
+                                 verbose = FALSE) {
 
 
                                 server <- sprintf("localhost/%s", dbname)
@@ -81,9 +81,9 @@
 
                                 if (verbose) {
 
-                                        db_name <- conn@jConnection$getCatalog()
+                                        dbname <- conn@jConnection$getCatalog()
 
-                                        secretary::typewrite(sprintf("%s to %s", conn$output, db_name))
+                                        secretary::typewrite(sprintf("%s to %s", conn$output, dbname))
 
                                 }
 

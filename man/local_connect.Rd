@@ -13,7 +13,7 @@ local_connect(
   oracleDriver = "thin",
   connectionString = NULL,
   pathToDriver = system.file(package = "pg13", "driver"),
-  verbose = TRUE
+  verbose = FALSE
 )
 }
 \arguments{
