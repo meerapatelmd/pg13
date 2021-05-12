@@ -10,6 +10,7 @@ condition of `verbose` in `query()` and `send()`.
 * Expand default argument values in `conn_db()`  
 * Silence `local_connect()` unless verbose is set to _TRUE_.  
 
+
 # pg13 1.1.0
 
 * Added join1 function

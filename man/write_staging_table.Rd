@@ -10,7 +10,7 @@ write_staging_table(
   schema,
   data,
   drop_existing = FALSE,
-  drop_on_exit = TRUE,
+  drop_on_exit = FALSE,
   verbose = TRUE,
   render_sql = TRUE,
   ...
@@ -31,7 +31,12 @@ write_staging_table(
 String of the staging table
 }
 \description{
-A \verb{Staging Table} is one that is named automatically in a naming convention of "V" followed by 14 integers representing the timestamp of the transaction. The staging table can optionally be dropped on exit in the parent frame from which the function is being called when \code{drop_on_exit} is set to TRUE.
+A \verb{Staging Table} is one that is named automatically in a
+naming convention of "V" followed by 14 integers
+representing the timestamp of the transaction. The
+staging table can optionally be dropped on exit in the
+parent frame from which the function is being called
+when \code{drop_on_exit} is set to TRUE.
 }
 \examples{
 library(pg13)

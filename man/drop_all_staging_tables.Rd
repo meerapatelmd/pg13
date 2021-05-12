@@ -14,13 +14,28 @@ drop_all_staging_tables(
 )
 }
 \arguments{
-\item{time_diff_hours}{Numeric designating the period of time in hours after which the the table should be considered expired. If 0, all tables will be dropped.}
+\item{time_diff_hours}{Numeric designating the period of
+time in hours after which the the table should be
+considered expired. If 0, all tables will be dropped.}
 }
 \value{
-If an expiration period is provided with a \code{time_diff_hours} greater than 0, a console message of the names of any tables following this convention remain in \code{schema}. If \code{time_diff_hours} is 0, all tables are dropped.
+If an expiration period is provided with a
+\code{time_diff_hours} greater than 0, a console message of
+the names of any tables following this convention remain
+in \code{schema}. If \code{time_diff_hours} is 0, all tables are
+dropped.
 }
 \description{
-Drop tables written by functions in this package that follows the \verb{Staging Table} naming convention of "V" followed by 14 integers representing the timestamp of the transaction. This function will clear any of the tables that strictly follows this pattern. An expiration period can optionally be applied where the date and time of the transaction is parsed from the table name and will be dropped only if the difference between the system time and timestamp in the table name is greater than the \code{time_diff_hours} argument.
+Drop tables written by functions in this package that
+follows the \verb{Staging Table} naming convention of "V"
+followed by 14 integers representing the timestamp of
+the transaction. This function will clear any of the
+tables that strictly follows this pattern. An expiration
+period can optionally be applied where the date and time
+of the transaction is parsed from the table name and will
+be dropped only if the difference between the system time
+and timestamp in the table name is greater than the
+\code{time_diff_hours} argument.
 }
 \examples{
 library(pg13)
