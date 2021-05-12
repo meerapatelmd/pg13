@@ -83,7 +83,7 @@
 
                                         dbname <- conn$result@jConnection$getCatalog()
 
-                                        secretary::typewrite(sprintf("%s to %s", conn$output, dbname))
+                                        secretary::typewrite(sprintf("Connected to '%s'", dbname))
 
                                 }
 
