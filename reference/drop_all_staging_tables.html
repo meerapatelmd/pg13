@@ -47,7 +47,16 @@
 
 
 <meta property="og:title" content="Drop V Tables — drop_all_staging_tables" />
-<meta property="og:description" content="Drop tables written by functions in this package that follows the Staging Table naming convention of &quot;V&quot; followed by 14 integers representing the timestamp of the transaction. This function will clear any of the tables that strictly follows this pattern. An expiration period can optionally be applied where the date and time of the transaction is parsed from the table name and will be dropped only if the difference between the system time and timestamp in the table name is greater than the time_diff_hours argument." />
+<meta property="og:description" content="Drop tables written by functions in this package that
+follows the Staging Table naming convention of &quot;V&quot;
+followed by 14 integers representing the timestamp of
+the transaction. This function will clear any of the
+tables that strictly follows this pattern. An expiration
+period can optionally be applied where the date and time
+of the transaction is parsed from the table name and will
+be dropped only if the difference between the system time
+and timestamp in the table name is greater than the
+time_diff_hours argument." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -125,7 +134,16 @@
     </div>
 
     <div class="ref-description">
-    <p>Drop tables written by functions in this package that follows the <code>Staging Table</code> naming convention of "V" followed by 14 integers representing the timestamp of the transaction. This function will clear any of the tables that strictly follows this pattern. An expiration period can optionally be applied where the date and time of the transaction is parsed from the table name and will be dropped only if the difference between the system time and timestamp in the table name is greater than the <code>time_diff_hours</code> argument.</p>
+    <p>Drop tables written by functions in this package that
+follows the <code>Staging Table</code> naming convention of "V"
+followed by 14 integers representing the timestamp of
+the transaction. This function will clear any of the
+tables that strictly follows this pattern. An expiration
+period can optionally be applied where the date and time
+of the transaction is parsed from the table name and will
+be dropped only if the difference between the system time
+and timestamp in the table name is greater than the
+<code>time_diff_hours</code> argument.</p>
     </div>
 
     <pre class="usage"><span class='fu'>drop_all_staging_tables</span><span class='op'>(</span>
@@ -142,13 +160,19 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>time_diff_hours</th>
-      <td><p>Numeric designating the period of time in hours after which the the table should be considered expired. If 0, all tables will be dropped.</p></td>
+      <td><p>Numeric designating the period of
+time in hours after which the the table should be
+considered expired. If 0, all tables will be dropped.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>If an expiration period is provided with a <code>time_diff_hours</code> greater than 0, a console message of the names of any tables following this convention remain in <code>schema</code>. If <code>time_diff_hours</code> is 0, all tables are dropped.</p>
+    <p>If an expiration period is provided with a
+<code>time_diff_hours</code> greater than 0, a console message of
+the names of any tables following this convention remain
+in <code>schema</code>. If <code>time_diff_hours</code> is 0, all tables are
+dropped.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other staging table functions: 
@@ -194,14 +218,14 @@
 </div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
 <span class='fu'><a href='ls_tables.html'>ls_tables</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
           schema <span class='op'>=</span> <span class='st'>"public"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-05-12 00:55:39]	<span style='color: #0000BB;font-weight: bold;'>SQL:</span><span> N/A
-#&gt; [2021-05-12 00:55:39]	</span><span style='color: #BBBB00;'>Listing Tables...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListTables': object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2021-05-12 01:04:20]	<span style='color: #0000BB;font-weight: bold;'>SQL:</span><span> N/A
+#&gt; [2021-05-12 01:04:20]	</span><span style='color: #BBBB00;'>Listing Tables...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListTables': object 'conn' not found</span></div><div class='input'>
 
 <span class='co'># All tables in a schema can be dropped with pattern matching to the "V{timestamp}" format</span>
 <span class='fu'>drop_all_staging_tables</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
                         schema <span class='op'>=</span> <span class='st'>"public"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-05-12 00:55:39]	</span><span style='color: #0000BB;font-weight: bold;'>SQL:</span><span> N/A
-#&gt; [2021-05-12 00:55:39]	</span><span style='color: #BBBB00;'>Listing Tables...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListTables': object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2021-05-12 01:04:20]	</span><span style='color: #0000BB;font-weight: bold;'>SQL:</span><span> N/A
+#&gt; [2021-05-12 01:04:20]	</span><span style='color: #BBBB00;'>Listing Tables...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListTables': object 'conn' not found</span></div><div class='input'>
 <span class='co'># The `time_diff_hours` option allows for the user to drop all tables other than the most recently written tables based on the number of hours from the current timestamp.</span>
 <span class='fu'><a href='write_staging_table.html'>write_staging_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
                     schema <span class='op'>=</span> <span class='st'>"public"</span>,
@@ -210,12 +234,12 @@
 <span class='fu'>drop_all_staging_tables</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
                         schema <span class='op'>=</span> <span class='st'>"public"</span>,
                         time_diff_hours <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-05-12 00:55:39]	</span><span style='color: #0000BB;font-weight: bold;'>SQL:</span><span> N/A
-#&gt; [2021-05-12 00:55:39]	</span><span style='color: #BBBB00;'>Listing Tables...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListTables': object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2021-05-12 01:04:20]	</span><span style='color: #0000BB;font-weight: bold;'>SQL:</span><span> N/A
+#&gt; [2021-05-12 01:04:20]	</span><span style='color: #BBBB00;'>Listing Tables...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListTables': object 'conn' not found</span></div><div class='input'>
 <span class='fu'><a href='ls_tables.html'>ls_tables</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
           schema <span class='op'>=</span> <span class='st'>"public"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-05-12 00:55:39]	</span><span style='color: #0000BB;font-weight: bold;'>SQL:</span><span> N/A
-#&gt; [2021-05-12 00:55:39]	</span><span style='color: #BBBB00;'>Listing Tables...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListTables': object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2021-05-12 01:04:20]	</span><span style='color: #0000BB;font-weight: bold;'>SQL:</span><span> N/A
+#&gt; [2021-05-12 01:04:20]	</span><span style='color: #BBBB00;'>Listing Tables...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListTables': object 'conn' not found</span></div><div class='input'>
 <span class='co'># If this function is called within an enclosed parent frame with `drop_on_exit` set to TRUE, the table will be dropped at the conclusion of the function.</span>
 <span class='va'>test_fun</span> <span class='op'>&lt;-</span>
         <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span>
@@ -232,16 +256,16 @@
 <span class='fu'>test_fun</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'><span class='fu'><a href='ls_tables.html'>ls_tables</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
           schema <span class='op'>=</span> <span class='st'>"public"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-05-12 00:55:39]	</span><span style='color: #0000BB;font-weight: bold;'>SQL:</span><span> N/A
-#&gt; [2021-05-12 00:55:39]	</span><span style='color: #BBBB00;'>Listing Tables...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListTables': object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2021-05-12 01:04:20]	</span><span style='color: #0000BB;font-weight: bold;'>SQL:</span><span> N/A
+#&gt; [2021-05-12 01:04:20]	</span><span style='color: #BBBB00;'>Listing Tables...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListTables': object 'conn' not found</span></div><div class='input'>
 <span class='co'># Dropping all staging tables before exiting the example</span>
 <span class='fu'>drop_all_staging_tables</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
                         schema <span class='op'>=</span> <span class='st'>"public"</span>,
                         time_diff_hours <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-05-12 00:55:39]	</span><span style='color: #0000BB;font-weight: bold;'>SQL:</span><span> N/A
-#&gt; [2021-05-12 00:55:39]	</span><span style='color: #BBBB00;'>Listing Tables...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListTables': object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2021-05-12 01:04:20]	</span><span style='color: #0000BB;font-weight: bold;'>SQL:</span><span> N/A
+#&gt; [2021-05-12 01:04:20]	</span><span style='color: #BBBB00;'>Listing Tables...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListTables': object 'conn' not found</span></div><div class='input'>
 <span class='fu'><a href='dc.html'>dc</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-05-12 00:55:39]	Postgres connection was already closed</div></span></pre>
+</div><div class='output co'>#&gt; [2021-05-12 01:04:20]	Postgres connection was already closed</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
