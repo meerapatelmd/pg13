@@ -31,7 +31,12 @@ append_table(
 \item{...}{Additional arguments passed to \code{DatabaseConnector::dbAppendTable()}}
 }
 \description{
-Like the writeTable function, this function is a wrapper around a DatabaseConnector function rather than one where a SQL statement is rendered using the SqlRender package. This function performs the additional step of converting all inputs to the data.frame class, especially in cases where the input is a tibble.
+Like the writeTable function, this function is a wrapper
+around a DatabaseConnector function rather than one where
+a SQL statement is rendered using the SqlRender package.
+This function performs the additional step of converting
+all inputs to the data.frame class, especially in cases
+where the input is a tibble.
 }
 \examples{
 library(pg13)

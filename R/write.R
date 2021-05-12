@@ -2,7 +2,12 @@
 #' Append a Table
 #'
 #' @description
-#' Like the writeTable function, this function is a wrapper around a DatabaseConnector function rather than one where a SQL statement is rendered using the SqlRender package. This function performs the additional step of converting all inputs to the data.frame class, especially in cases where the input is a tibble.
+#' Like the writeTable function, this function is a wrapper
+#' around a DatabaseConnector function rather than one where
+#' a SQL statement is rendered using the SqlRender package.
+#' This function performs the additional step of converting
+#' all inputs to the data.frame class, especially in cases
+#' where the input is a tibble.
 #'
 #' @inheritParams base_args
 #' @param           ...     Additional arguments passed to `DatabaseConnector::dbAppendTable()`
@@ -68,7 +73,13 @@ append_table <-
 #' Write a Table
 #'
 #' @description
-#' Unlike the dropTable and renameTable functions, this function is a wrapper around the `DatabaseConnector::dbWriteTable()` function rather than one where a SQL statement is rendered using the SqlRender package. This function that converts all inputs to a dataframe, especially in cases where the input is a tibble, in which case an error would be thrown when writing.
+#' Unlike the dropTable and renameTable functions, this
+#' function is a wrapper around the `DatabaseConnector::dbWriteTable()`
+#' function rather than one where a SQL statement is
+#' rendered using the SqlRender package. This function that
+#' converts all inputs to a dataframe, especially in cases
+#' where the input is a tibble, in which case an error would
+#' be thrown when writing.
 #'
 #' @inheritParams base_args
 #' @param       ...     Additional arguments passed to `DatabaseConnector::dbWriteTable()`
