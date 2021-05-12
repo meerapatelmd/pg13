@@ -2,7 +2,12 @@
 #' Write a Staging Table.
 #'
 #' @description
-#' A `Staging Table` is one that is named automatically in a naming convention of "V" followed by 14 integers representing the timestamp of the transaction. The staging table can optionally be dropped on exit in the parent frame from which the function is being called when `drop_on_exit` is set to TRUE.
+#' A `Staging Table` is one that is named automatically in a
+#' naming convention of "V" followed by 14 integers
+#' representing the timestamp of the transaction. The
+#' staging table can optionally be dropped on exit in the
+#' parent frame from which the function is being called
+#'  when `drop_on_exit` is set to TRUE.
 #'
 #' @return
 #' String of the staging table
@@ -22,15 +27,15 @@ write_staging_table <-
                  schema,
                  data,
                  drop_existing = FALSE,
-                 drop_on_exit = TRUE,
+                 drop_on_exit = FALSE,
                  verbose = TRUE,
                  render_sql = TRUE,
                  ...) {
 
-                        table_name <-
-                        sprintf("V%s",
-                                stringr::str_remove_all(as.character(Sys.time()),
-                                                pattern = "[^0-9]"))
+                table_name <-
+                sprintf("V%s",
+                        stringr::str_remove_all(as.character(Sys.time()),
+                                        pattern = "[^0-9]"))
 
 
 
@@ -45,6 +50,7 @@ write_staging_table <-
                            ... = ...)
 
                 if (drop_on_exit) {
+
                         do.call(
                                 what = on.exit,
                                 args = list(expr = substitute(drop_table(conn = conn,
@@ -61,9 +67,6 @@ write_staging_table <-
                 }
 
                 table_name
-
-
-
         }
 
 
@@ -71,12 +74,27 @@ write_staging_table <-
 #' Drop V Tables
 #'
 #' @description
-#' Drop tables written by functions in this package that follows the `Staging Table` naming convention of "V" followed by 14 integers representing the timestamp of the transaction. This function will clear any of the tables that strictly follows this pattern. An expiration period can optionally be applied where the date and time of the transaction is parsed from the table name and will be dropped only if the difference between the system time and timestamp in the table name is greater than the `time_diff_hours` argument.
+#' Drop tables written by functions in this package that
+#' follows the `Staging Table` naming convention of "V"
+#' followed by 14 integers representing the timestamp of
+#' the transaction. This function will clear any of the
+#' tables that strictly follows this pattern. An expiration
+#' period can optionally be applied where the date and time
+#' of the transaction is parsed from the table name and will
+#' be dropped only if the difference between the system time
+#' and timestamp in the table name is greater than the
+#' `time_diff_hours` argument.
 #'
 #' @return
-#' If an expiration period is provided with a `time_diff_hours` greater than 0, a console message of the names of any tables following this convention remain in `schema`. If `time_diff_hours` is 0, all tables are dropped.
+#' If an expiration period is provided with a
+#' `time_diff_hours` greater than 0, a console message of
+#' the names of any tables following this convention remain
+#' in `schema`. If `time_diff_hours` is 0, all tables are
+#' dropped.
 #'
-#' @param time_diff_hours Numeric designating the period of time in hours after which the the table should be considered expired. If 0, all tables will be dropped.
+#' @param time_diff_hours Numeric designating the period of
+#' time in hours after which the the table should be
+#' considered expired. If 0, all tables will be dropped.
 #'
 #' @importFrom stringr str_remove_all
 #' @importFrom lubridate ymd_hms
