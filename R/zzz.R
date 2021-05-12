@@ -27,12 +27,20 @@
                                  password,
                                  port,
                                  server,
+                                 extraSettings = NULL,
+                                 oracleDriver = "thin",
+                                 connectionString = NULL,
+                                 pathToDriver = system.file(package = "pg13", "driver"),
                                  verbose = TRUE) {
 
                                 conn <- quietly.conn_db(user = user,
                                                       password = password,
                                                       port = port,
-                                                      server = server)
+                                                      server = server,
+                                                      extraSettings = extraSettings,
+                                                      oracleDriver = oracleDriver,
+                                                      connectionString = connectionString,
+                                                      pathToDriver = pathToDriver)
 
                                 if (verbose) {
 
@@ -45,6 +53,8 @@
                                 conn$result
 
                         }
+
+
 
 
                 connect_ff <<-
