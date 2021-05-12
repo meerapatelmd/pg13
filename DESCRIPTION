@@ -22,20 +22,14 @@ BugReports: https://github.com/meerapatelmd/pg13/issues/
 Imports: 
     centipede,
     DatabaseConnector,
-    dplyr,
     forcats,
     lubridate,
-    magrittr,
     progress,
-    purrr,
     R.cache,
-    readr,
     rlang,
     secretary,
     SqlRender,
-    stringr,
-    tibble,
-    tidyr
+    tidyverse
 Suggests: 
     knitr,
     rmarkdown
