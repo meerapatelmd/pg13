@@ -55,6 +55,43 @@
                         }
 
 
+                local_connect <<-
+                        function(
+                                 dbname,
+                                 port = 5432,
+                                 user = NULL,
+                                 password = NULL,
+                                 extraSettings = NULL,
+                                 oracleDriver = "thin",
+                                 connectionString = NULL,
+                                 pathToDriver = system.file(package = "pg13", "driver"),
+                                 verbose = TRUE) {
+
+
+                                server <- sprintf("localhost/%s", dbname)
+
+                                conn <- quietly.conn_db(user = user,
+                                                        password = password,
+                                                        port = port,
+                                                        server = server,
+                                                        extraSettings = extraSettings,
+                                                        oracleDriver = oracleDriver,
+                                                        connectionString = connectionString,
+                                                        pathToDriver = pathToDriver)
+
+                                if (verbose) {
+
+                                        db_name <- conn@jConnection$getCatalog()
+
+                                        secretary::typewrite(sprintf("%s to %s", conn$output, db_name))
+
+                                }
+
+                                conn$result
+
+                        }
+
+
 
 
                 connect_ff <<-
