@@ -5,7 +5,7 @@
 \title{Connect to a Local Postgres Database}
 \usage{
 local_connect(
-  dbname,
+  dbname = "athena",
   port = 5432,
   user = NULL,
   password = NULL,
@@ -13,7 +13,7 @@ local_connect(
   oracleDriver = "thin",
   connectionString = NULL,
   pathToDriver = system.file(package = "pg13", "driver"),
-  verbose = FALSE
+  verbose = TRUE
 )
 }
 \arguments{
