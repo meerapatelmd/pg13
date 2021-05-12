@@ -22,21 +22,26 @@ NULL
 
 
 conn_db <-
-        function(user,
-                 password,
-                 port,
-                 server) {
+        function(user = NULL,
+                 password = NULL,
+                 server = NULL,
+                 port = NULL,
+                 extraSettings = NULL,
+                 oracleDriver = "thin",
+                 connectionString = NULL,
+                 pathToDriver =system.file(package = "pg13","driver")) {
 
-                conn_details <- DatabaseConnector::createConnectionDetails(dbms = "postgresql",
-                                                                           user = user,
-                                                                           password = password,
-                                                                           port = port,
-                                                                           server = server,
-                                                                           pathToDriver =
-                                                                                   system.file(
-                                                                                           package = "pg13",
-                                                                                           "driver"
-                                                                                   ))
+                conn_details <-
+                        DatabaseConnector::createConnectionDetails(
+                                dbms = "postgresql",
+                                user = user,
+                                password = password,
+                                server = server,
+                                port = port,
+                                extraSettings = extraSettings,
+                                oracleDriver = oracleDriver,
+                                connectionString = connectionString,
+                                pathToDriver = system.file(package = "pg13","driver"))
 
                 DatabaseConnector::connect(conn_details)
         }
