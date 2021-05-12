@@ -128,7 +128,16 @@
     <p>Connect to a Postgres Database</p>
     </div>
 
-    <pre class="usage"><span class='fu'>conn_db</span><span class='op'>(</span><span class='va'>user</span>, <span class='va'>password</span>, <span class='va'>port</span>, <span class='va'>server</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>conn_db</span><span class='op'>(</span>
+  user <span class='op'>=</span> <span class='cn'>NULL</span>,
+  password <span class='op'>=</span> <span class='cn'>NULL</span>,
+  server <span class='op'>=</span> <span class='cn'>NULL</span>,
+  port <span class='op'>=</span> <span class='cn'>NULL</span>,
+  extraSettings <span class='op'>=</span> <span class='cn'>NULL</span>,
+  oracleDriver <span class='op'>=</span> <span class='st'>"thin"</span>,
+  connectionString <span class='op'>=</span> <span class='cn'>NULL</span>,
+  pathToDriver <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span>package <span class='op'>=</span> <span class='st'>"pg13"</span>, <span class='st'>"driver"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>

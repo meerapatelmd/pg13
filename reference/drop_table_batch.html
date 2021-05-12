@@ -250,8 +250,8 @@
         <span class='op'>}</span>
 
 <span class='va'>conn</span> <span class='op'>&lt;-</span> <span class='fu'><a href='local_connect.html'>local_connect</a></span><span class='op'>(</span>dbname <span class='op'>=</span> <span class='st'>"pg13_test"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Connecting using PostgreSQL driver</span></div><div class='output co'>#&gt; <span class='error'>Error in rJava::.jcall(jdbcDriver, "Ljava/sql/Connection;", "connect",     as.character(url), p): org.postgresql.util.PSQLException: Connection to localhost:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.</span></div><div class='input'><span class='fu'>create_test_schema</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in rJava::.jcall(jdbcDriver, "Ljava/sql/Connection;", "connect",     as.character(url), p): org.postgresql.util.PSQLException: Connection to localhost:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.</span></div><div class='input'><span class='fu'>create_test_schema</span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'conn' not found</span></div><div class='input'>
 <span class='co'># Write a table without dropping</span>
 <span class='fu'><a href='write_table.html'>write_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
             schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
@@ -265,7 +265,7 @@
             table_name <span class='op'>=</span> <span class='st'>"test_table"</span>,
             drop_existing <span class='op'>=</span> <span class='cn'>TRUE</span>,
             data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>A <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, B <span class='op'>=</span> <span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-05-10 17:28:02]	<span style='color: #BBBB00;'>Dropping test_schema.test_table...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2021-05-12 00:36:27]	<span style='color: #BBBB00;'>Dropping test_schema.test_table...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
 
 <span class='co'># Include the name of the dataframe object in the messages</span>
 <span class='va'>test_data</span> <span class='op'>&lt;-</span>
@@ -275,7 +275,7 @@
             table_name <span class='op'>=</span> <span class='st'>"test_table3"</span>,
             drop_existing <span class='op'>=</span> <span class='cn'>TRUE</span>,
             data <span class='op'>=</span> <span class='va'>test_data</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-05-10 17:28:02]	</span><span style='color: #BBBB00;'>Dropping test_schema.test_table3...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2021-05-12 00:36:27]	</span><span style='color: #BBBB00;'>Dropping test_schema.test_table3...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
 <span class='co'># Append a table</span>
 <span class='fu'><a href='append_table.html'>append_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
              schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
@@ -302,7 +302,7 @@
 <span class='va'>test_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read_table.html'>read_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
                            schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
                            table <span class='op'>=</span> <span class='st'>"test_table"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-05-10 17:28:02]	</span><span style='color: #BBBB00;'>Reading test_schema.test_table...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in read_table(conn = conn, schema = "test_schema", table = "test_table"): unused arguments (conn = conn, schema = "test_schema", table = "test_table")</span></div><div class='input'>
 <span class='va'>test_data</span>
 </div><div class='output co'>#&gt;   A B
 #&gt; 1 1 a
@@ -314,10 +314,10 @@
             table_name <span class='op'>=</span> <span class='st'>"test_table4"</span>,
             drop_existing <span class='op'>=</span> <span class='cn'>TRUE</span>,
             data <span class='op'>=</span> <span class='va'>test_data2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-05-10 17:28:02]	</span><span style='color: #BBBB00;'>Dropping test_schema.test_table4...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'><span class='va'>test_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read_table.html'>read_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
+</div><div class='output co'>#&gt; [2021-05-12 00:36:27]	</span><span style='color: #BBBB00;'>Dropping test_schema.test_table4...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'><span class='va'>test_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read_table.html'>read_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
                         schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
                         table <span class='op'>=</span> <span class='st'>"test_table4"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-05-10 17:28:02]	</span><span style='color: #BBBB00;'>Reading test_schema.test_table4...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'><span class='va'>test_data</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in read_table(conn = conn, schema = "test_schema", table = "test_table4"): unused arguments (conn = conn, schema = "test_schema", table = "test_table4")</span></div><div class='input'><span class='va'>test_data</span>
 </div><div class='output co'>#&gt;   A B
 #&gt; 1 1 a
 #&gt; 2 2 b
@@ -342,18 +342,18 @@
            schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
            table <span class='op'>=</span> <span class='st'>"test_table"</span>,
            if_exists <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-05-10 17:28:02]	</span><span style='color: #BBBB00;'>Dropping test_schema.test_table...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2021-05-12 00:36:27]	</span><span style='color: #BBBB00;'>Dropping test_schema.test_table...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
 <span class='fu'><a href='drop_table.html'>drop_table</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
            schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
            table <span class='op'>=</span> <span class='st'>"test_table2"</span>,
            if_exists <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-05-10 17:28:02]	</span><span style='color: #BBBB00;'>Dropping test_schema.test_table2...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; [2021-05-12 00:36:27]	</span><span style='color: #BBBB00;'>Dropping test_schema.test_table2...</span><span></div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
 <span class='fu'><a href='drop_schema.html'>drop_schema</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span>,
             schema <span class='op'>=</span> <span class='st'>"test_schema"</span>,
             cascade <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in check_conn_status(conn = conn): object 'conn' not found</span></div><div class='input'>
 <span class='fu'><a href='dc.html'>dc</a></span><span class='op'>(</span>conn <span class='op'>=</span> <span class='va'>conn</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [2021-05-10 17:28:02]	Postgres connection was already closed</div></span></pre>
+</div><div class='output co'>#&gt; [2021-05-12 00:36:27]	Postgres connection was already closed</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
