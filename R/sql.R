@@ -122,8 +122,9 @@ execute_n <-
       # Checks
       # +++
 
-
-      check_conn(conn = conn)
+      if (verbose) {
+        check_conn(conn = conn)
+      }
 
       if (is.list(sql_statements)) {
         sql_statements <- unlist(sql_statements)
