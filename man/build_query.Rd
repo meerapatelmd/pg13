@@ -82,6 +82,5 @@ build_query(fields = c("concept_id", "concept_name"),
 
 }
 \seealso{
-\code{\link[cli]{cli_alert}}
 \code{\link[SqlRender]{render}}
 }

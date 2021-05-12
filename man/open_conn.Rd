@@ -16,7 +16,6 @@ Connect to a database and assign it to the \code{pg13_connection_env}. This is a
 }
 \seealso{
 \code{\link[secretary]{c("typewrite", "typewrite")}},\code{\link[secretary]{italicize}}
-\code{\link[cli]{cli_alert}}
 \code{\link[rlang]{parse_expr}}
 
 Other pg13 environment functions: 

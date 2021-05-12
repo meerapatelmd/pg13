@@ -1,0 +1,23 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r cars,results='hide'}
+conn <- NULL
+pg13::check_conn(conn)
+```
+
+
+```{r,results='hide'}
+conn <- pg13::local_connect()
+pg13::check_conn(conn)
+pg13::dc(conn)
+```
+

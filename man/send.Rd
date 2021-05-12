@@ -11,6 +11,7 @@ send(
   verbose = TRUE,
   render_sql = TRUE,
   render_only = FALSE,
+  sql_style = c("inline", "chunk"),
   ...
 )
 }

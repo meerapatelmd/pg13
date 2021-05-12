@@ -10,8 +10,9 @@ query(
   sql_statement,
   verbose = TRUE,
   render_sql = TRUE,
-  warn_no_rows = "deprecated",
   render_only = FALSE,
+  sql_style = c("inline", "chunk"),
+  warn_no_rows = "deprecated",
   ...
 )
 }

@@ -135,6 +135,5 @@ drop_schema(conn = conn,
 dc(conn = conn)
 }
 \seealso{
-\code{\link[cli]{cli_alert}}
 \code{\link[SqlRender]{render}}
 }

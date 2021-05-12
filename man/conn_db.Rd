@@ -4,7 +4,16 @@
 \alias{conn_db}
 \title{Connect to a Postgres Database}
 \usage{
-conn_db(user, password, port, server)
+conn_db(
+  user = NULL,
+  password = NULL,
+  server = NULL,
+  port = NULL,
+  extraSettings = NULL,
+  oracleDriver = "thin",
+  connectionString = NULL,
+  pathToDriver = system.file(package = "pg13", "driver")
+)
 }
 \description{
 Connect to a Postgres Database

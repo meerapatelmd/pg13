@@ -36,6 +36,5 @@ build_query_regex(
 Build a query that searches for a regular expression.
 }
 \seealso{
-\code{\link[cli]{cli_alert}}
 \code{\link[SqlRender]{render}}
 }

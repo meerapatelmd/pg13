@@ -67,6 +67,5 @@ build_join_query(
 Build a query the joins 2 tables, respectively aliased as \code{a} and \code{b} in the query itself.
 }
 \seealso{
-\code{\link[cli]{cli_alert}}
 \code{\link[SqlRender]{render}}
 }

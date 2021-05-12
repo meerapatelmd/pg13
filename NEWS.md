@@ -7,7 +7,7 @@
 console messages are less lengthy.  
 * Add styling option and return `checks_*` in console as 
 condition of `verbose` in `query()` and `send()`.  
-
+* Expand default argument values in `conn_db()`  
 
 # pg13 1.1.0
 

@@ -4,7 +4,17 @@
 \alias{connect}
 \title{Connect to a Postgres Database}
 \usage{
-connect(user, password, port, server, verbose = TRUE)
+connect(
+  user,
+  password,
+  port,
+  server,
+  extraSettings = NULL,
+  oracleDriver = "thin",
+  connectionString = NULL,
+  pathToDriver = system.file(package = "pg13", "driver"),
+  verbose = TRUE
+)
 }
 \arguments{
 \item{user}{The user name used to access the server.}
@@ -14,6 +24,21 @@ connect(user, password, port, server, verbose = TRUE)
 \item{port}{(optional) The port on the server to connect to.}
 
 \item{server}{The name of the server.}
+
+\item{extraSettings}{(optional) Additional configuration settings specific to the database
+provider to configure things as security for SSL. These must follow the
+format for the JDBC connection for the RDBMS specified in dbms.}
+
+\item{oracleDriver}{Specify which Oracle drive you want to use. Choose between \code{"thin"}
+or \code{"oci"}.}
+
+\item{connectionString}{The JDBC connection string. If specified, the \code{server}, \code{port},
+\code{extraSettings}, and \code{oracleDriver} fields are ignored. If
+\code{user} and \code{password} are not specified, they are assumed to
+already be included in the connection string.}
+
+\item{pathToDriver}{Path to a folder containing the JDBC driver JAR files. See \code{\link[DatabaseConnector]{downloadJdbcDrivers}} 
+for instructions on how to download the relevant drivers.}
 
 \item{verbose}{If TRUE, returns console messages when a connection has been secured.}
 }
