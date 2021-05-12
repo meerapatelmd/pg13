@@ -72,7 +72,7 @@ open_conn <-
                        } else {
 
 
-                               typewrite_alert_danger("Closed connection '%s' already exists."))
+                               typewrite_alert_danger("Closed connection '%s' already exists.")
                                secretary::typewrite(secretary::italicize("Reconnecting..."))
                                on.exit(secretary::typewrite(secretary::italicize("Reconnecting...complete")))
 

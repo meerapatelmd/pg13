@@ -286,7 +286,9 @@ send <-
 
 
                 if (verbose) {
-                check_conn(conn = conn)
+
+                    check_conn(conn = conn)
+
                 }
 
                 if (render_sql) {
@@ -311,7 +313,10 @@ send <-
                         secretary::typewrite("Sending...complete")
 
                 }
+
                 }
+
+
 
         }
 
