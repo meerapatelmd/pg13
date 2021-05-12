@@ -67,7 +67,5 @@ local_connect <-
         function(dbname = "athena",
                  port = 5432) {
 
-                conn_details <- make_local_conn_details(dbname = dbname,
-                                                     port = port)
-                DatabaseConnector::connect(conn_details)
+                "dummy"
         }
