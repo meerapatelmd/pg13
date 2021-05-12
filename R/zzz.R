@@ -57,7 +57,7 @@
 
                 local_connect <<-
                         function(
-                                 dbname,
+                                 dbname = "athena",
                                  port = 5432,
                                  user = NULL,
                                  password = NULL,
