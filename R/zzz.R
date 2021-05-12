@@ -65,7 +65,7 @@
                                  oracleDriver = "thin",
                                  connectionString = NULL,
                                  pathToDriver = system.file(package = "pg13", "driver"),
-                                 verbose = FALSE) {
+                                 verbose = TRUE) {
 
 
                                 server <- sprintf("localhost/%s", dbname)
