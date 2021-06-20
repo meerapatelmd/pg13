@@ -4,7 +4,7 @@
 \alias{field_exists}
 \title{Does a field exist?}
 \usage{
-field_exists(conn, schema, table, field)
+field_exists(conn, conn_fun, schema, table, field)
 }
 \arguments{
 \item{conn}{Connection object}

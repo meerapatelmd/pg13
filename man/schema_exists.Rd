@@ -4,7 +4,7 @@
 \alias{schema_exists}
 \title{Does a schema exist?}
 \usage{
-schema_exists(conn, schema)
+schema_exists(conn, conn_fun, schema)
 }
 \arguments{
 \item{conn}{Connection object}

@@ -14,11 +14,14 @@
 
 field_exists <-
   function(conn,
+           conn_fun,
            schema,
            table,
            field) {
+
     fields <- ls_fields(
       conn = conn,
+      conn_fun = conn_fun,
       schema = schema,
       table = table,
       verbose = FALSE,
@@ -49,10 +52,13 @@ field_exists <-
 
 schema_exists <-
   function(conn,
+           conn_fun,
            schema) {
+
     schemas <-
       ls_schema(
         conn = conn,
+        conn_fun = conn_fun,
         verbose = FALSE,
         render_sql = FALSE
       )
@@ -79,10 +85,13 @@ schema_exists <-
 
 table_exists <-
   function(conn,
+           conn_fun,
            schema,
            table_name) {
+
     tables <- ls_tables(
       conn = conn,
+      conn_fun = conn_fun,
       schema = schema,
       verbose = FALSE,
       render_sql = FALSE
@@ -108,9 +117,12 @@ table_exists <-
 
 db_exists <-
   function(conn,
+           conn_fun,
            db_name) {
+
     dbs <- ls_db(
       conn = conn,
+      conn_fun = conn_fun,
       verbose = FALSE,
       render_sql = FALSE
     )

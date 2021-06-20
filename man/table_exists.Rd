@@ -4,7 +4,7 @@
 \alias{table_exists}
 \title{Does a table exist?}
 \usage{
-table_exists(conn, schema, table_name)
+table_exists(conn, conn_fun, schema, table_name)
 }
 \arguments{
 \item{conn}{Connection object}

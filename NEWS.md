@@ -1,3 +1,9 @@
+# pg13 1.1.1  
+
+* Added `conn_fun` argument to `*_exists` functions  
+* Added `rename_schema()` function  
+
+
 # pg13 1.1.0.9000  
 
 * Styled project according to the tidyverse style guide  

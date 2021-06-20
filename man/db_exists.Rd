@@ -4,7 +4,7 @@
 \alias{db_exists}
 \title{Does a database exist?}
 \usage{
-db_exists(conn, db_name)
+db_exists(conn, conn_fun, db_name)
 }
 \arguments{
 \item{conn}{Connection object}
