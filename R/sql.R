@@ -338,7 +338,7 @@ send <-
     } else {
       # Verbose has to be true if a log file has been provided because logging is conditional upon verbose
       if (verbose == FALSE & log_file != "") {
-        typewrite_italic("`verbose` set to TRUE because `log_file` was provided.")
+        secretary::typewrite_italic("`verbose` set to TRUE because `log_file` was provided.")
         verbose <- TRUE
       }
       if (!missing(conn_fun)) {
@@ -386,7 +386,7 @@ send <-
       )
 
       if (verbose) {
-        secretary::typewrite("Sending...complete",
+        typewrite_activity("Sending...complete",
                              log_file = log_file,
                              append = append_log,
                              sep = sep_log)
