@@ -374,17 +374,22 @@ send <-
       }
 
       if (verbose) {
-        secretary::typewrite("Sending...")
+        typewrite_activity("Sending...",
+                           log_file = log_file,
+                           append = append_log,
+                           sep = sep_log)
       }
 
       DatabaseConnector::dbSendStatement(
         conn = conn,
-        statement = sql_statement,
-        ...
+        statement = sql_statement
       )
 
       if (verbose) {
-        secretary::typewrite("Sending...complete")
+        secretary::typewrite("Sending...complete",
+                             log_file = log_file,
+                             append = append_log,
+                             sep = sep_log)
       }
     }
   }
