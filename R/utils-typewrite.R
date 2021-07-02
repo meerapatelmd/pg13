@@ -138,7 +138,8 @@ cat_sql_chunk <-
       stopifnot(xfun::file_ext(rmd_file) == "Rmd")
       cat(output,
           sep = sep,
-          file = rmd_file)
+          file = rmd_file,
+          append = append)
     }
 
     cat(output,
@@ -182,7 +183,8 @@ cat_sql <-
       stopifnot(xfun::file_ext(sql_file) == "sql")
       cat(output,
           sep = sep,
-          file = sql_file)
+          file = sql_file,
+          append = append)
     }
 
     cat(output,
