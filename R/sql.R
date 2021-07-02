@@ -298,7 +298,7 @@ send <-
            log_file = "",
            append_log = TRUE,
            sep_log = "\n",
-           checks = c("conn_status", "conn_type", "rows"),
+           checks = c("conn_status", "conn_type"),
            verbose = TRUE,
            render_sql = TRUE,
            render_only = FALSE,
@@ -362,9 +362,7 @@ send <-
       if ("conn_type" %in% checks) {
         check_conn_type(conn = conn)
       }
-      if ("rows" %in% checks) {
-        check_rows(data = data)
-      }
+
       if (render_sql) {
         typewrite_sql(
           sql_statement = sql_statement,

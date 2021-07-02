@@ -11,7 +11,7 @@ send(
   log_file = "",
   append_log = TRUE,
   sep_log = "\\n",
-  checks = c("conn_status", "conn_type", "rows"),
+  checks = c("conn_status", "conn_type"),
   verbose = TRUE,
   render_sql = TRUE,
   render_only = FALSE,
