@@ -13,7 +13,9 @@ read_table(
   render_sql = TRUE,
   warn_no_rows = TRUE,
   render_only = FALSE,
-  ...
+  log_file = "",
+  append_log = TRUE,
+  sep_log = "\\n"
 )
 }
 \arguments{

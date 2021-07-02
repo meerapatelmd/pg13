@@ -20,7 +20,9 @@ drop_table <-
            verbose = TRUE,
            render_sql = TRUE,
            render_only = FALSE,
-           ...) {
+           log_file = "",
+           append_log = TRUE,
+           sep_log = "\n") {
     if (if_exists) {
       sql_statement <- sprintf("DROP TABLE IF EXISTS %s.%s;", schema, table)
     } else {
@@ -29,7 +31,10 @@ drop_table <-
 
 
     if (verbose) {
-      typewrite_activity(sprintf("Dropping %s.%s...", schema, table))
+      typewrite_activity(sprintf("Dropping %s.%s...", schema, table),
+                         log_file = log_file,
+                         append = append_log,
+                         sep = sep_log)
     }
 
 
@@ -40,12 +45,17 @@ drop_table <-
       verbose = verbose,
       render_sql = render_sql,
       render_only = render_only,
-      ...
+      log_file = log_file,
+      append_log = append_log,
+      sep_log = sep_log
     )
 
 
     if (verbose) {
-      typewrite_activity(sprintf("Dropping %s.%s...complete", schema, table))
+      typewrite_activity(sprintf("Dropping %s.%s...complete", schema, table),
+                         log_file = log_file,
+                         append = append_log,
+                         sep = sep_log)
     }
   }
 

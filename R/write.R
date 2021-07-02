@@ -31,7 +31,9 @@ append_table <-
            data,
            verbose = TRUE,
            render_sql = TRUE,
-           ...) {
+           log_file = "",
+           append_log = TRUE,
+           sep_log = "\n") {
     if (!missing(conn_fun)) {
       conn <- eval(rlang::parse_expr(conn_fun))
       on.exit(dc(
@@ -47,36 +49,53 @@ append_table <-
     # Checks
     # +++
     if ("conn_status" %in% checks) {
-      check_conn_status(conn = conn)
+      check_conn_status(conn = conn,
+                        log_file = log_file,
+                        append = append_log,
+                        sep = sep_log)
     }
 
     if ("conn_type" %in% checks) {
-      check_conn_type(conn = conn)
+      check_conn_type(conn = conn,
+                      log_file = log_file,
+                      append = append_log,
+                      sep = sep_log)
     }
     if ("rows" %in% checks) {
-      check_rows(data = data)
+      check_rows(data = data,
+                 log_file = log_file,
+                 append = append_log,
+                 sep = sep_log)
     }
 
     schema_table <- sprintf("%s.%s", schema, table)
 
 
     if (render_sql) {
-      typewrite_sql(sql_statement = "N/A")
+      typewrite_sql(sql_statement = "N/A",
+                    log_file = log_file,
+                    append = append_log,
+                    sep = sep_log)
     }
 
     if (verbose) {
-      typewrite_activity(sprintf("Appending %s...", schema_table))
+      typewrite_activity(sprintf("Appending %s...", schema_table),
+                         log_file = log_file,
+                         append = append_log,
+                         sep = sep_log)
     }
 
     DatabaseConnector::dbAppendTable(
       conn = conn,
       name = schema_table,
-      value = as.data.frame(data),
-      ...
+      value = as.data.frame(data)
     )
 
     if (verbose) {
-      typewrite_activity(sprintf("Appending %s...complete", schema_table))
+      typewrite_activity(sprintf("Appending %s...complete", schema_table),
+                         log_file = log_file,
+                         append = append_log,
+                         sep = sep_log)
     }
   }
 
@@ -116,7 +135,9 @@ write_table <-
            verbose = TRUE,
            render_sql = TRUE,
            render_only = FALSE,
-           ...) {
+           log_file = "",
+           append_log = TRUE,
+           sep_log = "\n") {
 
     if (!missing(conn_fun)) {
       conn <- eval(rlang::parse_expr(conn_fun))
@@ -133,19 +154,34 @@ write_table <-
     # Checks
     # +++
     if ("conn_status" %in% checks) {
-      check_conn_status(conn = conn)
+      check_conn_status(conn = conn,
+                        log_file = log_file,
+                        append = append_log,
+                        sep = sep_log)
     }
 
     if ("conn_type" %in% checks) {
-      check_conn_type(conn = conn)
+      check_conn_type(conn = conn,
+                      log_file = log_file,
+                      append = append_log,
+                      sep = sep_log)
     }
     if ("rows" %in% checks) {
-      check_rows(data = data)
+      check_rows(data = data,
+                 log_file = log_file,
+                 append = append_log,
+                 sep = sep_log)
     }
 
     if ("names" %in% checks) {
-      check_table_name(table_name = table_name)
-      check_field_names(field_names = colnames(data))
+      check_table_name(table_name = table_name,
+                       log_file = log_file,
+                       append = append_log,
+                       sep = sep_log)
+      check_field_names(field_names = colnames(data),
+                        log_file = log_file,
+                        append = append_log,
+                        sep = sep_log)
     }
 
     if (drop_existing) {
@@ -168,26 +204,34 @@ write_table <-
 
     if (!render_only) {
       if (verbose) {
-        typewrite_activity(sprintf("Writing %s...", schema_table_name))
+        typewrite_activity(sprintf("Writing %s...", schema_table_name),
+                           log_file = log_file,
+                           append = append_log,
+                           sep = sep_log)
       }
 
       DatabaseConnector::dbWriteTable(
         conn = conn,
         name = schema_table_name,
-        value = as.data.frame(data),
-        ...
+        value = as.data.frame(data)
       )
 
       if (verbose) {
 
-        typewrite_activity(sprintf("Writing %s...complete", schema_table_name))
+        typewrite_activity(sprintf("Writing %s...complete", schema_table_name),
+                           log_file = log_file,
+                           append = append_log,
+                           sep = sep_log)
       }
 
     } else {
 
       if (verbose) {
 
-        typewrite_activity(sprintf("No SQL to render for write_table()"))
+        typewrite_activity(sprintf("No SQL to render for write_table()"),
+                           log_file = log_file,
+                           append = append_log,
+                           sep = sep_log)
 
       }
     }

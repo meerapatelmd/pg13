@@ -13,7 +13,9 @@ append_table(
   data,
   verbose = TRUE,
   render_sql = TRUE,
-  ...
+  log_file = "",
+  append_log = TRUE,
+  sep_log = "\\n"
 )
 }
 \arguments{
