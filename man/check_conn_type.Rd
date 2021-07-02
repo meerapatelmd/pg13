@@ -4,7 +4,7 @@
 \alias{check_conn_type}
 \title{Check if a Connection is JDBC}
 \usage{
-check_conn_type(conn)
+check_conn_type(conn, log_file = "", sep = "\\n", append = TRUE)
 }
 \description{
 Check if a Connection is JDBC

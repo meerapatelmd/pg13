@@ -4,7 +4,7 @@
 \alias{check_conn_status}
 \title{Check Connection Status}
 \usage{
-check_conn_status(conn)
+check_conn_status(conn, log_file = "", sep = "\\n", append = TRUE)
 }
 \description{
 Check Connection Status

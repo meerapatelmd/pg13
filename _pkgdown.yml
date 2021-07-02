@@ -31,11 +31,6 @@ reference:
       Build queries of predetermined styles
     contents:
       - starts_with('build_')
-  - title: SQL Function Factories
-    desc: >
-      Set defaults for all or some of the arguments of a selection of functions
-    contents:
-      - ends_with('_ff')
   - title: Logging
     desc:  >
       Create a logging system of functions for a project.

@@ -4,7 +4,7 @@
 \alias{check_field_names}
 \title{Check a multiple field names}
 \usage{
-check_field_names(field_names)
+check_field_names(field_names, log_file = "", sep = "\\n", append = TRUE)
 }
 \description{
 Check that more than 1 field name is not a reserved SQL word.

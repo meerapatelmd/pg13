@@ -8,10 +8,17 @@ send(
   conn,
   conn_fun,
   sql_statement,
+  log_file = "",
+  append_log = TRUE,
+  sep_log = "\\n",
+  checks = c("conn_status", "conn_type", "rows"),
   verbose = TRUE,
   render_sql = TRUE,
   render_only = FALSE,
   sql_style = c("inline", "chunk"),
+  rmd_file = "",
+  sql_file = "",
+  warnOnMissingParameters = TRUE,
   ...
 )
 }

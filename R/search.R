@@ -37,12 +37,6 @@ search_table <-
       )
     }
 
-    if (verbose) {
-
-      check_conn(conn = conn)
-
-    }
-
     # Format Values for SQL
     values <- as.character(values)
 

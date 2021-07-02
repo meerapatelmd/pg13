@@ -8,6 +8,7 @@ execute_n(
   conn,
   conn_fun,
   sql_statements,
+  checks = c("conn_status", "conn_type", "rows"),
   verbose = TRUE,
   render_sql = TRUE,
   render_only = FALSE,

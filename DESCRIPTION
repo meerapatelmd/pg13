@@ -1,6 +1,6 @@
 Package: pg13
 Title: pg13 Package
-Version: 1.1.1
+Version: 1.2.0
 Authors@R: 
     person(given = "Meera",
            family = "Patel, MD",
@@ -20,14 +20,13 @@ URL: https://meerapatelmd.github.io/pg13/,
     https://github.com/meerapatelmd/pg13/
 BugReports: https://github.com/meerapatelmd/pg13/issues/
 Imports: 
-    centipede,
     DatabaseConnector,
-    forcats,
     lubridate,
     progress,
     R.cache,
     rlang,
     secretary,
+    crayon,
     SqlRender,
     tidyverse
 Suggests: 
@@ -36,7 +35,6 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes:
-    meerapatelmd/centipede,
     meerapatelmd/secretary
 Encoding: UTF-8
 LazyData: true

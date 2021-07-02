@@ -7,12 +7,19 @@
 query(
   conn,
   conn_fun,
+  checks = c("conn_status", "conn_type", "rows"),
   sql_statement,
   verbose = TRUE,
   render_sql = TRUE,
   render_only = FALSE,
+  log_file = "",
+  append_log = TRUE,
+  sep_log = "\\n",
   sql_style = c("inline", "chunk"),
+  rmd_file = "",
+  sql_file = "",
   warn_no_rows = "deprecated",
+  warnMissingParameters = TRUE,
   ...
 )
 }

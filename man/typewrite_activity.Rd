@@ -4,9 +4,9 @@
 \alias{typewrite_activity}
 \title{Typewrite Activity}
 \usage{
-typewrite_activity(activity)
+typewrite_activity(activity, log_file = "", sep = "\\n", append = TRUE)
 
-typewrite_activity(activity)
+typewrite_activity(activity, log_file = "", sep = "\\n", append = TRUE)
 }
 \arguments{
 \item{activity}{Character string.}

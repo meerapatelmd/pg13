@@ -5095,87 +5095,6 @@ load_cached_query <-
 
 
 
-#' @title
-#' Create a Brake Function
-#'
-#' @description
-#' Author new functions that stops and provides a custom message when a predicate evaluates to true.
-#'
-#' @param predicate             Evaluating function.
-#' @param stop_message          Message to receive with the `predicate` evaluates to true.
-#' @param arguments             (option) character vector of arguments for the new function. If missing, the new function will not have any arguments. Arguments in the `predicate` should also be considered. For example, if the predicate is "is.logical(x)", the `arguments` value should be "x".
-#'
-#' @return
-#' Assigned function
-#'
-#' @seealso
-#'  \code{\link[rlang]{parse_expr}},\code{\link[rlang]{missing_arg}}
-#'  \code{\link[purrr]{map}},\code{\link[purrr]{set_names}}
-#'
-#' @rdname brake_ff
-#' @family ff functions
-#' @family brake functions
-#'
-#' @export
-#'
-#' @importFrom rlang parse_expr missing_arg
-#' @importFrom purrr map set_names
-
-brake_ff <-
-  function(predicate,
-           stop_message,
-           arguments) {
-    .Deprecated("`check_*` functions")
-
-
-    x <-
-      function() {
-        if (eval(rlang::parse_expr(predicate))) {
-          stop(stop_message)
-        }
-      }
-
-
-    if (!missing(arguments)) {
-      output <-
-        arguments %>%
-        purrr::map(~ rlang::missing_arg()) %>%
-        purrr::set_names(arguments)
-
-      formals(x) <- output
-    }
-
-    x
-  }
-
-
-#' @title
-#' Brake if the Connection is Closed
-#'
-#' @description
-#' Stop an operation if the supplied Connection Class object is closed.
-#'
-#' @param  conn    Connection object
-#'
-#' @return
-#' Halted execution of a function or other process
-#'
-#' @details
-#' This function is derived from the \code{\link{brake_ff}}.
-#'
-#' @seealso
-#'  \code{\link{brake_ff}}
-#' @rdname brake_closed_conn
-#' @export
-
-
-brake_closed_conn <-
-  brake_ff(
-    predicate = "!is_conn_open(conn)",
-    stop_message = "connection is not open",
-    arguments = "conn"
-  )
-
 
 #' Get SourceFile Path
 #' @description This function provides the path for files installed within a given package's library.
@@ -5189,82 +5108,10 @@ source_file_path <-
   function(instSubdir,
            FileName,
            package) {
+    .Deprecated()
     paste0(system.file(package = package), "/", instSubdir, "/", FileName)
   }
 
-
-#' @title
-#' Create a Flag Function
-#'
-#' @description
-#' Author new functions that warns and provides a custom message when a predicate evaluates to true.
-#'
-#' @param predicate             Evaluating function.
-#' @param warn_message          Message to receive with the `predicate` evaluates to true.
-#' @param arguments             (option) character vector of arguments for the new function. If missing, the new function will not have any arguments. Arguments in the `predicate` should also be considered. For example, if the predicate is "is.logical(x)", the `arguments` value should be "x".
-#' @param ...                   Additional arguments passed to the base warning function
-#'
-#' @return
-#' Assigned function
-#'
-#' @seealso
-#'  \code{\link[rlang]{parse_expr}},\code{\link[rlang]{missing_arg}}
-#'  \code{\link[purrr]{map}},\code{\link[purrr]{set_names}}
-#'
-#' @rdname flag_ff
-#' @family ff functions
-#' @family flag functions
-#'
-#' @export
-#'
-#' @importFrom rlang parse_expr missing_arg
-#' @importFrom purrr map set_names
-
-flag_ff <-
-  function(predicate,
-           warn_message,
-           arguments,
-           ...) {
-    x <-
-      function() {
-        if (eval(rlang::parse_expr(predicate))) {
-          warning(
-            warn_message,
-            ...
-          )
-        }
-      }
-
-
-    if (!missing(arguments)) {
-      output <-
-        arguments %>%
-        purrr::map(~ rlang::missing_arg()) %>%
-        purrr::set_names(arguments)
-
-      formals(x) <- output
-    }
-
-    x
-  }
-
-
-#' @title
-#' Flag if Data Has 0 Rows
-#'
-#' @description
-#' Receive a warning in the console if data has 0 rows.
-#'
-#' @rdname flag_no_rows
-#' @export
-
-
-flag_no_rows <-
-  flag_ff(
-    predicate = "nrow(data)==0",
-    warn_message = "data has 0 rows",
-    arguments = "data"
-  )
 
 #' Export a sql statement to a file
 #' @param sql_statement sql statement R object
@@ -5278,10 +5125,78 @@ write_sql_file <-
            file,
            append = TRUE,
            ...) {
+    .Deprecated()
     readr::write_lines(
       x = sql_statement,
       path = file,
       append = append,
       ...
     )
+  }
+
+#' @title
+#' Check a Connection Object
+#' @export
+#' @rdname check_conn
+#' @family check functions
+#' @family check connection functions
+
+check_conn <-
+  function(conn) {
+    .Deprecated()
+    check_conn_status(conn = conn)
+    check_conn_type(conn = conn)
+  }
+
+#' @title
+#' Check that the data has rows
+#' @keywords internal
+#' @rdname check_data_rows
+
+check_data_rows <-
+  function(data) {
+    .Deprecated()
+    if (nrow(data) == 0) {
+      typewrite_alert_danger(text = "'data' has 0 rows")
+    } else {
+      typewrite_alert_success(text = sprintf("data has %s rows", nrow(data)))
+    }
+  }
+
+#' @title
+#' Check that the outgoing data has rows
+#' @keywords internal
+#' @rdname check_output_rows
+
+check_output_rows <-
+  function(data) {
+    .Deprecated()
+    if (nrow(data) == 0) {
+      typewrite_alert_danger(text = sprintf("Data '%s' has 0 rows", deparse(substitute(data))))
+    } else {
+      typewrite_alert_success(text = sprintf("Data '%s' has more than 0 rows", deparse(substitute(data))))
+    }
+  }
+
+#' @title
+#' Check Outgoing Data
+#' @export
+#' @rdname check_outflow
+#' @family check functions
+#' @family check data functions
+
+
+check_outflow <-
+  function(data,
+           table_name) {
+    .Deprecated()
+    check_rows(data = data)
+
+    if (!missing(table_name)) {
+      check_table_name(table_name = table_name)
+    }
+
+    field_names <- colnames(data)
+
+    check_field_names(field_names = field_names)
   }

@@ -1,3 +1,16 @@
+# pg13 1.3.0  
+
+* `query()` and `send()` can now accept custom values to 
+render SQL with.  
+* All `check_*` functions previously returned to the console 
+when `verbose` is set to _TRUE_. Now they can be explicitly 
+specified via the `checks` argument.  
+* Added feature for logging console messages to a log file.  
+* Added feature for concatenating SQL statements to SQL or 
+Rmd files.  
+* Deprecated redundant `check_*` functions.  
+
+
 # pg13 1.1.1  
 
 * Added `conn_fun` argument to `*_exists` functions  

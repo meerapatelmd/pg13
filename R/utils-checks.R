@@ -4,13 +4,26 @@
 #' @rdname check_conn_status
 
 check_conn_status <-
-  function(conn) {
+  function(conn,
+           log_file = "",
+           sep = "\n",
+           append = TRUE) {
     if (is.null(conn)) {
-      typewrite_alert_danger(text = "NULL connection")
+      typewrite_alert_danger(text = "NULL connection",
+                             log_file = log_file,
+                             sep = sep,
+                             append = append
+                             )
     } else if (is_conn_open(conn = conn)) {
-      typewrite_alert_success(text = "Open connection")
+      typewrite_alert_success(text = "Open connection",
+                              log_file = log_file,
+                              sep = sep,
+                              append = append)
     } else {
-      typewrite_alert_danger(text = "Closed connection")
+      typewrite_alert_danger(text = "Closed connection",
+                             log_file = log_file,
+                             sep = sep,
+                             append = append)
     }
   }
 
@@ -21,57 +34,51 @@ check_conn_status <-
 #' @rdname check_conn_type
 
 check_conn_type <-
-  function(conn) {
+  function(conn,
+           log_file = "",
+           sep = "\n",
+           append = TRUE) {
     if (!.hasSlot(conn, name = "jConnection")) {
-      typewrite_alert_danger(text = "Connection not JDBC")
+      typewrite_alert_danger(text = "Connection not JDBC",
+                             log_file = log_file,
+                             sep = sep,
+                             append = append)
     } else {
-      typewrite_alert_success(text = "JDBC connection")
+      typewrite_alert_success(text = "JDBC connection",
+                              log_file = log_file,
+                              sep = sep,
+                              append = append)
     }
   }
 
-
-#' @title
-#' Check that the data has rows
-#' @keywords internal
-#' @rdname check_data_rows
-
-check_data_rows <-
-  function(data) {
-    if (nrow(data) == 0) {
-      typewrite_alert_danger(text = "'data' has 0 rows")
-    } else {
-      typewrite_alert_success(text = sprintf("data has %s rows", nrow(data)))
-    }
-  }
-
-#' @title
-#' Check that the outgoing data has rows
-#' @keywords internal
-#' @rdname check_output_rows
-
-check_output_rows <-
-  function(data) {
-    if (nrow(data) == 0) {
-      typewrite_alert_danger(text = sprintf("Data '%s' has 0 rows", deparse(substitute(data))))
-    } else {
-      typewrite_alert_success(text = sprintf("Data '%s' has more than 0 rows", deparse(substitute(data))))
-    }
-  }
 
 #' @title
 #' Check that the incoming data has rows
 #' @keywords internal
-#' @rdname check_input_rows
+#' @rdname check_rows
 
-check_input_rows <-
-  function(data) {
+check_rows <-
+  function(data,
+           log_file = "",
+           sep = "\n",
+           append = TRUE) {
     if (nrow(data) == 0) {
-      typewrite_alert_danger(text = "Returned data has 0 rows")
+      typewrite_alert_danger(text = "Returned data has 0 rows.",
+                             log_file = log_file,
+                             sep = sep,
+                             append = append)
+    } else if (nrow(data) == 1) {
+      typewrite_alert_success(text = sprintf("Returned data has %s row.", nrow(data)),
+                              log_file = log_file,
+                              sep = sep,
+                              append = append)
     } else {
-      typewrite_alert_success(text = "Returned data has more than 0 rows")
+      typewrite_alert_success(text = sprintf("Returned data has %s rows.", nrow(data)),
+                              log_file = log_file,
+                              sep = sep,
+                              append = append)
     }
   }
-
 
 #' @title
 #' Check a field name
@@ -82,11 +89,17 @@ check_input_rows <-
 
 
 check_field_name <-
-  function(field_name) {
+  function(field_name,
+           log_file = "",
+           sep = "\n",
+           append = TRUE) {
     name <- toupper(field_name)
 
     if (name %in% reserved_words()) {
-      typewrite_alert_danger(text = sprintf("Field name '%s' is a reserved word", tolower(name)))
+      typewrite_alert_danger(text = sprintf("Field name '%s' is a reserved word", tolower(name)),
+                             log_file = log_file,
+                             sep = sep,
+                             append = append)
     }
   }
 
@@ -100,11 +113,17 @@ check_field_name <-
 
 
 check_table_name <-
-  function(table_name) {
+  function(table_name,
+           log_file = "",
+           sep = "\n",
+           append = TRUE) {
     name <- toupper(table_name)
 
     if (name %in% reserved_words()) {
-      typewrite_alert_danger(text = sprintf("Table name '%s' is a reserved word", table_name))
+      typewrite_alert_danger(text = sprintf("Table name '%s' is a reserved word", table_name),
+                             log_file = log_file,
+                             sep = sep,
+                             append = append)
     }
   }
 
@@ -118,8 +137,14 @@ check_table_name <-
 
 
 check_field_names <-
-  function(field_names) {
+  function(field_names,
+           log_file = "",
+           sep = "\n",
+           append = TRUE) {
     for (i in seq_along(field_names)) {
-      check_field_name(field_name = field_names[i])
+      check_field_name(field_name = field_names[i],
+                       log_file = log_file,
+                       sep = sep,
+                       append = append)
     }
   }

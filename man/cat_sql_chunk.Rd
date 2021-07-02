@@ -2,16 +2,31 @@
 % Please edit documentation in R/utils-typewrite.R
 \name{cat_sql_chunk}
 \alias{cat_sql_chunk}
-\title{Cat SQL Chunk}
+\title{Concatenate a SQL Chunk}
 \usage{
-cat_sql_chunk(sql_statement, tab_count = 0)
+cat_sql_chunk(
+  sql_statement,
+  tab_count = 0,
+  sep = "\\n",
+  rmd_file = "",
+  append = FALSE
+)
 }
 \arguments{
 \item{sql_statement}{SQL statement.}
 
 \item{tab_count}{Number of tabs the chunk will be indented when printed in
 the console, Default: 0.}
+
+\item{sep}{Passed to \code{cat()}.}
+
+\item{rmd_file}{Passed as \code{file} argument to \verb{cat().} A file will not be written by default and an error will be
+thrown if the extension is not \emph{Rmd}. Use \code{cat_sql} to write files with a \emph{sql} extension.}
+
+\item{append}{Passed to \code{cat()}.}
 }
 \description{
-Return a given SQL around ticks for R Markdown.
+Return a SQL statement given as a string surrounded by ticks for
+R Markdown consumption in the console. Output will be written
+verbatim to an Rmd file path if provided.
 }

@@ -7,6 +7,7 @@
 append_table(
   conn,
   conn_fun,
+  checks = c("conn_status", "conn_type", "rows"),
   schema,
   table,
   data,

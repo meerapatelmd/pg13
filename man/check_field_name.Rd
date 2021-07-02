@@ -4,7 +4,7 @@
 \alias{check_field_name}
 \title{Check a field name}
 \usage{
-check_field_name(field_name)
+check_field_name(field_name, log_file = "", sep = "\\n", append = TRUE)
 }
 \description{
 Check that a field name is not a reserved SQL word.

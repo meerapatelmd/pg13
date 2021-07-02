@@ -7,6 +7,7 @@
 write_table(
   conn,
   conn_fun,
+  checks = c("conn_status", "conn_type", "rows", "names"),
   schema,
   table_name,
   data,

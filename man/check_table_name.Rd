@@ -4,7 +4,7 @@
 \alias{check_table_name}
 \title{Check Table Name}
 \usage{
-check_table_name(table_name)
+check_table_name(table_name, log_file = "", sep = "\\n", append = TRUE)
 }
 \description{
 Check that a table name is not a reserved SQL word.

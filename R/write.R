@@ -25,6 +25,7 @@
 append_table <-
   function(conn,
            conn_fun,
+           checks = c("conn_status", "conn_type", "rows"),
            schema,
            table,
            data,
@@ -42,9 +43,18 @@ append_table <-
       )
     }
 
-    if (verbose) {
-      check_conn(conn = conn)
-      check_outflow(data = data)
+    # +++
+    # Checks
+    # +++
+    if ("conn_status" %in% checks) {
+      check_conn_status(conn = conn)
+    }
+
+    if ("conn_type" %in% checks) {
+      check_conn_type(conn = conn)
+    }
+    if ("rows" %in% checks) {
+      check_rows(data = data)
     }
 
     schema_table <- sprintf("%s.%s", schema, table)
@@ -98,6 +108,7 @@ append_table <-
 write_table <-
   function(conn,
            conn_fun,
+           checks = c("conn_status", "conn_type", "rows", "names"),
            schema,
            table_name,
            data,
@@ -118,8 +129,24 @@ write_table <-
       )
     }
 
+    # +++
+    # Checks
+    # +++
+    if ("conn_status" %in% checks) {
+      check_conn_status(conn = conn)
+    }
 
-    # <---! Performs any checks on the connection already so it is skipped --->
+    if ("conn_type" %in% checks) {
+      check_conn_type(conn = conn)
+    }
+    if ("rows" %in% checks) {
+      check_rows(data = data)
+    }
+
+    if ("names" %in% checks) {
+      check_table_name(table_name = table_name)
+      check_field_names(field_names = colnames(data))
+    }
 
     if (drop_existing) {
 
@@ -132,23 +159,6 @@ write_table <-
         verbose = verbose,
         render_sql = render_sql,
         render_only = render_only
-      )
-
-    } else {
-
-      if (verbose) {
-
-        check_conn(conn = conn)
-
-      }
-    }
-
-
-    if (verbose) {
-
-      check_outflow(
-        data = data,
-        table_name = table_name
       )
 
     }

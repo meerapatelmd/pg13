@@ -8,24 +8,61 @@
 #' @export
 #' @importFrom rlang parse_expr
 #' @importFrom DatabaseConnector dbGetQuery
+#' @importFrom SqlRender render
 
 query <-
   function(conn,
            conn_fun,
+           checks = c("conn_status", "conn_type", "rows"),
            sql_statement,
            verbose = TRUE,
            render_sql = TRUE,
            render_only = FALSE,
+           log_file = "",
+           append_log = TRUE,
+           sep_log = "\n",
            sql_style = c("inline", "chunk"),
+           rmd_file = "",
+           sql_file = "",
            warn_no_rows = "deprecated",
+           warnMissingParameters = TRUE,
            ...) {
+
+    sql_style <-
+      match.arg(arg = sql_style,
+                choices = c("inline", "chunk"),
+                several.ok = FALSE)
+
+    if (!missing(...)) {
+      sql_statement <-
+        SqlRender::render(
+          sql = sql_statement,
+          warnOnMissingParameters = warnOnMissingParameters,
+          ...
+        )
+    }
+
     if (render_only) {
-      typewrite_sql(
-        sql_statement = sql_statement,
-        style = sql_style
-      )
+      if (sql_style == "chunk") {
+        cat_sql_chunk(
+          sql_statement = sql_statement,
+          rmd_file = rmd_file
+        )
+      } else {
+        cat_sql(
+          sql_statement = sql_statement,
+          sql_file = sql_file
+        )
+      }
+
       invisible(sql_statement)
+
     } else {
+      # Verbose has to be true if a log file has been provided because logging is conditional upon verbose
+      if (verbose == FALSE & log_file != "") {
+        secretary::typewrite_italic("Note: `verbose` set to TRUE because `log_file` was provided.\n")
+        verbose <- TRUE
+      }
       if (!missing(conn_fun)) {
         conn <- eval(rlang::parse_expr(conn_fun))
         on.exit(dc(
@@ -41,35 +78,55 @@ query <-
       # Checks
       # +++
 
-      if (verbose) {
-        check_conn(conn = conn)
+      if ("conn_status" %in% checks) {
+        check_conn_status(conn = conn,
+                          log_file = log_file,
+                          append = append_log,
+                          sep = sep_log)
       }
 
+      if ("conn_type" %in% checks) {
+        check_conn_type(conn = conn,
+                        log_file = log_file,
+                        append = append_log,
+                        sep = sep_log)
+      }
 
       if (render_sql) {
         typewrite_sql(
           sql_statement = sql_statement,
-          style = sql_style
+          style = sql_style,
+          log_file = log_file,
+          append = append_log,
+          sep = sep_log
         )
       }
 
 
       if (verbose) {
-        typewrite_activity("Querying...")
+        typewrite_activity("Querying...",
+                           log_file = log_file,
+                           append = append_log,
+                           sep = sep_log)
       }
 
       resultset <- DatabaseConnector::dbGetQuery(conn,
-        statement = sql_statement,
-        ...
+        statement = sql_statement
       )
 
 
       if (verbose) {
-        typewrite_activity("Querying...complete")
+        typewrite_activity("Querying...complete",
+                           log_file = log_file,
+                           append = append_log,
+                           sep = sep_log)
       }
 
-      if (verbose) {
-        check_inflow(data = resultset)
+      if ("rows" %in% checks) {
+        check_rows(data = resultset,
+                   log_file = log_file,
+                   append = append_log,
+                   sep = sep_log)
       }
       resultset
     }
@@ -99,6 +156,7 @@ execute_n <-
   function(conn,
            conn_fun,
            sql_statements,
+           checks = c("conn_status", "conn_type", "rows"),
            verbose = TRUE,
            render_sql = TRUE,
            render_only = FALSE,
@@ -122,10 +180,16 @@ execute_n <-
       # Checks
       # +++
 
-      if (verbose) {
-        check_conn(conn = conn)
+      if ("conn_status" %in% checks) {
+        check_conn_status(conn = conn)
       }
 
+      if ("conn_type" %in% checks) {
+        check_conn_type(conn = conn)
+      }
+      if ("rows" %in% checks) {
+        check_rows(data = data)
+      }
       if (is.list(sql_statements)) {
         sql_statements <- unlist(sql_statements)
       }
@@ -225,23 +289,58 @@ execute_n <-
 #' @importFrom rlang parse_expr
 #' @importFrom secretary typewrite
 #' @importFrom DatabaseConnector dbSendStatement
+#' @importFrom SqlRender render
 
 send <-
   function(conn,
            conn_fun,
            sql_statement,
+           log_file = "",
+           append_log = TRUE,
+           sep_log = "\n",
+           checks = c("conn_status", "conn_type", "rows"),
            verbose = TRUE,
            render_sql = TRUE,
            render_only = FALSE,
            sql_style = c("inline", "chunk"),
+           rmd_file = "",
+           sql_file = "",
+           warnOnMissingParameters = TRUE,
            ...) {
+
+    sql_style <-
+      match.arg(arg = sql_style,
+                choices = c("inline", "chunk"),
+                several.ok = FALSE)
+
+    if (!missing(...)) {
+      sql_statement <-
+        SqlRender::render(
+          sql = sql_statement,
+          warnOnMissingParameters = warnOnMissingParameters,
+          ...
+        )
+    }
     if (render_only) {
-      typewrite_sql(
-        sql_statement = sql_statement,
-        style = sql_style
-      )
+      if (sql_style == "chunk") {
+        cat_sql_chunk(
+          sql_statement = sql_statement,
+          rmd_file = rmd_file
+        )
+      } else {
+        cat_sql(
+          sql_statement = sql_statement,
+          sql_file = sql_file
+        )
+      }
+
       invisible(sql_statement)
     } else {
+      # Verbose has to be true if a log file has been provided because logging is conditional upon verbose
+      if (verbose == FALSE & log_file != "") {
+        typewrite_italic("`verbose` set to TRUE because `log_file` was provided.")
+        verbose <- TRUE
+      }
       if (!missing(conn_fun)) {
         conn <- eval(rlang::parse_expr(conn_fun))
         on.exit(dc(
@@ -256,15 +355,23 @@ send <-
       # Checks
       # +++
 
-
-      if (verbose) {
-        check_conn(conn = conn)
+      if ("conn_status" %in% checks) {
+        check_conn_status(conn = conn)
       }
 
+      if ("conn_type" %in% checks) {
+        check_conn_type(conn = conn)
+      }
+      if ("rows" %in% checks) {
+        check_rows(data = data)
+      }
       if (render_sql) {
         typewrite_sql(
           sql_statement = sql_statement,
-          style = sql_style
+          style = sql_style,
+          log_file = log_file,
+          append = append_log,
+          sep = sep_log
         )
       }
 
