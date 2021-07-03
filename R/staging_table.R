@@ -153,7 +153,7 @@ drop_all_staging_tables <-
           conn = conn,
           conn_fun = conn_fun,
           schema = schema,
-          tableName = staging_tables[1],
+          table = staging_tables[1],
           if_exists = TRUE,
           verbose = verbose,
           render_sql = render_sql
