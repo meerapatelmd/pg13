@@ -149,7 +149,7 @@ drop_all_staging_tables <-
 
     while (length(datetimes) > 0) {
       if (difftime(Sys.time(), datetimes[1], "hours") > time_diff_hours) {
-        dropTable(
+        drop_table(
           conn = conn,
           conn_fun = conn_fun,
           schema = schema,
