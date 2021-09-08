@@ -1,4 +1,7 @@
-# pg13 (development version)
+# pg13 (development version)  
+
+* Add `constraints` feature to automate ER diagram creation  
+* Removed legacy SQL queries in the installation directory  
 
 # pg13 1.3.0  
 
