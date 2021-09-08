@@ -1,1 +1,0 @@
-ALTER TABLE @schema.@tableName RENAME TO @newTableName;
