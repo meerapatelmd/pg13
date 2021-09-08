@@ -112,7 +112,8 @@ check_source_rows <-
         sql_tokens[next_word_indexes] %>%
           grep(pattern = "^[A-Za-z]{1,}.*?[.]{1}[A-Za-z].*$",
                value = TRUE) %>%
-          stringr::str_remove_all(pattern = "[;]{1}")
+          stringr::str_remove_all(pattern = "[;]{1}") %>%
+          unique()
 
 
       }
@@ -128,10 +129,15 @@ check_source_rows <-
     for (table_path in table_paths) {
 
       output[[table_path]] <-
-      pg13::query(conn = conn,
-                  checks = "",
-                  sql_statement =
-                    glue::glue("SELECT COUNT(*) FROM {table_path} LIMIT 5;"))
+        tryCatch(
+          with_timeout(
+              query(conn = conn,
+                          checks = "",
+                          sql_statement =
+                            glue::glue("SELECT COUNT(*) FROM {table_path} LIMIT 1;")),
+              cpu = 30,
+              elapsed = 30),
+          error = function(e) tibble::tibble(count = NA_character_))
 
 
 
