@@ -96,10 +96,20 @@ check_total_rows <-
     parse_tablenames <-
       function(sql_statement) {
 
+        sql_tokens <-
         strsplit(sql_statement,
                  split = " ") %>%
           unlist() %>%
           trimws("both") %>%
+          tolower()
+
+        from_join_indexes <-
+          grep(pattern = "^from$|^join$",
+               x = sql_tokens)
+        next_word_indexes <-
+          from_join_indexes+1
+
+        sql_tokens[next_word_indexes] %>%
           grep(pattern = "^[A-Za-z]{1,}.*?[.]{1}[A-Za-z].*$",
                value = TRUE) %>%
           stringr::str_remove_all(pattern = "[;]{1}")
