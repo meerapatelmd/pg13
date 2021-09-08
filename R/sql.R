@@ -13,7 +13,7 @@
 query <-
   function(conn,
            conn_fun = "pg13::local_connect()",
-           checks = c("conn_status", "conn_type", "rows", "total_rows"),
+           checks = c("conn_status", "conn_type", "rows", "source_rows"),
            sql_statement,
            verbose = TRUE,
            render_sql = TRUE,
@@ -129,8 +129,8 @@ query <-
                    sep = sep_log)
       }
 
-      if ("total_rows" %in% checks) {
-        check_total_rows(
+      if ("source_rows" %in% checks) {
+        check_source_rows(
                   sql_statement = sql_statement,
                   conn = conn,
                    log_file = log_file,

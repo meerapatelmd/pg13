@@ -82,11 +82,11 @@ check_rows <-
 
 
 #' @title
-#' Check that the table has more than 1 row
+#' Check that the table has any rows
 #' @export
-#' @rdname check_total_rows
+#' @rdname check_source_rows
 
-check_total_rows <-
+check_source_rows <-
   function(sql_statement,
            conn,
            log_file = "",
@@ -131,7 +131,7 @@ check_total_rows <-
       pg13::query(conn = conn,
                   checks = "",
                   sql_statement =
-                    glue::glue("SELECT COUNT(*) FROM {table_path};"))
+                    glue::glue("SELECT COUNT(*) FROM {table_path} LIMIT 5;"))
 
 
 
