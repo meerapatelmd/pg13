@@ -80,6 +80,77 @@ check_rows <-
     }
   }
 
+
+#' @title
+#' Check that the table has more than 1 row
+#' @keywords internal
+#' @rdname check_total_rows
+
+check_total_rows <-
+  function(sql_statement,
+           conn,
+           log_file = "",
+           sep = "\n",
+           append = TRUE) {
+
+    parse_tablenames <-
+      function(sql_statement) {
+
+        strsplit(sql_statement,
+                 split = " ") %>%
+          unlist() %>%
+          trimws("both") %>%
+          grep(pattern = "^[A-Za-z]{1,}.*?[.]{1}[A-Za-z].*$",
+               value = TRUE) %>%
+          stringr::str_remove_all(pattern = "[;]{1}")
+
+
+      }
+
+
+    table_paths <- parse_tablenames(sql_statement = sql_statement)
+
+    output <-
+      vector(mode = "list",
+             length = length(table_paths))
+    names(output) <- table_paths
+
+    for (table_path in table_paths) {
+
+      output[[table_path]] <-
+      pg13::query(conn = conn,
+                  checks = "",
+                  sql_statement =
+                    glue::glue("SELECT COUNT(*) FROM {table_path};"))
+
+
+
+    }
+
+    output <-
+      output %>%
+      dplyr::bind_rows(.id = "table_path") %>%
+      dplyr::filter(count == 0)
+
+    if (nrow(output) == 0) {
+      typewrite_alert_success(text = glue::glue("The following detected source tables all had greater than 0 rows: {glue::glue_collapse(table_paths, sep = ', ')}"),
+                             log_file = log_file,
+                             sep = sep,
+                             append = append)
+    } else {
+
+      typewrite_activity(glue::glue("Source tables detected from the SQL string: {glue::glue_collapse(table_paths, sep = ', ')}"),
+                              log_file = log_file,
+                              sep = sep,
+                              append = append)
+
+      typewrite_alert_danger(text = glue::glue("Of the tables above, the following has a count of 0: {glue::glue_collapse(output$table_path, sep = ', ')}"),
+                              log_file = log_file,
+                              sep = sep,
+                              append = append)
+    }
+  }
+
 #' @title
 #' Check a field name
 #' @description

@@ -6,8 +6,8 @@
 \usage{
 query(
   conn,
-  conn_fun,
-  checks = c("conn_status", "conn_type", "rows"),
+  conn_fun = "pg13::local_connect()",
+  checks = c("conn_status", "conn_type", "rows", "total_rows"),
   sql_statement,
   verbose = TRUE,
   render_sql = TRUE,

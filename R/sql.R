@@ -12,8 +12,8 @@
 
 query <-
   function(conn,
-           conn_fun,
-           checks = c("conn_status", "conn_type", "rows"),
+           conn_fun = "pg13::local_connect()",
+           checks = c("conn_status", "conn_type", "rows", "total_rows"),
            sql_statement,
            verbose = TRUE,
            render_sql = TRUE,
@@ -63,7 +63,7 @@ query <-
         secretary::typewrite_italic("Note: `verbose` set to TRUE because `log_file` was provided.\n")
         verbose <- TRUE
       }
-      if (!missing(conn_fun)) {
+      if (missing(conn)) {
         conn <- eval(rlang::parse_expr(conn_fun))
         on.exit(dc(
           conn = conn,
@@ -124,6 +124,15 @@ query <-
 
       if ("rows" %in% checks) {
         check_rows(data = resultset,
+                   log_file = log_file,
+                   append = append_log,
+                   sep = sep_log)
+      }
+
+      if ("total_rows" %in% checks) {
+        check_total_rows(
+                  sql_statement = sql_statement,
+                  conn = conn,
                    log_file = log_file,
                    append = append_log,
                    sep = sep_log)
@@ -293,7 +302,7 @@ execute_n <-
 
 send <-
   function(conn,
-           conn_fun,
+           conn_fun = "pg13::local_connect()",
            sql_statement,
            log_file = "",
            append_log = TRUE,

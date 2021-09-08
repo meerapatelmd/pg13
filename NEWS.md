@@ -1,6 +1,8 @@
 # pg13 (development version)  
 
-* Add `constraints` feature to automate ER diagram creation  
+* Added `constraints` feature to automate ER diagram creation  
+* Added a `total_rows` checkpoint that reports the row counts of 
+source tables detected from the sql string served to the connection.  
 * Removed legacy SQL queries in the installation directory  
 
 # pg13 1.3.0  

@@ -6,7 +6,7 @@
 \usage{
 send(
   conn,
-  conn_fun,
+  conn_fun = "pg13::local_connect()",
   sql_statement,
   log_file = "",
   append_log = TRUE,
