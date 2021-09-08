@@ -83,7 +83,7 @@ check_rows <-
 
 #' @title
 #' Check that the table has more than 1 row
-#' @keywords internal
+#' @export
 #' @rdname check_total_rows
 
 check_total_rows <-

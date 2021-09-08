@@ -15,4 +15,3 @@ check_total_rows(
 \description{
 Check that the table has more than 1 row
 }
-\keyword{internal}
