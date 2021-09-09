@@ -130,13 +130,10 @@ check_source_rows <-
 
       output[[table_path]] <-
         tryCatch(
-          with_timeout(
               query(conn = conn,
                           checks = "",
                           sql_statement =
                             glue::glue("SELECT COUNT(*) FROM {table_path} LIMIT 1;")),
-              cpu = 30,
-              elapsed = 30),
           error = function(e) tibble::tibble(count = NA_character_))
 
 
