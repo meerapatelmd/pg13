@@ -24,7 +24,7 @@
 
 append_table <-
   function(conn,
-           conn_fun,
+           conn_fun = "pg13::local_connect()",
            checks = c("conn_status", "conn_type", "rows"),
            schema,
            table,
@@ -34,7 +34,7 @@ append_table <-
            log_file = "",
            append_log = TRUE,
            sep_log = "\n") {
-    if (!missing(conn_fun)) {
+    if (missing(conn)) {
       conn <- eval(rlang::parse_expr(conn_fun))
       on.exit(dc(
         conn = conn,
@@ -126,7 +126,7 @@ append_table <-
 
 write_table <-
   function(conn,
-           conn_fun,
+           conn_fun = "pg13::local_connect()",
            checks = c("conn_status", "conn_type", "rows", "names"),
            schema,
            table_name,
@@ -139,7 +139,7 @@ write_table <-
            append_log = TRUE,
            sep_log = "\n") {
 
-    if (!missing(conn_fun)) {
+    if (missing(conn)) {
       conn <- eval(rlang::parse_expr(conn_fun))
       on.exit(dc(
         conn = conn,

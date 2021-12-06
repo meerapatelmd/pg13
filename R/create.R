@@ -7,7 +7,7 @@
 
 create_schema <-
   function(conn,
-           conn_fun,
+           conn_fun = "pg13::local_connect()",
            schema,
            verbose = TRUE,
            render_sql = TRUE,
@@ -108,7 +108,7 @@ draft_create_table <-
 
 create_table <-
   function(conn,
-           conn_fun,
+           conn_fun = "pg13::local_connect()",
            schema,
            table_name,
            if_not_exists = TRUE,
@@ -229,7 +229,7 @@ draft_create_table_from_df <-
 
 create_table_from_df <-
   function(conn,
-           conn_fun,
+           conn_fun = "pg13::local_connect()",
            schema,
            table_name,
            if_not_exists = TRUE,

@@ -1,9 +1,20 @@
 # pg13 (development version)  
 
+## Fixes  
+
+* Fixed `count` field datatypes when performing 
+checks on source rows that are then bound into a single 
+data frame  
+* Add default `conn_fun` value to `send()`  
+
+## Features  
+
 * Added `constraints` feature to automate ER diagram creation  
 * Added a `total_rows` checkpoint that reports the row counts of 
 source tables detected from the sql string served to the connection.  
 * Removed legacy SQL queries in the installation directory  
+
+
 
 # pg13 1.3.0  
 

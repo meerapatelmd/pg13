@@ -6,7 +6,7 @@
 \usage{
 append_table(
   conn,
-  conn_fun,
+  conn_fun = "pg13::local_connect()",
   checks = c("conn_status", "conn_type", "rows"),
   schema,
   table,

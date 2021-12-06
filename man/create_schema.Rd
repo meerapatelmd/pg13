@@ -6,7 +6,7 @@
 \usage{
 create_schema(
   conn,
-  conn_fun,
+  conn_fun = "pg13::local_connect()",
   schema,
   verbose = TRUE,
   render_sql = TRUE,

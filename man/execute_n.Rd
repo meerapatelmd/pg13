@@ -6,7 +6,7 @@
 \usage{
 execute_n(
   conn,
-  conn_fun,
+  conn_fun = "pg13::local_connect()",
   sql_statements,
   checks = c("conn_status", "conn_type", "rows"),
   verbose = TRUE,

@@ -6,7 +6,7 @@
 \usage{
 create_table(
   conn,
-  conn_fun,
+  conn_fun = "pg13::local_connect()",
   schema,
   table_name,
   if_not_exists = TRUE,
