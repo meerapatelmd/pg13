@@ -134,7 +134,8 @@ check_source_rows <-
                           checks = "",
                           sql_statement =
                             glue::glue("SELECT COUNT(*) FROM {table_path} LIMIT 1;")),
-          error = function(e) tibble::tibble(count = NA_character_))
+          error = function(e) tibble::tibble(count = NA)) %>%
+        mutate(count = as.integer(count))
 
 
 
