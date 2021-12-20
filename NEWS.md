@@ -14,6 +14,9 @@ for a NULL source table.
 
 ## Features  
 
+* Add PLR family of functions that allows executing R scripts directly 
+in Postgres  
+* Add `ls_extensions()`  
 * Added `constraints` feature to automate ER diagram creation  
 * Added a `total_rows` checkpoint that reports the row counts of 
 source tables detected from the sql string served to the connection.  
