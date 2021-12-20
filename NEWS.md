@@ -5,7 +5,12 @@
 * Fixed `count` field datatypes when performing 
 checks on source rows that are then bound into a single 
 data frame  
-* Add default `conn_fun` value to `send()` and changed logic to missing `conn` argument
+* Add default `conn_fun` value to `send()` and changed 
+logic to missing `conn` argument.  
+* Fixed `check_source_rows()` where if no table paths were 
+found, an error won't be throw querying using a SQL statement 
+for a NULL source table.  
+
 
 ## Features  
 

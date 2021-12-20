@@ -121,6 +121,8 @@ check_source_rows <-
 
     table_paths <- parse_tablenames(sql_statement = sql_statement)
 
+    if (length(table_paths) > 0) {
+
     output <-
       vector(mode = "list",
              length = length(table_paths))
@@ -163,7 +165,11 @@ check_source_rows <-
                               sep = sep,
                               append = append)
     }
+  } else {
+    typewrite_alert_success(text = "No table paths found.")
   }
+  }
+
 
 #' @title
 #' Check a field name
