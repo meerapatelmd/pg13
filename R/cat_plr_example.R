@@ -21,7 +21,4 @@ cat_plr_example <-
                 "
                 )
 
-
-
-
         }
