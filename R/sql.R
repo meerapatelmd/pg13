@@ -350,7 +350,7 @@ send <-
         secretary::typewrite_italic("`verbose` set to TRUE because `log_file` was provided.")
         verbose <- TRUE
       }
-      if (!missing(conn_fun)) {
+      if (missing(conn)) {
         conn <- eval(rlang::parse_expr(conn_fun))
         on.exit(dc(
           conn = conn,

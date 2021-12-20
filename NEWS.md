@@ -5,7 +5,7 @@
 * Fixed `count` field datatypes when performing 
 checks on source rows that are then bound into a single 
 data frame  
-* Add default `conn_fun` value to `send()`  
+* Add default `conn_fun` value to `send()` and changed logic to missing `conn` argument
 
 ## Features  
 
